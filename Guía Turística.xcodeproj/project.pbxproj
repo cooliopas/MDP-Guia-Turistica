@@ -8,34 +8,256 @@
 
 /* Begin PBXBuildFile section */
 		E28735CA1AFB24E9005ED91B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28735C91AFB24E9005ED91B /* AppDelegate.swift */; };
-		E28735CC1AFB24E9005ED91B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28735CB1AFB24E9005ED91B /* ViewController.swift */; };
-		E28735CF1AFB24E9005ED91B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E28735CD1AFB24E9005ED91B /* Main.storyboard */; };
-		E28735D11AFB24E9005ED91B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E28735D01AFB24E9005ED91B /* Images.xcassets */; };
-		E28735D41AFB24E9005ED91B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E28735D21AFB24E9005ED91B /* LaunchScreen.xib */; };
-		E28735E01AFB24E9005ED91B /* Gui_a_Turi_sticaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28735DF1AFB24E9005ED91B /* Gui_a_Turi_sticaTests.swift */; };
+		E28735EA1AFB2538005ED91B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E28735E91AFB2538005ED91B /* CoreLocation.framework */; };
+		E28735EC1AFB253D005ED91B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E28735EB1AFB253D005ED91B /* MapKit.framework */; };
+		E28735F01AFB266F005ED91B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E28735EF1AFB266F005ED91B /* Images.xcassets */; };
+		E28735F41AFB269C005ED91B /* PaseosPDF.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E28735F11AFB269C005ED91B /* PaseosPDF.bundle */; };
+		E28735F51AFB269C005ED91B /* Recorridos.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E28735F21AFB269C005ED91B /* Recorridos.bundle */; };
+		E28735F61AFB269C005ED91B /* Varios.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E28735F31AFB269C005ED91B /* Varios.bundle */; };
+		E28735FB1AFB271F005ED91B /* NSDateExtendida.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28735F71AFB271F005ED91B /* NSDateExtendida.swift */; };
+		E28735FC1AFB271F005ED91B /* IJProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28735F81AFB271F005ED91B /* IJProgressView.swift */; };
+		E28735FD1AFB271F005ED91B /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28735F91AFB271F005ED91B /* LocationManager.swift */; };
+		E28735FE1AFB271F005ED91B /* MapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28735FA1AFB271F005ED91B /* MapManager.swift */; };
+		E28736031AFB272E005ED91B /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E28736011AFB272E005ED91B /* SWRevealViewController.m */; };
+		E287360F1AFB2758005ED91B /* coverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736041AFB2758005ED91B /* coverViewController.swift */; };
+		E28736101AFB2758005ED91B /* Evento.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736051AFB2758005ED91B /* Evento.swift */; };
+		E28736111AFB2758005ED91B /* Farmacia.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736061AFB2758005ED91B /* Farmacia.swift */; };
+		E28736121AFB2758005ED91B /* funciones.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736071AFB2758005ED91B /* funciones.swift */; };
+		E28736131AFB2758005ED91B /* Hotel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736081AFB2758005ED91B /* Hotel.swift */; };
+		E28736141AFB2758005ED91B /* Lugar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736091AFB2758005ED91B /* Lugar.swift */; };
+		E28736151AFB2758005ED91B /* MenuTableViewCell1.swift in Sources */ = {isa = PBXBuildFile; fileRef = E287360A1AFB2758005ED91B /* MenuTableViewCell1.swift */; };
+		E28736161AFB2758005ED91B /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E287360B1AFB2758005ED91B /* MenuViewController.swift */; };
+		E28736171AFB2758005ED91B /* PuestoCarga.swift in Sources */ = {isa = PBXBuildFile; fileRef = E287360C1AFB2758005ED91B /* PuestoCarga.swift */; };
+		E28736181AFB2758005ED91B /* PuestoCargaAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E287360D1AFB2758005ED91B /* PuestoCargaAnnotation.swift */; };
+		E28736191AFB2758005ED91B /* Soaper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E287360E1AFB2758005ED91B /* Soaper.swift */; };
+		E287361B1AFB2784005ED91B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E287361A1AFB2784005ED91B /* LaunchScreen.xib */; };
+		E28736281AFB283E005ED91B /* GastronomiaCellFiltroTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E287361E1AFB283D005ED91B /* GastronomiaCellFiltroTableViewCell.swift */; };
+		E28736291AFB283E005ED91B /* GastronomiaLugarDatosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E287361F1AFB283D005ED91B /* GastronomiaLugarDatosTableViewCell.swift */; };
+		E287362A1AFB283E005ED91B /* GastronomiaLugarFotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736201AFB283D005ED91B /* GastronomiaLugarFotosTableViewCell.swift */; };
+		E287362B1AFB283E005ED91B /* GastronomiaLugarInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736211AFB283D005ED91B /* GastronomiaLugarInfoTableViewCell.swift */; };
+		E287362C1AFB283E005ED91B /* GastronomiaLugarMapaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736221AFB283D005ED91B /* GastronomiaLugarMapaTableViewCell.swift */; };
+		E287362D1AFB283E005ED91B /* GastronomiaLugarObservacionesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736231AFB283D005ED91B /* GastronomiaLugarObservacionesTableViewCell.swift */; };
+		E287362E1AFB283E005ED91B /* GastronomiaLugarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736241AFB283D005ED91B /* GastronomiaLugarViewController.swift */; };
+		E287362F1AFB283E005ED91B /* GastronomiaOpcionesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736251AFB283E005ED91B /* GastronomiaOpcionesViewController.swift */; };
+		E28736301AFB283E005ED91B /* GastronomiaResultadosLugarCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736261AFB283E005ED91B /* GastronomiaResultadosLugarCellTableViewCell.swift */; };
+		E28736311AFB283E005ED91B /* GastronomiaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736271AFB283E005ED91B /* GastronomiaViewController.swift */; };
+		E287363B1AFB285C005ED91B /* CongresosYEventosCellFiltroTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736331AFB285C005ED91B /* CongresosYEventosCellFiltroTableViewCell.swift */; };
+		E287363C1AFB285C005ED91B /* CongresosYEventosEventoDatosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736341AFB285C005ED91B /* CongresosYEventosEventoDatosTableViewCell.swift */; };
+		E287363D1AFB285C005ED91B /* CongresosYEventosEventoInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736351AFB285C005ED91B /* CongresosYEventosEventoInfoTableViewCell.swift */; };
+		E287363E1AFB285C005ED91B /* CongresosYEventosEventoObservacionesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736361AFB285C005ED91B /* CongresosYEventosEventoObservacionesTableViewCell.swift */; };
+		E287363F1AFB285C005ED91B /* CongresosYEventosEventoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736371AFB285C005ED91B /* CongresosYEventosEventoViewController.swift */; };
+		E28736401AFB285C005ED91B /* CongresosYEventosOpcionesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736381AFB285C005ED91B /* CongresosYEventosOpcionesViewController.swift */; };
+		E28736411AFB285C005ED91B /* CongresosYEventosResultadosEventoCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736391AFB285C005ED91B /* CongresosYEventosResultadosEventoCellTableViewCell.swift */; };
+		E28736421AFB285C005ED91B /* CongresosYEventosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E287363A1AFB285C005ED91B /* CongresosYEventosViewController.swift */; };
+		E287364E1AFB286D005ED91B /* HotelesYAlojamientoCellFiltroTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736441AFB286D005ED91B /* HotelesYAlojamientoCellFiltroTableViewCell.swift */; };
+		E287364F1AFB286D005ED91B /* HotelesYAlojamientoHotelDatosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736451AFB286D005ED91B /* HotelesYAlojamientoHotelDatosTableViewCell.swift */; };
+		E28736501AFB286D005ED91B /* HotelesYAlojamientoHotelInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736461AFB286D005ED91B /* HotelesYAlojamientoHotelInfoTableViewCell.swift */; };
+		E28736511AFB286D005ED91B /* HotelesYAlojamientoHotelMapaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736471AFB286D005ED91B /* HotelesYAlojamientoHotelMapaTableViewCell.swift */; };
+		E28736521AFB286D005ED91B /* HotelesYAlojamientoHotelObservacionesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736481AFB286D005ED91B /* HotelesYAlojamientoHotelObservacionesTableViewCell.swift */; };
+		E28736531AFB286D005ED91B /* HotelesYAlojamientoHotelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736491AFB286D005ED91B /* HotelesYAlojamientoHotelViewController.swift */; };
+		E28736541AFB286D005ED91B /* HotelesYAlojamientoOpcionesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E287364A1AFB286D005ED91B /* HotelesYAlojamientoOpcionesViewController.swift */; };
+		E28736551AFB286D005ED91B /* HotelesYAlojamientoResultadosHotelCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E287364B1AFB286D005ED91B /* HotelesYAlojamientoResultadosHotelCellTableViewCell.swift */; };
+		E28736561AFB286D005ED91B /* HotelesYAlojamientosHotelFotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E287364C1AFB286D005ED91B /* HotelesYAlojamientosHotelFotosTableViewCell.swift */; };
+		E28736571AFB286D005ED91B /* HotelesYAlojamientoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E287364D1AFB286D005ED91B /* HotelesYAlojamientoViewController.swift */; };
+		E287365F1AFB288A005ED91B /* InformacionCentrosSaludViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736591AFB288A005ED91B /* InformacionCentrosSaludViewController.swift */; };
+		E28736601AFB288A005ED91B /* InformacionComisariasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E287365A1AFB288A005ED91B /* InformacionComisariasViewController.swift */; };
+		E28736611AFB288A005ED91B /* InformacionFarmaciasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E287365B1AFB288A005ED91B /* InformacionFarmaciasViewController.swift */; };
+		E28736621AFB288A005ED91B /* InformacionMovilPolicialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E287365C1AFB288A005ED91B /* InformacionMovilPolicialViewController.swift */; };
+		E28736631AFB288A005ED91B /* InformacionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E287365D1AFB288A005ED91B /* InformacionViewController.swift */; };
+		E28736641AFB288A005ED91B /* InformacionWiFiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E287365E1AFB288A005ED91B /* InformacionWiFiViewController.swift */; };
+		E28736701AFB289A005ED91B /* InmobiliariasCellFiltroTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736661AFB289A005ED91B /* InmobiliariasCellFiltroTableViewCell.swift */; };
+		E28736711AFB289A005ED91B /* InmobiliariasInmobiliariaDatosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736671AFB289A005ED91B /* InmobiliariasInmobiliariaDatosTableViewCell.swift */; };
+		E28736721AFB289A005ED91B /* InmobiliariasInmobiliariaFotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736681AFB289A005ED91B /* InmobiliariasInmobiliariaFotosTableViewCell.swift */; };
+		E28736731AFB289A005ED91B /* InmobiliariasInmobiliariaInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736691AFB289A005ED91B /* InmobiliariasInmobiliariaInfoTableViewCell.swift */; };
+		E28736741AFB289A005ED91B /* InmobiliariasInmobiliariaMapaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E287366A1AFB289A005ED91B /* InmobiliariasInmobiliariaMapaTableViewCell.swift */; };
+		E28736751AFB289A005ED91B /* InmobiliariasInmobiliariaObservacionesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E287366B1AFB289A005ED91B /* InmobiliariasInmobiliariaObservacionesTableViewCell.swift */; };
+		E28736761AFB289A005ED91B /* InmobiliariasInmobiliariaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E287366C1AFB289A005ED91B /* InmobiliariasInmobiliariaViewController.swift */; };
+		E28736771AFB289A005ED91B /* InmobiliariasOpcionesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E287366D1AFB289A005ED91B /* InmobiliariasOpcionesViewController.swift */; };
+		E28736781AFB289A005ED91B /* InmobiliariasResultadosInmobiliariaCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E287366E1AFB289A005ED91B /* InmobiliariasResultadosInmobiliariaCellTableViewCell.swift */; };
+		E28736791AFB289A005ED91B /* InmobiliariasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E287366F1AFB289A005ED91B /* InmobiliariasViewController.swift */; };
+		E287367E1AFB28AB005ED91B /* MediosDeAccesoLinkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E287367B1AFB28AB005ED91B /* MediosDeAccesoLinkViewController.swift */; };
+		E287367F1AFB28AB005ED91B /* MediosDeAccesoMapaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E287367C1AFB28AB005ED91B /* MediosDeAccesoMapaViewController.swift */; };
+		E28736801AFB28AB005ED91B /* MediosDeAccesoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E287367D1AFB28AB005ED91B /* MediosDeAccesoViewController.swift */; };
+		E287368B1AFB28DB005ED91B /* MuseosCellFiltroTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736821AFB28DB005ED91B /* MuseosCellFiltroTableViewCell.swift */; };
+		E287368C1AFB28DB005ED91B /* MuseosMuseoDatosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736831AFB28DB005ED91B /* MuseosMuseoDatosTableViewCell.swift */; };
+		E287368D1AFB28DB005ED91B /* MuseosMuseoFotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736841AFB28DB005ED91B /* MuseosMuseoFotosTableViewCell.swift */; };
+		E287368E1AFB28DB005ED91B /* MuseosMuseoInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736851AFB28DB005ED91B /* MuseosMuseoInfoTableViewCell.swift */; };
+		E287368F1AFB28DB005ED91B /* MuseosMuseoMapaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736861AFB28DB005ED91B /* MuseosMuseoMapaTableViewCell.swift */; };
+		E28736901AFB28DB005ED91B /* MuseosMuseoObservacionesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736871AFB28DB005ED91B /* MuseosMuseoObservacionesTableViewCell.swift */; };
+		E28736911AFB28DB005ED91B /* MuseosMuseoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736881AFB28DB005ED91B /* MuseosMuseoViewController.swift */; };
+		E28736921AFB28DB005ED91B /* MuseosResultadosMuseoCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736891AFB28DB005ED91B /* MuseosResultadosMuseoCellTableViewCell.swift */; };
+		E28736931AFB28DB005ED91B /* MuseosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E287368A1AFB28DB005ED91B /* MuseosViewController.swift */; };
+		E28736B91AFB28FD005ED91B /* PaseosYLugaresCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736951AFB28FC005ED91B /* PaseosYLugaresCellTableViewCell.swift */; };
+		E28736BA1AFB28FD005ED91B /* PaseosYLugaresPDFViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736961AFB28FC005ED91B /* PaseosYLugaresPDFViewController.swift */; };
+		E28736BB1AFB28FD005ED91B /* PaseosYLugaresViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736971AFB28FC005ED91B /* PaseosYLugaresViewController.swift */; };
+		E28736BC1AFB28FD005ED91B /* PlayasCellFiltroTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736981AFB28FC005ED91B /* PlayasCellFiltroTableViewCell.swift */; };
+		E28736BD1AFB28FD005ED91B /* PlayasOpcionesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736991AFB28FC005ED91B /* PlayasOpcionesViewController.swift */; };
+		E28736BE1AFB28FD005ED91B /* PlayasPlayaDatosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E287369A1AFB28FC005ED91B /* PlayasPlayaDatosTableViewCell.swift */; };
+		E28736BF1AFB28FD005ED91B /* PlayasPlayaFotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E287369B1AFB28FC005ED91B /* PlayasPlayaFotosTableViewCell.swift */; };
+		E28736C01AFB28FD005ED91B /* PlayasPlayaInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E287369C1AFB28FC005ED91B /* PlayasPlayaInfoTableViewCell.swift */; };
+		E28736C11AFB28FD005ED91B /* PlayasPlayaMapaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E287369D1AFB28FC005ED91B /* PlayasPlayaMapaTableViewCell.swift */; };
+		E28736C21AFB28FD005ED91B /* PlayasPlayaObservacionesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E287369E1AFB28FC005ED91B /* PlayasPlayaObservacionesTableViewCell.swift */; };
+		E28736C31AFB28FD005ED91B /* PlayasPlayaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E287369F1AFB28FC005ED91B /* PlayasPlayaViewController.swift */; };
+		E28736C41AFB28FD005ED91B /* PlayasResultadosPlayaCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736A01AFB28FC005ED91B /* PlayasResultadosPlayaCellTableViewCell.swift */; };
+		E28736C51AFB28FD005ED91B /* PlayasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736A11AFB28FC005ED91B /* PlayasViewController.swift */; };
+		E28736C61AFB28FD005ED91B /* RecreacionCellFiltroTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736A21AFB28FC005ED91B /* RecreacionCellFiltroTableViewCell.swift */; };
+		E28736C71AFB28FD005ED91B /* RecreacionExcursionesNocheViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736A31AFB28FC005ED91B /* RecreacionExcursionesNocheViewController.swift */; };
+		E28736C81AFB28FD005ED91B /* RecreacionLugarDatosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736A41AFB28FC005ED91B /* RecreacionLugarDatosTableViewCell.swift */; };
+		E28736C91AFB28FD005ED91B /* RecreacionLugarFotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736A51AFB28FC005ED91B /* RecreacionLugarFotosTableViewCell.swift */; };
+		E28736CA1AFB28FD005ED91B /* RecreacionLugarInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736A61AFB28FC005ED91B /* RecreacionLugarInfoTableViewCell.swift */; };
+		E28736CB1AFB28FD005ED91B /* RecreacionLugarMapaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736A71AFB28FC005ED91B /* RecreacionLugarMapaTableViewCell.swift */; };
+		E28736CC1AFB28FD005ED91B /* RecreacionLugarObservacionesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736A81AFB28FC005ED91B /* RecreacionLugarObservacionesTableViewCell.swift */; };
+		E28736CD1AFB28FD005ED91B /* RecreacionLugarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736A91AFB28FC005ED91B /* RecreacionLugarViewController.swift */; };
+		E28736CE1AFB28FD005ED91B /* RecreacionOpcionesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736AA1AFB28FC005ED91B /* RecreacionOpcionesViewController.swift */; };
+		E28736CF1AFB28FD005ED91B /* RecreacionResultadosLugarCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736AB1AFB28FC005ED91B /* RecreacionResultadosLugarCellTableViewCell.swift */; };
+		E28736D01AFB28FD005ED91B /* RecreacionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736AC1AFB28FC005ED91B /* RecreacionViewController.swift */; };
+		E28736D11AFB28FD005ED91B /* TransporteColeMyBusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736AD1AFB28FC005ED91B /* TransporteColeMyBusViewController.swift */; };
+		E28736D21AFB28FD005ED91B /* TransporteColeRecorridos.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736AE1AFB28FC005ED91B /* TransporteColeRecorridos.swift */; };
+		E28736D31AFB28FD005ED91B /* TransporteColeRecorridosMapaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736AF1AFB28FC005ED91B /* TransporteColeRecorridosMapaViewController.swift */; };
+		E28736D41AFB28FD005ED91B /* TransporteColeTarjetaMapaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736B01AFB28FC005ED91B /* TransporteColeTarjetaMapaViewController.swift */; };
+		E28736D51AFB28FD005ED91B /* TransporteEstacionarInfoContenidoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736B11AFB28FC005ED91B /* TransporteEstacionarInfoContenidoViewController.swift */; };
+		E28736D61AFB28FD005ED91B /* TransporteEstacionarInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736B21AFB28FC005ED91B /* TransporteEstacionarInfoViewController.swift */; };
+		E28736D71AFB28FD005ED91B /* TransporteEstacionarInfoWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736B31AFB28FC005ED91B /* TransporteEstacionarInfoWebViewController.swift */; };
+		E28736D81AFB28FD005ED91B /* TransporteEstacionarOnlineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736B41AFB28FC005ED91B /* TransporteEstacionarOnlineViewController.swift */; };
+		E28736D91AFB28FD005ED91B /* TransporteEstacionarTarjetaMapaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736B51AFB28FC005ED91B /* TransporteEstacionarTarjetaMapaViewController.swift */; };
+		E28736DA1AFB28FD005ED91B /* TransporteEstacionarZonaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736B61AFB28FC005ED91B /* TransporteEstacionarZonaViewController.swift */; };
+		E28736DB1AFB28FD005ED91B /* TransportePopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736B71AFB28FC005ED91B /* TransportePopViewController.swift */; };
+		E28736DC1AFB28FD005ED91B /* TransporteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736B81AFB28FC005ED91B /* TransporteViewController.swift */; };
+		E2C813671B044EB000BECFA8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2C813691B044EB000BECFA8 /* Main.storyboard */; };
+		E2C8136C1B04D31E00BECFA8 /* MapManager2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C8136B1B04D31E00BECFA8 /* MapManager2.swift */; };
+		E2C8136E1B04D38500BECFA8 /* LocationManager2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C8136D1B04D38500BECFA8 /* LocationManager2.swift */; };
+		E30277AF62B64872D6BFD20C /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B9B11BFB8E51AB34ADDD349 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		E28735DA1AFB24E9005ED91B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E28735BC1AFB24E9005ED91B /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = E28735C31AFB24E9005ED91B;
-			remoteInfo = "Guía Turística";
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
+		417253B2D668CDEA82FA8491 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		6307FEABF60DE8F816804A6E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		7B9B11BFB8E51AB34ADDD349 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E28735C41AFB24E9005ED91B /* Guía Turística.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Guía Turística.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E28735C81AFB24E9005ED91B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E28735C91AFB24E9005ED91B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E28735CB1AFB24E9005ED91B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		E28735CE1AFB24E9005ED91B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		E28735D01AFB24E9005ED91B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		E28735D31AFB24E9005ED91B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		E28735D91AFB24E9005ED91B /* Guía TurísticaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Guía TurísticaTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E28735DE1AFB24E9005ED91B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E28735DF1AFB24E9005ED91B /* Gui_a_Turi_sticaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gui_a_Turi_sticaTests.swift; sourceTree = "<group>"; };
+		E28735E91AFB2538005ED91B /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		E28735EB1AFB253D005ED91B /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		E28735EF1AFB266F005ED91B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		E28735F11AFB269C005ED91B /* PaseosPDF.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = PaseosPDF.bundle; sourceTree = "<group>"; };
+		E28735F21AFB269C005ED91B /* Recorridos.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Recorridos.bundle; sourceTree = "<group>"; };
+		E28735F31AFB269C005ED91B /* Varios.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Varios.bundle; sourceTree = "<group>"; };
+		E28735F71AFB271F005ED91B /* NSDateExtendida.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateExtendida.swift; sourceTree = "<group>"; };
+		E28735F81AFB271F005ED91B /* IJProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IJProgressView.swift; sourceTree = "<group>"; };
+		E28735F91AFB271F005ED91B /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		E28735FA1AFB271F005ED91B /* MapManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapManager.swift; sourceTree = "<group>"; };
+		E28735FF1AFB272D005ED91B /* Guía Turística-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Guía Turística-Bridging-Header.h"; sourceTree = "<group>"; };
+		E28736001AFB272E005ED91B /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
+		E28736011AFB272E005ED91B /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
+		E28736041AFB2758005ED91B /* coverViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = coverViewController.swift; sourceTree = "<group>"; };
+		E28736051AFB2758005ED91B /* Evento.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Evento.swift; sourceTree = "<group>"; };
+		E28736061AFB2758005ED91B /* Farmacia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Farmacia.swift; sourceTree = "<group>"; };
+		E28736071AFB2758005ED91B /* funciones.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = funciones.swift; sourceTree = "<group>"; };
+		E28736081AFB2758005ED91B /* Hotel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hotel.swift; sourceTree = "<group>"; };
+		E28736091AFB2758005ED91B /* Lugar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Lugar.swift; sourceTree = "<group>"; };
+		E287360A1AFB2758005ED91B /* MenuTableViewCell1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell1.swift; sourceTree = "<group>"; };
+		E287360B1AFB2758005ED91B /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		E287360C1AFB2758005ED91B /* PuestoCarga.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuestoCarga.swift; sourceTree = "<group>"; };
+		E287360D1AFB2758005ED91B /* PuestoCargaAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuestoCargaAnnotation.swift; sourceTree = "<group>"; };
+		E287360E1AFB2758005ED91B /* Soaper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Soaper.swift; sourceTree = "<group>"; };
+		E287361A1AFB2784005ED91B /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
+		E287361E1AFB283D005ED91B /* GastronomiaCellFiltroTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GastronomiaCellFiltroTableViewCell.swift; sourceTree = "<group>"; };
+		E287361F1AFB283D005ED91B /* GastronomiaLugarDatosTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GastronomiaLugarDatosTableViewCell.swift; sourceTree = "<group>"; };
+		E28736201AFB283D005ED91B /* GastronomiaLugarFotosTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GastronomiaLugarFotosTableViewCell.swift; sourceTree = "<group>"; };
+		E28736211AFB283D005ED91B /* GastronomiaLugarInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GastronomiaLugarInfoTableViewCell.swift; sourceTree = "<group>"; };
+		E28736221AFB283D005ED91B /* GastronomiaLugarMapaTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GastronomiaLugarMapaTableViewCell.swift; sourceTree = "<group>"; };
+		E28736231AFB283D005ED91B /* GastronomiaLugarObservacionesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GastronomiaLugarObservacionesTableViewCell.swift; sourceTree = "<group>"; };
+		E28736241AFB283D005ED91B /* GastronomiaLugarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GastronomiaLugarViewController.swift; sourceTree = "<group>"; };
+		E28736251AFB283E005ED91B /* GastronomiaOpcionesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GastronomiaOpcionesViewController.swift; sourceTree = "<group>"; };
+		E28736261AFB283E005ED91B /* GastronomiaResultadosLugarCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GastronomiaResultadosLugarCellTableViewCell.swift; sourceTree = "<group>"; };
+		E28736271AFB283E005ED91B /* GastronomiaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GastronomiaViewController.swift; sourceTree = "<group>"; };
+		E28736331AFB285C005ED91B /* CongresosYEventosCellFiltroTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongresosYEventosCellFiltroTableViewCell.swift; sourceTree = "<group>"; };
+		E28736341AFB285C005ED91B /* CongresosYEventosEventoDatosTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongresosYEventosEventoDatosTableViewCell.swift; sourceTree = "<group>"; };
+		E28736351AFB285C005ED91B /* CongresosYEventosEventoInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongresosYEventosEventoInfoTableViewCell.swift; sourceTree = "<group>"; };
+		E28736361AFB285C005ED91B /* CongresosYEventosEventoObservacionesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongresosYEventosEventoObservacionesTableViewCell.swift; sourceTree = "<group>"; };
+		E28736371AFB285C005ED91B /* CongresosYEventosEventoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongresosYEventosEventoViewController.swift; sourceTree = "<group>"; };
+		E28736381AFB285C005ED91B /* CongresosYEventosOpcionesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongresosYEventosOpcionesViewController.swift; sourceTree = "<group>"; };
+		E28736391AFB285C005ED91B /* CongresosYEventosResultadosEventoCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongresosYEventosResultadosEventoCellTableViewCell.swift; sourceTree = "<group>"; };
+		E287363A1AFB285C005ED91B /* CongresosYEventosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CongresosYEventosViewController.swift; sourceTree = "<group>"; };
+		E28736441AFB286D005ED91B /* HotelesYAlojamientoCellFiltroTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotelesYAlojamientoCellFiltroTableViewCell.swift; sourceTree = "<group>"; };
+		E28736451AFB286D005ED91B /* HotelesYAlojamientoHotelDatosTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotelesYAlojamientoHotelDatosTableViewCell.swift; sourceTree = "<group>"; };
+		E28736461AFB286D005ED91B /* HotelesYAlojamientoHotelInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotelesYAlojamientoHotelInfoTableViewCell.swift; sourceTree = "<group>"; };
+		E28736471AFB286D005ED91B /* HotelesYAlojamientoHotelMapaTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotelesYAlojamientoHotelMapaTableViewCell.swift; sourceTree = "<group>"; };
+		E28736481AFB286D005ED91B /* HotelesYAlojamientoHotelObservacionesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotelesYAlojamientoHotelObservacionesTableViewCell.swift; sourceTree = "<group>"; };
+		E28736491AFB286D005ED91B /* HotelesYAlojamientoHotelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotelesYAlojamientoHotelViewController.swift; sourceTree = "<group>"; };
+		E287364A1AFB286D005ED91B /* HotelesYAlojamientoOpcionesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotelesYAlojamientoOpcionesViewController.swift; sourceTree = "<group>"; };
+		E287364B1AFB286D005ED91B /* HotelesYAlojamientoResultadosHotelCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotelesYAlojamientoResultadosHotelCellTableViewCell.swift; sourceTree = "<group>"; };
+		E287364C1AFB286D005ED91B /* HotelesYAlojamientosHotelFotosTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotelesYAlojamientosHotelFotosTableViewCell.swift; sourceTree = "<group>"; };
+		E287364D1AFB286D005ED91B /* HotelesYAlojamientoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotelesYAlojamientoViewController.swift; sourceTree = "<group>"; };
+		E28736591AFB288A005ED91B /* InformacionCentrosSaludViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformacionCentrosSaludViewController.swift; sourceTree = "<group>"; };
+		E287365A1AFB288A005ED91B /* InformacionComisariasViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformacionComisariasViewController.swift; sourceTree = "<group>"; };
+		E287365B1AFB288A005ED91B /* InformacionFarmaciasViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformacionFarmaciasViewController.swift; sourceTree = "<group>"; };
+		E287365C1AFB288A005ED91B /* InformacionMovilPolicialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformacionMovilPolicialViewController.swift; sourceTree = "<group>"; };
+		E287365D1AFB288A005ED91B /* InformacionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformacionViewController.swift; sourceTree = "<group>"; };
+		E287365E1AFB288A005ED91B /* InformacionWiFiViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformacionWiFiViewController.swift; sourceTree = "<group>"; };
+		E28736661AFB289A005ED91B /* InmobiliariasCellFiltroTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InmobiliariasCellFiltroTableViewCell.swift; sourceTree = "<group>"; };
+		E28736671AFB289A005ED91B /* InmobiliariasInmobiliariaDatosTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InmobiliariasInmobiliariaDatosTableViewCell.swift; sourceTree = "<group>"; };
+		E28736681AFB289A005ED91B /* InmobiliariasInmobiliariaFotosTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InmobiliariasInmobiliariaFotosTableViewCell.swift; sourceTree = "<group>"; };
+		E28736691AFB289A005ED91B /* InmobiliariasInmobiliariaInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InmobiliariasInmobiliariaInfoTableViewCell.swift; sourceTree = "<group>"; };
+		E287366A1AFB289A005ED91B /* InmobiliariasInmobiliariaMapaTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InmobiliariasInmobiliariaMapaTableViewCell.swift; sourceTree = "<group>"; };
+		E287366B1AFB289A005ED91B /* InmobiliariasInmobiliariaObservacionesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InmobiliariasInmobiliariaObservacionesTableViewCell.swift; sourceTree = "<group>"; };
+		E287366C1AFB289A005ED91B /* InmobiliariasInmobiliariaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InmobiliariasInmobiliariaViewController.swift; sourceTree = "<group>"; };
+		E287366D1AFB289A005ED91B /* InmobiliariasOpcionesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InmobiliariasOpcionesViewController.swift; sourceTree = "<group>"; };
+		E287366E1AFB289A005ED91B /* InmobiliariasResultadosInmobiliariaCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InmobiliariasResultadosInmobiliariaCellTableViewCell.swift; sourceTree = "<group>"; };
+		E287366F1AFB289A005ED91B /* InmobiliariasViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InmobiliariasViewController.swift; sourceTree = "<group>"; };
+		E287367B1AFB28AB005ED91B /* MediosDeAccesoLinkViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediosDeAccesoLinkViewController.swift; sourceTree = "<group>"; };
+		E287367C1AFB28AB005ED91B /* MediosDeAccesoMapaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediosDeAccesoMapaViewController.swift; sourceTree = "<group>"; };
+		E287367D1AFB28AB005ED91B /* MediosDeAccesoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediosDeAccesoViewController.swift; sourceTree = "<group>"; };
+		E28736821AFB28DB005ED91B /* MuseosCellFiltroTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MuseosCellFiltroTableViewCell.swift; sourceTree = "<group>"; };
+		E28736831AFB28DB005ED91B /* MuseosMuseoDatosTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MuseosMuseoDatosTableViewCell.swift; sourceTree = "<group>"; };
+		E28736841AFB28DB005ED91B /* MuseosMuseoFotosTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MuseosMuseoFotosTableViewCell.swift; sourceTree = "<group>"; };
+		E28736851AFB28DB005ED91B /* MuseosMuseoInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MuseosMuseoInfoTableViewCell.swift; sourceTree = "<group>"; };
+		E28736861AFB28DB005ED91B /* MuseosMuseoMapaTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MuseosMuseoMapaTableViewCell.swift; sourceTree = "<group>"; };
+		E28736871AFB28DB005ED91B /* MuseosMuseoObservacionesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MuseosMuseoObservacionesTableViewCell.swift; sourceTree = "<group>"; };
+		E28736881AFB28DB005ED91B /* MuseosMuseoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MuseosMuseoViewController.swift; sourceTree = "<group>"; };
+		E28736891AFB28DB005ED91B /* MuseosResultadosMuseoCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MuseosResultadosMuseoCellTableViewCell.swift; sourceTree = "<group>"; };
+		E287368A1AFB28DB005ED91B /* MuseosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MuseosViewController.swift; sourceTree = "<group>"; };
+		E28736951AFB28FC005ED91B /* PaseosYLugaresCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaseosYLugaresCellTableViewCell.swift; sourceTree = "<group>"; };
+		E28736961AFB28FC005ED91B /* PaseosYLugaresPDFViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaseosYLugaresPDFViewController.swift; sourceTree = "<group>"; };
+		E28736971AFB28FC005ED91B /* PaseosYLugaresViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaseosYLugaresViewController.swift; sourceTree = "<group>"; };
+		E28736981AFB28FC005ED91B /* PlayasCellFiltroTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayasCellFiltroTableViewCell.swift; sourceTree = "<group>"; };
+		E28736991AFB28FC005ED91B /* PlayasOpcionesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayasOpcionesViewController.swift; sourceTree = "<group>"; };
+		E287369A1AFB28FC005ED91B /* PlayasPlayaDatosTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayasPlayaDatosTableViewCell.swift; sourceTree = "<group>"; };
+		E287369B1AFB28FC005ED91B /* PlayasPlayaFotosTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayasPlayaFotosTableViewCell.swift; sourceTree = "<group>"; };
+		E287369C1AFB28FC005ED91B /* PlayasPlayaInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayasPlayaInfoTableViewCell.swift; sourceTree = "<group>"; };
+		E287369D1AFB28FC005ED91B /* PlayasPlayaMapaTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayasPlayaMapaTableViewCell.swift; sourceTree = "<group>"; };
+		E287369E1AFB28FC005ED91B /* PlayasPlayaObservacionesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayasPlayaObservacionesTableViewCell.swift; sourceTree = "<group>"; };
+		E287369F1AFB28FC005ED91B /* PlayasPlayaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayasPlayaViewController.swift; sourceTree = "<group>"; };
+		E28736A01AFB28FC005ED91B /* PlayasResultadosPlayaCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayasResultadosPlayaCellTableViewCell.swift; sourceTree = "<group>"; };
+		E28736A11AFB28FC005ED91B /* PlayasViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayasViewController.swift; sourceTree = "<group>"; };
+		E28736A21AFB28FC005ED91B /* RecreacionCellFiltroTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecreacionCellFiltroTableViewCell.swift; sourceTree = "<group>"; };
+		E28736A31AFB28FC005ED91B /* RecreacionExcursionesNocheViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecreacionExcursionesNocheViewController.swift; sourceTree = "<group>"; };
+		E28736A41AFB28FC005ED91B /* RecreacionLugarDatosTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecreacionLugarDatosTableViewCell.swift; sourceTree = "<group>"; };
+		E28736A51AFB28FC005ED91B /* RecreacionLugarFotosTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecreacionLugarFotosTableViewCell.swift; sourceTree = "<group>"; };
+		E28736A61AFB28FC005ED91B /* RecreacionLugarInfoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecreacionLugarInfoTableViewCell.swift; sourceTree = "<group>"; };
+		E28736A71AFB28FC005ED91B /* RecreacionLugarMapaTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecreacionLugarMapaTableViewCell.swift; sourceTree = "<group>"; };
+		E28736A81AFB28FC005ED91B /* RecreacionLugarObservacionesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecreacionLugarObservacionesTableViewCell.swift; sourceTree = "<group>"; };
+		E28736A91AFB28FC005ED91B /* RecreacionLugarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecreacionLugarViewController.swift; sourceTree = "<group>"; };
+		E28736AA1AFB28FC005ED91B /* RecreacionOpcionesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecreacionOpcionesViewController.swift; sourceTree = "<group>"; };
+		E28736AB1AFB28FC005ED91B /* RecreacionResultadosLugarCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecreacionResultadosLugarCellTableViewCell.swift; sourceTree = "<group>"; };
+		E28736AC1AFB28FC005ED91B /* RecreacionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecreacionViewController.swift; sourceTree = "<group>"; };
+		E28736AD1AFB28FC005ED91B /* TransporteColeMyBusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransporteColeMyBusViewController.swift; sourceTree = "<group>"; };
+		E28736AE1AFB28FC005ED91B /* TransporteColeRecorridos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransporteColeRecorridos.swift; sourceTree = "<group>"; };
+		E28736AF1AFB28FC005ED91B /* TransporteColeRecorridosMapaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransporteColeRecorridosMapaViewController.swift; sourceTree = "<group>"; };
+		E28736B01AFB28FC005ED91B /* TransporteColeTarjetaMapaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransporteColeTarjetaMapaViewController.swift; sourceTree = "<group>"; };
+		E28736B11AFB28FC005ED91B /* TransporteEstacionarInfoContenidoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransporteEstacionarInfoContenidoViewController.swift; sourceTree = "<group>"; };
+		E28736B21AFB28FC005ED91B /* TransporteEstacionarInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransporteEstacionarInfoViewController.swift; sourceTree = "<group>"; };
+		E28736B31AFB28FC005ED91B /* TransporteEstacionarInfoWebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransporteEstacionarInfoWebViewController.swift; sourceTree = "<group>"; };
+		E28736B41AFB28FC005ED91B /* TransporteEstacionarOnlineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransporteEstacionarOnlineViewController.swift; sourceTree = "<group>"; };
+		E28736B51AFB28FC005ED91B /* TransporteEstacionarTarjetaMapaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransporteEstacionarTarjetaMapaViewController.swift; sourceTree = "<group>"; };
+		E28736B61AFB28FC005ED91B /* TransporteEstacionarZonaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransporteEstacionarZonaViewController.swift; sourceTree = "<group>"; };
+		E28736B71AFB28FC005ED91B /* TransportePopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransportePopViewController.swift; sourceTree = "<group>"; };
+		E28736B81AFB28FC005ED91B /* TransporteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransporteViewController.swift; sourceTree = "<group>"; };
+		E2C813681B044EB000BECFA8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E2C8136B1B04D31E00BECFA8 /* MapManager2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapManager2.swift; sourceTree = "<group>"; };
+		E2C8136D1B04D38500BECFA8 /* LocationManager2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager2.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,25 +265,42 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E28735D61AFB24E9005ED91B /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				E28735EC1AFB253D005ED91B /* MapKit.framework in Frameworks */,
+				E28735EA1AFB2538005ED91B /* CoreLocation.framework in Frameworks */,
+				E30277AF62B64872D6BFD20C /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9D87B96835E987666907FB74 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7B9B11BFB8E51AB34ADDD349 /* Pods.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D501A475E6E1CF7F546C806B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				417253B2D668CDEA82FA8491 /* Pods.debug.xcconfig */,
+				6307FEABF60DE8F816804A6E /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		E28735BB1AFB24E9005ED91B = {
 			isa = PBXGroup;
 			children = (
+				E28735E91AFB2538005ED91B /* CoreLocation.framework */,
+				E28735EB1AFB253D005ED91B /* MapKit.framework */,
 				E28735C61AFB24E9005ED91B /* Guía Turística */,
 				E28735DC1AFB24E9005ED91B /* Guía TurísticaTests */,
 				E28735C51AFB24E9005ED91B /* Products */,
+				D501A475E6E1CF7F546C806B /* Pods */,
+				9D87B96835E987666907FB74 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -69,7 +308,6 @@
 			isa = PBXGroup;
 			children = (
 				E28735C41AFB24E9005ED91B /* Guía Turística.app */,
-				E28735D91AFB24E9005ED91B /* Guía TurísticaTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -77,12 +315,29 @@
 		E28735C61AFB24E9005ED91B /* Guía Turística */ = {
 			isa = PBXGroup;
 			children = (
+				E2C813691B044EB000BECFA8 /* Main.storyboard */,
 				E28735C91AFB24E9005ED91B /* AppDelegate.swift */,
-				E28735CB1AFB24E9005ED91B /* ViewController.swift */,
-				E28735CD1AFB24E9005ED91B /* Main.storyboard */,
-				E28735D01AFB24E9005ED91B /* Images.xcassets */,
-				E28735D21AFB24E9005ED91B /* LaunchScreen.xib */,
+				E28736041AFB2758005ED91B /* coverViewController.swift */,
+				E28736071AFB2758005ED91B /* funciones.swift */,
+				E287360A1AFB2758005ED91B /* MenuTableViewCell1.swift */,
+				E287360B1AFB2758005ED91B /* MenuViewController.swift */,
+				E287360D1AFB2758005ED91B /* PuestoCargaAnnotation.swift */,
+				E28735EF1AFB266F005ED91B /* Images.xcassets */,
+				E287361A1AFB2784005ED91B /* LaunchScreen.xib */,
+				E287361C1AFB27CF005ED91B /* Bundles */,
+				E28736431AFB2861005ED91B /* Eventos */,
+				E28736321AFB284C005ED91B /* Gastronomía */,
+				E28736581AFB287B005ED91B /* HotelesYAlojamiento */,
+				E28736651AFB288F005ED91B /* Información */,
+				E287367A1AFB289F005ED91B /* Inmobiliarias */,
+				E28736811AFB28AF005ED91B /* MediosDeAcceso */,
+				E28736941AFB28E3005ED91B /* Museos */,
+				E287361D1AFB27FF005ED91B /* Objetos */,
+				E28736DD1AFB2909005ED91B /* PaseosYLugares */,
+				E28736DE1AFB2913005ED91B /* Playas */,
+				E28736DF1AFB291C005ED91B /* Recreación */,
 				E28735C71AFB24E9005ED91B /* Supporting Files */,
+				E28736E01AFB2923005ED91B /* Transporte */,
 			);
 			path = "Guía Turística";
 			sourceTree = "<group>";
@@ -90,7 +345,17 @@
 		E28735C71AFB24E9005ED91B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E287360E1AFB2758005ED91B /* Soaper.swift */,
+				E28735F71AFB271F005ED91B /* NSDateExtendida.swift */,
+				E28735F81AFB271F005ED91B /* IJProgressView.swift */,
+				E28735F91AFB271F005ED91B /* LocationManager.swift */,
+				E2C8136D1B04D38500BECFA8 /* LocationManager2.swift */,
+				E28735FA1AFB271F005ED91B /* MapManager.swift */,
+				E2C8136B1B04D31E00BECFA8 /* MapManager2.swift */,
+				E28736001AFB272E005ED91B /* SWRevealViewController.h */,
+				E28736011AFB272E005ED91B /* SWRevealViewController.m */,
 				E28735C81AFB24E9005ED91B /* Info.plist */,
+				E28735FF1AFB272D005ED91B /* Guía Turística-Bridging-Header.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -112,6 +377,197 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		E287361C1AFB27CF005ED91B /* Bundles */ = {
+			isa = PBXGroup;
+			children = (
+				E28735F11AFB269C005ED91B /* PaseosPDF.bundle */,
+				E28735F21AFB269C005ED91B /* Recorridos.bundle */,
+				E28735F31AFB269C005ED91B /* Varios.bundle */,
+			);
+			name = Bundles;
+			sourceTree = "<group>";
+		};
+		E287361D1AFB27FF005ED91B /* Objetos */ = {
+			isa = PBXGroup;
+			children = (
+				E28736051AFB2758005ED91B /* Evento.swift */,
+				E28736061AFB2758005ED91B /* Farmacia.swift */,
+				E28736081AFB2758005ED91B /* Hotel.swift */,
+				E28736091AFB2758005ED91B /* Lugar.swift */,
+				E287360C1AFB2758005ED91B /* PuestoCarga.swift */,
+			);
+			name = Objetos;
+			sourceTree = "<group>";
+		};
+		E28736321AFB284C005ED91B /* Gastronomía */ = {
+			isa = PBXGroup;
+			children = (
+				E287361E1AFB283D005ED91B /* GastronomiaCellFiltroTableViewCell.swift */,
+				E287361F1AFB283D005ED91B /* GastronomiaLugarDatosTableViewCell.swift */,
+				E28736201AFB283D005ED91B /* GastronomiaLugarFotosTableViewCell.swift */,
+				E28736211AFB283D005ED91B /* GastronomiaLugarInfoTableViewCell.swift */,
+				E28736221AFB283D005ED91B /* GastronomiaLugarMapaTableViewCell.swift */,
+				E28736231AFB283D005ED91B /* GastronomiaLugarObservacionesTableViewCell.swift */,
+				E28736241AFB283D005ED91B /* GastronomiaLugarViewController.swift */,
+				E28736251AFB283E005ED91B /* GastronomiaOpcionesViewController.swift */,
+				E28736261AFB283E005ED91B /* GastronomiaResultadosLugarCellTableViewCell.swift */,
+				E28736271AFB283E005ED91B /* GastronomiaViewController.swift */,
+			);
+			name = "Gastronomía";
+			sourceTree = "<group>";
+		};
+		E28736431AFB2861005ED91B /* Eventos */ = {
+			isa = PBXGroup;
+			children = (
+				E28736331AFB285C005ED91B /* CongresosYEventosCellFiltroTableViewCell.swift */,
+				E28736341AFB285C005ED91B /* CongresosYEventosEventoDatosTableViewCell.swift */,
+				E28736351AFB285C005ED91B /* CongresosYEventosEventoInfoTableViewCell.swift */,
+				E28736361AFB285C005ED91B /* CongresosYEventosEventoObservacionesTableViewCell.swift */,
+				E28736371AFB285C005ED91B /* CongresosYEventosEventoViewController.swift */,
+				E28736381AFB285C005ED91B /* CongresosYEventosOpcionesViewController.swift */,
+				E28736391AFB285C005ED91B /* CongresosYEventosResultadosEventoCellTableViewCell.swift */,
+				E287363A1AFB285C005ED91B /* CongresosYEventosViewController.swift */,
+			);
+			name = Eventos;
+			sourceTree = "<group>";
+		};
+		E28736581AFB287B005ED91B /* HotelesYAlojamiento */ = {
+			isa = PBXGroup;
+			children = (
+				E28736441AFB286D005ED91B /* HotelesYAlojamientoCellFiltroTableViewCell.swift */,
+				E28736451AFB286D005ED91B /* HotelesYAlojamientoHotelDatosTableViewCell.swift */,
+				E28736461AFB286D005ED91B /* HotelesYAlojamientoHotelInfoTableViewCell.swift */,
+				E28736471AFB286D005ED91B /* HotelesYAlojamientoHotelMapaTableViewCell.swift */,
+				E28736481AFB286D005ED91B /* HotelesYAlojamientoHotelObservacionesTableViewCell.swift */,
+				E28736491AFB286D005ED91B /* HotelesYAlojamientoHotelViewController.swift */,
+				E287364A1AFB286D005ED91B /* HotelesYAlojamientoOpcionesViewController.swift */,
+				E287364B1AFB286D005ED91B /* HotelesYAlojamientoResultadosHotelCellTableViewCell.swift */,
+				E287364C1AFB286D005ED91B /* HotelesYAlojamientosHotelFotosTableViewCell.swift */,
+				E287364D1AFB286D005ED91B /* HotelesYAlojamientoViewController.swift */,
+			);
+			name = HotelesYAlojamiento;
+			sourceTree = "<group>";
+		};
+		E28736651AFB288F005ED91B /* Información */ = {
+			isa = PBXGroup;
+			children = (
+				E28736591AFB288A005ED91B /* InformacionCentrosSaludViewController.swift */,
+				E287365A1AFB288A005ED91B /* InformacionComisariasViewController.swift */,
+				E287365B1AFB288A005ED91B /* InformacionFarmaciasViewController.swift */,
+				E287365C1AFB288A005ED91B /* InformacionMovilPolicialViewController.swift */,
+				E287365D1AFB288A005ED91B /* InformacionViewController.swift */,
+				E287365E1AFB288A005ED91B /* InformacionWiFiViewController.swift */,
+			);
+			name = "Información";
+			sourceTree = "<group>";
+		};
+		E287367A1AFB289F005ED91B /* Inmobiliarias */ = {
+			isa = PBXGroup;
+			children = (
+				E28736661AFB289A005ED91B /* InmobiliariasCellFiltroTableViewCell.swift */,
+				E28736671AFB289A005ED91B /* InmobiliariasInmobiliariaDatosTableViewCell.swift */,
+				E28736681AFB289A005ED91B /* InmobiliariasInmobiliariaFotosTableViewCell.swift */,
+				E28736691AFB289A005ED91B /* InmobiliariasInmobiliariaInfoTableViewCell.swift */,
+				E287366A1AFB289A005ED91B /* InmobiliariasInmobiliariaMapaTableViewCell.swift */,
+				E287366B1AFB289A005ED91B /* InmobiliariasInmobiliariaObservacionesTableViewCell.swift */,
+				E287366C1AFB289A005ED91B /* InmobiliariasInmobiliariaViewController.swift */,
+				E287366D1AFB289A005ED91B /* InmobiliariasOpcionesViewController.swift */,
+				E287366E1AFB289A005ED91B /* InmobiliariasResultadosInmobiliariaCellTableViewCell.swift */,
+				E287366F1AFB289A005ED91B /* InmobiliariasViewController.swift */,
+			);
+			name = Inmobiliarias;
+			sourceTree = "<group>";
+		};
+		E28736811AFB28AF005ED91B /* MediosDeAcceso */ = {
+			isa = PBXGroup;
+			children = (
+				E287367B1AFB28AB005ED91B /* MediosDeAccesoLinkViewController.swift */,
+				E287367C1AFB28AB005ED91B /* MediosDeAccesoMapaViewController.swift */,
+				E287367D1AFB28AB005ED91B /* MediosDeAccesoViewController.swift */,
+			);
+			name = MediosDeAcceso;
+			sourceTree = "<group>";
+		};
+		E28736941AFB28E3005ED91B /* Museos */ = {
+			isa = PBXGroup;
+			children = (
+				E28736821AFB28DB005ED91B /* MuseosCellFiltroTableViewCell.swift */,
+				E28736831AFB28DB005ED91B /* MuseosMuseoDatosTableViewCell.swift */,
+				E28736841AFB28DB005ED91B /* MuseosMuseoFotosTableViewCell.swift */,
+				E28736851AFB28DB005ED91B /* MuseosMuseoInfoTableViewCell.swift */,
+				E28736861AFB28DB005ED91B /* MuseosMuseoMapaTableViewCell.swift */,
+				E28736871AFB28DB005ED91B /* MuseosMuseoObservacionesTableViewCell.swift */,
+				E28736881AFB28DB005ED91B /* MuseosMuseoViewController.swift */,
+				E28736891AFB28DB005ED91B /* MuseosResultadosMuseoCellTableViewCell.swift */,
+				E287368A1AFB28DB005ED91B /* MuseosViewController.swift */,
+			);
+			name = Museos;
+			sourceTree = "<group>";
+		};
+		E28736DD1AFB2909005ED91B /* PaseosYLugares */ = {
+			isa = PBXGroup;
+			children = (
+				E28736951AFB28FC005ED91B /* PaseosYLugaresCellTableViewCell.swift */,
+				E28736961AFB28FC005ED91B /* PaseosYLugaresPDFViewController.swift */,
+				E28736971AFB28FC005ED91B /* PaseosYLugaresViewController.swift */,
+			);
+			name = PaseosYLugares;
+			sourceTree = "<group>";
+		};
+		E28736DE1AFB2913005ED91B /* Playas */ = {
+			isa = PBXGroup;
+			children = (
+				E28736981AFB28FC005ED91B /* PlayasCellFiltroTableViewCell.swift */,
+				E28736991AFB28FC005ED91B /* PlayasOpcionesViewController.swift */,
+				E287369A1AFB28FC005ED91B /* PlayasPlayaDatosTableViewCell.swift */,
+				E287369B1AFB28FC005ED91B /* PlayasPlayaFotosTableViewCell.swift */,
+				E287369C1AFB28FC005ED91B /* PlayasPlayaInfoTableViewCell.swift */,
+				E287369D1AFB28FC005ED91B /* PlayasPlayaMapaTableViewCell.swift */,
+				E287369E1AFB28FC005ED91B /* PlayasPlayaObservacionesTableViewCell.swift */,
+				E287369F1AFB28FC005ED91B /* PlayasPlayaViewController.swift */,
+				E28736A01AFB28FC005ED91B /* PlayasResultadosPlayaCellTableViewCell.swift */,
+				E28736A11AFB28FC005ED91B /* PlayasViewController.swift */,
+			);
+			name = Playas;
+			sourceTree = "<group>";
+		};
+		E28736DF1AFB291C005ED91B /* Recreación */ = {
+			isa = PBXGroup;
+			children = (
+				E28736A21AFB28FC005ED91B /* RecreacionCellFiltroTableViewCell.swift */,
+				E28736A31AFB28FC005ED91B /* RecreacionExcursionesNocheViewController.swift */,
+				E28736A41AFB28FC005ED91B /* RecreacionLugarDatosTableViewCell.swift */,
+				E28736A51AFB28FC005ED91B /* RecreacionLugarFotosTableViewCell.swift */,
+				E28736A61AFB28FC005ED91B /* RecreacionLugarInfoTableViewCell.swift */,
+				E28736A71AFB28FC005ED91B /* RecreacionLugarMapaTableViewCell.swift */,
+				E28736A81AFB28FC005ED91B /* RecreacionLugarObservacionesTableViewCell.swift */,
+				E28736A91AFB28FC005ED91B /* RecreacionLugarViewController.swift */,
+				E28736AA1AFB28FC005ED91B /* RecreacionOpcionesViewController.swift */,
+				E28736AB1AFB28FC005ED91B /* RecreacionResultadosLugarCellTableViewCell.swift */,
+				E28736AC1AFB28FC005ED91B /* RecreacionViewController.swift */,
+			);
+			name = "Recreación";
+			sourceTree = "<group>";
+		};
+		E28736E01AFB2923005ED91B /* Transporte */ = {
+			isa = PBXGroup;
+			children = (
+				E28736AD1AFB28FC005ED91B /* TransporteColeMyBusViewController.swift */,
+				E28736AE1AFB28FC005ED91B /* TransporteColeRecorridos.swift */,
+				E28736AF1AFB28FC005ED91B /* TransporteColeRecorridosMapaViewController.swift */,
+				E28736B01AFB28FC005ED91B /* TransporteColeTarjetaMapaViewController.swift */,
+				E28736B11AFB28FC005ED91B /* TransporteEstacionarInfoContenidoViewController.swift */,
+				E28736B21AFB28FC005ED91B /* TransporteEstacionarInfoViewController.swift */,
+				E28736B31AFB28FC005ED91B /* TransporteEstacionarInfoWebViewController.swift */,
+				E28736B41AFB28FC005ED91B /* TransporteEstacionarOnlineViewController.swift */,
+				E28736B51AFB28FC005ED91B /* TransporteEstacionarTarjetaMapaViewController.swift */,
+				E28736B61AFB28FC005ED91B /* TransporteEstacionarZonaViewController.swift */,
+				E28736B71AFB28FC005ED91B /* TransportePopViewController.swift */,
+				E28736B81AFB28FC005ED91B /* TransporteViewController.swift */,
+			);
+			name = Transporte;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -119,9 +575,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E28735E31AFB24E9005ED91B /* Build configuration list for PBXNativeTarget "Guía Turística" */;
 			buildPhases = (
+				3D97053CFB604C5448711F68 /* Check Pods Manifest.lock */,
 				E28735C01AFB24E9005ED91B /* Sources */,
 				E28735C11AFB24E9005ED91B /* Frameworks */,
 				E28735C21AFB24E9005ED91B /* Resources */,
+				A17BE29A52FE22703819B32C /* Embed Pods Frameworks */,
+				CBA30D7305E68CB092A40D59 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -131,24 +590,6 @@
 			productName = "Guía Turística";
 			productReference = E28735C41AFB24E9005ED91B /* Guía Turística.app */;
 			productType = "com.apple.product-type.application";
-		};
-		E28735D81AFB24E9005ED91B /* Guía TurísticaTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E28735E61AFB24E9005ED91B /* Build configuration list for PBXNativeTarget "Guía TurísticaTests" */;
-			buildPhases = (
-				E28735D51AFB24E9005ED91B /* Sources */,
-				E28735D61AFB24E9005ED91B /* Frameworks */,
-				E28735D71AFB24E9005ED91B /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				E28735DB1AFB24E9005ED91B /* PBXTargetDependency */,
-			);
-			name = "Guía TurísticaTests";
-			productName = "Guía TurísticaTests";
-			productReference = E28735D91AFB24E9005ED91B /* Guía TurísticaTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -161,10 +602,7 @@
 				TargetAttributes = {
 					E28735C31AFB24E9005ED91B = {
 						CreatedOnToolsVersion = 6.3.1;
-					};
-					E28735D81AFB24E9005ED91B = {
-						CreatedOnToolsVersion = 6.3.1;
-						TestTargetID = E28735C31AFB24E9005ED91B;
+						DevelopmentTeam = 64T3BWWW2D;
 					};
 				};
 			};
@@ -173,7 +611,6 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
 			);
 			mainGroup = E28735BB1AFB24E9005ED91B;
@@ -182,7 +619,6 @@
 			projectRoot = "";
 			targets = (
 				E28735C31AFB24E9005ED91B /* Guía Turística */,
-				E28735D81AFB24E9005ED91B /* Guía TurísticaTests */,
 			);
 		};
 /* End PBXProject section */
@@ -192,64 +628,193 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E28735CF1AFB24E9005ED91B /* Main.storyboard in Resources */,
-				E28735D41AFB24E9005ED91B /* LaunchScreen.xib in Resources */,
-				E28735D11AFB24E9005ED91B /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E28735D71AFB24E9005ED91B /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				E28735F41AFB269C005ED91B /* PaseosPDF.bundle in Resources */,
+				E28735F01AFB266F005ED91B /* Images.xcassets in Resources */,
+				E28735F51AFB269C005ED91B /* Recorridos.bundle in Resources */,
+				E2C813671B044EB000BECFA8 /* Main.storyboard in Resources */,
+				E287361B1AFB2784005ED91B /* LaunchScreen.xib in Resources */,
+				E28735F61AFB269C005ED91B /* Varios.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3D97053CFB604C5448711F68 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A17BE29A52FE22703819B32C /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CBA30D7305E68CB092A40D59 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E28735C01AFB24E9005ED91B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E28735CC1AFB24E9005ED91B /* ViewController.swift in Sources */,
+				E28736BD1AFB28FD005ED91B /* PlayasOpcionesViewController.swift in Sources */,
+				E28736101AFB2758005ED91B /* Evento.swift in Sources */,
+				E28735FD1AFB271F005ED91B /* LocationManager.swift in Sources */,
+				E28736511AFB286D005ED91B /* HotelesYAlojamientoHotelMapaTableViewCell.swift in Sources */,
+				E28735FE1AFB271F005ED91B /* MapManager.swift in Sources */,
+				E28736CB1AFB28FD005ED91B /* RecreacionLugarMapaTableViewCell.swift in Sources */,
+				E28736CA1AFB28FD005ED91B /* RecreacionLugarInfoTableViewCell.swift in Sources */,
+				E28736BF1AFB28FD005ED91B /* PlayasPlayaFotosTableViewCell.swift in Sources */,
+				E28736C61AFB28FD005ED91B /* RecreacionCellFiltroTableViewCell.swift in Sources */,
+				E28736161AFB2758005ED91B /* MenuViewController.swift in Sources */,
+				E28736D31AFB28FD005ED91B /* TransporteColeRecorridosMapaViewController.swift in Sources */,
+				E28736921AFB28DB005ED91B /* MuseosResultadosMuseoCellTableViewCell.swift in Sources */,
+				E28736C11AFB28FD005ED91B /* PlayasPlayaMapaTableViewCell.swift in Sources */,
+				E28736C21AFB28FD005ED91B /* PlayasPlayaObservacionesTableViewCell.swift in Sources */,
+				E28736CD1AFB28FD005ED91B /* RecreacionLugarViewController.swift in Sources */,
+				E28736561AFB286D005ED91B /* HotelesYAlojamientosHotelFotosTableViewCell.swift in Sources */,
+				E28736521AFB286D005ED91B /* HotelesYAlojamientoHotelObservacionesTableViewCell.swift in Sources */,
+				E287363C1AFB285C005ED91B /* CongresosYEventosEventoDatosTableViewCell.swift in Sources */,
+				E287362A1AFB283E005ED91B /* GastronomiaLugarFotosTableViewCell.swift in Sources */,
+				E28736D21AFB28FD005ED91B /* TransporteColeRecorridos.swift in Sources */,
+				E28736C31AFB28FD005ED91B /* PlayasPlayaViewController.swift in Sources */,
+				E28736551AFB286D005ED91B /* HotelesYAlojamientoResultadosHotelCellTableViewCell.swift in Sources */,
+				E28736D61AFB28FD005ED91B /* TransporteEstacionarInfoViewController.swift in Sources */,
+				E287364E1AFB286D005ED91B /* HotelesYAlojamientoCellFiltroTableViewCell.swift in Sources */,
+				E287363F1AFB285C005ED91B /* CongresosYEventosEventoViewController.swift in Sources */,
+				E28736931AFB28DB005ED91B /* MuseosViewController.swift in Sources */,
+				E28736151AFB2758005ED91B /* MenuTableViewCell1.swift in Sources */,
+				E28736171AFB2758005ED91B /* PuestoCarga.swift in Sources */,
+				E28736CE1AFB28FD005ED91B /* RecreacionOpcionesViewController.swift in Sources */,
+				E28736D41AFB28FD005ED91B /* TransporteColeTarjetaMapaViewController.swift in Sources */,
+				E28736DC1AFB28FD005ED91B /* TransporteViewController.swift in Sources */,
+				E28736611AFB288A005ED91B /* InformacionFarmaciasViewController.swift in Sources */,
+				E28735FC1AFB271F005ED91B /* IJProgressView.swift in Sources */,
+				E28736C71AFB28FD005ED91B /* RecreacionExcursionesNocheViewController.swift in Sources */,
+				E28736D81AFB28FD005ED91B /* TransporteEstacionarOnlineViewController.swift in Sources */,
+				E287367E1AFB28AB005ED91B /* MediosDeAccesoLinkViewController.swift in Sources */,
+				E287368F1AFB28DB005ED91B /* MuseosMuseoMapaTableViewCell.swift in Sources */,
+				E28736BC1AFB28FD005ED91B /* PlayasCellFiltroTableViewCell.swift in Sources */,
+				E28736621AFB288A005ED91B /* InformacionMovilPolicialViewController.swift in Sources */,
+				E287362B1AFB283E005ED91B /* GastronomiaLugarInfoTableViewCell.swift in Sources */,
+				E287368D1AFB28DB005ED91B /* MuseosMuseoFotosTableViewCell.swift in Sources */,
+				E287362D1AFB283E005ED91B /* GastronomiaLugarObservacionesTableViewCell.swift in Sources */,
+				E287360F1AFB2758005ED91B /* coverViewController.swift in Sources */,
+				E287368C1AFB28DB005ED91B /* MuseosMuseoDatosTableViewCell.swift in Sources */,
+				E28736BA1AFB28FD005ED91B /* PaseosYLugaresPDFViewController.swift in Sources */,
+				E28736141AFB2758005ED91B /* Lugar.swift in Sources */,
+				E28736C91AFB28FD005ED91B /* RecreacionLugarFotosTableViewCell.swift in Sources */,
+				E28736781AFB289A005ED91B /* InmobiliariasResultadosInmobiliariaCellTableViewCell.swift in Sources */,
+				E28736CF1AFB28FD005ED91B /* RecreacionResultadosLugarCellTableViewCell.swift in Sources */,
+				E28736DB1AFB28FD005ED91B /* TransportePopViewController.swift in Sources */,
+				E287363B1AFB285C005ED91B /* CongresosYEventosCellFiltroTableViewCell.swift in Sources */,
+				E28736901AFB28DB005ED91B /* MuseosMuseoObservacionesTableViewCell.swift in Sources */,
+				E2C8136E1B04D38500BECFA8 /* LocationManager2.swift in Sources */,
+				E28736D91AFB28FD005ED91B /* TransporteEstacionarTarjetaMapaViewController.swift in Sources */,
+				E28736751AFB289A005ED91B /* InmobiliariasInmobiliariaObservacionesTableViewCell.swift in Sources */,
+				E28736D51AFB28FD005ED91B /* TransporteEstacionarInfoContenidoViewController.swift in Sources */,
+				E28736631AFB288A005ED91B /* InformacionViewController.swift in Sources */,
+				E28736791AFB289A005ED91B /* InmobiliariasViewController.swift in Sources */,
+				E28736BE1AFB28FD005ED91B /* PlayasPlayaDatosTableViewCell.swift in Sources */,
+				E28736761AFB289A005ED91B /* InmobiliariasInmobiliariaViewController.swift in Sources */,
+				E28736191AFB2758005ED91B /* Soaper.swift in Sources */,
+				E28736711AFB289A005ED91B /* InmobiliariasInmobiliariaDatosTableViewCell.swift in Sources */,
+				E2C8136C1B04D31E00BECFA8 /* MapManager2.swift in Sources */,
+				E287362E1AFB283E005ED91B /* GastronomiaLugarViewController.swift in Sources */,
+				E287368E1AFB28DB005ED91B /* MuseosMuseoInfoTableViewCell.swift in Sources */,
+				E28736411AFB285C005ED91B /* CongresosYEventosResultadosEventoCellTableViewCell.swift in Sources */,
 				E28735CA1AFB24E9005ED91B /* AppDelegate.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E28735D51AFB24E9005ED91B /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E28735E01AFB24E9005ED91B /* Gui_a_Turi_sticaTests.swift in Sources */,
+				E28735FB1AFB271F005ED91B /* NSDateExtendida.swift in Sources */,
+				E287363E1AFB285C005ED91B /* CongresosYEventosEventoObservacionesTableViewCell.swift in Sources */,
+				E28736301AFB283E005ED91B /* GastronomiaResultadosLugarCellTableViewCell.swift in Sources */,
+				E28736801AFB28AB005ED91B /* MediosDeAccesoViewController.swift in Sources */,
+				E28736721AFB289A005ED91B /* InmobiliariasInmobiliariaFotosTableViewCell.swift in Sources */,
+				E28736501AFB286D005ED91B /* HotelesYAlojamientoHotelInfoTableViewCell.swift in Sources */,
+				E287362F1AFB283E005ED91B /* GastronomiaOpcionesViewController.swift in Sources */,
+				E287365F1AFB288A005ED91B /* InformacionCentrosSaludViewController.swift in Sources */,
+				E28736281AFB283E005ED91B /* GastronomiaCellFiltroTableViewCell.swift in Sources */,
+				E28736421AFB285C005ED91B /* CongresosYEventosViewController.swift in Sources */,
+				E28736C01AFB28FD005ED91B /* PlayasPlayaInfoTableViewCell.swift in Sources */,
+				E28736911AFB28DB005ED91B /* MuseosMuseoViewController.swift in Sources */,
+				E28736311AFB283E005ED91B /* GastronomiaViewController.swift in Sources */,
+				E28736B91AFB28FD005ED91B /* PaseosYLugaresCellTableViewCell.swift in Sources */,
+				E28736031AFB272E005ED91B /* SWRevealViewController.m in Sources */,
+				E28736401AFB285C005ED91B /* CongresosYEventosOpcionesViewController.swift in Sources */,
+				E28736DA1AFB28FD005ED91B /* TransporteEstacionarZonaViewController.swift in Sources */,
+				E28736121AFB2758005ED91B /* funciones.swift in Sources */,
+				E28736D71AFB28FD005ED91B /* TransporteEstacionarInfoWebViewController.swift in Sources */,
+				E287368B1AFB28DB005ED91B /* MuseosCellFiltroTableViewCell.swift in Sources */,
+				E287364F1AFB286D005ED91B /* HotelesYAlojamientoHotelDatosTableViewCell.swift in Sources */,
+				E28736111AFB2758005ED91B /* Farmacia.swift in Sources */,
+				E28736291AFB283E005ED91B /* GastronomiaLugarDatosTableViewCell.swift in Sources */,
+				E28736571AFB286D005ED91B /* HotelesYAlojamientoViewController.swift in Sources */,
+				E28736C51AFB28FD005ED91B /* PlayasViewController.swift in Sources */,
+				E28736C81AFB28FD005ED91B /* RecreacionLugarDatosTableViewCell.swift in Sources */,
+				E28736701AFB289A005ED91B /* InmobiliariasCellFiltroTableViewCell.swift in Sources */,
+				E28736531AFB286D005ED91B /* HotelesYAlojamientoHotelViewController.swift in Sources */,
+				E287362C1AFB283E005ED91B /* GastronomiaLugarMapaTableViewCell.swift in Sources */,
+				E28736C41AFB28FD005ED91B /* PlayasResultadosPlayaCellTableViewCell.swift in Sources */,
+				E28736741AFB289A005ED91B /* InmobiliariasInmobiliariaMapaTableViewCell.swift in Sources */,
+				E287367F1AFB28AB005ED91B /* MediosDeAccesoMapaViewController.swift in Sources */,
+				E28736771AFB289A005ED91B /* InmobiliariasOpcionesViewController.swift in Sources */,
+				E28736641AFB288A005ED91B /* InformacionWiFiViewController.swift in Sources */,
+				E287363D1AFB285C005ED91B /* CongresosYEventosEventoInfoTableViewCell.swift in Sources */,
+				E28736731AFB289A005ED91B /* InmobiliariasInmobiliariaInfoTableViewCell.swift in Sources */,
+				E28736D01AFB28FD005ED91B /* RecreacionViewController.swift in Sources */,
+				E28736541AFB286D005ED91B /* HotelesYAlojamientoOpcionesViewController.swift in Sources */,
+				E28736CC1AFB28FD005ED91B /* RecreacionLugarObservacionesTableViewCell.swift in Sources */,
+				E28736131AFB2758005ED91B /* Hotel.swift in Sources */,
+				E28736601AFB288A005ED91B /* InformacionComisariasViewController.swift in Sources */,
+				E28736181AFB2758005ED91B /* PuestoCargaAnnotation.swift in Sources */,
+				E28736D11AFB28FD005ED91B /* TransporteColeMyBusViewController.swift in Sources */,
+				E28736BB1AFB28FD005ED91B /* PaseosYLugaresViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		E28735DB1AFB24E9005ED91B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = E28735C31AFB24E9005ED91B /* Guía Turística */;
-			targetProxy = E28735DA1AFB24E9005ED91B /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin PBXVariantGroup section */
-		E28735CD1AFB24E9005ED91B /* Main.storyboard */ = {
+		E2C813691B044EB000BECFA8 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				E28735CE1AFB24E9005ED91B /* Base */,
+				E2C813681B044EB000BECFA8 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		E28735D21AFB24E9005ED91B /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E28735D31AFB24E9005ED91B /* Base */,
-			);
-			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -338,55 +903,30 @@
 		};
 		E28735E41AFB24E9005ED91B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 417253B2D668CDEA82FA8491 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Guía Turística/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Guía Turística/Guía Turística-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		E28735E51AFB24E9005ED91B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6307FEABF60DE8F816804A6E /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = "Guía Turística/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		E28735E71AFB24E9005ED91B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "Guía TurísticaTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Guía Turística.app/Guía Turística";
-			};
-			name = Debug;
-		};
-		E28735E81AFB24E9005ED91B /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "Guía TurísticaTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Guía Turística.app/Guía Turística";
+				SWIFT_OBJC_BRIDGING_HEADER = "Guía Turística/Guía Turística-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -409,14 +949,7 @@
 				E28735E51AFB24E9005ED91B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-		};
-		E28735E61AFB24E9005ED91B /* Build configuration list for PBXNativeTarget "Guía TurísticaTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E28735E71AFB24E9005ED91B /* Debug */,
-				E28735E81AFB24E9005ED91B /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

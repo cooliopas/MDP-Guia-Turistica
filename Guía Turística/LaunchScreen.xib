@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="480" height="747"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="splash1" translatesAutoresizingMaskIntoConstraints="NO" id="h4Z-2G-9Hb">
+                    <rect key="frame" x="-10" y="0.0" width="500" height="374"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="500" id="HfX-f3-BsH"/>
+                        <constraint firstAttribute="width" secondItem="h4Z-2G-9Hb" secondAttribute="height" multiplier="480:359" id="Q1b-pY-ZEV"/>
+                    </constraints>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fGg-Zf-GWT">
+                    <rect key="frame" x="0.0" y="374" width="480" height="373"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mar del Plata" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EI4-zJ-4sg">
+                            <rect key="frame" x="129" y="147" width="222" height="46"/>
+                            <fontDescription key="fontDescription" name="Futura-CondensedExtraBold" family="Futura" pointSize="36"/>
+                            <color key="textColor" red="0.45477524399757385" green="0.60293745994567871" blue="0.78737491369247437" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Guia Turistica" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WAW-38-Ivm">
+                            <rect key="frame" x="130" y="189" width="220" height="31"/>
+                            <fontDescription key="fontDescription" name="Copperplate" family="Copperplate" pointSize="30"/>
+                            <color key="textColor" red="0.45477524399757385" green="0.60293745994567871" blue="0.78737491369247437" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.86970758438110352" green="0.92044973373413086" blue="0.97994726896286011" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="centerY" secondItem="EI4-zJ-4sg" secondAttribute="centerY" constant="17" id="4Oa-jQ-TFy"/>
+                        <constraint firstItem="WAW-38-Ivm" firstAttribute="top" secondItem="EI4-zJ-4sg" secondAttribute="bottom" constant="-4" id="O96-Qy-TOx"/>
+                        <constraint firstAttribute="centerX" secondItem="EI4-zJ-4sg" secondAttribute="centerX" id="cKx-1U-rAK"/>
+                        <constraint firstAttribute="centerX" secondItem="WAW-38-Ivm" secondAttribute="centerX" id="hJX-0O-fCs"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.86970758438110352" green="0.92044973373413086" blue="0.97994726896286011" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="fGg-Zf-GWT" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="1bR-eH-zu8"/>
+                <constraint firstAttribute="centerX" secondItem="h4Z-2G-9Hb" secondAttribute="centerX" id="4fV-e6-mMM"/>
+                <constraint firstItem="h4Z-2G-9Hb" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="D6Z-jZ-3Sq"/>
+                <constraint firstItem="h4Z-2G-9Hb" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="F1f-E5-n5I"/>
+                <constraint firstItem="fGg-Zf-GWT" firstAttribute="top" secondItem="h4Z-2G-9Hb" secondAttribute="bottom" id="Y4D-KN-bFv"/>
+                <constraint firstAttribute="bottom" secondItem="fGg-Zf-GWT" secondAttribute="bottom" id="e3S-3V-YN5"/>
+                <constraint firstAttribute="trailing" secondItem="fGg-Zf-GWT" secondAttribute="trailing" id="ilB-aG-RAJ"/>
+                <constraint firstAttribute="trailing" secondItem="h4Z-2G-9Hb" secondAttribute="trailing" id="qLF-WU-PbF"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="F1f-E5-n5I"/>
+                    <exclude reference="qLF-WU-PbF"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="463" y="647.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="splash1" width="682" height="512"/>
+    </resources>
+</document>
