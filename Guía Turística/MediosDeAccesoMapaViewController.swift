@@ -15,6 +15,7 @@ class MediosDeAccesoMapaViewController: UIViewController, MKMapViewDelegate, CLL
 
 	@IBOutlet weak var mapaView: MKMapView!
 	@IBOutlet weak var mapaPasoAPasoBoton: UIButton!
+	@IBOutlet weak var sinUbicacionLabel: UILabel!
 	
 	let locationManager = CLLocationManager()
 	
@@ -26,17 +27,17 @@ class MediosDeAccesoMapaViewController: UIViewController, MKMapViewDelegate, CLL
     override func viewDidLoad() {
         super.viewDidLoad()
 
-		if CLLocationManager.authorizationStatus() == .NotDetermined {
-			locationManager.requestWhenInUseAuthorization()
-		}
-
-		locationManager.desiredAccuracy = kCLLocationAccuracyBest
 		locationManager.delegate = self
 
-		mapaView.showsUserLocation = true
+		if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse {
+			mapaView.showsUserLocation = true
+		}
+		
 		mapaView.delegate = self
 
 		mapaPasoAPasoBoton.layer.cornerRadius = 5
+		sinUbicacionLabel.layer.cornerRadius = 7
+		sinUbicacionLabel.clipsToBounds = true
 		
 	}
 	
@@ -46,20 +47,16 @@ class MediosDeAccesoMapaViewController: UIViewController, MKMapViewDelegate, CLL
 		armaNavegacion()
 		self.revealViewController().delegate = self
 		
-		if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.Denied {
-			
-			alertaLocalizacion()
-			
-		}
-		
-		self.view.sendSubviewToBack(mapaView)
-		
-		IJProgressView.shared.showProgressView(self.view, padding: true)
-		
 	}
 	
 	func alertaLocalizacion() {
 		
+		UIView.animateWithDuration(0.4, delay: 0, options: .CurveEaseOut, animations: {
+			
+			self.sinUbicacionLabel.alpha = 1
+			
+			}, completion: nil)
+
 		var alertController = UIAlertController (title: "Acceso a la localización", message: "Para mostrar la ruta desde tu ubicación hasta Mar del Plata, es necesario que permitas el acceso a la localización desde esta aplicación.\n\nPodes permitir el acceso desde \"Ajustes\".", preferredStyle: .Alert)
 		
 		var settingsAction = UIAlertAction(title: "Ir a Ajustes", style: .Default) { (_) -> Void in
@@ -114,8 +111,6 @@ class MediosDeAccesoMapaViewController: UIViewController, MKMapViewDelegate, CLL
 		let destination = CLLocationCoordinate2DMake(-37.995526, -57.552260) // Luro e Independencia
 		
 		mapManager.directionsUsingGoogle(from: origin, to: destination) { [weak self] (route,directionInformation, boundingRegion, error) -> () in
-		
-			println("busco")
 			
 			if error != nil {
 				
@@ -166,7 +161,7 @@ class MediosDeAccesoMapaViewController: UIViewController, MKMapViewDelegate, CLL
 						self!.mapaView.addAnnotation(pointOfDestination)
 						self!.mapaView.setVisibleMapRect(boundingRegion!, edgePadding: UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30), animated: true)
 
-						IJProgressView.shared.hideProgressView()
+						if self!.revealViewController() != nil { IJProgressView.shared.hideProgressView() }
 						
 						UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut, animations: {
 							
@@ -207,8 +202,10 @@ class MediosDeAccesoMapaViewController: UIViewController, MKMapViewDelegate, CLL
 		switch status {
 			case CLAuthorizationStatus.Restricted:
 				autorizacionStatus = "Restringido"
+				alertaLocalizacion()
 			case CLAuthorizationStatus.Denied:
 				autorizacionStatus = "Denegado"
+				alertaLocalizacion()
 			case CLAuthorizationStatus.NotDetermined:
 				autorizacionStatus = "No determinado aún"
 			default:
@@ -216,9 +213,25 @@ class MediosDeAccesoMapaViewController: UIViewController, MKMapViewDelegate, CLL
 				autorizado = true
 		}
 		
+		println("Location: \(autorizacionStatus)")
+		
 		if autorizado == true {
 			
-			locationManager.startUpdatingLocation()
+			UIView.animateWithDuration(0.4, delay: 0, options: .CurveEaseOut, animations: {
+				
+				self.sinUbicacionLabel.alpha = 0
+				
+				}, completion: nil)
+			
+			mapaView.showsUserLocation = true
+			
+			self.view.sendSubviewToBack(mapaView)
+			
+			IJProgressView.shared.showProgressView(self.view, padding: true, texto: "Detectando ubicación")
+			
+		} else {
+			
+			locationManager.requestWhenInUseAuthorization()
 			
 		}
 		
@@ -226,15 +239,18 @@ class MediosDeAccesoMapaViewController: UIViewController, MKMapViewDelegate, CLL
 	
 	override func viewDidDisappear(animated: Bool) {
 		
-		println("disapear")
-		
+		super.viewDidDisappear(animated)
+				
 		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
 		appDelegate.arrayVC.removeValueForKey("mediosDeAccesoMapa")
 		
 		locationManager.stopUpdatingLocation()
 		locationManager.delegate = nil
+		
 		mapaView.delegate = nil
 		
+		IJProgressView.shared.hideProgressView()
+
 		self.removeFromParentViewController()
 		
 	}

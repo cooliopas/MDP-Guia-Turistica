@@ -94,6 +94,8 @@ class HotelesYAlojamientoOpcionesViewController: UIViewController, UITableViewDa
 	
 	override func viewDidDisappear(animated: Bool) {
 		
+		super.viewDidDisappear(animated)
+		
 		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
 		appDelegate.arrayVC.removeValueForKey("hotelesYAlojamientoOpciones")
 		

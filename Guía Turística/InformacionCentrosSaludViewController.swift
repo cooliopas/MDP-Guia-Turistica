@@ -9,32 +9,55 @@ import UIKit
 import MapKit
 import CoreLocation
 
-class InformacionCentrosSaludViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, SWRevealViewControllerDelegate {
+class InformacionCentrosSaludViewController: UIViewController, MKMapViewDelegate, SWRevealViewControllerDelegate {
 	
 	@IBOutlet weak var mapaView: MKMapView!
+	@IBOutlet weak var statusLabel: UILabel!
 
 	let locationManager = CLLocationManager()
-	
-	var ubicacionActual: CLLocationCoordinate2D?
 	
 	var actualizoRegion = false
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		if CLLocationManager.authorizationStatus() == .NotDetermined {
-			locationManager.requestWhenInUseAuthorization()
+		if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse {
+			mapaView.showsUserLocation = true
 		}
 		
-		locationManager.delegate = self
-		locationManager.desiredAccuracy = kCLLocationAccuracyBest
-		
-		mapaView.showsUserLocation = true
 		mapaView.delegate = self
+
+		let parametros = [[String: String]]()
+		soapea("centros_de_salud", parametros) { (respuesta, error) in
+			
+			if error == nil {
+				
+				for centro in respuesta {
+					
+					let annotation = MKPointAnnotation()
+					annotation.coordinate = CLLocationCoordinate2DMake((centro["latitud"]! as NSString).doubleValue,(centro["longitud"]! as NSString).doubleValue)
+					let nombre = centro["descripcion"]!
+					let direccion = centro["ubicacion"]!
+					
+					annotation.title = nombre
+					annotation.subtitle = direccion
+					
+					self.mapaView.addAnnotation(annotation)
+					
+				}
+				
+			} else {
+				
+				println("No se encontraron Centros de Salud")
+				println(error)
+				
+			}
+			
+		}
 		
 		if !actualizoRegion {
 			
-			mapaView.setRegion(MKCoordinateRegionMake(CLLocationCoordinate2DMake(-37.992820,-57.583932), MKCoordinateSpanMake(0.05, 0.05)), animated: false)
+			mapaView.setRegion(MKCoordinateRegionMake(CLLocationCoordinate2DMake(-37.992820,-57.583932), MKCoordinateSpanMake(0.04, 0.04)), animated: false)
 			
 		}
 		
@@ -50,37 +73,7 @@ class InformacionCentrosSaludViewController: UIViewController, MKMapViewDelegate
 	
 	func mapView(mapView: MKMapView!, didUpdateUserLocation userLocation: MKUserLocation!) {
 		
-		ubicacionActual = userLocation.coordinate
-		
 		if !actualizoRegion {
-			
-			let parametros = [[String: String]]()
-			soapea("centros_de_salud", parametros) { (respuesta, error) in
-				
-				if error == nil {
-					
-					for centro in respuesta {
-						
-						let annotation = MKPointAnnotation()
-						annotation.coordinate = CLLocationCoordinate2DMake((centro["latitud"]! as NSString).doubleValue,(centro["longitud"]! as NSString).doubleValue)
-						let nombre = centro["descripcion"]!
-						let direccion = centro["ubicacion"]!
-						
-						annotation.title = nombre
-						annotation.subtitle = direccion
-						
-						self.mapaView.addAnnotation(annotation)
-						
-					}
-	
-				} else {
-					
-					println("No se encontraron Centros de Salud")
-					println(error)
-					
-				}
-				
-			}
 			
 			mapaView.setRegion(MKCoordinateRegionMake(userLocation.coordinate, MKCoordinateSpanMake(0.03, 0.03)), animated: true)
 			actualizoRegion = true
@@ -125,40 +118,13 @@ class InformacionCentrosSaludViewController: UIViewController, MKMapViewDelegate
 		println("deinit")
 	}
 	
-	func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-		
-		var autorizado = false
-		var autorizacionStatus = ""
-		
-		switch status {
-		case CLAuthorizationStatus.Restricted:
-			autorizacionStatus = "Restringido"
-		case CLAuthorizationStatus.Denied:
-			autorizacionStatus = "Denegado"
-		case CLAuthorizationStatus.NotDetermined:
-			autorizacionStatus = "No determinado aún"
-		default:
-			autorizacionStatus = "Permitido"
-			autorizado = true
-		}
-		
-		if autorizado == true {
-			
-			locationManager.startUpdatingLocation()
-			
-		}
-		
-	}
-	
 	override func viewDidDisappear(animated: Bool) {
 		
-		println("disapear")
-		
+		super.viewDidDisappear(animated)
+				
 		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
 		appDelegate.arrayVC.removeValueForKey("informacionCentrosSalud")
 		
-		locationManager.stopUpdatingLocation()
-		locationManager.delegate = nil
 		mapaView.delegate = nil
 		
 		self.removeFromParentViewController()

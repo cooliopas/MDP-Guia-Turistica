@@ -9,7 +9,7 @@
 import UIKit
 import CoreLocation
 
-class InmobiliariasViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SWRevealViewControllerDelegate {
+class InmobiliariasViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate, SWRevealViewControllerDelegate {
 
 	@IBOutlet weak var tablaOpciones: UITableView!
 	@IBOutlet weak var tablaResultados: UITableView!
@@ -29,7 +29,7 @@ class InmobiliariasViewController: UIViewController, UITableViewDelegate, UITabl
 	
 	var inmobiliarias = [Lugar]()
 
-	let locationManager = LocationManager.sharedInstance
+	let locationManager = CLLocationManager()
 	var ubicacionActual: CLLocationCoordinate2D?
 	
 	override func viewDidLoad() {
@@ -48,21 +48,31 @@ class InmobiliariasViewController: UIViewController, UITableViewDelegate, UITabl
 					
 		armaNavegacion()
 		self.revealViewController().delegate = self
-			
-		locationManager.autoUpdate = true
-		locationManager.startUpdatingLocationWithCompletionHandler { [weak self] (latitude, longitude, status, verboseMessage, error) -> () in
-			
-			if self != nil {
-				
-				self!.ubicacionActual = CLLocationCoordinate2DMake(latitude, longitude)
-				self!.locationManager.stopUpdatingLocation()
-				
-			}
-			
+
+		locationManager.delegate = self
+		
+		locationManager.desiredAccuracy = kCLLocationAccuracyBest
+
+	}
+	
+	func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+		
+		if status == CLAuthorizationStatus.AuthorizedWhenInUse {
+			locationManager.startUpdatingLocation()
+		} else {
+			locationManager.requestWhenInUseAuthorization()
 		}
 		
 	}
 	
+	func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+		
+		locationManager.stopUpdatingLocation()
+		
+		ubicacionActual = (locations.last as! CLLocation).coordinate
+		
+	}
+
 	override func viewDidLayoutSubviews() {
 		if tablaResultados.respondsToSelector(Selector("layoutMargins")) {
 			tablaResultados.layoutMargins = UIEdgeInsetsZero;
@@ -94,7 +104,7 @@ class InmobiliariasViewController: UIViewController, UITableViewDelegate, UITabl
 
 		restea("Inmobiliaria","Buscar",["Token":"01234567890123456789012345678901","SoloConAlquilerTuristico":"true","IdZona":idZona,"Nombre":filtroNombre]) { (request, response, JSON, error) in
 
-			IJProgressView.shared.hideProgressView()
+			if self.revealViewController() != nil { IJProgressView.shared.hideProgressView() }
 			
 			if error == nil, let info = JSON as? NSDictionary where (info["Inmobiliarias"] as! NSArray).count > 0 {
 				
@@ -371,6 +381,14 @@ class InmobiliariasViewController: UIViewController, UITableViewDelegate, UITabl
 		if cellBusqueda != nil {
 			cellBusqueda!.filtroNombreTextField.endEditing(true)
 		}
+	}
+	
+	override func viewDidDisappear(animated: Bool) {
+
+		super.viewDidDisappear(animated)
+		
+		IJProgressView.shared.hideProgressView()
+		
 	}
 	
     override func didReceiveMemoryWarning() {

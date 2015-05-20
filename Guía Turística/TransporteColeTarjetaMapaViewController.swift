@@ -16,6 +16,7 @@ class TransporteColeTarjetaMapaViewController: UIViewController, MKMapViewDelega
 	@IBOutlet weak var mapaView: MKMapView!
 	@IBOutlet weak var segmentadorTipo: UISegmentedControl!
 	@IBOutlet weak var segmentadorTodos: UISegmentedControl!
+	@IBOutlet weak var statusLabel: UILabel!
 
 	var linea: String!
 	
@@ -35,16 +36,17 @@ class TransporteColeTarjetaMapaViewController: UIViewController, MKMapViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
 
-		if CLLocationManager.authorizationStatus() == .NotDetermined {
-			locationManager.requestWhenInUseAuthorization()
-		}
-
 		locationManager.delegate = self
-		locationManager.desiredAccuracy = kCLLocationAccuracyBest
 
-		mapaView.showsUserLocation = true
+		if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse {
+			mapaView.showsUserLocation = true
+		}
+		
 		mapaView.delegate = self
 		
+		statusLabel.layer.cornerRadius = 7
+		statusLabel.clipsToBounds = true
+
 		if let file = NSBundle.mainBundle().pathForResource("Varios.bundle/puntosDeCargaUTE", ofType: "json"),
 			let data = NSData(contentsOfFile: file),
 			let puestosUTE = JSON(data:data).array {
@@ -74,6 +76,8 @@ class TransporteColeTarjetaMapaViewController: UIViewController, MKMapViewDelega
 			mapaView.setRegion(MKCoordinateRegionMake(CLLocationCoordinate2DMake(-37.992820,-57.583932), MKCoordinateSpanMake(0.05, 0.05)), animated: false)
 			
 		}
+		
+		mostrarPuestos(segmentadorTipo.selectedSegmentIndex,todos: segmentadorTodos.selectedSegmentIndex)
 
 	}
 	
@@ -87,12 +91,44 @@ class TransporteColeTarjetaMapaViewController: UIViewController, MKMapViewDelega
 	
 	@IBAction func mostrarPuestosActualiza() {
 		
+		if segmentadorTodos.selectedSegmentIndex == 0 && ubicacionActual == nil && mapaView.showsUserLocation == false {
+		
+			segmentadorTodos.selectedSegmentIndex = 1
+			alertaLocalizacion()
+			
+		}
+		
 		mostrarPuestos(segmentadorTipo.selectedSegmentIndex,todos: segmentadorTodos.selectedSegmentIndex)
 		
 	}
 	
+	func alertaLocalizacion() {
+		
+		var alertController = UIAlertController (title: "Acceso a la localización", message: "Para mostrar los puestos de carga más cercanos, es necesario que permitas el acceso a la localización desde esta aplicación.\n\nPodes permitir el acceso desde \"Ajustes\".", preferredStyle: .Alert)
+		
+		var settingsAction = UIAlertAction(title: "Ir a Ajustes", style: .Default) { (_) -> Void in
+			let settingsUrl = NSURL(string: UIApplicationOpenSettingsURLString)
+			if let url = settingsUrl {
+				UIApplication.sharedApplication().openURL(url)
+			}
+		}
+		
+		var cancelAction = UIAlertAction(title: "Ignorar", style: .Default, handler: nil)
+		alertController.addAction(settingsAction)
+		alertController.addAction(cancelAction)
+		
+		presentViewController(alertController, animated: true, completion: nil);
+		
+	}
+	
 	func sorterForDistancia(this:PuestoCarga, that:PuestoCarga) -> Bool {
-		return this.distancia! < that.distancia!
+		if this.distancia == nil {
+			return false
+		} else if that.distancia == nil {
+			return true
+		} else {
+			return this.distancia! < that.distancia!
+		}
 	}
 	
 	func mostrarPuestos(tipo: Int,todos: Int) {
@@ -264,10 +300,12 @@ class TransporteColeTarjetaMapaViewController: UIViewController, MKMapViewDelega
 				
 			}
 			
-			mostrarPuestos(segmentadorTipo.selectedSegmentIndex,todos: segmentadorTodos.selectedSegmentIndex)
+			if segmentadorTodos.selectedSegmentIndex == 0 {
 			
-			println("actualizo ubicacion y puestos")
-
+				mostrarPuestos(segmentadorTipo.selectedSegmentIndex,todos: segmentadorTodos.selectedSegmentIndex)
+			
+			}
+			
 		}
 		
 		if !actualizoRegion {
@@ -289,20 +327,28 @@ class TransporteColeTarjetaMapaViewController: UIViewController, MKMapViewDelega
 		var autorizacionStatus = ""
 		
 		switch status {
-			case CLAuthorizationStatus.Restricted:
-				autorizacionStatus = "Restringido"
-			case CLAuthorizationStatus.Denied:
-				autorizacionStatus = "Denegado"
-			case CLAuthorizationStatus.NotDetermined:
-				autorizacionStatus = "No determinado aún"
-			default:
-				autorizacionStatus = "Permitido"
-				autorizado = true
+		case CLAuthorizationStatus.Restricted:
+			autorizacionStatus = "Restringido"
+//			alertaLocalizacion()
+		case CLAuthorizationStatus.Denied:
+			autorizacionStatus = "Denegado"
+//			alertaLocalizacion()
+		case CLAuthorizationStatus.NotDetermined:
+			autorizacionStatus = "No determinado aún"
+		default:
+			autorizacionStatus = "Permitido"
+			autorizado = true
 		}
+		
+		println("Location: \(autorizacionStatus)")
 		
 		if autorizado == true {
 			
-			locationManager.startUpdatingLocation()
+			mapaView.showsUserLocation = true
+			
+		} else {
+			
+			locationManager.requestWhenInUseAuthorization()
 			
 		}
 		
@@ -310,13 +356,11 @@ class TransporteColeTarjetaMapaViewController: UIViewController, MKMapViewDelega
 	
 	override func viewDidDisappear(animated: Bool) {
 		
-		println("disapear")
-		
+		super.viewDidDisappear(animated)
+				
 		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
 		appDelegate.arrayVC.removeValueForKey("transporteColeTarjetaMapa")
 		
-		locationManager.stopUpdatingLocation()
-		locationManager.delegate = nil
 		mapaView.delegate = nil
 		
 		self.removeFromParentViewController()

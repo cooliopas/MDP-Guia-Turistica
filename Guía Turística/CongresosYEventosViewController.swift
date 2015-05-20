@@ -82,7 +82,7 @@ class CongresosYEventosViewController: UIViewController, UITableViewDelegate, UI
 
 		restea("Evento","Buscar",["Token":"01234567890123456789012345678901","IdCategoria":idCategoria,"FechaDesde":fechaDesde,"FechaHasta":fechaHasta,"Nombre":filtroNombre]) { (request, response, JSON, error) in
 			
-			IJProgressView.shared.hideProgressView()
+			if self.revealViewController() != nil { IJProgressView.shared.hideProgressView() }
 			
 			if error == nil, let info = JSON as? NSDictionary where (info["Eventos"] as! NSArray).count > 0 {
 			
@@ -322,6 +322,14 @@ class CongresosYEventosViewController: UIViewController, UITableViewDelegate, UI
 		if cellBusqueda != nil {
 			cellBusqueda!.filtroNombreTextField.endEditing(true)
 		}
+	}
+
+	override func viewDidDisappear(animated: Bool) {
+
+		super.viewDidDisappear(animated)
+		
+		IJProgressView.shared.hideProgressView()
+
 	}
 	
 	override func didReceiveMemoryWarning() {

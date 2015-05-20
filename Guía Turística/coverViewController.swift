@@ -38,6 +38,8 @@ class coverViewController: UIViewController {
 				tapGestureRecognizer.numberOfTapsRequired = 1
 				viewId.addGestureRecognizer(tapGestureRecognizer)
 
+				viewId.userInteractionEnabled = false
+				
 				arrayConstraints.append([:])
 				
 				arrayConstraints[id]["width"] = NSLayoutConstraint(item: viewId, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: itemWidth)
@@ -52,8 +54,6 @@ class coverViewController: UIViewController {
 				arrayConstraints[id]["top"] = NSLayoutConstraint(item: viewId, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self.topLayoutGuide, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: superHeight)
 				self.view.addConstraint(arrayConstraints[id]["top"]!);
 
-//				viewId.
-				
 				self.view.sendSubviewToBack(viewId)
 				
 				viewId.alpha = 0.0
@@ -88,7 +88,12 @@ class coverViewController: UIViewController {
 				
 				self.view.layoutIfNeeded()
 				
-			}, completion: nil)
+				}, completion: { finished in
+					
+					viewId.userInteractionEnabled = true
+			
+				}
+			)
 
 			delay += 0.1
 			
@@ -101,61 +106,70 @@ class coverViewController: UIViewController {
 		let viewActual = recognizer.view!
 		let tagActual = viewActual.tag
 		var label: UILabel!
+		var nuevoVC = ""
 		
-		for view in viewActual.subviews {
-			
-			if view is UILabel {
+		switch viewActual.tag {
+		case 1:
+			nuevoVC = "mediosDeAcceso"
+		case 2:
+			nuevoVC = "hotelesYAlojamiento"
+		case 3:
+			nuevoVC = "inmobiliarias"
+		case 4:
+			nuevoVC = "gastronomia"
+		case 5:
+			nuevoVC = "playas"
+		case 6:
+			nuevoVC = "transporte"
+		case 7:
+			nuevoVC = "congresosYEventos"
+		case 8:
+			nuevoVC = "recreacion"
+		case 9:
+			nuevoVC = "paseosYLugares"
+		case 10:
+			nuevoVC = "museos"
+		case 11:
+			nuevoVC = "informacion"
+		default:
+			break
+		}
+		
+		if nuevoVC != "" && self.revealViewController().frontViewController.restorationIdentifier != nuevoVC {
+		
+			for view in viewActual.subviews {
 				
-				label = view as? UILabel
+				if view is UILabel {
+					
+					label = view as? UILabel
+					
+				}
 				
 			}
 			
+			self.view.bringSubviewToFront(viewActual)
+			
+			let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+			
+			UIView.animateWithDuration(0.4, delay: 0.0, options: .CurveEaseOut, animations: {
+
+				self.arrayConstraints[tagActual]["width"]!.constant = self.superWidth
+				self.arrayConstraints[tagActual]["height"]!.constant = self.superHeight
+
+				self.arrayConstraints[tagActual]["top"]!.constant = self.navigationHeight
+				self.arrayConstraints[tagActual]["left"]!.constant = -16
+				
+				label.alpha = 0
+				
+				self.view.layoutIfNeeded()
+				
+				}, completion: { finished in
+					
+					self.revealViewController().setFrontViewController(appDelegate.traeVC(nuevoVC), animated: true)
+					
+			})
+
 		}
-		
-		self.view.bringSubviewToFront(viewActual)
-		
-		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-		
-		UIView.animateWithDuration(0.4, delay: 0.0, options: .CurveEaseOut, animations: {
-
-			self.arrayConstraints[tagActual]["width"]!.constant = self.superWidth
-			self.arrayConstraints[tagActual]["height"]!.constant = self.superHeight
-
-			self.arrayConstraints[tagActual]["top"]!.constant = self.navigationHeight
-			self.arrayConstraints[tagActual]["left"]!.constant = -16
-			
-			label.alpha = 0
-			
-			self.view.layoutIfNeeded()
-			
-			}, completion: { finished in
-				
-				if viewActual.tag==1 {
-					self.revealViewController().setFrontViewController(appDelegate.traeVC("mediosDeAcceso"), animated: true)
-				} else if viewActual.tag==2 {
-					self.revealViewController().setFrontViewController(appDelegate.traeVC("hotelesYAlojamiento"), animated: true)
-				} else if viewActual.tag==3 {
-					self.revealViewController().setFrontViewController(appDelegate.traeVC("inmobiliarias"), animated: true)
-				} else if viewActual.tag==4 {
-					self.revealViewController().setFrontViewController(appDelegate.traeVC("gastronomia"), animated: true)
-				} else if viewActual.tag==5 {
-					self.revealViewController().setFrontViewController(appDelegate.traeVC("playas"), animated: true)
-				} else if viewActual.tag==6 {
-					self.revealViewController().setFrontViewController(appDelegate.traeVC("transporte"), animated: true)
-				} else if viewActual.tag==7 {
-					self.revealViewController().setFrontViewController(appDelegate.traeVC("congresosYEventos"), animated: true)
-				} else if viewActual.tag==8 {
-					self.revealViewController().setFrontViewController(appDelegate.traeVC("recreacion"), animated: true)
-				} else if viewActual.tag==9 {
-					self.revealViewController().setFrontViewController(appDelegate.traeVC("paseosYLugares"), animated: true)
-				} else if viewActual.tag==10 {
-					self.revealViewController().setFrontViewController(appDelegate.traeVC("museos"), animated: true)
-				} else if viewActual.tag==11 {
-					self.revealViewController().setFrontViewController(appDelegate.traeVC("informacion"), animated: true)
-				}
-				
-		})
-
 	}
 	
     override func didReceiveMemoryWarning() {

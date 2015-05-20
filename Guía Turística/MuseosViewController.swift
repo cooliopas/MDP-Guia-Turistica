@@ -7,10 +7,9 @@
 //
 
 import UIKit
-import Alamofire
 import CoreLocation
 
-class MuseosViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SWRevealViewControllerDelegate {
+class MuseosViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate, SWRevealViewControllerDelegate {
 
 	@IBOutlet weak var tablaResultados: UITableView!
 	@IBOutlet weak var labelSinResultados: UILabel!
@@ -20,36 +19,46 @@ class MuseosViewController: UIViewController, UITableViewDelegate, UITableViewDa
 	
 	var museos = [Lugar]()
 
-	let locationManager = LocationManager.sharedInstance
+	let locationManager = CLLocationManager()
 	var ubicacionActual: CLLocationCoordinate2D?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		println("load")
+
+		buscar()
+		
 	}
 
 	override func viewDidAppear(animated: Bool) {
 		super.viewDidAppear(animated)
-		println("appear")
-		buscar()
-		
+
 		armaNavegacion()
 		self.revealViewController().delegate = self
 		
-		locationManager.autoUpdate = true
-		locationManager.startUpdatingLocationWithCompletionHandler { [weak self] (latitude, longitude, status, verboseMessage, error) -> () in
-			
-			if self != nil {
-				
-				self!.ubicacionActual = CLLocationCoordinate2DMake(latitude, longitude)
-				self!.locationManager.stopUpdatingLocation()
-				
-			}
-			
+		locationManager.delegate = self
+		
+		locationManager.desiredAccuracy = kCLLocationAccuracyBest
+
+	}
+	
+	func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+		
+		if status == CLAuthorizationStatus.AuthorizedWhenInUse {
+			locationManager.startUpdatingLocation()
+		} else {
+			locationManager.requestWhenInUseAuthorization()
 		}
 		
 	}
 	
+	func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+		
+		locationManager.stopUpdatingLocation()
+		
+		ubicacionActual = (locations.last as! CLLocation).coordinate
+		
+	}
+
 	override func viewDidLayoutSubviews() {
 		if tablaResultados.respondsToSelector(Selector("layoutMargins")) {
 			tablaResultados.layoutMargins = UIEdgeInsetsZero;
@@ -60,64 +69,64 @@ class MuseosViewController: UIViewController, UITableViewDelegate, UITableViewDa
 		
 		UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
 			
-			self.tablaResultados.alpha = 1
-//			self.labelSinResultados.alpha = 0
-//			self.botonReintentar.alpha = 0
+			self.tablaResultados.alpha = 0
+			self.labelSinResultados.alpha = 0
+			self.botonReintentar.alpha = 0
 			
 			}, completion: { finished in
 		
-//				self.tablaResultados.scrollRectToVisible(CGRectMake(0, 0, 1, 1), animated: false)
+				self.tablaResultados.scrollRectToVisible(CGRectMake(0, 0, 1, 1), animated: false)
 		
 		})
 		
-//		IJProgressView.shared.showProgressView(self.view, padding: true)
-//		
-//		restea("Museo","Buscar",["Token":"01234567890123456789012345678901"]) { (request, response, JSON, error) in
-//
-//			IJProgressView.shared.hideProgressView()
-//			
-//			if error == nil, let info = JSON as? NSDictionary where (info["Museos"] as! NSArray).count > 0 {
-//
-//				self.museos = Lugar.lugaresCargaDeJSON(info["Museos"] as! NSArray)
-//
-//				if self.ubicacionActual != nil {
-//					
-//					for museo in self.museos {
-//						
-//						if museo.latitud != 0 {
-//
-//							museo.distancia = directMetersFromCoordinate(self.ubicacionActual!, CLLocationCoordinate2DMake(museo.latitud, museo.longitud))
-//							
-//						}
-//						
-//					}
-//					
-//					self.museos.sort(self.sorterForDistancia)
-//					
-//				}
-//				
-//				self.tablaResultados.reloadData()
-//				
-//				UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
-//					
-//					self.tablaResultados.alpha = 1
-//					
-//					}, completion: nil)
-//
-//			} else {
-//				
-//				self.labelSinResultados.text = "Ocurrió un error al leer los datos.\nPor favor intente nuevamente."
-//				
-//				UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
-//					
-//					self.labelSinResultados.alpha = 1
-//					self.botonReintentar.alpha = 1
-//					
-//					}, completion: nil)
-//				
-//			}
-//			
-//		}
+		IJProgressView.shared.showProgressView(self.view, padding: true)
+		
+		restea("Museo","Buscar",["Token":"01234567890123456789012345678901"]) { (request, response, JSON, error) in
+
+			if self.revealViewController() != nil { IJProgressView.shared.hideProgressView() }
+			
+			if error == nil, let info = JSON as? NSDictionary where (info["Museos"] as! NSArray).count > 0 {
+
+				self.museos = Lugar.lugaresCargaDeJSON(info["Museos"] as! NSArray)
+
+				if self.ubicacionActual != nil {
+					
+					for museo in self.museos {
+						
+						if museo.latitud != 0 {
+
+							museo.distancia = directMetersFromCoordinate(self.ubicacionActual!, CLLocationCoordinate2DMake(museo.latitud, museo.longitud))
+							
+						}
+						
+					}
+					
+					self.museos.sort(self.sorterForDistancia)
+					
+				}
+				
+				self.tablaResultados.reloadData()
+				
+				UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
+					
+					self.tablaResultados.alpha = 1
+					
+					}, completion: nil)
+
+			} else {
+				
+				self.labelSinResultados.text = "Ocurrió un error al leer los datos.\nPor favor intente nuevamente."
+				
+				UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
+					
+					self.labelSinResultados.alpha = 1
+					self.botonReintentar.alpha = 1
+					
+					}, completion: nil)
+				
+			}
+			
+		}
 		
 	}
 	
@@ -223,6 +232,14 @@ class MuseosViewController: UIViewController, UITableViewDelegate, UITableViewDa
 		if cellBusqueda != nil {
 			cellBusqueda!.filtroNombreTextField.endEditing(true)
 		}
+	}
+	
+	override func viewDidDisappear(animated: Bool) {
+
+		super.viewDidDisappear(animated)
+		
+		IJProgressView.shared.hideProgressView()
+		
 	}
 	
     override func didReceiveMemoryWarning() {

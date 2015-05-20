@@ -10,17 +10,18 @@ import UIKit
 import MapKit
 import AddressBook
 
-class HotelesYAlojamientoHotelViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate, SWRevealViewControllerDelegate {
+class HotelesYAlojamientoHotelViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate, CLLocationManagerDelegate, SWRevealViewControllerDelegate {
 	
 	@IBOutlet weak var tabla: UITableView!
 	
 	@IBOutlet weak var mapaCerrarBoton: UIButton!
 	@IBOutlet weak var mapaComoLlegarBoton: UIButton!
 	@IBOutlet weak var mapaPasoAPasoBoton: UIButton!
+	@IBOutlet weak var statusLabel: UILabel!
 	
 	var mapa: MKMapView!
 	
-	let locationManager = LocationManager.sharedInstance
+	let locationManager = CLLocationManager()
 	
 	var hotel: Hotel!
 	var cellMapa: HotelesYAlojamientoHotelMapaTableViewCell!
@@ -34,6 +35,10 @@ class HotelesYAlojamientoHotelViewController: UIViewController, UITableViewDeleg
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+		locationManager.delegate = self
+		
+		locationManager.desiredAccuracy = kCLLocationAccuracyBest
+
 		restea("Hotel","Detalle",["Token":"01234567890123456789012345678901","IdLugar":hotel.id]) { (request, response, JSON, error) in
 			
 			if error == nil, let info = JSON as? NSDictionary {
@@ -59,18 +64,8 @@ class HotelesYAlojamientoHotelViewController: UIViewController, UITableViewDeleg
 		
 		mapaComoLlegarBoton.layer.cornerRadius = 5
 		mapaPasoAPasoBoton.layer.cornerRadius = 5
-		
-		locationManager.autoUpdate = true
-		locationManager.startUpdatingLocationWithCompletionHandler { [weak self] (latitude, longitude, status, verboseMessage, error) -> () in
-			
-			if self != nil {
-			
-				self!.ubicacionActual = CLLocationCoordinate2DMake(latitude, longitude)
-				self!.locationManager.stopUpdatingLocation()
-
-			}
-			
-		}
+		statusLabel.layer.cornerRadius = 7
+		statusLabel.clipsToBounds = true
 
 		if self.hotel.latitud != 0 {
 		
@@ -163,6 +158,34 @@ class HotelesYAlojamientoHotelViewController: UIViewController, UITableViewDeleg
 		
 	}
 	
+	func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+		
+		if status == CLAuthorizationStatus.AuthorizedWhenInUse {
+			locationManager.startUpdatingLocation()
+		}
+		
+	}
+	
+	func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+		
+		locationManager.stopUpdatingLocation()
+		
+		ubicacionActual = (locations.last as! CLLocation).coordinate
+		
+		if self.statusLabel.alpha == 1 {
+		
+			UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut, animations: {
+				
+				self.statusLabel.alpha = 0
+				
+				}, completion: nil)
+
+			mapaComoLlegar()
+			
+		}
+			
+	}
+	
 	@IBAction func mapaCerrar() {
 		
 		let rectInTableView = tabla.rectForRowAtIndexPath(NSIndexPath(forRow: 2, inSection: 0))
@@ -177,6 +200,7 @@ class HotelesYAlojamientoHotelViewController: UIViewController, UITableViewDeleg
 			self.mapaCerrarBoton.alpha = 0
 			self.mapaComoLlegarBoton.alpha = 0
 			self.mapaPasoAPasoBoton.alpha = 0
+			self.statusLabel.alpha = 0
 			self.mapaPasoAPasoBoton.userInteractionEnabled = false
 			self.mapaComoLlegarBoton.userInteractionEnabled = false
 			
@@ -232,6 +256,7 @@ class HotelesYAlojamientoHotelViewController: UIViewController, UITableViewDeleg
 		self.view.bringSubviewToFront(self.mapaCerrarBoton)
 		self.view.bringSubviewToFront(self.mapaComoLlegarBoton)
 		self.view.bringSubviewToFront(self.mapaPasoAPasoBoton)
+		self.view.bringSubviewToFront(self.statusLabel)
 		
 		let rectInTableView = tabla.rectForRowAtIndexPath(NSIndexPath(forRow: 2, inSection: 0))
 		let rectInSuperview = tabla.convertRect(rectInTableView, toView: tabla.superview)
@@ -364,7 +389,7 @@ class HotelesYAlojamientoHotelViewController: UIViewController, UITableViewDeleg
 							self!.mapa.addAnnotation(pointOfDestination)
 							self!.mapa.setVisibleMapRect(boundingRegion!, edgePadding: UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30), animated: true)
 							
-							IJProgressView.shared.hideProgressView()
+							if self!.revealViewController() != nil { IJProgressView.shared.hideProgressView() }
 							
 							UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseOut, animations: {
 								
@@ -377,7 +402,42 @@ class HotelesYAlojamientoHotelViewController: UIViewController, UITableViewDeleg
 					}
 				}
 			}
+		} else {
+			
+			if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse {
+			
+				UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut, animations: {
+					
+					self.statusLabel.alpha = 1
+					
+					}, completion: nil)
+				
+			} else {
+			
+				alertaLocalizacion()
+				
+			}
+			
 		}
+	}
+	
+	func alertaLocalizacion() {
+		
+		var alertController = UIAlertController (title: "Acceso a la localización", message: "Para mostrar la ruta hasta el hotel, es necesario que permitas el acceso a la localización desde esta aplicación.\n\nPodes permitir el acceso desde \"Ajustes\".", preferredStyle: .Alert)
+		
+		var settingsAction = UIAlertAction(title: "Ir a Ajustes", style: .Default) { (_) -> Void in
+			let settingsUrl = NSURL(string: UIApplicationOpenSettingsURLString)
+			if let url = settingsUrl {
+				UIApplication.sharedApplication().openURL(url)
+			}
+		}
+		
+		var cancelAction = UIAlertAction(title: "Ignorar", style: .Default, handler: nil)
+		alertController.addAction(settingsAction)
+		alertController.addAction(cancelAction)
+		
+		presentViewController(alertController, animated: true, completion: nil);
+		
 	}
 	
 	@IBAction func mapaPasoAPaso() {
@@ -468,7 +528,7 @@ class HotelesYAlojamientoHotelViewController: UIViewController, UITableViewDeleg
 									
 									if let cellVisible = self.tabla.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as? HotelesYAlojamientosHotelFotosTableViewCell {
 										
-										IJProgressView.shared.hideProgressView()
+										if self.revealViewController() != nil { IJProgressView.shared.hideProgressView() }
 										cellVisible.foto.image = self.hotel.fotoCache
 										
 										UIView.animateWithDuration(1.0, delay: 0.0, options: .CurveEaseOut, animations: {
@@ -647,15 +707,15 @@ class HotelesYAlojamientoHotelViewController: UIViewController, UITableViewDeleg
 	
 	override func viewDidDisappear(animated: Bool) {
 		
+		super.viewDidDisappear(animated)
+		
 		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
 		appDelegate.arrayVC.removeValueForKey("hotelesYAlojamientoHotel")
 		
 		mapa.delegate = nil
-		
-		locationManager.stopUpdatingLocation()
-		
-		locationManager.delegate = nil
-		
+
+		IJProgressView.shared.hideProgressView()
+
 		self.removeFromParentViewController()
 		
 	}

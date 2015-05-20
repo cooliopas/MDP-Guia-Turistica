@@ -39,6 +39,8 @@ class PaseosYLugaresPDFViewController: UIViewController, UIWebViewDelegate, UIAl
 	
 	override func viewDidDisappear(animated: Bool) {
 		
+		super.viewDidDisappear(animated)
+		
 		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
 		appDelegate.arrayVC.removeValueForKey("paseosYLugaresPDF")
 		

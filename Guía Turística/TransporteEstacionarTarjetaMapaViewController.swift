@@ -13,6 +13,8 @@ import CoreLocation
 class TransporteEstacionarTarjetaMapaViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, SWRevealViewControllerDelegate {
 
 	@IBOutlet weak var mapaView: MKMapView!
+	@IBOutlet weak var sinUbicacionLabel: UILabel!
+	@IBOutlet weak var statusLabel: UILabel!
 
 	var linea: String!
 	
@@ -27,16 +29,17 @@ class TransporteEstacionarTarjetaMapaViewController: UIViewController, MKMapView
     override func viewDidLoad() {
         super.viewDidLoad()
 
-		if CLLocationManager.authorizationStatus() == .NotDetermined {
-			locationManager.requestWhenInUseAuthorization()
-		}
-
 		locationManager.delegate = self
-		locationManager.desiredAccuracy = kCLLocationAccuracyBest
 
-		mapaView.showsUserLocation = true
+		if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse {
+			mapaView.showsUserLocation = true
+		}
+		
 		mapaView.delegate = self
 		
+		statusLabel.layer.cornerRadius = 7
+		statusLabel.clipsToBounds = true
+
 		if !actualizoRegion {
 		
 			mapaView.setRegion(MKCoordinateRegionMake(CLLocationCoordinate2DMake(-38.000125, -57.549382), MKCoordinateSpanMake(0.01, 0.01)), animated: false)
@@ -55,39 +58,91 @@ class TransporteEstacionarTarjetaMapaViewController: UIViewController, MKMapView
 	
 	func mapView(mapView: MKMapView!, didUpdateUserLocation userLocation: MKUserLocation!) {
 		
-		ubicacionActual = userLocation.coordinate
-		
-		if !actualizoRegion {
+		if ubicacionActual == nil || directMetersFromCoordinate(ubicacionActual!, userLocation.coordinate) > 100 {
+			
+			ubicacionActual = userLocation.coordinate
 
-			let parametros = [["latitud":"\(ubicacionActual!.latitude)"],["longitud":"\(ubicacionActual!.longitude)"]]
-			soapea("latlong_puestomedido", parametros) { (respuesta, error) in
+			mostrarPuestos(ubicacionActual!)
+
+		}
+			
+		if self.revealViewController() != nil { IJProgressView.shared.hideProgressView() }
+			
+	}
+	
+	func mostrarPuestos(coordenadas: CLLocationCoordinate2D) {
+		
+		let parametros = [["latitud":"\(coordenadas.latitude)"],["longitud":"\(coordenadas.longitude)"]]
+		soapea("latlong_puestomedido", parametros) { (respuesta, error) in
+			
+			if error == nil {
+
+				var arrayNuevosPuestos: [String] = []
 				
-				if error == nil {
+				for puesto in respuesta {
 					
-					for puesto in respuesta {
-												
-						let annotation = MKPointAnnotation()
-						annotation.coordinate = CLLocationCoordinate2DMake((puesto["codigo"]!.componentsSeparatedByString(",")[0] as NSString).doubleValue,(puesto["codigo"]!.componentsSeparatedByString(",")[1] as NSString).doubleValue)
-						annotation.title = "Punto de venta"
+					let latitud = (puesto["codigo"]!.componentsSeparatedByString(",")[0] as NSString).doubleValue
+					let longitud = (puesto["codigo"]!.componentsSeparatedByString(",")[1] as NSString).doubleValue
+					
+					arrayNuevosPuestos.append("\(latitud),\(longitud)")
+					
+				}
+
+				for annotation in self.mapaView.annotations {
+					
+					if let anotacion = annotation as? MKPointAnnotation {
 						
-						self.mapaView.addAnnotation(annotation)
+						let latitud = anotacion.coordinate.latitude
+						let longitud = anotacion.coordinate.longitude
+						let stringCoordenadas = "\(latitud),\(longitud)"
+						
+						if !contains(arrayNuevosPuestos,stringCoordenadas) {
+						
+							self.mapaView.removeAnnotation(anotacion)
+							
+						} else {
+
+							if let indexPuesto = find(arrayNuevosPuestos,stringCoordenadas) {
+
+								arrayNuevosPuestos.removeAtIndex(indexPuesto)
+								
+							}
+							
+						}
 						
 					}
 					
-				} else {
+				}
+
+				for puesto in arrayNuevosPuestos {
 					
-					println("No se encontraron puntos de venta de estacionamiento medido")
-					println(error)
+					let latitud = (puesto.componentsSeparatedByString(",")[0] as NSString).doubleValue
+					let longitud = (puesto.componentsSeparatedByString(",")[1] as NSString).doubleValue
+					
+					let annotation = MKPointAnnotation()
+					annotation.coordinate = CLLocationCoordinate2DMake(latitud,longitud)
+					annotation.title = "Punto de venta"
+					
+					self.mapaView.addAnnotation(annotation)
 					
 				}
 				
+			} else {
+				
+				println("No se encontraron puntos de venta de estacionamiento medido")
+				println(error)
+				
 			}
-			
-			mapaView.setRegion(MKCoordinateRegionMake(userLocation.coordinate, MKCoordinateSpanMake(0.03, 0.03)), animated: true)
-			actualizoRegion = true
 			
 		}
 		
+		if !actualizoRegion {
+		
+			mapaView.setRegion(MKCoordinateRegionMake(coordenadas, MKCoordinateSpanMake(0.007, 0.007)), animated: true)
+			actualizoRegion = true
+			
+		}
+
 	}
 	
 	func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
@@ -128,26 +183,71 @@ class TransporteEstacionarTarjetaMapaViewController: UIViewController, MKMapView
 		println("deinit")
 	}
 		
+	func alertaLocalizacion() {
+		
+		mostrarPuestos(CLLocationCoordinate2DMake(-37.995816,-57.552115))
+
+		UIView.animateWithDuration(0.4, delay: 0, options: .CurveEaseOut, animations: {
+			
+			self.sinUbicacionLabel.alpha = 1
+			
+			}, completion: nil)
+		
+		var alertController = UIAlertController (title: "Acceso a la localización", message: "Para mostrar los puestos de carga más cercanos a tu ubicación, es necesario que permitas el acceso a la localización desde esta aplicación.\n\nPodes permitir el acceso desde \"Ajustes\".", preferredStyle: .Alert)
+		
+		var settingsAction = UIAlertAction(title: "Ir a Ajustes", style: .Default) { (_) -> Void in
+			let settingsUrl = NSURL(string: UIApplicationOpenSettingsURLString)
+			if let url = settingsUrl {
+				UIApplication.sharedApplication().openURL(url)
+			}
+		}
+		
+		var cancelAction = UIAlertAction(title: "Ignorar", style: .Default, handler: nil)
+		alertController.addAction(settingsAction)
+		alertController.addAction(cancelAction)
+		
+		presentViewController(alertController, animated: true, completion: nil);
+		
+	}
+	
 	func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
 		
 		var autorizado = false
 		var autorizacionStatus = ""
 		
 		switch status {
-			case CLAuthorizationStatus.Restricted:
-				autorizacionStatus = "Restringido"
-			case CLAuthorizationStatus.Denied:
-				autorizacionStatus = "Denegado"
-			case CLAuthorizationStatus.NotDetermined:
-				autorizacionStatus = "No determinado aún"
-			default:
-				autorizacionStatus = "Permitido"
-				autorizado = true
+		case CLAuthorizationStatus.Restricted:
+			autorizacionStatus = "Restringido"
+			alertaLocalizacion()
+		case CLAuthorizationStatus.Denied:
+			autorizacionStatus = "Denegado"
+			alertaLocalizacion()
+		case CLAuthorizationStatus.NotDetermined:
+			autorizacionStatus = "No determinado aún"
+		default:
+			autorizacionStatus = "Permitido"
+			autorizado = true
 		}
+		
+		println("Location: \(autorizacionStatus)")
 		
 		if autorizado == true {
 			
-			locationManager.startUpdatingLocation()
+			UIView.animateWithDuration(0.4, delay: 0, options: .CurveEaseOut, animations: {
+				
+				self.sinUbicacionLabel.alpha = 0
+				
+				}, completion: nil)
+			
+			mapaView.showsUserLocation = true
+			
+			self.view.sendSubviewToBack(mapaView)
+			
+			IJProgressView.shared.showProgressView(self.view, padding: true, texto: "Detectando ubicación")
+			
+		} else {
+			
+			locationManager.requestWhenInUseAuthorization()
 			
 		}
 		
@@ -155,15 +255,18 @@ class TransporteEstacionarTarjetaMapaViewController: UIViewController, MKMapView
 	
 	override func viewDidDisappear(animated: Bool) {
 		
-		println("disapear")
+		super.viewDidDisappear(animated)
 		
 		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
 		appDelegate.arrayVC.removeValueForKey("transporteEstacionarTarjetaMapa")
 		
 		locationManager.stopUpdatingLocation()
 		locationManager.delegate = nil
+
 		mapaView.delegate = nil
 		
+		IJProgressView.shared.hideProgressView()
+
 		self.removeFromParentViewController()
 		
 	}

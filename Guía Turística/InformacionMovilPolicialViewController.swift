@@ -18,6 +18,7 @@ class InformacionMovilPolicialViewController: UIViewController, CLLocationManage
 	@IBOutlet weak var emergenciaBoton: UIButton!
 	@IBOutlet weak var emergenciaViewHeight: NSLayoutConstraint!
 	@IBOutlet weak var detectandoView: UIView!
+	@IBOutlet weak var detectandoLabel: UILabel!
 	@IBOutlet weak var telefonosView: UIView!
 	@IBOutlet weak var telefonosViewHeight: NSLayoutConstraint!
 	@IBOutlet weak var comisariaTitulo: UILabel!
@@ -32,14 +33,8 @@ class InformacionMovilPolicialViewController: UIViewController, CLLocationManage
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		if CLLocationManager.authorizationStatus() == .NotDetermined {
-			locationManager.requestWhenInUseAuthorization()
-		}
-		
 		locationManager.delegate = self
 		locationManager.desiredAccuracy = kCLLocationAccuracyBest
-
-		locationManager.startUpdatingLocation()
 		
 		emergenciaView.alpha = 0
 		emergenciaView.userInteractionEnabled = false
@@ -51,6 +46,9 @@ class InformacionMovilPolicialViewController: UIViewController, CLLocationManage
 		comisariaTitulo.alpha = 0
 		comisariaDetalle.alpha = 0
 		comisariaBoton.alpha = 0
+		
+		emergenciaBoton.titleLabel?.adjustsFontSizeToFitWidth = true
+		emergenciaBoton.titleLabel?.minimumScaleFactor = 0.5
 		
 		detectandoView.layer.cornerRadius = 5
 
@@ -85,32 +83,36 @@ class InformacionMovilPolicialViewController: UIViewController, CLLocationManage
 
 	func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
 		
-		println("Actualizo location")
-		
 		locationManager.stopUpdatingLocation()
 		
 		ubicacionActual = (locations.last as! CLLocation).coordinate
+		
+		detectandoLabel.text = "Buscando movil policial más cercano ..."
 		
 		let parametros = [["latitud":"\(ubicacionActual!.latitude)"],["longitud":"\(ubicacionActual!.longitude)"]]
 		soapea("movilpolicial_lat_lng", parametros) { (respuesta, error) in
 			
 			if error == nil {
 				
+				var nuevoEmergenciaViewHeight: CGFloat = 0
+				
 				if respuesta.count > 0 && respuesta[0]["return"] != "NO" {
 					
 					self.emergenciaLabel.text = "En caso de emergencia, el teléfono celular del móvil policial más cercano es: "
-					self.emergenciaBoton.setTitle("0223 155 381575", forState: UIControlState.Normal)
-					self.emergenciaViewHeight.constant = 120
+					self.emergenciaBoton.setTitle(respuesta[0]["return"], forState: UIControlState.Normal)
+					nuevoEmergenciaViewHeight = 120
 					
 				} else {
 					
 					self.emergenciaLabel.text = "Lamentablemente, el servicio de información no esta disponible en este momento."
 					self.emergenciaBoton.hidden = true
-					self.emergenciaViewHeight.constant = 80
+					nuevoEmergenciaViewHeight = 80
 
 				}
 				
 				UIView.animateWithDuration(0.6, delay: 0.5, options: .CurveEaseOut, animations: {
+					
+					self.emergenciaViewHeight.constant = nuevoEmergenciaViewHeight
 					
 					self.detectandoView.alpha = 0
 
@@ -119,8 +121,9 @@ class InformacionMovilPolicialViewController: UIViewController, CLLocationManage
 					
 					self.telefonosView.alpha = 1
 					
+					self.view.layoutIfNeeded()
+					
 					}, completion: nil)
-
 				
 			} else {
 				
@@ -141,7 +144,6 @@ class InformacionMovilPolicialViewController: UIViewController, CLLocationManage
 					
 					self.comisariaCercana = comisaria
 					
-//					annotation.coordinate = CLLocationCoordinate2DMake((comisaria["latitud"]! as NSString).doubleValue,(comisaria["longitud"]! as NSString).doubleValue)
 					let nombre = comisaria["nro"]!
 					let direccion = comisaria["ubicacion"]!
 					let tel = comisaria["telefono"] ?? ""
@@ -182,6 +184,89 @@ class InformacionMovilPolicialViewController: UIViewController, CLLocationManage
 				println(error)
 				
 			}
+			
+		}
+		
+	}
+	
+	func alertaLocalizacion() {
+		
+		self.emergenciaLabel.text = "No fue posible detectar tu ubicación."
+		self.emergenciaBoton.hidden = true
+		
+		UIView.animateWithDuration(0.6, delay: 0.5, options: .CurveEaseOut, animations: {
+			
+			self.emergenciaViewHeight.constant = 80
+
+			self.detectandoView.alpha = 0
+			
+			self.emergenciaView.alpha = 1
+			self.emergenciaView.userInteractionEnabled = true
+			
+			self.telefonosView.alpha = 1
+			
+			self.view.layoutIfNeeded()
+			
+			}, completion: nil)
+		
+		var alertController = UIAlertController (title: "Acceso a la localización", message: "Para mostrar el movil policial más cercano a tu ubicación, es necesario que permitas el acceso a la localización desde esta aplicación.\n\nPodes permitir el acceso desde \"Ajustes\".", preferredStyle: .Alert)
+		
+		var settingsAction = UIAlertAction(title: "Ir a Ajustes", style: .Default) { (_) -> Void in
+			let settingsUrl = NSURL(string: UIApplicationOpenSettingsURLString)
+			if let url = settingsUrl {
+				UIApplication.sharedApplication().openURL(url)
+			}
+		}
+		
+		var cancelAction = UIAlertAction(title: "Ignorar", style: .Default, handler: nil)
+		alertController.addAction(settingsAction)
+		alertController.addAction(cancelAction)
+		
+		presentViewController(alertController, animated: true, completion: nil);
+		
+	}
+
+	func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+		
+		var autorizado = false
+		var autorizacionStatus = ""
+		
+		switch status {
+		case CLAuthorizationStatus.Restricted:
+			autorizacionStatus = "Restringido"
+			alertaLocalizacion()
+		case CLAuthorizationStatus.Denied:
+			autorizacionStatus = "Denegado"
+			alertaLocalizacion()
+		case CLAuthorizationStatus.NotDetermined:
+			autorizacionStatus = "No determinado aún"
+		default:
+			autorizacionStatus = "Permitido"
+			autorizado = true
+		}
+		
+		println("Location: \(autorizacionStatus)")
+		
+		if autorizado == true {
+			
+			self.emergenciaBoton.hidden = false
+			
+			UIView.animateWithDuration(0.6, delay: 0, options: .CurveEaseOut, animations: {
+				
+				self.detectandoView.alpha = 1
+				
+				self.emergenciaView.alpha = 0
+				self.emergenciaView.userInteractionEnabled = false
+				
+				self.telefonosView.alpha = 1
+				
+				}, completion: nil)
+			
+			locationManager.startUpdatingLocation()
+			
+		} else {
+			
+			locationManager.requestWhenInUseAuthorization()
 			
 		}
 		
@@ -230,8 +315,8 @@ class InformacionMovilPolicialViewController: UIViewController, CLLocationManage
 	
 	override func viewDidDisappear(animated: Bool) {
 		
-		println("disapear")
-		
+		super.viewDidDisappear(animated)
+				
 		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
 		appDelegate.arrayVC.removeValueForKey("informacionMovilPolicial")
 		

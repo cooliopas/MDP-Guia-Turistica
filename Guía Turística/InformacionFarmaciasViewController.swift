@@ -18,6 +18,7 @@ class InformacionFarmaciasViewController: UIViewController, MKMapViewDelegate, C
 	
 	@IBOutlet weak var avisoFarmaciasDeTurnoView: UIView!
 	@IBOutlet weak var avisoFarmaciasDeTurnoLabel: UILabel!
+	@IBOutlet weak var statusLabel: UILabel!
 	
 	var linea: String!
 	
@@ -27,47 +28,20 @@ class InformacionFarmaciasViewController: UIViewController, MKMapViewDelegate, C
 	
 	let mapManager = MapManager()
 	
-	var actualizoRegion = false
-	
 	var farmacias: [Farmacia] = []
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		if CLLocationManager.authorizationStatus() == .NotDetermined {
-			locationManager.requestWhenInUseAuthorization()
-		}
-		
 		locationManager.delegate = self
-		locationManager.desiredAccuracy = kCLLocationAccuracyBest
 		
-		mapaView.showsUserLocation = true
-		mapaView.delegate = self
-		
-		avisoFarmaciasDeTurnoView.layer.cornerRadius = 5
-		avisoFarmaciasDeTurnoView.alpha = 0
-
-		segmentadorTipo.setEnabled(false, forSegmentAtIndex: 0)
-		
-		let hora = NSCalendar.currentCalendar().components(.CalendarUnitHour | .CalendarUnitMinute, fromDate: NSDate()).hour
-		
-		let dateFormatter = NSDateFormatter()
-		dateFormatter.dateFormat = "dd/MM/yyyy"
-		let fechaHoy = dateFormatter.stringFromDate(NSDate())
-		
-		let fechaTurno: String
-		
-		if hora >= 9 { // pedimos el listado de farmacias de turno de acuerdo a la hora actual
-		
-			fechaTurno = dateFormatter.stringFromDate(NSDate()) // si es después de las 9am, pedimos el listado de farmacias del día actual
-			avisoFarmaciasDeTurnoLabel.text = "Farmacias de turno para HOY (\(fechaHoy)) desde las 9:00 hs."
-
-		} else {
-			
-			fechaTurno = dateFormatter.stringFromDate(NSDate().dateByAddingTimeInterval(-86400)) // si es antes de las 9am, pedimos el listado del día anterior
-			avisoFarmaciasDeTurnoLabel.text = "Farmacias de turno para HOY (\(fechaHoy)) hasta las 9:00 hs."
-			
+		if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse {
+			mapaView.showsUserLocation = true
 		}
+		
+		mapaView.delegate = self
+
+		// leemos todas las farmacias
 		
 		if let file = NSBundle.mainBundle().pathForResource("Varios.bundle/farmacias", ofType: "json"),
 			let data = NSData(contentsOfFile: file),
@@ -81,14 +55,38 @@ class InformacionFarmaciasViewController: UIViewController, MKMapViewDelegate, C
 				
 		}
 		
-		Alamofire.request(.GET, "http://lansingwiki.org/farmaturno3.php?fecha=\(fechaTurno)").responseJSON { (req, res, json, error) in
+		// preparamos farmacias de turno
+		
+		avisoFarmaciasDeTurnoView.layer.cornerRadius = 5
+		avisoFarmaciasDeTurnoView.alpha = 0
+		statusLabel.layer.cornerRadius = 7
+		statusLabel.clipsToBounds = true
+		
+		segmentadorTipo.setEnabled(false, forSegmentAtIndex: 0)
+		
+		let hora = NSCalendar.currentCalendar().components(.CalendarUnitHour | .CalendarUnitMinute, fromDate: NSDate()).hour
+		
+		let dateFormatter = NSDateFormatter()
+		dateFormatter.dateFormat = "dd/MM/yyyy"
+		let fechaHoy = dateFormatter.stringFromDate(NSDate())
+		
+		let fechaTurno: String
+		
+		if hora >= 9 { // pedimos el listado de farmacias de turno de acuerdo a la hora actual
 			
-			if (error != nil) {
-				
-				println(req)
-				println(res)
-				
-			} else {
+			fechaTurno = dateFormatter.stringFromDate(NSDate()) // si es después de las 9am, pedimos el listado de farmacias del día actual
+			avisoFarmaciasDeTurnoLabel.text = "Farmacias de turno para HOY (\(fechaHoy)) desde las 9:00 hs."
+			
+		} else {
+			
+			fechaTurno = dateFormatter.stringFromDate(NSDate().dateByAddingTimeInterval(-86400)) // si es antes de las 9am, pedimos el listado del día anterior
+			avisoFarmaciasDeTurnoLabel.text = "Farmacias de turno para HOY (\(fechaHoy)) hasta las 9:00 hs."
+			
+		}
+		
+		Alamofire.request(.GET, "http://www.colfarmamdp.com.ar/farmaturno3.php?fecha=\(fechaTurno)").responseJSON { (req, res, json, error) in
+			
+			if (error == nil) {
 				
 				let farmaciasDeTurno = JSON(json!).arrayValue
 				
@@ -108,24 +106,24 @@ class InformacionFarmaciasViewController: UIViewController, MKMapViewDelegate, C
 						if farmacia.direccionDeTurno == direccionString {
 							
 							farmacia.tipo = 1
-							
-//							println("Es \(farmacia.nombre)")
-							
+														
 						}
 						
 					}
 					
 				}
 				
+			} else {
+				
+				println(req)
+				println(res)
+				
 			}
 			
 		}
 		
-		if !actualizoRegion {
-			
-			mapaView.setRegion(MKCoordinateRegionMake(CLLocationCoordinate2DMake(-37.992820,-57.583932), MKCoordinateSpanMake(0.05, 0.05)), animated: false)
-			
-		}
+		mapaView.setRegion(MKCoordinateRegionMake(CLLocationCoordinate2DMake(-37.995526,-57.552260), MKCoordinateSpanMake(0.005, 0.005)), animated: false)
+		mostrarFarmacias(segmentadorTipo.selectedSegmentIndex)
 		
 	}
 	
@@ -171,12 +169,69 @@ class InformacionFarmaciasViewController: UIViewController, MKMapViewDelegate, C
 	
 	@IBAction func mostrarFarmaciasActualiza() {
 		
-		mostrarFarmacias(segmentadorTipo.selectedSegmentIndex)
+		if segmentadorTipo.selectedSegmentIndex == 1 && ubicacionActual == nil {
+			
+			if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse {
+				
+				UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut, animations: {
+					
+					self.statusLabel.alpha = 1
+					
+					}, completion: nil)
+				
+			} else {
+				
+				segmentadorTipo.selectedSegmentIndex = 2
+				alertaLocalizacion()
+				
+			}
+			
+		} else {
+
+			UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut, animations: {
+				
+				self.statusLabel.alpha = 0
+				
+				}, completion: nil)
+			
+			mostrarFarmacias(segmentadorTipo.selectedSegmentIndex)
+			
+			if segmentadorTipo.selectedSegmentIndex == 1 {
+				
+				mapaView.setRegion(MKCoordinateRegionMake(ubicacionActual!, MKCoordinateSpanMake(0.02, 0.02)), animated: true)
+				
+			}
+			
+		}
+		
+		if segmentadorTipo.selectedSegmentIndex == 0 {
+			
+			UIView.animateWithDuration(0.6, delay: 0.0, options: .CurveEaseOut, animations: {
+				
+				self.avisoFarmaciasDeTurnoView.alpha = 1
+				
+				}, completion: nil)
+			
+		} else {
+			
+			UIView.animateWithDuration(0.6, delay: 0.0, options: .CurveEaseOut, animations: {
+				
+				self.avisoFarmaciasDeTurnoView.alpha = 0
+				
+				}, completion: nil)
+			
+		}
 		
 	}
 	
 	func sorterForDistancia(this:Farmacia, that:Farmacia) -> Bool {
-		return this.distancia! < that.distancia!
+		if this.distancia == nil {
+			return false
+		} else if that.distancia == nil {
+			return true
+		} else {
+			return this.distancia! < that.distancia!
+		}
 	}
 	
 	func mostrarFarmacias(tipo: Int) {
@@ -191,7 +246,7 @@ class InformacionFarmaciasViewController: UIViewController, MKMapViewDelegate, C
 			
 		}
 		
-		if tipo == 1 { farmacias.sort(sorterForDistancia) }
+		if tipo == 1 && ubicacionActual != nil { farmacias.sort(sorterForDistancia) }
 		
 		var farmaciasMostradas = 0
 		
@@ -214,24 +269,6 @@ class InformacionFarmaciasViewController: UIViewController, MKMapViewDelegate, C
 				
 		}
 		
-		if tipo == 0 {
-			
-			UIView.animateWithDuration(0.6, delay: 0.0, options: .CurveEaseOut, animations: {
-				
-				self.avisoFarmaciasDeTurnoView.alpha = 1
-				
-				}, completion: nil)
-			
-		} else {
-			
-			UIView.animateWithDuration(0.6, delay: 0.0, options: .CurveEaseOut, animations: {
-				
-				self.avisoFarmaciasDeTurnoView.alpha = 0
-				
-				}, completion: nil)
-		
-		}
-		
 	}
 	
 	func mapView(mapView: MKMapView!, didUpdateUserLocation userLocation: MKUserLocation!) {
@@ -246,16 +283,21 @@ class InformacionFarmaciasViewController: UIViewController, MKMapViewDelegate, C
 				
 			}
 			
-			mostrarFarmacias(segmentadorTipo.selectedSegmentIndex)
+			if segmentadorTipo.selectedSegmentIndex == 1 {
 			
-//			println("actualizo ubicacion y farmacias")
+				mostrarFarmacias(segmentadorTipo.selectedSegmentIndex)
+				
+			}
 			
 		}
 		
-		if !actualizoRegion {
+		if statusLabel.alpha == 1 {
 			
-			mapaView.setRegion(MKCoordinateRegionMake(userLocation.coordinate, MKCoordinateSpanMake(0.02, 0.02)), animated: true)
-			actualizoRegion = true
+			UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut, animations: {
+				
+				self.statusLabel.alpha = 0
+				
+				}, completion: nil)
 			
 		}
 		
@@ -263,6 +305,25 @@ class InformacionFarmaciasViewController: UIViewController, MKMapViewDelegate, C
 	
 	deinit {
 		println("deinit")
+	}
+	
+	func alertaLocalizacion() {
+		
+		var alertController = UIAlertController (title: "Acceso a la localización", message: "Para mostrar las farmacias más cercanas a tu ubicación, es necesario que permitas el acceso a la localización desde esta aplicación.\n\nPodes permitir el acceso desde \"Ajustes\".", preferredStyle: .Alert)
+		
+		var settingsAction = UIAlertAction(title: "Ir a Ajustes", style: .Default) { (_) -> Void in
+			let settingsUrl = NSURL(string: UIApplicationOpenSettingsURLString)
+			if let url = settingsUrl {
+				UIApplication.sharedApplication().openURL(url)
+			}
+		}
+		
+		var cancelAction = UIAlertAction(title: "Ignorar", style: .Default, handler: nil)
+		alertController.addAction(settingsAction)
+		alertController.addAction(cancelAction)
+		
+		presentViewController(alertController, animated: true, completion: nil);
+		
 	}
 	
 	func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
@@ -282,9 +343,15 @@ class InformacionFarmaciasViewController: UIViewController, MKMapViewDelegate, C
 			autorizado = true
 		}
 		
+		println("Location: \(autorizacionStatus)")
+		
 		if autorizado == true {
 			
-			locationManager.startUpdatingLocation()
+			mapaView.showsUserLocation = true
+			
+		} else {
+			
+			locationManager.requestWhenInUseAuthorization()
 			
 		}
 		
@@ -292,8 +359,8 @@ class InformacionFarmaciasViewController: UIViewController, MKMapViewDelegate, C
 	
 	override func viewDidDisappear(animated: Bool) {
 		
-		println("disapear")
-		
+		super.viewDidDisappear(animated)
+				
 		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
 		appDelegate.arrayVC.removeValueForKey("informacionFarmacias")
 		

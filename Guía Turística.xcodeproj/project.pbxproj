@@ -16,7 +16,6 @@
 		E28735F61AFB269C005ED91B /* Varios.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E28735F31AFB269C005ED91B /* Varios.bundle */; };
 		E28735FB1AFB271F005ED91B /* NSDateExtendida.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28735F71AFB271F005ED91B /* NSDateExtendida.swift */; };
 		E28735FC1AFB271F005ED91B /* IJProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28735F81AFB271F005ED91B /* IJProgressView.swift */; };
-		E28735FD1AFB271F005ED91B /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28735F91AFB271F005ED91B /* LocationManager.swift */; };
 		E28735FE1AFB271F005ED91B /* MapManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28735FA1AFB271F005ED91B /* MapManager.swift */; };
 		E28736031AFB272E005ED91B /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E28736011AFB272E005ED91B /* SWRevealViewController.m */; };
 		E287360F1AFB2758005ED91B /* coverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736041AFB2758005ED91B /* coverViewController.swift */; };
@@ -123,9 +122,7 @@
 		E28736DA1AFB28FD005ED91B /* TransporteEstacionarZonaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736B61AFB28FC005ED91B /* TransporteEstacionarZonaViewController.swift */; };
 		E28736DB1AFB28FD005ED91B /* TransportePopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736B71AFB28FC005ED91B /* TransportePopViewController.swift */; };
 		E28736DC1AFB28FD005ED91B /* TransporteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28736B81AFB28FC005ED91B /* TransporteViewController.swift */; };
-		E2C813671B044EB000BECFA8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2C813691B044EB000BECFA8 /* Main.storyboard */; };
-		E2C8136C1B04D31E00BECFA8 /* MapManager2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C8136B1B04D31E00BECFA8 /* MapManager2.swift */; };
-		E2C8136E1B04D38500BECFA8 /* LocationManager2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2C8136D1B04D38500BECFA8 /* LocationManager2.swift */; };
+		E2C813701B05141300BECFA8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E2C8136F1B05141300BECFA8 /* Main.storyboard */; };
 		E30277AF62B64872D6BFD20C /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B9B11BFB8E51AB34ADDD349 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
@@ -146,7 +143,6 @@
 		E28735F31AFB269C005ED91B /* Varios.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Varios.bundle; sourceTree = "<group>"; };
 		E28735F71AFB271F005ED91B /* NSDateExtendida.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateExtendida.swift; sourceTree = "<group>"; };
 		E28735F81AFB271F005ED91B /* IJProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IJProgressView.swift; sourceTree = "<group>"; };
-		E28735F91AFB271F005ED91B /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		E28735FA1AFB271F005ED91B /* MapManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapManager.swift; sourceTree = "<group>"; };
 		E28735FF1AFB272D005ED91B /* Guía Turística-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Guía Turística-Bridging-Header.h"; sourceTree = "<group>"; };
 		E28736001AFB272E005ED91B /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
@@ -255,9 +251,7 @@
 		E28736B61AFB28FC005ED91B /* TransporteEstacionarZonaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransporteEstacionarZonaViewController.swift; sourceTree = "<group>"; };
 		E28736B71AFB28FC005ED91B /* TransportePopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransportePopViewController.swift; sourceTree = "<group>"; };
 		E28736B81AFB28FC005ED91B /* TransporteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransporteViewController.swift; sourceTree = "<group>"; };
-		E2C813681B044EB000BECFA8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		E2C8136B1B04D31E00BECFA8 /* MapManager2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapManager2.swift; sourceTree = "<group>"; };
-		E2C8136D1B04D38500BECFA8 /* LocationManager2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager2.swift; sourceTree = "<group>"; };
+		E2C8136F1B05141300BECFA8 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -315,7 +309,7 @@
 		E28735C61AFB24E9005ED91B /* Guía Turística */ = {
 			isa = PBXGroup;
 			children = (
-				E2C813691B044EB000BECFA8 /* Main.storyboard */,
+				E2C8136F1B05141300BECFA8 /* Main.storyboard */,
 				E28735C91AFB24E9005ED91B /* AppDelegate.swift */,
 				E28736041AFB2758005ED91B /* coverViewController.swift */,
 				E28736071AFB2758005ED91B /* funciones.swift */,
@@ -348,10 +342,7 @@
 				E287360E1AFB2758005ED91B /* Soaper.swift */,
 				E28735F71AFB271F005ED91B /* NSDateExtendida.swift */,
 				E28735F81AFB271F005ED91B /* IJProgressView.swift */,
-				E28735F91AFB271F005ED91B /* LocationManager.swift */,
-				E2C8136D1B04D38500BECFA8 /* LocationManager2.swift */,
 				E28735FA1AFB271F005ED91B /* MapManager.swift */,
-				E2C8136B1B04D31E00BECFA8 /* MapManager2.swift */,
 				E28736001AFB272E005ED91B /* SWRevealViewController.h */,
 				E28736011AFB272E005ED91B /* SWRevealViewController.m */,
 				E28735C81AFB24E9005ED91B /* Info.plist */,
@@ -631,7 +622,7 @@
 				E28735F41AFB269C005ED91B /* PaseosPDF.bundle in Resources */,
 				E28735F01AFB266F005ED91B /* Images.xcassets in Resources */,
 				E28735F51AFB269C005ED91B /* Recorridos.bundle in Resources */,
-				E2C813671B044EB000BECFA8 /* Main.storyboard in Resources */,
+				E2C813701B05141300BECFA8 /* Main.storyboard in Resources */,
 				E287361B1AFB2784005ED91B /* LaunchScreen.xib in Resources */,
 				E28735F61AFB269C005ED91B /* Varios.bundle in Resources */,
 			);
@@ -694,7 +685,6 @@
 			files = (
 				E28736BD1AFB28FD005ED91B /* PlayasOpcionesViewController.swift in Sources */,
 				E28736101AFB2758005ED91B /* Evento.swift in Sources */,
-				E28735FD1AFB271F005ED91B /* LocationManager.swift in Sources */,
 				E28736511AFB286D005ED91B /* HotelesYAlojamientoHotelMapaTableViewCell.swift in Sources */,
 				E28735FE1AFB271F005ED91B /* MapManager.swift in Sources */,
 				E28736CB1AFB28FD005ED91B /* RecreacionLugarMapaTableViewCell.swift in Sources */,
@@ -744,7 +734,6 @@
 				E28736DB1AFB28FD005ED91B /* TransportePopViewController.swift in Sources */,
 				E287363B1AFB285C005ED91B /* CongresosYEventosCellFiltroTableViewCell.swift in Sources */,
 				E28736901AFB28DB005ED91B /* MuseosMuseoObservacionesTableViewCell.swift in Sources */,
-				E2C8136E1B04D38500BECFA8 /* LocationManager2.swift in Sources */,
 				E28736D91AFB28FD005ED91B /* TransporteEstacionarTarjetaMapaViewController.swift in Sources */,
 				E28736751AFB289A005ED91B /* InmobiliariasInmobiliariaObservacionesTableViewCell.swift in Sources */,
 				E28736D51AFB28FD005ED91B /* TransporteEstacionarInfoContenidoViewController.swift in Sources */,
@@ -754,7 +743,6 @@
 				E28736761AFB289A005ED91B /* InmobiliariasInmobiliariaViewController.swift in Sources */,
 				E28736191AFB2758005ED91B /* Soaper.swift in Sources */,
 				E28736711AFB289A005ED91B /* InmobiliariasInmobiliariaDatosTableViewCell.swift in Sources */,
-				E2C8136C1B04D31E00BECFA8 /* MapManager2.swift in Sources */,
 				E287362E1AFB283E005ED91B /* GastronomiaLugarViewController.swift in Sources */,
 				E287368E1AFB28DB005ED91B /* MuseosMuseoInfoTableViewCell.swift in Sources */,
 				E28736411AFB285C005ED91B /* CongresosYEventosResultadosEventoCellTableViewCell.swift in Sources */,
@@ -807,17 +795,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		E2C813691B044EB000BECFA8 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E2C813681B044EB000BECFA8 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		E28735E11AFB24E9005ED91B /* Debug */ = {

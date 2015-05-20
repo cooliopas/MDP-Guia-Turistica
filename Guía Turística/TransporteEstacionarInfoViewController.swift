@@ -125,8 +125,8 @@ class TransporteEstacionarInfoViewController: UIViewController, UITableViewDataS
 
 	override func viewDidDisappear(animated: Bool) {
 		
-//		println("disapear")
-		
+		super.viewDidDisappear(animated)
+				
 		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
 		appDelegate.arrayVC.removeValueForKey("transporteEstacionarInfo")
 		

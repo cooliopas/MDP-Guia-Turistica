@@ -94,6 +94,8 @@ class CongresosYEventosOpcionesViewController: UIViewController, UITableViewData
 	
 	override func viewDidDisappear(animated: Bool) {
 		
+		super.viewDidDisappear(animated)
+		
 		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
 		appDelegate.arrayVC.removeValueForKey("congresosYEventosOpciones")
 		

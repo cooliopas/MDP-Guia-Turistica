@@ -41,16 +41,20 @@ class TransporteEstacionarOnlineViewController: UIViewController, UIWebViewDeleg
 	
 	override func viewDidDisappear(animated: Bool) {
 		
+		super.viewDidDisappear(animated)
+		
 		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
 		appDelegate.arrayVC.removeValueForKey("transporteEstacionarOnline")
 		
+		IJProgressView.shared.hideProgressView()
+
 		self.removeFromParentViewController()
 		
 	}
 	
 	func webView(webView: UIWebView, didFailLoadWithError error: NSError) {
 		
-		IJProgressView.shared.hideProgressView()
+		if self.revealViewController() != nil { IJProgressView.shared.hideProgressView() }
 		
 		let alertView = UIAlertView(title: "Error", message: error.localizedDescription, delegate: self, cancelButtonTitle: "OK", otherButtonTitles: "")
 		alertView.alertViewStyle = .Default
@@ -70,7 +74,7 @@ class TransporteEstacionarOnlineViewController: UIViewController, UIWebViewDeleg
 	
 	func webViewDidFinishLoad(webView: UIWebView) {
 				
-		IJProgressView.shared.hideProgressView()
+		if self.revealViewController() != nil { IJProgressView.shared.hideProgressView() }
 		
 	}
 

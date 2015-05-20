@@ -12,6 +12,8 @@ import CoreLocation
 class InformacionWiFiViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, SWRevealViewControllerDelegate {
 	
 	@IBOutlet weak var mapaView: MKMapView!
+	@IBOutlet weak var statusLabel: UILabel!
+	@IBOutlet weak var sinUbicacionLabel: UILabel!
 
 	let locationManager = CLLocationManager()
 	
@@ -22,16 +24,17 @@ class InformacionWiFiViewController: UIViewController, MKMapViewDelegate, CLLoca
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		if CLLocationManager.authorizationStatus() == .NotDetermined {
-			locationManager.requestWhenInUseAuthorization()
-		}
-		
 		locationManager.delegate = self
-		locationManager.desiredAccuracy = kCLLocationAccuracyBest
-		
-		mapaView.showsUserLocation = true
+
+		if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse {
+			mapaView.showsUserLocation = true
+		}
+
 		mapaView.delegate = self
 		
+		statusLabel.layer.cornerRadius = 7
+		statusLabel.clipsToBounds = true
+
 		if !actualizoRegion {
 			
 			mapaView.setRegion(MKCoordinateRegionMake(CLLocationCoordinate2DMake(-37.992820,-57.583932), MKCoordinateSpanMake(0.05, 0.05)), animated: false)
@@ -50,12 +53,18 @@ class InformacionWiFiViewController: UIViewController, MKMapViewDelegate, CLLoca
 	
 	func mapView(mapView: MKMapView!, didUpdateUserLocation userLocation: MKUserLocation!) {
 		
-		ubicacionActual = userLocation.coordinate
-		
-		if !actualizoRegion {
+		if ubicacionActual == nil || directMetersFromCoordinate(ubicacionActual!, userLocation.coordinate) > 1000 {
+			
+			statusLabel.text = "Cargando datos ..."
 			
 			let parametros = [["latitud":"\(userLocation.coordinate.latitude)"],["longitud":"\(userLocation.coordinate.longitude)"],["distanciamaxima":"100"],["cantidadmaxima":"100"]]
 			soapea("wifi_mgp", parametros) { (respuesta, error) in
+				
+				UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut | .BeginFromCurrentState, animations: {
+					
+					self.statusLabel.alpha = 0
+					
+					}, completion: nil)
 				
 				if error == nil {
 					
@@ -81,11 +90,17 @@ class InformacionWiFiViewController: UIViewController, MKMapViewDelegate, CLLoca
 				}
 				
 			}
+
+		}
+		
+		if !actualizoRegion {
 			
 			mapaView.setRegion(MKCoordinateRegionMake(userLocation.coordinate, MKCoordinateSpanMake(0.03, 0.03)), animated: true)
 			actualizoRegion = true
 			
 		}
+		
+		ubicacionActual = userLocation.coordinate
 		
 	}
 	
@@ -126,6 +141,31 @@ class InformacionWiFiViewController: UIViewController, MKMapViewDelegate, CLLoca
 		println("deinit")
 	}
 	
+	func alertaLocalizacion() {
+		
+		UIView.animateWithDuration(0.4, delay: 0, options: .CurveEaseOut, animations: {
+			
+			self.sinUbicacionLabel.alpha = 1
+			
+			}, completion: nil)
+		
+		var alertController = UIAlertController (title: "Acceso a la localización", message: "Para mostrar los puntos de WiFi Público más cercanos a tu ubicación, es necesario que permitas el acceso a la localización desde esta aplicación.\n\nPodes permitir el acceso desde \"Ajustes\".", preferredStyle: .Alert)
+		
+		var settingsAction = UIAlertAction(title: "Ir a Ajustes", style: .Default) { (_) -> Void in
+			let settingsUrl = NSURL(string: UIApplicationOpenSettingsURLString)
+			if let url = settingsUrl {
+				UIApplication.sharedApplication().openURL(url)
+			}
+		}
+		
+		var cancelAction = UIAlertAction(title: "Ignorar", style: .Default, handler: nil)
+		alertController.addAction(settingsAction)
+		alertController.addAction(cancelAction)
+		
+		presentViewController(alertController, animated: true, completion: nil);
+		
+	}
+	
 	func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
 		
 		var autorizado = false
@@ -134,8 +174,10 @@ class InformacionWiFiViewController: UIViewController, MKMapViewDelegate, CLLoca
 		switch status {
 		case CLAuthorizationStatus.Restricted:
 			autorizacionStatus = "Restringido"
+			alertaLocalizacion()
 		case CLAuthorizationStatus.Denied:
 			autorizacionStatus = "Denegado"
+			alertaLocalizacion()
 		case CLAuthorizationStatus.NotDetermined:
 			autorizacionStatus = "No determinado aún"
 		default:
@@ -143,9 +185,22 @@ class InformacionWiFiViewController: UIViewController, MKMapViewDelegate, CLLoca
 			autorizado = true
 		}
 		
+		println("Location: \(autorizacionStatus)")
+		
 		if autorizado == true {
 			
-			locationManager.startUpdatingLocation()
+			UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut, animations: {
+				
+				self.statusLabel.alpha = 1
+				self.sinUbicacionLabel.alpha = 0
+				
+				}, completion: nil)
+			
+			mapaView.showsUserLocation = true
+			
+		} else {
+			
+			locationManager.requestWhenInUseAuthorization()
 			
 		}
 		
@@ -153,8 +208,8 @@ class InformacionWiFiViewController: UIViewController, MKMapViewDelegate, CLLoca
 	
 	override func viewDidDisappear(animated: Bool) {
 		
-		println("disapear")
-		
+		super.viewDidDisappear(animated)
+				
 		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
 		appDelegate.arrayVC.removeValueForKey("informacionWiFi")
 		

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TcJ-IA-Ugj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TcJ-IA-Ugj">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -926,10 +926,31 @@ Lugares</string>
                                     <action selector="mostrarMapa" destination="otb-Zg-cDg" eventType="touchUpInside" id="Vgd-Kq-xOy"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No fue posible detectar tu ubicación." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lST-4a-Ynt">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <color key="backgroundColor" red="0.99819964169999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="ywq-KZ-Gvt"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="ywq-KZ-Gvt"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="ywq-KZ-Gvt"/>
+                                    </mask>
+                                </variation>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.86970758438110352" green="0.92044973373413086" blue="0.97994726896286011" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="wnj-Ie-ohu" firstAttribute="top" secondItem="iKL-RR-ZCr" secondAttribute="bottom" id="Axh-i4-4ct"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="lST-4a-Ynt" secondAttribute="trailing" id="CyF-H4-cXf"/>
                             <constraint firstAttribute="centerX" secondItem="skm-6E-KNh" secondAttribute="centerX" id="Prc-y8-Hai"/>
                             <constraint firstAttribute="width" secondItem="wnj-Ie-ohu" secondAttribute="width" id="Qi4-Aq-ap7"/>
                             <constraint firstItem="HFh-dC-4ER" firstAttribute="top" secondItem="wcR-90-Vfc" secondAttribute="bottom" constant="-64" id="TWf-6D-Ey7">
@@ -938,12 +959,14 @@ Lugares</string>
                             <constraint firstItem="HFh-dC-4ER" firstAttribute="top" secondItem="wcR-90-Vfc" secondAttribute="bottom" id="UPo-0t-2fO"/>
                             <constraint firstItem="HFh-dC-4ER" firstAttribute="top" secondItem="skm-6E-KNh" secondAttribute="bottom" constant="23" id="Uvd-XR-nC1"/>
                             <constraint firstItem="wcR-90-Vfc" firstAttribute="leading" secondItem="0bT-FF-yrM" secondAttribute="leadingMargin" constant="-16" id="XqW-9Q-Spy"/>
+                            <constraint firstItem="lST-4a-Ynt" firstAttribute="leading" secondItem="0bT-FF-yrM" secondAttribute="leadingMargin" id="bju-TS-0bU"/>
                             <constraint firstItem="wcR-90-Vfc" firstAttribute="top" secondItem="wnj-Ie-ohu" secondAttribute="bottom" constant="-7" id="cM0-oE-dJ2">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
                             <constraint firstItem="wcR-90-Vfc" firstAttribute="height" secondItem="0bT-FF-yrM" secondAttribute="height" id="dfT-mj-6KA"/>
                             <constraint firstAttribute="trailingMargin" secondItem="wcR-90-Vfc" secondAttribute="trailing" constant="-16" id="dn2-86-Ei4"/>
                             <constraint firstAttribute="centerX" secondItem="wnj-Ie-ohu" secondAttribute="centerX" id="jnV-dq-LLJ"/>
+                            <constraint firstItem="HFh-dC-4ER" firstAttribute="top" secondItem="lST-4a-Ynt" secondAttribute="bottom" constant="8" id="neM-Gu-Hlb"/>
                             <constraint firstItem="wcR-90-Vfc" firstAttribute="top" secondItem="iKL-RR-ZCr" secondAttribute="bottom" constant="37" id="rge-vH-GZO"/>
                         </constraints>
                         <variation key="default">
@@ -951,11 +974,15 @@ Lugares</string>
                                 <exclude reference="wnj-Ie-ohu"/>
                                 <exclude reference="wcR-90-Vfc"/>
                                 <exclude reference="skm-6E-KNh"/>
+                                <exclude reference="lST-4a-Ynt"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="TWf-6D-Ey7"/>
                                 <exclude reference="UPo-0t-2fO"/>
                                 <exclude reference="Uvd-XR-nC1"/>
+                                <exclude reference="neM-Gu-Hlb"/>
+                                <exclude reference="CyF-H4-cXf"/>
+                                <exclude reference="bju-TS-0bU"/>
                                 <exclude reference="Prc-y8-Hai"/>
                                 <exclude reference="Axh-i4-4ct"/>
                                 <exclude reference="Qi4-Aq-ap7"/>
@@ -972,11 +999,15 @@ Lugares</string>
                                 <include reference="wnj-Ie-ohu"/>
                                 <include reference="wcR-90-Vfc"/>
                                 <include reference="skm-6E-KNh"/>
+                                <include reference="lST-4a-Ynt"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="TWf-6D-Ey7"/>
                                 <exclude reference="UPo-0t-2fO"/>
                                 <include reference="Uvd-XR-nC1"/>
+                                <include reference="neM-Gu-Hlb"/>
+                                <include reference="CyF-H4-cXf"/>
+                                <include reference="bju-TS-0bU"/>
                                 <include reference="Prc-y8-Hai"/>
                                 <include reference="Axh-i4-4ct"/>
                                 <include reference="Qi4-Aq-ap7"/>
@@ -992,6 +1023,7 @@ Lugares</string>
                     <connections>
                         <outlet property="mapaPasoAPasoBoton" destination="skm-6E-KNh" id="9Ja-3I-h9D"/>
                         <outlet property="mapaView" destination="wcR-90-Vfc" id="QEb-GB-s2X"/>
+                        <outlet property="sinUbicacionLabel" destination="lST-4a-Ynt" id="0Ti-aq-dn5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OSf-P0-yGq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1717,17 +1749,40 @@ Lugares</string>
                                     <action selector="mapaPasoAPaso" destination="T0s-ym-o1y" eventType="touchUpInside" id="tO8-wn-h68"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detectando ubicación ..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MCe-6t-7Re">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <color key="backgroundColor" red="0.45477524399757385" green="0.60293745994567871" blue="0.78737491369247437" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="1op-or-Bz7"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="1op-or-Bz7"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="1op-or-Bz7"/>
+                                    </mask>
+                                </variation>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.86970758438110352" green="0.92044973373413086" blue="0.97994726896286011" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="b2A-Be-5jb" firstAttribute="top" secondItem="MCe-6t-7Re" secondAttribute="bottom" constant="8" id="4g9-We-UcR"/>
                             <constraint firstItem="Lda-jC-gis" firstAttribute="leading" secondItem="Gdt-Rs-RzL" secondAttribute="leadingMargin" id="F5E-Xw-dX2"/>
                             <constraint firstItem="b2A-Be-5jb" firstAttribute="top" secondItem="nNW-lT-rnk" secondAttribute="bottom" constant="24" id="H3h-sA-j52">
                                 <variation key="heightClass=regular-widthClass=compact" constant="23"/>
                             </constraint>
                             <constraint firstAttribute="centerX" secondItem="nNW-lT-rnk" secondAttribute="centerX" id="N4i-3V-TE0"/>
+                            <constraint firstItem="MCe-6t-7Re" firstAttribute="trailing" secondItem="Gdt-Rs-RzL" secondAttribute="trailingMargin" id="ORO-rb-Lkl"/>
                             <constraint firstItem="Lda-jC-gis" firstAttribute="top" secondItem="wIJ-hx-REk" secondAttribute="bottom" id="Qln-00-PmL">
                                 <variation key="heightClass=regular-widthClass=compact" constant="6"/>
                             </constraint>
+                            <constraint firstItem="MCe-6t-7Re" firstAttribute="leading" secondItem="Gdt-Rs-RzL" secondAttribute="leadingMargin" id="Reb-Dn-PeB"/>
                             <constraint firstItem="b2A-Be-5jb" firstAttribute="top" secondItem="od0-l1-wPX" secondAttribute="bottom" constant="22" id="SaT-0a-KtU">
                                 <variation key="heightClass=regular-widthClass=compact" constant="56"/>
                             </constraint>
@@ -1748,8 +1803,12 @@ Lugares</string>
                                 <exclude reference="Lda-jC-gis"/>
                                 <exclude reference="od0-l1-wPX"/>
                                 <exclude reference="nNW-lT-rnk"/>
+                                <exclude reference="MCe-6t-7Re"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="ORO-rb-Lkl"/>
+                                <exclude reference="Reb-Dn-PeB"/>
+                                <exclude reference="4g9-We-UcR"/>
                                 <exclude reference="H3h-sA-j52"/>
                                 <exclude reference="SaT-0a-KtU"/>
                                 <exclude reference="cjr-lw-f82"/>
@@ -1773,8 +1832,12 @@ Lugares</string>
                                 <include reference="Lda-jC-gis"/>
                                 <include reference="od0-l1-wPX"/>
                                 <include reference="nNW-lT-rnk"/>
+                                <include reference="MCe-6t-7Re"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="ORO-rb-Lkl"/>
+                                <include reference="Reb-Dn-PeB"/>
+                                <include reference="4g9-We-UcR"/>
                                 <include reference="H3h-sA-j52"/>
                                 <include reference="SaT-0a-KtU"/>
                                 <include reference="cjr-lw-f82"/>
@@ -1793,6 +1856,7 @@ Lugares</string>
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="detectandoUbicacion" destination="MCe-6t-7Re" id="Qh4-fG-pSh"/>
                         <outlet property="mapaCerrarBoton" destination="Lda-jC-gis" id="iyR-AU-DVO"/>
                         <outlet property="mapaComoLlegarBoton" destination="od0-l1-wPX" id="cI3-c3-gcd"/>
                         <outlet property="mapaPasoAPasoBoton" destination="nNW-lT-rnk" id="tzS-hy-P4e"/>
@@ -2766,6 +2830,9 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                                     <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="search"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="114" y="4" width="198" height="21"/>
+                                                    </variation>
                                                     <connections>
                                                         <action selector="filtroNombreTextFieldAction:" destination="rcG-eR-6RI" eventType="editingDidEndOnExit" id="oTc-dI-J4j"/>
                                                     </connections>
@@ -3986,7 +4053,8 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                                             <exclude reference="zVn-oR-HWi"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
                                                         <mask key="constraints">
                                                             <exclude reference="xHv-Y7-AUe"/>
                                                             <include reference="zVn-oR-HWi"/>
@@ -4580,6 +4648,26 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                     <action selector="mapaComoLlegar" destination="T0s-ym-o1y" eventType="touchUpInside" id="oP8-xK-YOT"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detectando ubicación ..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Kd-Ph-OIO">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <color key="backgroundColor" red="0.45477524400000002" green="0.60293745990000003" blue="0.78737491370000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="XEE-kr-htu"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="XEE-kr-htu"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="XEE-kr-htu"/>
+                                    </mask>
+                                </variation>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.86970758438110352" green="0.92044973373413086" blue="0.97994726896286011" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -4589,6 +4677,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                             <constraint firstItem="PSC-xl-IwN" firstAttribute="top" secondItem="U95-vz-RyE" secondAttribute="bottom" id="4IZ-ZJ-y49"/>
                             <constraint firstItem="U95-vz-RyE" firstAttribute="top" secondItem="WIX-Dh-Vue" secondAttribute="bottom" id="4hj-Zl-Pd5"/>
                             <constraint firstAttribute="centerX" secondItem="swn-U2-jki" secondAttribute="centerX" id="8bD-uF-7XQ"/>
+                            <constraint firstItem="7Kd-Ph-OIO" firstAttribute="trailing" secondItem="snd-MQ-J3d" secondAttribute="trailingMargin" id="DmI-gR-Oyr"/>
                             <constraint firstAttribute="centerX" secondItem="pE8-f9-Gei" secondAttribute="centerX" id="Rv4-qU-FOP"/>
                             <constraint firstItem="aPp-uG-lsp" firstAttribute="top" secondItem="WIX-Dh-Vue" secondAttribute="bottom" constant="369" id="amD-Sb-4Y4">
                                 <variation key="heightClass=regular-widthClass=compact" constant="6"/>
@@ -4599,6 +4688,8 @@ Desde la Ciudad Autónoma de Buenos Aires:
                             <constraint firstItem="aPp-uG-lsp" firstAttribute="leading" secondItem="snd-MQ-J3d" secondAttribute="leadingMargin" constant="154" id="dk2-Sk-EZ6">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
+                            <constraint firstItem="9nY-Mv-nil" firstAttribute="top" secondItem="7Kd-Ph-OIO" secondAttribute="bottom" constant="8" id="pFg-jr-9Aq"/>
+                            <constraint firstItem="7Kd-Ph-OIO" firstAttribute="leading" secondItem="snd-MQ-J3d" secondAttribute="leadingMargin" id="qsA-jR-HHx"/>
                             <constraint firstAttribute="width" secondItem="PSC-xl-IwN" secondAttribute="width" id="rhH-kM-Brj"/>
                             <constraint firstItem="9nY-Mv-nil" firstAttribute="top" secondItem="PSC-xl-IwN" secondAttribute="bottom" id="uNv-cQ-SeR"/>
                             <constraint firstItem="9nY-Mv-nil" firstAttribute="top" secondItem="swn-U2-jki" secondAttribute="bottom" constant="384" id="wSM-Z5-8Y1">
@@ -4612,9 +4703,13 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                 <exclude reference="aPp-uG-lsp"/>
                                 <exclude reference="pE8-f9-Gei"/>
                                 <exclude reference="swn-U2-jki"/>
+                                <exclude reference="7Kd-Ph-OIO"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="DmI-gR-Oyr"/>
+                                <exclude reference="qsA-jR-HHx"/>
                                 <exclude reference="3XS-Va-OsE"/>
+                                <exclude reference="pFg-jr-9Aq"/>
                                 <exclude reference="uNv-cQ-SeR"/>
                                 <exclude reference="wSM-Z5-8Y1"/>
                                 <exclude reference="amD-Sb-4Y4"/>
@@ -4636,9 +4731,13 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                 <include reference="aPp-uG-lsp"/>
                                 <include reference="pE8-f9-Gei"/>
                                 <include reference="swn-U2-jki"/>
+                                <include reference="7Kd-Ph-OIO"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="DmI-gR-Oyr"/>
+                                <include reference="qsA-jR-HHx"/>
                                 <include reference="3XS-Va-OsE"/>
+                                <include reference="pFg-jr-9Aq"/>
                                 <include reference="uNv-cQ-SeR"/>
                                 <include reference="wSM-Z5-8Y1"/>
                                 <include reference="amD-Sb-4Y4"/>
@@ -4655,6 +4754,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="detectandoUbicacion" destination="7Kd-Ph-OIO" id="eHm-IW-8qV"/>
                         <outlet property="mapaCerrarBoton" destination="aPp-uG-lsp" id="P4G-iV-W01"/>
                         <outlet property="mapaComoLlegarBoton" destination="swn-U2-jki" id="gav-Xp-3Gl"/>
                         <outlet property="mapaPasoAPasoBoton" destination="pE8-f9-Gei" id="ljM-KT-RUY"/>
@@ -5204,7 +5304,8 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                                             <exclude reference="Hz5-ep-nIx"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
                                                         <mask key="constraints">
                                                             <include reference="Cd1-1x-hrq"/>
                                                             <exclude reference="Hz5-ep-nIx"/>
@@ -5462,6 +5563,9 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                             <color key="textColor" red="0.86970758439999996" green="0.92044973370000005" blue="0.97994726899999995" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
+                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                                <rect key="frame" x="8" y="0.0" width="312" height="28"/>
+                                                            </variation>
                                                         </label>
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.45477524400000002" green="0.60293745990000003" blue="0.78737491370000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -5488,7 +5592,8 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                                             <exclude reference="gbt-SZ-CoA"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="28"/>
                                                         <mask key="subviews">
                                                             <include reference="j6M-py-Pto"/>
                                                         </mask>
@@ -5513,8 +5618,9 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                                         </fragment>
                                                     </attributedString>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <rect key="frame" x="8" y="36" width="304" height="16"/>
                                                     </variation>
                                                 </label>
                                             </subviews>
@@ -5586,6 +5692,9 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                                             <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                                             <color key="textColor" red="0.86970758439999996" green="0.92044973370000005" blue="0.97994726899999995" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
+                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                                <rect key="frame" x="8" y="0.0" width="312" height="28"/>
+                                                            </variation>
                                                         </label>
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.45477524400000002" green="0.60293745990000003" blue="0.78737491370000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -5612,7 +5721,8 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                                             <exclude reference="sp4-l1-K7k"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="28"/>
                                                         <mask key="subviews">
                                                             <include reference="nNy-RM-dVS"/>
                                                         </mask>
@@ -5637,8 +5747,9 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                                         </fragment>
                                                     </attributedString>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact">
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <rect key="frame" x="8" y="36" width="304" height="16"/>
                                                     </variation>
                                                 </label>
                                             </subviews>
@@ -5788,12 +5899,34 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                     <action selector="mapaComoLlegar" destination="T0s-ym-o1y" eventType="touchUpInside" id="uAb-Gp-nuP"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detectando ubicación ..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6oD-3t-WRo">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <color key="backgroundColor" red="0.45477524400000002" green="0.60293745990000003" blue="0.78737491370000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="b9T-s7-fV7"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="b9T-s7-fV7"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="b9T-s7-fV7"/>
+                                    </mask>
+                                </variation>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.86970758438110352" green="0.92044973373413086" blue="0.97994726896286011" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="24h-dH-tVe" secondAttribute="centerX" id="1NU-mz-3QG"/>
                             <constraint firstAttribute="width" secondItem="IVv-vW-3eK" secondAttribute="width" id="Cpp-UO-Vn2"/>
                             <constraint firstItem="k17-lk-QKe" firstAttribute="top" secondItem="IVv-vW-3eK" secondAttribute="bottom" id="Gj2-J3-g4e"/>
+                            <constraint firstItem="6oD-3t-WRo" firstAttribute="leading" secondItem="dXH-JD-J2O" secondAttribute="leadingMargin" id="KHr-wI-bfH"/>
+                            <constraint firstItem="k17-lk-QKe" firstAttribute="top" secondItem="6oD-3t-WRo" secondAttribute="bottom" constant="8" id="OGE-Uv-STw"/>
                             <constraint firstItem="PRc-1W-B0z" firstAttribute="top" secondItem="L4I-so-0YZ" secondAttribute="bottom" constant="369" id="P5c-Hc-XRj">
                                 <variation key="heightClass=regular-widthClass=compact" constant="6"/>
                             </constraint>
@@ -5801,6 +5934,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                 <variation key="heightClass=regular-widthClass=compact" constant="23"/>
                             </constraint>
                             <constraint firstAttribute="centerX" secondItem="676-d0-btw" secondAttribute="centerX" id="VBW-js-JDO"/>
+                            <constraint firstItem="6oD-3t-WRo" firstAttribute="trailing" secondItem="dXH-JD-J2O" secondAttribute="trailingMargin" id="anX-wO-vzJ"/>
                             <constraint firstItem="k17-lk-QKe" firstAttribute="top" secondItem="676-d0-btw" secondAttribute="bottom" constant="384" id="ghE-x2-CYD">
                                 <variation key="heightClass=regular-widthClass=compact" constant="56"/>
                             </constraint>
@@ -5820,9 +5954,13 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                 <exclude reference="PRc-1W-B0z"/>
                                 <exclude reference="Ulh-Ig-8BJ"/>
                                 <exclude reference="676-d0-btw"/>
+                                <exclude reference="6oD-3t-WRo"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="KHr-wI-bfH"/>
+                                <exclude reference="anX-wO-vzJ"/>
                                 <exclude reference="Gj2-J3-g4e"/>
+                                <exclude reference="OGE-Uv-STw"/>
                                 <exclude reference="Psu-3e-MD8"/>
                                 <exclude reference="ghE-x2-CYD"/>
                                 <exclude reference="VBW-js-JDO"/>
@@ -5844,9 +5982,13 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                 <include reference="PRc-1W-B0z"/>
                                 <include reference="Ulh-Ig-8BJ"/>
                                 <include reference="676-d0-btw"/>
+                                <include reference="6oD-3t-WRo"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="KHr-wI-bfH"/>
+                                <include reference="anX-wO-vzJ"/>
                                 <include reference="Gj2-J3-g4e"/>
+                                <include reference="OGE-Uv-STw"/>
                                 <include reference="Psu-3e-MD8"/>
                                 <include reference="ghE-x2-CYD"/>
                                 <include reference="VBW-js-JDO"/>
@@ -5863,6 +6005,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="detectandoUbicacion" destination="6oD-3t-WRo" id="aJ2-w8-SCr"/>
                         <outlet property="mapaCerrarBoton" destination="PRc-1W-B0z" id="z4n-7Q-YhU"/>
                         <outlet property="mapaComoLlegarBoton" destination="676-d0-btw" id="Ok2-be-NwX"/>
                         <outlet property="mapaPasoAPasoBoton" destination="Ulh-Ig-8BJ" id="CHt-7O-ww9"/>
@@ -6172,14 +6315,49 @@ Desde la Ciudad Autónoma de Buenos Aires:
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="hHb-Ih-q9P">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                             </mapView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="2" translatesAutoresizingMaskIntoConstraints="NO" id="xmb-dE-y8m">
+                                <rect key="frame" x="-61" y="-14" width="123" height="29"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <segments>
+                                    <segment title="Ida"/>
+                                    <segment title="Vuelta"/>
+                                    <segment title="Ambos"/>
+                                </segments>
+                                <connections>
+                                    <action selector="segmentarRecorrido" destination="P7n-L6-uom" eventType="valueChanged" id="cBx-hQ-HPD"/>
+                                </connections>
+                            </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detectando ubicación ..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RRa-Vw-ecP">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <color key="backgroundColor" red="0.45477524400000002" green="0.60293745990000003" blue="0.78737491370000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="JwO-MM-RHb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="JwO-MM-RHb"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="JwO-MM-RHb"/>
+                                    </mask>
+                                </variation>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.86970758438110352" green="0.92044973373413086" blue="0.97994726896286011" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="RRa-Vw-ecP" firstAttribute="trailing" secondItem="1ju-Ff-Oz1" secondAttribute="trailingMargin" id="2jO-E7-0HA"/>
                             <constraint firstItem="hHb-Ih-q9P" firstAttribute="height" secondItem="1ju-Ff-Oz1" secondAttribute="height" id="3mJ-vX-NJX"/>
+                            <constraint firstItem="hHb-Ih-q9P" firstAttribute="top" secondItem="xmb-dE-y8m" secondAttribute="bottom" constant="-40" id="5Md-5y-5pw"/>
                             <constraint firstItem="fh0-NE-BJX" firstAttribute="top" secondItem="hHb-Ih-q9P" secondAttribute="bottom" id="7r8-ih-aS9"/>
                             <constraint firstItem="fh0-NE-BJX" firstAttribute="top" secondItem="hHb-Ih-q9P" secondAttribute="bottom" constant="-64" id="GLA-1W-zk4">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
+                            <constraint firstAttribute="centerX" secondItem="xmb-dE-y8m" secondAttribute="centerX" id="J97-Sf-JCx"/>
                             <constraint firstItem="hHb-Ih-q9P" firstAttribute="leading" secondItem="1ju-Ff-Oz1" secondAttribute="leadingMargin" constant="-16" id="NEi-Q4-PuE"/>
                             <constraint firstItem="hHb-Ih-q9P" firstAttribute="top" secondItem="PUb-dV-WbF" secondAttribute="bottom" constant="37" id="QUn-Sp-q0v"/>
                             <constraint firstAttribute="trailingMargin" secondItem="hHb-Ih-q9P" secondAttribute="trailing" constant="-16" id="awy-RZ-cDN"/>
@@ -6187,21 +6365,30 @@ Desde la Ciudad Autónoma de Buenos Aires:
                             <constraint firstItem="hHb-Ih-q9P" firstAttribute="top" secondItem="WGg-Cv-K2E" secondAttribute="bottom" constant="-7" id="buo-mb-oDc">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
+                            <constraint firstItem="fh0-NE-BJX" firstAttribute="top" secondItem="RRa-Vw-ecP" secondAttribute="bottom" constant="8" id="kaR-aJ-vak"/>
                             <constraint firstAttribute="width" secondItem="WGg-Cv-K2E" secondAttribute="width" id="qAJ-zt-tah"/>
+                            <constraint firstItem="RRa-Vw-ecP" firstAttribute="leading" secondItem="1ju-Ff-Oz1" secondAttribute="leadingMargin" id="rRQ-qD-fzN"/>
                             <constraint firstItem="WGg-Cv-K2E" firstAttribute="top" secondItem="PUb-dV-WbF" secondAttribute="bottom" id="wuO-yq-PuT"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="WGg-Cv-K2E"/>
                                 <exclude reference="hHb-Ih-q9P"/>
+                                <exclude reference="xmb-dE-y8m"/>
+                                <exclude reference="RRa-Vw-ecP"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="2jO-E7-0HA"/>
+                                <exclude reference="rRQ-qD-fzN"/>
                                 <exclude reference="7r8-ih-aS9"/>
                                 <exclude reference="GLA-1W-zk4"/>
+                                <exclude reference="kaR-aJ-vak"/>
+                                <exclude reference="J97-Sf-JCx"/>
                                 <exclude reference="b2T-ub-W4b"/>
                                 <exclude reference="qAJ-zt-tah"/>
                                 <exclude reference="wuO-yq-PuT"/>
                                 <exclude reference="3mJ-vX-NJX"/>
+                                <exclude reference="5Md-5y-5pw"/>
                                 <exclude reference="NEi-Q4-PuE"/>
                                 <exclude reference="QUn-Sp-q0v"/>
                                 <exclude reference="awy-RZ-cDN"/>
@@ -6212,14 +6399,21 @@ Desde la Ciudad Autónoma de Buenos Aires:
                             <mask key="subviews">
                                 <include reference="WGg-Cv-K2E"/>
                                 <include reference="hHb-Ih-q9P"/>
+                                <include reference="xmb-dE-y8m"/>
+                                <include reference="RRa-Vw-ecP"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="2jO-E7-0HA"/>
+                                <include reference="rRQ-qD-fzN"/>
                                 <exclude reference="7r8-ih-aS9"/>
                                 <include reference="GLA-1W-zk4"/>
+                                <include reference="kaR-aJ-vak"/>
+                                <include reference="J97-Sf-JCx"/>
                                 <include reference="b2T-ub-W4b"/>
                                 <include reference="qAJ-zt-tah"/>
                                 <include reference="wuO-yq-PuT"/>
                                 <exclude reference="3mJ-vX-NJX"/>
+                                <include reference="5Md-5y-5pw"/>
                                 <include reference="NEi-Q4-PuE"/>
                                 <exclude reference="QUn-Sp-q0v"/>
                                 <include reference="awy-RZ-cDN"/>
@@ -6228,7 +6422,10 @@ Desde la Ciudad Autónoma de Buenos Aires:
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="detectandoUbicacion" destination="RRa-Vw-ecP" id="lf4-IE-rws"/>
                         <outlet property="mapaView" destination="hHb-Ih-q9P" id="umL-xF-CQb"/>
+                        <outlet property="navigationBar" destination="WGg-Cv-K2E" id="jVl-Ah-YYm"/>
+                        <outlet property="segmentadorRecorridos" destination="xmb-dE-y8m" id="daR-Jw-JYI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ix7-LD-yEf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -6268,7 +6465,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                     <action selector="mostrarPuestosActualiza" destination="kSQ-pw-cHi" eventType="valueChanged" id="WGC-z0-Uol"/>
                                 </connections>
                             </segmentedControl>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="tCR-aC-ZBo">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="tCR-aC-ZBo">
                                 <rect key="frame" x="-61" y="-14" width="123" height="29"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <segments>
@@ -6279,6 +6476,26 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                     <action selector="mostrarPuestosActualiza" destination="kSQ-pw-cHi" eventType="valueChanged" id="rU3-UI-rAu"/>
                                 </connections>
                             </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detectando ubicación ..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e2M-rU-bBd">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <color key="backgroundColor" red="0.45477524400000002" green="0.60293745990000003" blue="0.78737491370000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="y08-09-31H"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="y08-09-31H"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="y08-09-31H"/>
+                                    </mask>
+                                </variation>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.86970758438110352" green="0.92044973373413086" blue="0.97994726896286011" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -6286,6 +6503,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                             <constraint firstItem="Jh0-MM-pif" firstAttribute="top" secondItem="Vqg-dx-NyD" secondAttribute="bottom" constant="-64" id="DmU-rZ-Qe5">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
+                            <constraint firstItem="e2M-rU-bBd" firstAttribute="leading" secondItem="rux-CT-2WJ" secondAttribute="leadingMargin" id="ECS-eK-eCx"/>
                             <constraint firstItem="Vqg-dx-NyD" firstAttribute="height" secondItem="rux-CT-2WJ" secondAttribute="height" id="Hjc-Gd-lY4"/>
                             <constraint firstItem="Vqg-dx-NyD" firstAttribute="leading" secondItem="rux-CT-2WJ" secondAttribute="leadingMargin" constant="-16" id="Igb-0h-OiD"/>
                             <constraint firstItem="e5d-l1-yMI" firstAttribute="centerX" secondItem="Vqg-dx-NyD" secondAttribute="centerX" constant="0.5" id="KBE-qx-fEo"/>
@@ -6296,6 +6514,8 @@ Desde la Ciudad Autónoma de Buenos Aires:
                             </constraint>
                             <constraint firstAttribute="centerX" secondItem="9Ov-oE-0H9" secondAttribute="centerX" id="VYz-bl-rkS"/>
                             <constraint firstItem="Vqg-dx-NyD" firstAttribute="top" secondItem="m2s-xf-clV" secondAttribute="bottom" constant="37" id="YdE-4r-Vcd"/>
+                            <constraint firstItem="e2M-rU-bBd" firstAttribute="trailing" secondItem="rux-CT-2WJ" secondAttribute="trailingMargin" id="Z7T-va-skB"/>
+                            <constraint firstItem="Jh0-MM-pif" firstAttribute="top" secondItem="e2M-rU-bBd" secondAttribute="bottom" constant="8" id="cJV-ly-56v"/>
                             <constraint firstAttribute="centerX" secondItem="tCR-aC-ZBo" secondAttribute="centerX" constant="48.5" id="grv-yJ-HKA">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
@@ -6309,10 +6529,14 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                 <exclude reference="Vqg-dx-NyD"/>
                                 <exclude reference="e5d-l1-yMI"/>
                                 <exclude reference="tCR-aC-ZBo"/>
+                                <exclude reference="e2M-rU-bBd"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="DmU-rZ-Qe5"/>
+                                <exclude reference="cJV-ly-56v"/>
                                 <exclude reference="qIw-UV-haH"/>
+                                <exclude reference="ECS-eK-eCx"/>
+                                <exclude reference="Z7T-va-skB"/>
                                 <exclude reference="KBE-qx-fEo"/>
                                 <exclude reference="Cq4-De-5ds"/>
                                 <exclude reference="grv-yJ-HKA"/>
@@ -6333,10 +6557,14 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                 <include reference="Vqg-dx-NyD"/>
                                 <include reference="e5d-l1-yMI"/>
                                 <include reference="tCR-aC-ZBo"/>
+                                <include reference="e2M-rU-bBd"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="DmU-rZ-Qe5"/>
+                                <include reference="cJV-ly-56v"/>
                                 <exclude reference="qIw-UV-haH"/>
+                                <include reference="ECS-eK-eCx"/>
+                                <include reference="Z7T-va-skB"/>
                                 <include reference="KBE-qx-fEo"/>
                                 <include reference="Cq4-De-5ds"/>
                                 <include reference="grv-yJ-HKA"/>
@@ -6353,6 +6581,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="detectandoUbicacion" destination="e2M-rU-bBd" id="qIb-pM-NUc"/>
                         <outlet property="mapaView" destination="Vqg-dx-NyD" id="Uee-ZA-q70"/>
                         <outlet property="segmentadorTipo" destination="e5d-l1-yMI" id="2El-iJ-PJw"/>
                         <outlet property="segmentadorTodos" destination="tCR-aC-ZBo" id="YUf-Tk-rYQ"/>
@@ -6450,7 +6679,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BxM-iZ-uhI">
                                 <rect key="frame" x="0.0" y="20" width="600" height="44"/>
                                 <items>
-                                    <navigationItem title="Estacionamiento - Zona" id="P4n-Gt-6he"/>
+                                    <navigationItem title="Zona Estacionamiento Medido" id="P4n-Gt-6he"/>
                                 </items>
                             </navigationBar>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="FtU-Lx-wWF">
@@ -6515,6 +6744,26 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                     <action selector="mostrarUbicacion" destination="Wx9-1E-fn8" eventType="touchUpInside" id="xSa-Ko-6rL"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No fue posible detectar tu ubicación." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7fF-Tz-zFb">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <color key="backgroundColor" red="0.99819964169999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="7ao-iz-Lhz"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="7ao-iz-Lhz"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="7ao-iz-Lhz"/>
+                                    </mask>
+                                </variation>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.86970758438110352" green="0.92044973373413086" blue="0.97994726896286011" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -6526,16 +6775,19 @@ Desde la Ciudad Autónoma de Buenos Aires:
                             </constraint>
                             <constraint firstItem="Y9q-1V-NPM" firstAttribute="centerX" secondItem="FtU-Lx-wWF" secondAttribute="centerX" id="IKw-qX-qea"/>
                             <constraint firstAttribute="trailingMargin" secondItem="FtU-Lx-wWF" secondAttribute="trailing" constant="-16" id="Ivu-PU-2cc"/>
+                            <constraint firstItem="pX0-iF-AQt" firstAttribute="top" secondItem="7fF-Tz-zFb" secondAttribute="bottom" constant="8" id="MAv-4O-YlO"/>
                             <constraint firstItem="BxM-iZ-uhI" firstAttribute="top" secondItem="Xvb-tn-RZh" secondAttribute="bottom" id="Ofb-Hd-2YZ"/>
                             <constraint firstItem="FtU-Lx-wWF" firstAttribute="top" secondItem="Xvb-tn-RZh" secondAttribute="bottom" constant="37" id="SLi-Rc-tZM"/>
                             <constraint firstItem="pX0-iF-AQt" firstAttribute="top" secondItem="FtU-Lx-wWF" secondAttribute="bottom" constant="-64" id="bFt-Tj-SC1">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
+                            <constraint firstItem="7fF-Tz-zFb" firstAttribute="leading" secondItem="A5a-sk-4bV" secondAttribute="leadingMargin" id="fzV-vg-fIQ"/>
                             <constraint firstItem="FtU-Lx-wWF" firstAttribute="top" secondItem="BxM-iZ-uhI" secondAttribute="bottom" constant="-7" id="k8t-No-AbB">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
                             <constraint firstItem="KVd-3C-8U6" firstAttribute="top" secondItem="Y9q-1V-NPM" secondAttribute="bottom" constant="8" id="ofQ-Wi-iUm"/>
                             <constraint firstItem="pX0-iF-AQt" firstAttribute="top" secondItem="FtU-Lx-wWF" secondAttribute="bottom" id="rDa-2m-BWA"/>
+                            <constraint firstItem="7fF-Tz-zFb" firstAttribute="trailing" secondItem="A5a-sk-4bV" secondAttribute="trailingMargin" id="ryA-AC-Q2P"/>
                             <constraint firstAttribute="centerX" secondItem="BxM-iZ-uhI" secondAttribute="centerX" id="wqd-or-wmM"/>
                             <constraint firstItem="FtU-Lx-wWF" firstAttribute="leading" secondItem="A5a-sk-4bV" secondAttribute="leadingMargin" constant="-16" id="yj9-74-ptv"/>
                         </constraints>
@@ -6545,10 +6797,14 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                 <exclude reference="FtU-Lx-wWF"/>
                                 <exclude reference="Y9q-1V-NPM"/>
                                 <exclude reference="KVd-3C-8U6"/>
+                                <exclude reference="7fF-Tz-zFb"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="fzV-vg-fIQ"/>
+                                <exclude reference="ryA-AC-Q2P"/>
                                 <exclude reference="GiO-FI-hsz"/>
                                 <exclude reference="IKw-qX-qea"/>
+                                <exclude reference="MAv-4O-YlO"/>
                                 <exclude reference="bFt-Tj-SC1"/>
                                 <exclude reference="rDa-2m-BWA"/>
                                 <exclude reference="9Db-SF-AbV"/>
@@ -6569,10 +6825,14 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                 <include reference="FtU-Lx-wWF"/>
                                 <include reference="Y9q-1V-NPM"/>
                                 <include reference="KVd-3C-8U6"/>
+                                <include reference="7fF-Tz-zFb"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="fzV-vg-fIQ"/>
+                                <include reference="ryA-AC-Q2P"/>
                                 <include reference="GiO-FI-hsz"/>
                                 <include reference="IKw-qX-qea"/>
+                                <include reference="MAv-4O-YlO"/>
                                 <include reference="bFt-Tj-SC1"/>
                                 <exclude reference="rDa-2m-BWA"/>
                                 <include reference="9Db-SF-AbV"/>
@@ -6592,6 +6852,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                         <outlet property="botonUbicacion" destination="KVd-3C-8U6" id="Mi8-cp-KWa"/>
                         <outlet property="labelVerificando" destination="Y9q-1V-NPM" id="VBu-1i-Syd"/>
                         <outlet property="mapaView" destination="FtU-Lx-wWF" id="gzc-rD-eF3"/>
+                        <outlet property="sinUbicacionLabel" destination="7fF-Tz-zFb" id="F6r-mM-iBE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DKi-m1-HlU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -6613,18 +6874,61 @@ Desde la Ciudad Autónoma de Buenos Aires:
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g5y-Yo-gHT">
                                 <rect key="frame" x="0.0" y="20" width="600" height="44"/>
                                 <items>
-                                    <navigationItem title="Estacionamiento - Puestos de Carga" id="2uK-Yf-2LD"/>
+                                    <navigationItem title="Puestos de Carga" id="2uK-Yf-2LD"/>
                                 </items>
                             </navigationBar>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="bdC-IB-oBs">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                             </mapView>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detectando ubicación ..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Whh-mj-tF1">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <color key="backgroundColor" red="0.45477524400000002" green="0.60293745990000003" blue="0.78737491370000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="Bzr-ET-Jbi"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Bzr-ET-Jbi"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="Bzr-ET-Jbi"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No fue posible detectar tu ubicación." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6y1-XR-ZQM">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <color key="backgroundColor" red="0.99819964169999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="jBY-1E-UUF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="jBY-1E-UUF"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="jBY-1E-UUF"/>
+                                    </mask>
+                                </variation>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.86970758438110352" green="0.92044973373413086" blue="0.97994726896286011" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="bdC-IB-oBs" firstAttribute="top" secondItem="p4M-l6-zTg" secondAttribute="bottom" constant="37" id="1NK-qd-eKq"/>
                             <constraint firstItem="VOM-Mw-YKZ" firstAttribute="top" secondItem="bdC-IB-oBs" secondAttribute="bottom" id="2I7-Nu-gVg"/>
                             <constraint firstItem="bdC-IB-oBs" firstAttribute="height" secondItem="Duk-Q7-MvK" secondAttribute="height" id="683-Uh-Wde"/>
+                            <constraint firstItem="6y1-XR-ZQM" firstAttribute="trailing" secondItem="Duk-Q7-MvK" secondAttribute="trailingMargin" id="8h2-Ix-t19"/>
+                            <constraint firstItem="VOM-Mw-YKZ" firstAttribute="top" secondItem="Whh-mj-tF1" secondAttribute="bottom" constant="8" id="FRi-lM-xUk"/>
+                            <constraint firstItem="6y1-XR-ZQM" firstAttribute="leading" secondItem="Duk-Q7-MvK" secondAttribute="leadingMargin" id="Kml-ii-BcV"/>
                             <constraint firstItem="bdC-IB-oBs" firstAttribute="top" secondItem="g5y-Yo-gHT" secondAttribute="bottom" constant="-7" id="Qtz-II-W3X">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
@@ -6632,19 +6936,30 @@ Desde la Ciudad Autónoma de Buenos Aires:
                             <constraint firstItem="VOM-Mw-YKZ" firstAttribute="top" secondItem="bdC-IB-oBs" secondAttribute="bottom" constant="-64" id="XOt-Qa-WOb">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
+                            <constraint firstItem="Whh-mj-tF1" firstAttribute="trailing" secondItem="Duk-Q7-MvK" secondAttribute="trailingMargin" id="b7e-M2-apP"/>
                             <constraint firstAttribute="trailingMargin" secondItem="bdC-IB-oBs" secondAttribute="trailing" constant="-16" id="dpj-yv-kZq"/>
+                            <constraint firstItem="VOM-Mw-YKZ" firstAttribute="top" secondItem="6y1-XR-ZQM" secondAttribute="bottom" constant="8" id="fed-A3-Aug"/>
                             <constraint firstItem="g5y-Yo-gHT" firstAttribute="top" secondItem="p4M-l6-zTg" secondAttribute="bottom" id="i9F-cD-F9B"/>
                             <constraint firstAttribute="centerX" secondItem="g5y-Yo-gHT" secondAttribute="centerX" id="rIb-NA-YZL"/>
                             <constraint firstItem="bdC-IB-oBs" firstAttribute="leading" secondItem="Duk-Q7-MvK" secondAttribute="leadingMargin" constant="-16" id="rs2-Bi-KFP"/>
+                            <constraint firstItem="Whh-mj-tF1" firstAttribute="leading" secondItem="Duk-Q7-MvK" secondAttribute="leadingMargin" id="uX5-Km-Tss"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="g5y-Yo-gHT"/>
                                 <exclude reference="bdC-IB-oBs"/>
+                                <exclude reference="Whh-mj-tF1"/>
+                                <exclude reference="6y1-XR-ZQM"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="8h2-Ix-t19"/>
+                                <exclude reference="Kml-ii-BcV"/>
                                 <exclude reference="2I7-Nu-gVg"/>
+                                <exclude reference="FRi-lM-xUk"/>
                                 <exclude reference="XOt-Qa-WOb"/>
+                                <exclude reference="fed-A3-Aug"/>
+                                <exclude reference="b7e-M2-apP"/>
+                                <exclude reference="uX5-Km-Tss"/>
                                 <exclude reference="Ro5-8O-psk"/>
                                 <exclude reference="i9F-cD-F9B"/>
                                 <exclude reference="rIb-NA-YZL"/>
@@ -6659,10 +6974,18 @@ Desde la Ciudad Autónoma de Buenos Aires:
                             <mask key="subviews">
                                 <include reference="g5y-Yo-gHT"/>
                                 <include reference="bdC-IB-oBs"/>
+                                <include reference="Whh-mj-tF1"/>
+                                <include reference="6y1-XR-ZQM"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="8h2-Ix-t19"/>
+                                <include reference="Kml-ii-BcV"/>
                                 <exclude reference="2I7-Nu-gVg"/>
+                                <include reference="FRi-lM-xUk"/>
                                 <include reference="XOt-Qa-WOb"/>
+                                <include reference="fed-A3-Aug"/>
+                                <include reference="b7e-M2-apP"/>
+                                <include reference="uX5-Km-Tss"/>
                                 <include reference="Ro5-8O-psk"/>
                                 <include reference="i9F-cD-F9B"/>
                                 <include reference="rIb-NA-YZL"/>
@@ -6675,7 +6998,9 @@ Desde la Ciudad Autónoma de Buenos Aires:
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="detectandoUbicacion" destination="Whh-mj-tF1" id="JcC-7i-fyD"/>
                         <outlet property="mapaView" destination="bdC-IB-oBs" id="spr-ot-Y0O"/>
+                        <outlet property="sinUbicacionLabel" destination="6y1-XR-ZQM" id="lA3-cb-6BF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qL0-5h-KOn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -7201,7 +7526,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                     </mask>
                                 </variation>
                             </view>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="oKC-nq-M1L">
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="2" translatesAutoresizingMaskIntoConstraints="NO" id="oKC-nq-M1L">
                                 <rect key="frame" x="-61" y="-14" width="123" height="29"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <segments>
@@ -7213,6 +7538,26 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                     <action selector="mostrarFarmaciasActualiza" destination="yLP-vt-0mT" eventType="valueChanged" id="yq5-kt-5ii"/>
                                 </connections>
                             </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detectando ubicación ..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lLc-8S-bXp">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <color key="backgroundColor" red="0.45477524400000002" green="0.60293745990000003" blue="0.78737491370000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="JFC-ws-PR2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="JFC-ws-PR2"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="JFC-ws-PR2"/>
+                                    </mask>
+                                </variation>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.86970758438110352" green="0.92044973373413086" blue="0.97994726896286011" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -7223,6 +7568,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                             <constraint firstItem="BSj-R6-NvS" firstAttribute="top" secondItem="AFC-bN-YMr" secondAttribute="bottom" constant="37" id="IDn-He-Jfe"/>
                             <constraint firstItem="UN2-a0-cuI" firstAttribute="top" secondItem="0nz-PE-Pav" secondAttribute="bottom" constant="8" id="QOW-vi-6OK"/>
                             <constraint firstAttribute="width" secondItem="mq5-eU-FMs" secondAttribute="width" id="UUO-xo-ixD"/>
+                            <constraint firstItem="lLc-8S-bXp" firstAttribute="trailing" secondItem="L74-j3-oa6" secondAttribute="trailingMargin" id="V99-3z-mGz"/>
                             <constraint firstAttribute="centerX" secondItem="mq5-eU-FMs" secondAttribute="centerX" id="XcS-o6-qIV"/>
                             <constraint firstItem="BSj-R6-NvS" firstAttribute="top" secondItem="mq5-eU-FMs" secondAttribute="bottom" constant="-7" id="ako-Cu-Xt1">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
@@ -7231,9 +7577,11 @@ Desde la Ciudad Autónoma de Buenos Aires:
                             <constraint firstItem="UN2-a0-cuI" firstAttribute="top" secondItem="BSj-R6-NvS" secondAttribute="bottom" constant="-64" id="eu1-hh-iTO">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
+                            <constraint firstItem="lLc-8S-bXp" firstAttribute="leading" secondItem="L74-j3-oa6" secondAttribute="leadingMargin" id="fBu-ij-jip"/>
                             <constraint firstItem="UN2-a0-cuI" firstAttribute="top" secondItem="BSj-R6-NvS" secondAttribute="bottom" id="jYR-Zc-RRe"/>
                             <constraint firstItem="oKC-nq-M1L" firstAttribute="centerX" secondItem="BSj-R6-NvS" secondAttribute="centerX" constant="0.5" id="mq6-Hy-G1C"/>
                             <constraint firstAttribute="trailingMargin" secondItem="BSj-R6-NvS" secondAttribute="trailing" constant="-16" id="r4W-cz-fKF"/>
+                            <constraint firstItem="UN2-a0-cuI" firstAttribute="top" secondItem="lLc-8S-bXp" secondAttribute="bottom" constant="8" id="xWL-2f-uvE"/>
                             <constraint firstItem="BSj-R6-NvS" firstAttribute="top" secondItem="oKC-nq-M1L" secondAttribute="bottom" constant="-40" id="zJT-DD-6qp"/>
                         </constraints>
                         <variation key="default">
@@ -7242,11 +7590,15 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                 <exclude reference="BSj-R6-NvS"/>
                                 <exclude reference="0nz-PE-Pav"/>
                                 <exclude reference="oKC-nq-M1L"/>
+                                <exclude reference="lLc-8S-bXp"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="QOW-vi-6OK"/>
                                 <exclude reference="eu1-hh-iTO"/>
                                 <exclude reference="jYR-Zc-RRe"/>
+                                <exclude reference="xWL-2f-uvE"/>
+                                <exclude reference="V99-3z-mGz"/>
+                                <exclude reference="fBu-ij-jip"/>
                                 <exclude reference="mq6-Hy-G1C"/>
                                 <exclude reference="BLu-mx-Dlh"/>
                                 <exclude reference="UUO-xo-ixD"/>
@@ -7267,11 +7619,15 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                 <include reference="BSj-R6-NvS"/>
                                 <include reference="0nz-PE-Pav"/>
                                 <include reference="oKC-nq-M1L"/>
+                                <include reference="lLc-8S-bXp"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="QOW-vi-6OK"/>
                                 <include reference="eu1-hh-iTO"/>
                                 <exclude reference="jYR-Zc-RRe"/>
+                                <include reference="xWL-2f-uvE"/>
+                                <include reference="V99-3z-mGz"/>
+                                <include reference="fBu-ij-jip"/>
                                 <include reference="mq6-Hy-G1C"/>
                                 <include reference="BLu-mx-Dlh"/>
                                 <include reference="UUO-xo-ixD"/>
@@ -7290,6 +7646,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                     <connections>
                         <outlet property="avisoFarmaciasDeTurnoLabel" destination="kbv-Wd-JiM" id="uLo-g8-S0s"/>
                         <outlet property="avisoFarmaciasDeTurnoView" destination="0nz-PE-Pav" id="IN1-xU-mFx"/>
+                        <outlet property="detectandoUbicacion" destination="lLc-8S-bXp" id="tUw-fG-jJo"/>
                         <outlet property="mapaView" destination="BSj-R6-NvS" id="Nq8-G6-vbO"/>
                         <outlet property="segmentadorTipo" destination="oKC-nq-M1L" id="dX5-Hx-VBj"/>
                     </connections>
@@ -7319,6 +7676,46 @@ Desde la Ciudad Autónoma de Buenos Aires:
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="FON-au-hPi">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                             </mapView>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No fue posible detectar tu ubicación." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1j6-Ev-FKc">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <color key="backgroundColor" red="0.99819964169999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="Qn5-Sq-dhp"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Qn5-Sq-dhp"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="Qn5-Sq-dhp"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detectando ubicación ..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wQR-4p-Fdt">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <color key="backgroundColor" red="0.45477524400000002" green="0.60293745990000003" blue="0.78737491370000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="TGF-4r-yKM"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="TGF-4r-yKM"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="TGF-4r-yKM"/>
+                                    </mask>
+                                </variation>
+                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k0W-jS-qLO">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
@@ -7362,6 +7759,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                     </constraint>
                                     <constraint firstAttribute="centerX" secondItem="CIy-Om-I5a" secondAttribute="centerX" id="CZo-AD-TOX"/>
                                     <constraint firstItem="PwP-Ic-NCM" firstAttribute="leading" secondItem="k0W-jS-qLO" secondAttribute="leading" constant="8" id="FTI-yo-fKg"/>
+                                    <constraint firstAttribute="trailing" secondItem="CIy-Om-I5a" secondAttribute="trailing" constant="8" id="Vzj-od-7I4"/>
                                     <constraint firstAttribute="trailing" secondItem="PwP-Ic-NCM" secondAttribute="trailing" constant="318" id="c7E-lf-8NY">
                                         <variation key="heightClass=regular-widthClass=compact" constant="8"/>
                                     </constraint>
@@ -7374,6 +7772,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                     <constraint firstAttribute="bottom" secondItem="PwP-Ic-NCM" secondAttribute="bottom" constant="21" id="tB0-q0-G3X">
                                         <variation key="heightClass=regular-widthClass=compact" constant="8"/>
                                     </constraint>
+                                    <constraint firstItem="CIy-Om-I5a" firstAttribute="leading" secondItem="k0W-jS-qLO" secondAttribute="leading" constant="8" id="yR5-GL-Q2i"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="subviews">
@@ -7387,7 +7786,9 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                         <exclude reference="c7E-lf-8NY"/>
                                         <exclude reference="tB0-q0-G3X"/>
                                         <exclude reference="CZo-AD-TOX"/>
+                                        <exclude reference="Vzj-od-7I4"/>
                                         <exclude reference="dFs-7O-rFP"/>
+                                        <exclude reference="yR5-GL-Q2i"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
@@ -7401,30 +7802,40 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                         <include reference="FTI-yo-fKg"/>
                                         <include reference="c7E-lf-8NY"/>
                                         <exclude reference="tB0-q0-G3X"/>
-                                        <include reference="CZo-AD-TOX"/>
+                                        <exclude reference="CZo-AD-TOX"/>
+                                        <include reference="Vzj-od-7I4"/>
                                         <include reference="dFs-7O-rFP"/>
+                                        <include reference="yR5-GL-Q2i"/>
                                     </mask>
                                 </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.86970758438110352" green="0.92044973373413086" blue="0.97994726896286011" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="XlQ-hK-mMV" firstAttribute="top" secondItem="wQR-4p-Fdt" secondAttribute="bottom" constant="8" id="1bM-Tx-nnN"/>
                             <constraint firstItem="XlQ-hK-mMV" firstAttribute="top" secondItem="FON-au-hPi" secondAttribute="bottom" constant="-64" id="6i8-yX-X0O">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
+                            <constraint firstItem="1j6-Ev-FKc" firstAttribute="leading" secondItem="TAr-jn-LIF" secondAttribute="leadingMargin" id="7xx-kA-vOM"/>
                             <constraint firstItem="k0W-jS-qLO" firstAttribute="trailing" secondItem="TAr-jn-LIF" secondAttribute="trailingMargin" id="NdC-ox-fq7"/>
                             <constraint firstItem="FON-au-hPi" firstAttribute="top" secondItem="KAy-5B-hVW" secondAttribute="bottom" constant="-7" id="OME-KX-YVe">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
+                            <constraint firstItem="XlQ-hK-mMV" firstAttribute="top" secondItem="1j6-Ev-FKc" secondAttribute="bottom" constant="386" id="Opt-ys-ntL"/>
+                            <constraint firstItem="wQR-4p-Fdt" firstAttribute="leading" secondItem="TAr-jn-LIF" secondAttribute="leadingMargin" id="Os6-kj-eKh"/>
                             <constraint firstItem="FON-au-hPi" firstAttribute="top" secondItem="750-cy-qXR" secondAttribute="bottom" constant="37" id="Pvw-58-24s"/>
+                            <constraint firstItem="XlQ-hK-mMV" firstAttribute="top" secondItem="1j6-Ev-FKc" secondAttribute="bottom" constant="386" id="SES-zm-2ia"/>
+                            <constraint firstItem="1j6-Ev-FKc" firstAttribute="trailing" secondItem="TAr-jn-LIF" secondAttribute="trailingMargin" id="XeV-q7-KM7"/>
                             <constraint firstItem="k0W-jS-qLO" firstAttribute="leading" secondItem="TAr-jn-LIF" secondAttribute="leadingMargin" id="ZsO-gT-tDK"/>
                             <constraint firstAttribute="width" secondItem="KAy-5B-hVW" secondAttribute="width" id="bdB-cP-TyX"/>
+                            <constraint firstItem="XlQ-hK-mMV" firstAttribute="top" secondItem="1j6-Ev-FKc" secondAttribute="bottom" constant="8" id="dUQ-NG-rSw"/>
                             <constraint firstItem="XlQ-hK-mMV" firstAttribute="top" secondItem="FON-au-hPi" secondAttribute="bottom" id="dfh-Hb-ybk"/>
                             <constraint firstAttribute="centerX" secondItem="KAy-5B-hVW" secondAttribute="centerX" id="eHd-0V-lvF"/>
                             <constraint firstItem="FON-au-hPi" firstAttribute="leading" secondItem="TAr-jn-LIF" secondAttribute="leadingMargin" constant="-16" id="iCA-Fx-Fqe"/>
                             <constraint firstItem="k0W-jS-qLO" firstAttribute="bottom" secondItem="XlQ-hK-mMV" secondAttribute="top" constant="8" id="inD-o0-YeV">
                                 <variation key="heightClass=regular-widthClass=compact" constant="-8"/>
                             </constraint>
+                            <constraint firstItem="wQR-4p-Fdt" firstAttribute="trailing" secondItem="TAr-jn-LIF" secondAttribute="trailingMargin" id="nWg-ld-Hzg"/>
                             <constraint firstItem="FON-au-hPi" firstAttribute="height" secondItem="TAr-jn-LIF" secondAttribute="height" id="sXi-2V-c0J"/>
                             <constraint firstItem="KAy-5B-hVW" firstAttribute="top" secondItem="750-cy-qXR" secondAttribute="bottom" id="sY7-Sz-QpO"/>
                             <constraint firstAttribute="trailingMargin" secondItem="FON-au-hPi" secondAttribute="trailing" constant="-16" id="yY9-qT-sKh"/>
@@ -7433,11 +7844,21 @@ Desde la Ciudad Autónoma de Buenos Aires:
                             <mask key="subviews">
                                 <exclude reference="KAy-5B-hVW"/>
                                 <exclude reference="FON-au-hPi"/>
+                                <exclude reference="1j6-Ev-FKc"/>
+                                <exclude reference="wQR-4p-Fdt"/>
                                 <exclude reference="k0W-jS-qLO"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="7xx-kA-vOM"/>
+                                <exclude reference="XeV-q7-KM7"/>
+                                <exclude reference="1bM-Tx-nnN"/>
                                 <exclude reference="6i8-yX-X0O"/>
+                                <exclude reference="Opt-ys-ntL"/>
+                                <exclude reference="SES-zm-2ia"/>
+                                <exclude reference="dUQ-NG-rSw"/>
                                 <exclude reference="dfh-Hb-ybk"/>
+                                <exclude reference="Os6-kj-eKh"/>
+                                <exclude reference="nWg-ld-Hzg"/>
                                 <exclude reference="bdB-cP-TyX"/>
                                 <exclude reference="eHd-0V-lvF"/>
                                 <exclude reference="sY7-Sz-QpO"/>
@@ -7455,11 +7876,21 @@ Desde la Ciudad Autónoma de Buenos Aires:
                             <mask key="subviews">
                                 <include reference="KAy-5B-hVW"/>
                                 <include reference="FON-au-hPi"/>
+                                <include reference="1j6-Ev-FKc"/>
+                                <include reference="wQR-4p-Fdt"/>
                                 <include reference="k0W-jS-qLO"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="7xx-kA-vOM"/>
+                                <include reference="XeV-q7-KM7"/>
+                                <include reference="1bM-Tx-nnN"/>
                                 <include reference="6i8-yX-X0O"/>
+                                <exclude reference="Opt-ys-ntL"/>
+                                <exclude reference="SES-zm-2ia"/>
+                                <include reference="dUQ-NG-rSw"/>
                                 <exclude reference="dfh-Hb-ybk"/>
+                                <include reference="Os6-kj-eKh"/>
+                                <include reference="nWg-ld-Hzg"/>
                                 <include reference="bdB-cP-TyX"/>
                                 <include reference="eHd-0V-lvF"/>
                                 <include reference="sY7-Sz-QpO"/>
@@ -7475,10 +7906,12 @@ Desde la Ciudad Autónoma de Buenos Aires:
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="detectandoUbicacion" destination="wQR-4p-Fdt" id="j3m-iF-bIT"/>
                         <outlet property="emergenciaBoton" destination="CIy-Om-I5a" id="ASh-Me-aPi"/>
                         <outlet property="emergenciaLabel" destination="PwP-Ic-NCM" id="w8a-Z8-Jkz"/>
                         <outlet property="emergenciaView" destination="k0W-jS-qLO" id="Lli-ab-ja0"/>
                         <outlet property="mapaView" destination="FON-au-hPi" id="p2s-E0-TqQ"/>
+                        <outlet property="sinUbicacionLabel" destination="1j6-Ev-FKc" id="6C2-np-S1e"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ckw-dL-EWf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -7506,7 +7939,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D89-Pz-wGb" userLabel="Detectando ubicación">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detectando tu ubicación actual" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eHd-m9-rQs">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detectando tu ubicación actual" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eHd-m9-rQs">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="84" id="JeU-TH-EBC">
@@ -7523,7 +7956,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                         </variation>
                                         <variation key="heightClass=regular-widthClass=compact">
                                             <mask key="constraints">
-                                                <include reference="JeU-TH-EBC"/>
+                                                <exclude reference="JeU-TH-EBC"/>
                                             </mask>
                                         </variation>
                                     </label>
@@ -7618,12 +8051,14 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                     <constraint firstItem="NDf-Iq-uz3" firstAttribute="top" secondItem="e7Z-wG-BPk" secondAttribute="top" constant="8" id="A68-p3-ifi">
                                         <variation key="heightClass=regular-widthClass=compact" constant="4"/>
                                     </constraint>
+                                    <constraint firstAttribute="trailing" secondItem="l0f-KV-GE6" secondAttribute="trailing" constant="8" id="JqJ-UM-KhI"/>
+                                    <constraint firstItem="l0f-KV-GE6" firstAttribute="leading" secondItem="e7Z-wG-BPk" secondAttribute="leading" constant="8" id="QdE-WC-U1n"/>
                                     <constraint firstItem="NDf-Iq-uz3" firstAttribute="leading" secondItem="e7Z-wG-BPk" secondAttribute="leading" constant="8" id="VEd-vj-wNz"/>
                                     <constraint firstAttribute="centerX" secondItem="l0f-KV-GE6" secondAttribute="centerX" id="b5b-wG-7xd"/>
                                     <constraint firstAttribute="bottom" secondItem="NDf-Iq-uz3" secondAttribute="bottom" constant="21" id="dqQ-XU-c7P">
                                         <variation key="heightClass=regular-widthClass=compact" constant="8"/>
                                     </constraint>
-                                    <constraint firstAttribute="height" constant="120" id="ihA-wd-qDK"/>
+                                    <constraint firstAttribute="height" constant="70" id="ihA-wd-qDK"/>
                                     <constraint firstAttribute="trailing" secondItem="NDf-Iq-uz3" secondAttribute="trailing" constant="318" id="zgH-0e-2JS">
                                         <variation key="heightClass=regular-widthClass=compact" constant="8"/>
                                     </constraint>
@@ -7640,6 +8075,8 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                         <exclude reference="dqQ-XU-c7P"/>
                                         <exclude reference="zgH-0e-2JS"/>
                                         <exclude reference="6py-Cq-Oko"/>
+                                        <exclude reference="JqJ-UM-KhI"/>
+                                        <exclude reference="QdE-WC-U1n"/>
                                         <exclude reference="b5b-wG-7xd"/>
                                     </mask>
                                 </variation>
@@ -7655,14 +8092,16 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                         <exclude reference="dqQ-XU-c7P"/>
                                         <include reference="zgH-0e-2JS"/>
                                         <include reference="6py-Cq-Oko"/>
-                                        <include reference="b5b-wG-7xd"/>
+                                        <include reference="JqJ-UM-KhI"/>
+                                        <include reference="QdE-WC-U1n"/>
+                                        <exclude reference="b5b-wG-7xd"/>
                                     </mask>
                                 </variation>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vgk-Rq-TrB" userLabel="Teléfonos Útiles">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Otros teléfonos útiles en caso de emergencia:" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Bnq-by-6yf">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Teléfonos útiles en caso de emergencia:" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Bnq-by-6yf">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                         <color key="textColor" red="0.86970758438110352" green="0.92044973373413086" blue="0.97994726896286011" alpha="1" colorSpace="calibratedRGB"/>
@@ -7938,6 +8377,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                         <outlet property="comisariaBoton" destination="lfb-F5-UnM" id="Lpc-hG-wkD"/>
                         <outlet property="comisariaDetalle" destination="Rng-s2-ndX" id="gj2-jW-FEF"/>
                         <outlet property="comisariaTitulo" destination="54b-4n-PTP" id="p5X-NN-ppa"/>
+                        <outlet property="detectandoLabel" destination="eHd-m9-rQs" id="bSX-C9-dcq"/>
                         <outlet property="detectandoView" destination="D89-Pz-wGb" id="8mD-DZ-9qi"/>
                         <outlet property="emergenciaBoton" destination="l0f-KV-GE6" id="mjv-ZJ-pil"/>
                         <outlet property="emergenciaLabel" destination="NDf-Iq-uz3" id="Hby-Xo-5Jn"/>
@@ -7972,15 +8412,61 @@ Desde la Ciudad Autónoma de Buenos Aires:
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Bu1-pH-XfC">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                             </mapView>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detectando ubicación ..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K52-jI-WNy">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <color key="backgroundColor" red="0.45477524400000002" green="0.60293745990000003" blue="0.78737491370000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="qg1-YL-nVw"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="qg1-YL-nVw"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="qg1-YL-nVw"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No fue posible detectar tu ubicación." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Urv-nG-Wts">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <color key="backgroundColor" red="0.99819964169999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="KwJ-0a-2gP"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="KwJ-0a-2gP"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="KwJ-0a-2gP"/>
+                                    </mask>
+                                </variation>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.86970758438110352" green="0.92044973373413086" blue="0.97994726896286011" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="GGg-Ci-zz0" firstAttribute="top" secondItem="vnG-7L-dct" secondAttribute="bottom" id="0do-Xo-ePz"/>
                             <constraint firstItem="N07-V6-QNi" firstAttribute="top" secondItem="Bu1-pH-XfC" secondAttribute="bottom" id="7nG-iE-YY8"/>
+                            <constraint firstItem="K52-jI-WNy" firstAttribute="leading" secondItem="QIe-Wd-ulh" secondAttribute="leadingMargin" id="BC0-rr-ZHz"/>
+                            <constraint firstItem="N07-V6-QNi" firstAttribute="top" secondItem="K52-jI-WNy" secondAttribute="bottom" constant="8" id="H63-Zx-414"/>
                             <constraint firstAttribute="width" secondItem="GGg-Ci-zz0" secondAttribute="width" id="HJt-Q6-KSa"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Bu1-pH-XfC" secondAttribute="trailing" constant="-16" id="Hey-7W-OBe"/>
+                            <constraint firstItem="Urv-nG-Wts" firstAttribute="trailing" secondItem="QIe-Wd-ulh" secondAttribute="trailingMargin" id="QPa-TM-drK"/>
+                            <constraint firstItem="N07-V6-QNi" firstAttribute="top" secondItem="Urv-nG-Wts" secondAttribute="bottom" constant="8" id="S2b-nO-CIq"/>
                             <constraint firstItem="Bu1-pH-XfC" firstAttribute="leading" secondItem="QIe-Wd-ulh" secondAttribute="leadingMargin" constant="-16" id="SUw-fz-eLc"/>
+                            <constraint firstItem="Urv-nG-Wts" firstAttribute="leading" secondItem="QIe-Wd-ulh" secondAttribute="leadingMargin" id="Wa0-zl-1op"/>
                             <constraint firstAttribute="centerX" secondItem="GGg-Ci-zz0" secondAttribute="centerX" id="gr8-Bp-tDZ"/>
+                            <constraint firstItem="K52-jI-WNy" firstAttribute="trailing" secondItem="QIe-Wd-ulh" secondAttribute="trailingMargin" id="mHD-dZ-7rk"/>
                             <constraint firstItem="Bu1-pH-XfC" firstAttribute="top" secondItem="GGg-Ci-zz0" secondAttribute="bottom" constant="-7" id="sFZ-Cz-Nwy">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
@@ -7994,10 +8480,18 @@ Desde la Ciudad Autónoma de Buenos Aires:
                             <mask key="subviews">
                                 <exclude reference="GGg-Ci-zz0"/>
                                 <exclude reference="Bu1-pH-XfC"/>
+                                <exclude reference="K52-jI-WNy"/>
+                                <exclude reference="Urv-nG-Wts"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="BC0-rr-ZHz"/>
+                                <exclude reference="mHD-dZ-7rk"/>
                                 <exclude reference="7nG-iE-YY8"/>
+                                <exclude reference="H63-Zx-414"/>
+                                <exclude reference="S2b-nO-CIq"/>
                                 <exclude reference="zir-2s-FDF"/>
+                                <exclude reference="QPa-TM-drK"/>
+                                <exclude reference="Wa0-zl-1op"/>
                                 <exclude reference="0do-Xo-ePz"/>
                                 <exclude reference="HJt-Q6-KSa"/>
                                 <exclude reference="gr8-Bp-tDZ"/>
@@ -8012,10 +8506,18 @@ Desde la Ciudad Autónoma de Buenos Aires:
                             <mask key="subviews">
                                 <include reference="GGg-Ci-zz0"/>
                                 <include reference="Bu1-pH-XfC"/>
+                                <include reference="K52-jI-WNy"/>
+                                <include reference="Urv-nG-Wts"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="BC0-rr-ZHz"/>
+                                <include reference="mHD-dZ-7rk"/>
                                 <exclude reference="7nG-iE-YY8"/>
+                                <include reference="H63-Zx-414"/>
+                                <include reference="S2b-nO-CIq"/>
                                 <include reference="zir-2s-FDF"/>
+                                <include reference="QPa-TM-drK"/>
+                                <include reference="Wa0-zl-1op"/>
                                 <include reference="0do-Xo-ePz"/>
                                 <include reference="HJt-Q6-KSa"/>
                                 <include reference="gr8-Bp-tDZ"/>
@@ -8029,6 +8531,8 @@ Desde la Ciudad Autónoma de Buenos Aires:
                     </view>
                     <connections>
                         <outlet property="mapaView" destination="Bu1-pH-XfC" id="mYN-Wz-VG1"/>
+                        <outlet property="sinUbicacionLabel" destination="Urv-nG-Wts" id="7tl-Ac-5Pt"/>
+                        <outlet property="statusLabel" destination="K52-jI-WNy" id="aGo-Kz-n9H"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="okA-6g-M9z" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -8056,13 +8560,35 @@ Desde la Ciudad Autónoma de Buenos Aires:
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="gZC-jL-0su">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                             </mapView>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detectando ubicación ..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iF8-Vj-5nb">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <color key="backgroundColor" red="0.45477524400000002" green="0.60293745990000003" blue="0.78737491370000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="2gO-gV-Wbe"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="2gO-gV-Wbe"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="2gO-gV-Wbe"/>
+                                    </mask>
+                                </variation>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.86970758438110352" green="0.92044973373413086" blue="0.97994726896286011" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="tC6-tB-Nk2" firstAttribute="top" secondItem="iF8-Vj-5nb" secondAttribute="bottom" constant="8" id="8pL-iA-WyI"/>
                             <constraint firstItem="gZC-jL-0su" firstAttribute="top" secondItem="XXb-Wn-P2c" secondAttribute="bottom" constant="-7" id="9Bm-pB-tVR">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                             </constraint>
                             <constraint firstAttribute="trailingMargin" secondItem="gZC-jL-0su" secondAttribute="trailing" constant="-16" id="9b0-Zs-IdN"/>
+                            <constraint firstItem="iF8-Vj-5nb" firstAttribute="trailing" secondItem="CjI-9J-syv" secondAttribute="trailingMargin" id="BsM-Qk-eBE"/>
                             <constraint firstItem="gZC-jL-0su" firstAttribute="top" secondItem="bAk-N8-ghA" secondAttribute="bottom" constant="37" id="DCL-fb-RXK"/>
                             <constraint firstItem="tC6-tB-Nk2" firstAttribute="top" secondItem="gZC-jL-0su" secondAttribute="bottom" constant="-64" id="KnL-XS-3fP">
                                 <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
@@ -8073,15 +8599,15 @@ Desde la Ciudad Autónoma de Buenos Aires:
                             <constraint firstAttribute="width" secondItem="XXb-Wn-P2c" secondAttribute="width" id="wEA-Td-XJK"/>
                             <constraint firstItem="gZC-jL-0su" firstAttribute="leading" secondItem="CjI-9J-syv" secondAttribute="leadingMargin" constant="-16" id="wkK-cF-mXc"/>
                             <constraint firstAttribute="centerX" secondItem="XXb-Wn-P2c" secondAttribute="centerX" id="xSp-k7-Hg6"/>
+                            <constraint firstItem="iF8-Vj-5nb" firstAttribute="leading" secondItem="CjI-9J-syv" secondAttribute="leadingMargin" id="xlL-Ov-6c5"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="XXb-Wn-P2c"/>
                                 <exclude reference="gZC-jL-0su"/>
+                                <exclude reference="iF8-Vj-5nb"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="KnL-XS-3fP"/>
-                                <exclude reference="RSs-w9-d8A"/>
                                 <exclude reference="Uat-Bw-dBb"/>
                                 <exclude reference="wEA-Td-XJK"/>
                                 <exclude reference="xSp-k7-Hg6"/>
@@ -8090,16 +8616,20 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                 <exclude reference="DCL-fb-RXK"/>
                                 <exclude reference="vJ9-1A-MaJ"/>
                                 <exclude reference="wkK-cF-mXc"/>
+                                <exclude reference="BsM-Qk-eBE"/>
+                                <exclude reference="xlL-Ov-6c5"/>
+                                <exclude reference="8pL-iA-WyI"/>
+                                <exclude reference="KnL-XS-3fP"/>
+                                <exclude reference="RSs-w9-d8A"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
                                 <include reference="XXb-Wn-P2c"/>
                                 <include reference="gZC-jL-0su"/>
+                                <include reference="iF8-Vj-5nb"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="KnL-XS-3fP"/>
-                                <exclude reference="RSs-w9-d8A"/>
                                 <include reference="Uat-Bw-dBb"/>
                                 <include reference="wEA-Td-XJK"/>
                                 <include reference="xSp-k7-Hg6"/>
@@ -8108,11 +8638,17 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                 <exclude reference="DCL-fb-RXK"/>
                                 <exclude reference="vJ9-1A-MaJ"/>
                                 <include reference="wkK-cF-mXc"/>
+                                <include reference="BsM-Qk-eBE"/>
+                                <include reference="xlL-Ov-6c5"/>
+                                <include reference="8pL-iA-WyI"/>
+                                <include reference="KnL-XS-3fP"/>
+                                <exclude reference="RSs-w9-d8A"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
                         <outlet property="mapaView" destination="gZC-jL-0su" id="fnX-fx-hwl"/>
+                        <outlet property="statusLabel" destination="iF8-Vj-5nb" id="DJL-3B-fvI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pl9-jc-7ew" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -8846,12 +9382,33 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                     <action selector="mapaPasoAPaso" destination="Emk-Tn-iYi" eventType="touchUpInside" id="kot-cO-KJk"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detectando ubicación ..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6m6-Ot-1Mn">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <color key="backgroundColor" red="0.45477524400000002" green="0.60293745990000003" blue="0.78737491370000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="Nij-0L-FlS"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Nij-0L-FlS"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="Nij-0L-FlS"/>
+                                    </mask>
+                                </variation>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.86970758438110352" green="0.92044973373413086" blue="0.97994726896286011" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="5cV-Ae-zP6" firstAttribute="top" secondItem="dNC-fD-5mm" secondAttribute="bottom" id="9v4-OD-GLJ">
                                 <variation key="heightClass=regular-widthClass=compact" constant="6"/>
                             </constraint>
+                            <constraint firstItem="BKU-80-AiX" firstAttribute="top" secondItem="6m6-Ot-1Mn" secondAttribute="bottom" constant="8" id="Ar7-B5-xV5"/>
                             <constraint firstItem="BKU-80-AiX" firstAttribute="top" secondItem="Op2-Pn-Bh7" secondAttribute="bottom" constant="24" id="F3T-r5-tQY">
                                 <variation key="heightClass=regular-widthClass=compact" constant="23"/>
                             </constraint>
@@ -8862,10 +9419,12 @@ Desde la Ciudad Autónoma de Buenos Aires:
                             </constraint>
                             <constraint firstItem="5cV-Ae-zP6" firstAttribute="leading" secondItem="gqW-yz-rXP" secondAttribute="leadingMargin" id="R5O-EG-FlT"/>
                             <constraint firstItem="BKU-80-AiX" firstAttribute="top" secondItem="akO-Lk-GIC" secondAttribute="bottom" id="UXU-bz-swW"/>
+                            <constraint firstItem="6m6-Ot-1Mn" firstAttribute="leading" secondItem="gqW-yz-rXP" secondAttribute="leadingMargin" id="cJs-W5-lZe"/>
                             <constraint firstAttribute="centerX" secondItem="VFB-2u-KCJ" secondAttribute="centerX" id="eCr-v9-g9V"/>
                             <constraint firstItem="akO-Lk-GIC" firstAttribute="top" secondItem="VFB-2u-KCJ" secondAttribute="bottom" id="hNL-RU-8C0"/>
                             <constraint firstItem="5cV-Ae-zP6" firstAttribute="leading" secondItem="gqW-yz-rXP" secondAttribute="leadingMargin" id="hbU-Vs-cKf"/>
                             <constraint firstAttribute="centerX" secondItem="Oer-nb-O01" secondAttribute="centerX" id="m1I-vd-hC5"/>
+                            <constraint firstItem="6m6-Ot-1Mn" firstAttribute="trailing" secondItem="gqW-yz-rXP" secondAttribute="trailingMargin" id="ppe-zz-F7H"/>
                             <constraint firstItem="VFB-2u-KCJ" firstAttribute="top" secondItem="dNC-fD-5mm" secondAttribute="bottom" id="t6J-bT-Dn6"/>
                             <constraint firstAttribute="centerX" secondItem="Op2-Pn-Bh7" secondAttribute="centerX" id="ttt-uj-5u9"/>
                             <constraint firstAttribute="width" secondItem="akO-Lk-GIC" secondAttribute="width" id="uEq-NW-7Zm"/>
@@ -8877,8 +9436,12 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                 <exclude reference="5cV-Ae-zP6"/>
                                 <exclude reference="Oer-nb-O01"/>
                                 <exclude reference="Op2-Pn-Bh7"/>
+                                <exclude reference="6m6-Ot-1Mn"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="cJs-W5-lZe"/>
+                                <exclude reference="ppe-zz-F7H"/>
+                                <exclude reference="Ar7-B5-xV5"/>
                                 <exclude reference="F3T-r5-tQY"/>
                                 <exclude reference="MwW-TD-Ql6"/>
                                 <exclude reference="UXU-bz-swW"/>
@@ -8902,8 +9465,12 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                 <include reference="5cV-Ae-zP6"/>
                                 <include reference="Oer-nb-O01"/>
                                 <include reference="Op2-Pn-Bh7"/>
+                                <include reference="6m6-Ot-1Mn"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="cJs-W5-lZe"/>
+                                <include reference="ppe-zz-F7H"/>
+                                <include reference="Ar7-B5-xV5"/>
                                 <include reference="F3T-r5-tQY"/>
                                 <include reference="MwW-TD-Ql6"/>
                                 <include reference="UXU-bz-swW"/>
@@ -8922,6 +9489,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="detectandoUbicacion" destination="6m6-Ot-1Mn" id="bKS-CG-rHH"/>
                         <outlet property="mapaCerrarBoton" destination="5cV-Ae-zP6" id="G5X-Pk-LUf"/>
                         <outlet property="mapaComoLlegarBoton" destination="Oer-nb-O01" id="igM-Qn-eKL"/>
                         <outlet property="mapaPasoAPasoBoton" destination="Op2-Pn-Bh7" id="8az-rv-B8c"/>
@@ -9013,6 +9581,9 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                                     <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="search"/>
+                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="114" y="4" width="198" height="21"/>
+                                                    </variation>
                                                     <connections>
                                                         <action selector="filtroNombreTextFieldAction:" destination="p37-vq-ofd" eventType="editingDidEndOnExit" id="Ii8-cu-idx"/>
                                                     </connections>
@@ -9374,7 +9945,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ja0-ba-DpS">
                                 <rect key="frame" x="0.0" y="20" width="600" height="44"/>
                                 <items>
-                                    <navigationItem title="Museosa" id="LoV-B9-k3k"/>
+                                    <navigationItem title="Museos" id="LoV-B9-k3k"/>
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="UZR-p9-bj4">
@@ -9975,6 +10546,26 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                     <action selector="mapaPasoAPaso" destination="kQr-at-Gdn" eventType="touchUpInside" id="SWr-M5-lOl"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detectando ubicación ..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jN1-fS-JBe">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <color key="backgroundColor" red="0.45477524400000002" green="0.60293745990000003" blue="0.78737491370000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="GTE-5C-gpL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="GTE-5C-gpL"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="GTE-5C-gpL"/>
+                                    </mask>
+                                </variation>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.86970758438110352" green="0.92044973373413086" blue="0.97994726896286011" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -9982,7 +10573,10 @@ Desde la Ciudad Autónoma de Buenos Aires:
                             <constraint firstItem="GWl-ri-ojs" firstAttribute="top" secondItem="PcO-TF-x9c" secondAttribute="bottom" constant="24" id="90Z-3F-Hs2">
                                 <variation key="heightClass=regular-widthClass=compact" constant="23"/>
                             </constraint>
+                            <constraint firstItem="jN1-fS-JBe" firstAttribute="trailing" secondItem="nrB-4z-dkr" secondAttribute="trailingMargin" id="98b-b1-aTQ"/>
+                            <constraint firstItem="GWl-ri-ojs" firstAttribute="top" secondItem="jN1-fS-JBe" secondAttribute="bottom" constant="8" id="AX3-66-p6k"/>
                             <constraint firstItem="ja0-ba-DpS" firstAttribute="width" secondItem="nrB-4z-dkr" secondAttribute="width" id="B2W-yN-G4e"/>
+                            <constraint firstItem="jN1-fS-JBe" firstAttribute="leading" secondItem="nrB-4z-dkr" secondAttribute="leadingMargin" id="BXR-14-cxk"/>
                             <constraint firstAttribute="centerX" secondItem="ja0-ba-DpS" secondAttribute="centerX" id="EWh-K9-ok0"/>
                             <constraint firstItem="GWl-ri-ojs" firstAttribute="top" secondItem="qe5-U7-0TN" secondAttribute="bottom" constant="22" id="Iya-Tj-6Fc">
                                 <variation key="heightClass=regular-widthClass=compact" constant="56"/>
@@ -10006,11 +10600,15 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                 <exclude reference="asu-Pn-obC"/>
                                 <exclude reference="qe5-U7-0TN"/>
                                 <exclude reference="PcO-TF-x9c"/>
+                                <exclude reference="jN1-fS-JBe"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="90Z-3F-Hs2"/>
+                                <exclude reference="AX3-66-p6k"/>
                                 <exclude reference="Iya-Tj-6Fc"/>
                                 <exclude reference="RZ0-5M-Ref"/>
+                                <exclude reference="98b-b1-aTQ"/>
+                                <exclude reference="BXR-14-cxk"/>
                                 <exclude reference="nEA-uM-ZrD"/>
                                 <exclude reference="p9k-67-Efw"/>
                                 <exclude reference="sV6-MU-nfi"/>
@@ -10031,11 +10629,15 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                 <include reference="asu-Pn-obC"/>
                                 <include reference="qe5-U7-0TN"/>
                                 <include reference="PcO-TF-x9c"/>
+                                <include reference="jN1-fS-JBe"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="90Z-3F-Hs2"/>
+                                <include reference="AX3-66-p6k"/>
                                 <include reference="Iya-Tj-6Fc"/>
                                 <include reference="RZ0-5M-Ref"/>
+                                <include reference="98b-b1-aTQ"/>
+                                <include reference="BXR-14-cxk"/>
                                 <include reference="nEA-uM-ZrD"/>
                                 <include reference="p9k-67-Efw"/>
                                 <exclude reference="sV6-MU-nfi"/>
@@ -10051,6 +10653,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="detectandoUbicacion" destination="jN1-fS-JBe" id="625-Bx-j6K"/>
                         <outlet property="mapaCerrarBoton" destination="asu-Pn-obC" id="n0i-1S-4yr"/>
                         <outlet property="mapaComoLlegarBoton" destination="qe5-U7-0TN" id="7gV-lF-8Cc"/>
                         <outlet property="mapaPasoAPasoBoton" destination="PcO-TF-x9c" id="VdB-xe-RP8"/>
@@ -10076,13 +10679,13 @@ Desde la Ciudad Autónoma de Buenos Aires:
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kJW-BX-a9g">
                                 <rect key="frame" x="0.0" y="20" width="600" height="44"/>
                                 <items>
-                                    <navigationItem title="Museoss" id="9yw-jM-aWf"/>
+                                    <navigationItem title="Museos" id="9yw-jM-aWf"/>
                                 </items>
                             </navigationBar>
-                            <tableView clipsSubviews="YES" alpha="0.0" contentMode="scaleToFill" restorationIdentifier="tablaResultados" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="hUJ-6q-G4R">
+                            <tableView clipsSubviews="YES" alpha="0.0" contentMode="scaleToFill" ambiguous="YES" restorationIdentifier="tablaResultados" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="hUJ-6q-G4R">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" red="0.76695811749999998" green="0.85238462690000005" blue="0.95030701159999997" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="separatorColor" red="0.99819964169999997" green="0.3104772073" blue="0.2421960316" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="separatorColor" red="0.45477524399757385" green="0.60293745994567871" blue="0.78737491369247437" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" reuseIdentifier="museo" rowHeight="80" id="W54-Te-gvr" customClass="MuseosResultadosMuseoCellTableViewCell" customModule="Gui_a_Turi_stica" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
@@ -10245,7 +10848,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.99819964169999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.76695811748504639" green="0.85238462686538696" blue="0.95030701160430908" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <outlet property="categoriaNombre" destination="QeV-E9-jbY" id="kfb-MK-4d2"/>
                                             <outlet property="direccion" destination="IlQ-Xo-zFC" id="9N8-NO-PUA"/>
@@ -10260,53 +10863,84 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                     <outlet property="delegate" destination="KEd-l7-Wgm" id="boT-at-tIg"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nmC-LG-52I">
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Error leyendo datos" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999998807907104" translatesAutoresizingMaskIntoConstraints="NO" id="yC7-ps-BwY">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nmC-LG-52I">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <state key="normal" title="Button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="buscar" destination="KEd-l7-Wgm" eventType="touchUpInside" id="Bbx-OY-VGi"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.86970758438110352" green="0.92044973373413086" blue="0.97994726896286011" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="Oin-AT-3mX" firstAttribute="top" secondItem="hUJ-6q-G4R" secondAttribute="bottom" id="2if-Oe-wwd"/>
                             <constraint firstItem="nmC-LG-52I" firstAttribute="leading" secondItem="pig-qv-kfJ" secondAttribute="leadingMargin" constant="161" id="AvX-32-dpB"/>
+                            <constraint firstItem="yC7-ps-BwY" firstAttribute="trailing" secondItem="pig-qv-kfJ" secondAttribute="trailingMargin" id="GSL-5m-CfB"/>
                             <constraint firstItem="nmC-LG-52I" firstAttribute="top" secondItem="kJW-BX-a9g" secondAttribute="bottom" constant="5" id="IWA-ns-zXs"/>
                             <constraint firstAttribute="width" secondItem="kJW-BX-a9g" secondAttribute="width" id="JXq-J5-bla"/>
                             <constraint firstAttribute="centerX" secondItem="kJW-BX-a9g" secondAttribute="centerX" id="L12-DX-BOJ"/>
                             <constraint firstItem="hUJ-6q-G4R" firstAttribute="leading" secondItem="pig-qv-kfJ" secondAttribute="leadingMargin" constant="-16" id="NXc-e6-mpx"/>
+                            <constraint firstItem="nmC-LG-52I" firstAttribute="leading" secondItem="pig-qv-kfJ" secondAttribute="leadingMargin" id="Nz7-lt-0UO"/>
+                            <constraint firstItem="yC7-ps-BwY" firstAttribute="bottom" secondItem="nmC-LG-52I" secondAttribute="top" constant="2" id="Tag-Sg-Mrf"/>
+                            <constraint firstItem="yC7-ps-BwY" firstAttribute="top" secondItem="nmC-LG-52I" secondAttribute="bottom" constant="292" id="Ycf-au-ueE"/>
                             <constraint firstItem="kJW-BX-a9g" firstAttribute="top" secondItem="l1i-C6-9nc" secondAttribute="bottom" id="ZuG-8X-Zk9"/>
-                            <constraint firstItem="hUJ-6q-G4R" firstAttribute="top" secondItem="kJW-BX-a9g" secondAttribute="bottom" id="hX5-vp-7e4">
-                                <variation key="heightClass=regular-widthClass=compact" constant="150"/>
-                            </constraint>
+                            <constraint firstItem="yC7-ps-BwY" firstAttribute="top" secondItem="kJW-BX-a9g" secondAttribute="bottom" constant="12" id="dyB-fK-m7w"/>
+                            <constraint firstItem="hUJ-6q-G4R" firstAttribute="top" secondItem="kJW-BX-a9g" secondAttribute="bottom" id="hX5-vp-7e4"/>
                             <constraint firstAttribute="trailingMargin" secondItem="hUJ-6q-G4R" secondAttribute="trailing" constant="-16" id="kWf-tH-xXk"/>
+                            <constraint firstItem="yC7-ps-BwY" firstAttribute="leading" secondItem="pig-qv-kfJ" secondAttribute="leadingMargin" id="sNY-Cf-rSG"/>
                         </constraints>
                         <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="yC7-ps-BwY"/>
+                            </mask>
                             <mask key="constraints">
+                                <exclude reference="GSL-5m-CfB"/>
+                                <exclude reference="Tag-Sg-Mrf"/>
+                                <exclude reference="Ycf-au-ueE"/>
+                                <exclude reference="dyB-fK-m7w"/>
+                                <exclude reference="sNY-Cf-rSG"/>
                                 <exclude reference="NXc-e6-mpx"/>
                                 <exclude reference="hX5-vp-7e4"/>
                                 <exclude reference="kWf-tH-xXk"/>
                                 <exclude reference="AvX-32-dpB"/>
                                 <exclude reference="IWA-ns-zXs"/>
+                                <exclude reference="Nz7-lt-0UO"/>
                                 <exclude reference="2if-Oe-wwd"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
                                 <include reference="hUJ-6q-G4R"/>
+                                <include reference="yC7-ps-BwY"/>
                                 <include reference="nmC-LG-52I"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="GSL-5m-CfB"/>
+                                <include reference="Tag-Sg-Mrf"/>
+                                <exclude reference="Ycf-au-ueE"/>
+                                <include reference="dyB-fK-m7w"/>
+                                <include reference="sNY-Cf-rSG"/>
                                 <include reference="NXc-e6-mpx"/>
                                 <include reference="hX5-vp-7e4"/>
                                 <include reference="kWf-tH-xXk"/>
-                                <include reference="AvX-32-dpB"/>
-                                <include reference="IWA-ns-zXs"/>
+                                <exclude reference="AvX-32-dpB"/>
+                                <exclude reference="IWA-ns-zXs"/>
+                                <include reference="Nz7-lt-0UO"/>
                                 <include reference="2if-Oe-wwd"/>
                             </mask>
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="botonReintentar" destination="nmC-LG-52I" id="AJh-Cz-EU5"/>
+                        <outlet property="labelSinResultados" destination="yC7-ps-BwY" id="DwR-uu-jsM"/>
                         <outlet property="tablaResultados" destination="hUJ-6q-G4R" id="l9E-aD-hTh"/>
                     </connections>
                 </viewController>
@@ -11048,6 +11682,26 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                     <action selector="mapaPasoAPaso" destination="eMI-9l-u8P" eventType="touchUpInside" id="Dkb-xM-mfe"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detectando ubicación ..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5ym-lg-qaJ">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <color key="backgroundColor" red="0.45477524400000002" green="0.60293745990000003" blue="0.78737491370000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="YQ0-Tn-lCF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="YQ0-Tn-lCF"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="YQ0-Tn-lCF"/>
+                                    </mask>
+                                </variation>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.86970758438110352" green="0.92044973373413086" blue="0.97994726896286011" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -11056,7 +11710,9 @@ Desde la Ciudad Autónoma de Buenos Aires:
                             <constraint firstItem="NBI-6q-Kh8" firstAttribute="top" secondItem="5ja-9W-xc1" secondAttribute="bottom" id="9gH-dk-fJy"/>
                             <constraint firstItem="dqS-jE-dGx" firstAttribute="leading" secondItem="HZu-Bp-VGH" secondAttribute="leadingMargin" id="AGY-zG-OFJ"/>
                             <constraint firstItem="kzU-x6-zGG" firstAttribute="top" secondItem="eZB-mU-PCC" secondAttribute="bottom" id="AQI-4A-8L7"/>
+                            <constraint firstItem="5ym-lg-qaJ" firstAttribute="trailing" secondItem="HZu-Bp-VGH" secondAttribute="trailingMargin" id="D62-ja-24s"/>
                             <constraint firstItem="dqS-jE-dGx" firstAttribute="leading" secondItem="HZu-Bp-VGH" secondAttribute="leadingMargin" id="PZV-9L-Hzn"/>
+                            <constraint firstItem="kzU-x6-zGG" firstAttribute="top" secondItem="5ym-lg-qaJ" secondAttribute="bottom" constant="8" id="Qzu-yQ-ll3"/>
                             <constraint firstItem="kzU-x6-zGG" firstAttribute="top" secondItem="u14-OU-4Ew" secondAttribute="bottom" constant="22" id="VjK-A6-sYu">
                                 <variation key="heightClass=regular-widthClass=compact" constant="56"/>
                             </constraint>
@@ -11067,6 +11723,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                             </constraint>
                             <constraint firstItem="eZB-mU-PCC" firstAttribute="leading" secondItem="HZu-Bp-VGH" secondAttribute="leadingMargin" constant="-16" id="dbN-E5-lla"/>
                             <constraint firstAttribute="centerX" secondItem="ZVl-VW-bzs" secondAttribute="centerX" id="f5B-Mg-Co1"/>
+                            <constraint firstItem="5ym-lg-qaJ" firstAttribute="leading" secondItem="HZu-Bp-VGH" secondAttribute="leadingMargin" id="iVk-t6-98L"/>
                             <constraint firstItem="dqS-jE-dGx" firstAttribute="top" secondItem="5ja-9W-xc1" secondAttribute="bottom" id="l4y-21-rhq">
                                 <variation key="heightClass=regular-widthClass=compact" constant="6"/>
                             </constraint>
@@ -11079,9 +11736,13 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                 <exclude reference="dqS-jE-dGx"/>
                                 <exclude reference="u14-OU-4Ew"/>
                                 <exclude reference="ZVl-VW-bzs"/>
+                                <exclude reference="5ym-lg-qaJ"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="D62-ja-24s"/>
+                                <exclude reference="iVk-t6-98L"/>
                                 <exclude reference="AQI-4A-8L7"/>
+                                <exclude reference="Qzu-yQ-ll3"/>
                                 <exclude reference="VjK-A6-sYu"/>
                                 <exclude reference="a7l-tZ-y1H"/>
                                 <exclude reference="f5B-Mg-Co1"/>
@@ -11104,9 +11765,13 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                 <include reference="dqS-jE-dGx"/>
                                 <include reference="u14-OU-4Ew"/>
                                 <include reference="ZVl-VW-bzs"/>
+                                <include reference="5ym-lg-qaJ"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="D62-ja-24s"/>
+                                <include reference="iVk-t6-98L"/>
                                 <include reference="AQI-4A-8L7"/>
+                                <include reference="Qzu-yQ-ll3"/>
                                 <include reference="VjK-A6-sYu"/>
                                 <include reference="a7l-tZ-y1H"/>
                                 <include reference="f5B-Mg-Co1"/>
@@ -11124,6 +11789,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                         </variation>
                     </view>
                     <connections>
+                        <outlet property="detectandoUbicacion" destination="5ym-lg-qaJ" id="fkw-xK-rgi"/>
                         <outlet property="mapaCerrarBoton" destination="dqS-jE-dGx" id="M3l-LM-jK7"/>
                         <outlet property="mapaComoLlegarBoton" destination="u14-OU-4Ew" id="DMz-Ie-tSv"/>
                         <outlet property="mapaPasoAPasoBoton" destination="ZVl-VW-bzs" id="t3h-pA-p5M"/>

@@ -37,17 +37,17 @@ public class IJProgressView {
 		
         containerView.frame = CGRectMake(0, 0+paddingPoints, view.frame.size.width, view.frame.size.height-paddingPoints)
         containerView.backgroundColor = UIColor(hex: 0xcccccc, alpha: 0.5)
-        
+		
         progressView.frame = CGRectMake(0, 0, 80, 80)
         progressView.center = CGPointMake(containerView.bounds.width / 2, containerView.bounds.height / 2)
         progressView.backgroundColor = UIColor(hex: 0x444444, alpha: 0.7)
         progressView.clipsToBounds = true
         progressView.layer.cornerRadius = 10
-        
+		
         activityIndicator.frame = CGRectMake(0, 0, 40, 40)
         activityIndicator.activityIndicatorViewStyle = .WhiteLarge
         activityIndicator.center = CGPointMake(progressView.bounds.width / 2, progressView.bounds.height / 2)
-        
+		
 		progressView.addSubview(activityIndicator)
 		containerView.addSubview(progressView)
 
@@ -74,10 +74,13 @@ public class IJProgressView {
         view.addSubview(containerView)
 		
         activityIndicator.startAnimating()
+		
     }
     
     public func hideProgressView() {
         activityIndicator.stopAnimating()
+		textoView.removeFromSuperview()
+		textoView = UIView()
         containerView.removeFromSuperview()
 		UIApplication.sharedApplication().networkActivityIndicatorVisible = false
     }

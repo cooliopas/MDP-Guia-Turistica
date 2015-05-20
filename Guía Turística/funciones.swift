@@ -17,7 +17,7 @@ extension UIViewController {
 	// asignar el panGestureRecognizer en UINavigationBar, para mostrar el menu lateral
 	
 	func armaNavegacion() {
-		
+
 		if self.revealViewController() != nil {
 			
 			var navegacion: UINavigationBar?
@@ -103,51 +103,55 @@ extension UIViewController {
 	
 	func volver() {
 		
-		if let identifier = self.restorationIdentifier {
+		if self.revealViewController().frontViewPosition == .Left {
 		
-			var padre = ""
+			if let identifier = self.restorationIdentifier {
 			
-			switch identifier {
-				case "transporteColeRecorridosMapa":
-					padre = "transporteColeRecorridos"
-				case "transporteEstacionarInfoContenido","transporteEstacionarInfoWeb":
-					padre = "transporteEstacionarInfo"
-				case "transporteColeRecorridos","transporteColeTarjetaMapa","transporteColeMyBus","transporteEstacionarInfo","transporteEstacionarZona","transporteEstacionarTarjetaMapa","transporteEstacionarOnline":
-					padre = "transporte"
-				case "mediosDeAccesoMapa","mediosDeAccesoLink":
-					padre = "mediosDeAcceso"
-				case "hotelesYAlojamientoOpciones","hotelesYAlojamientoHotel":
-					padre = "hotelesYAlojamiento"
-				case "gastronomiaOpciones","gastronomiaLugar":
-					padre = "gastronomia"
-				case "museosMuseo":
-					padre = "museos"
-				case "inmobiliariasOpciones","inmobiliariasInmobiliaria":
-					padre = "inmobiliarias"
-				case "congresosYEventosOpciones","congresosYEventosEvento":
-					padre = "congresosYEventos"
-				case "paseosYLugaresPDF":
-					padre = "paseosYLugares"
-				case "playasOpciones","playasPlaya":
-					padre = "playas"
-				case "recreacionOpciones","recreacionLugar":
-					padre = "recreacion"
-				case "informacionFarmacias","informacionComisarias","informacionMovilPolicial","informacionWiFi","informacionCentrosSalud":
-					padre = "informacion"
-				default:
-					break
-			}
-			
-			if padre != "" {
+				var padre = ""
 				
-				let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+				switch identifier {
+					case "transporteColeRecorridosMapa":
+						padre = "transporteColeRecorridos"
+					case "transporteEstacionarInfoContenido","transporteEstacionarInfoWeb":
+						padre = "transporteEstacionarInfo"
+					case "transporteColeRecorridos","transporteColeTarjetaMapa","transporteColeMyBus","transporteEstacionarInfo","transporteEstacionarZona","transporteEstacionarTarjetaMapa","transporteEstacionarOnline":
+						padre = "transporte"
+					case "mediosDeAccesoMapa","mediosDeAccesoLink":
+						padre = "mediosDeAcceso"
+					case "hotelesYAlojamientoOpciones","hotelesYAlojamientoHotel":
+						padre = "hotelesYAlojamiento"
+					case "gastronomiaOpciones","gastronomiaLugar":
+						padre = "gastronomia"
+					case "museosMuseo":
+						padre = "museos"
+					case "inmobiliariasOpciones","inmobiliariasInmobiliaria":
+						padre = "inmobiliarias"
+					case "congresosYEventosOpciones","congresosYEventosEvento":
+						padre = "congresosYEventos"
+					case "paseosYLugaresPDF":
+						padre = "paseosYLugares"
+					case "playasOpciones","playasPlaya":
+						padre = "playas"
+					case "recreacionOpciones","recreacionLugar":
+						padre = "recreacion"
+					case "informacionFarmacias","informacionComisarias","informacionMovilPolicial","informacionWiFi","informacionCentrosSalud":
+						padre = "informacion"
+					default:
+						break
+				}
+				
+				if padre != "" {
+					
+					let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
 
-				self.revealViewController().setFrontViewController((appDelegate.traeVC(padre)), animated: true)
+					self.revealViewController().setFrontViewController((appDelegate.traeVC(padre)), animated: true)
+					
+				}
 				
 			}
-			
+
 		}
-		
+			
 	}
 	
 	// función de SWRevealViewControllerDelegate que se ejecuta cuando abrimos o cerramos el menu lateral
@@ -157,27 +161,34 @@ extension UIViewController {
 		if position == FrontViewPosition.Right {
 
 			// armo un UIView que cubre todo el Front, para que no se pueda interactuar.
-			// No puedo usar self.view.userInteractionEnabled = false, porque el NavigationBar es parte de self.view y bloquea el boton de menu para cerrarlo
+			// a la vez, lo uso para asignarle el tapGestureRecognizer() y panGestureRecognizer() de RevealViewController
 			// se le asigna el tag = 555 para localizarlo luego y hacerlo desaparecer
 			
-			let marginCobertor = 44+UIApplication.sharedApplication().statusBarFrame.size.height
-			
-			let viewCobertor = UIView(frame: CGRectMake(0, marginCobertor, self.view.frame.width, self.view.frame.height - marginCobertor))
+			let viewCobertor = UIView(frame: CGRectMake(0, 0, self.view.frame.width, self.view.frame.height))
 			
 			viewCobertor.tag = 555
+
+			viewCobertor.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+			viewCobertor.addGestureRecognizer(self.revealViewController().tapGestureRecognizer())
 			
 			self.view.addSubview(viewCobertor)
 			
 		} else {
 
 			// recorro los subviews buscando el view con tag == 555, y lo elimino
+			// también vuelvo a asignar panGestureRecognizer() al navigationBar
 			
 			for view in self.view.subviews {
 				
 				if view.tag == 555 {
 					
 					view.removeFromSuperview()
-					break
+					
+				}
+			
+				if view is UINavigationBar {
+					
+					view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
 					
 				}
 				

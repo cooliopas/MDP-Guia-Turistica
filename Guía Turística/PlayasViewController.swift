@@ -7,10 +7,9 @@
 //
 
 import UIKit
-import Alamofire
 import CoreLocation
 
-class PlayasViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SWRevealViewControllerDelegate {
+class PlayasViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CLLocationManagerDelegate, SWRevealViewControllerDelegate {
 
 	@IBOutlet weak var tablaOpciones: UITableView!
 	@IBOutlet weak var tablaResultados: UITableView!
@@ -30,7 +29,7 @@ class PlayasViewController: UIViewController, UITableViewDelegate, UITableViewDa
 	
 	var playas = [Lugar]()
 
-	let locationManager = LocationManager.sharedInstance
+	let locationManager = CLLocationManager()
 	var ubicacionActual: CLLocationCoordinate2D?
 
 	override func viewDidLoad() {
@@ -46,21 +45,31 @@ class PlayasViewController: UIViewController, UITableViewDelegate, UITableViewDa
 		
 		armaNavegacion()
 		self.revealViewController().delegate = self
+
+		locationManager.delegate = self
 		
-		locationManager.autoUpdate = true
-		locationManager.startUpdatingLocationWithCompletionHandler { [weak self] (latitude, longitude, status, verboseMessage, error) -> () in
-			
-			if self != nil {
-				
-				self!.ubicacionActual = CLLocationCoordinate2DMake(latitude, longitude)
-				self!.locationManager.stopUpdatingLocation()
-				
-			}
-			
+		locationManager.desiredAccuracy = kCLLocationAccuracyBest
+
+	}
+	
+	func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+		
+		if status == CLAuthorizationStatus.AuthorizedWhenInUse {
+			locationManager.startUpdatingLocation()
+		} else {
+			locationManager.requestWhenInUseAuthorization()
 		}
 		
 	}
 	
+	func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+		
+		locationManager.stopUpdatingLocation()
+		
+		ubicacionActual = (locations.last as! CLLocation).coordinate
+		
+	}
+
 	override func viewDidLayoutSubviews() {
 		if tablaResultados.respondsToSelector(Selector("layoutMargins")) {
 			tablaResultados.layoutMargins = UIEdgeInsetsZero;
@@ -92,7 +101,7 @@ class PlayasViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
 		restea("Playa","Buscar",["Token":"01234567890123456789012345678901","IdZona":idZona,"Nombre":filtroNombre]) { (request, response, JSON, error) in
 			
-			IJProgressView.shared.hideProgressView()
+			if self.revealViewController() != nil { IJProgressView.shared.hideProgressView() }
 			
 			if error == nil, let info = JSON as? NSDictionary where (info["Playas"] as! NSArray).count > 0 {
 				
@@ -356,6 +365,14 @@ class PlayasViewController: UIViewController, UITableViewDelegate, UITableViewDa
 		if cellBusqueda != nil {
 			cellBusqueda!.filtroNombreTextField.endEditing(true)
 		}
+	}
+	
+	override func viewDidDisappear(animated: Bool) {
+
+		super.viewDidDisappear(animated)
+		
+		IJProgressView.shared.hideProgressView()
+		
 	}
 	
 	override func didReceiveMemoryWarning() {

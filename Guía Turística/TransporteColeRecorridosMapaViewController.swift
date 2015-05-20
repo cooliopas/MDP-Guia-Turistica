@@ -11,29 +11,39 @@ import MapKit
 import CoreLocation
 import SwiftyJSON
 
-class TransporteColeRecorridosMapaViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, SWRevealViewControllerDelegate {
+class TransporteColeRecorridosMapaViewController: UIViewController, MKMapViewDelegate, SWRevealViewControllerDelegate {
 
 	@IBOutlet weak var mapaView: MKMapView!
+	@IBOutlet weak var navigationBar: UINavigationBar!
+	@IBOutlet weak var segmentadorRecorridos: UISegmentedControl!
+	@IBOutlet weak var statusLabel: UILabel!
 
 	var linea: String!
 	
-	let locationManager = CLLocationManager()
-	
 	let mapManager = MapManager()
+	
+	var polylineIda = MKPolyline()
+	var annotationInicioIda = MKPointAnnotation()
+	var annotationFinIda = MKPointAnnotation()
+
+	var polylineVuelta = MKPolyline()
+	var annotationInicioVuelta = MKPointAnnotation()
+	let annotationFinVuelta = MKPointAnnotation()
 	
     override func viewDidLoad() {
         super.viewDidLoad()
 
-		if CLLocationManager.authorizationStatus() == .NotDetermined {
-			locationManager.requestWhenInUseAuthorization()
+		navigationBar.topItem?.title = "Recorrido linea \(linea)"
+		
+		if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse {
+			mapaView.showsUserLocation = true
 		}
-
-		locationManager.delegate = self
-		locationManager.desiredAccuracy = kCLLocationAccuracyBest
-
-		mapaView.showsUserLocation = true
+		
 		mapaView.delegate = self
 		
+		statusLabel.layer.cornerRadius = 7
+		statusLabel.clipsToBounds = true
+
 // leo recorrido de ida
 		
 		if let file = NSBundle.mainBundle().pathForResource("Recorridos.bundle/\(linea)-ida", ofType: "json"),
@@ -53,23 +63,16 @@ class TransporteColeRecorridosMapaViewController: UIViewController, MKMapViewDel
 				
 			}
 
-			let polylineIda = MKPolyline(coordinates: &arrayPuntosIda, count: arrayPuntosIda.count)
+			polylineIda = MKPolyline(coordinates: &arrayPuntosIda, count: arrayPuntosIda.count)
 			polylineIda.title = "ida"
-			mapaView.addOverlay(polylineIda)
 
-			let annotationInicioIda = MKPointAnnotation()
 			annotationInicioIda.coordinate = inicioIda
-			annotationInicioIda.title = "Inicio Ida"
-			annotationInicioIda.subtitle = "Sub Inicio Ida"
+			annotationInicioIda.title = "Inicio recorrido de ida"
+//			annotationInicioIda.subtitle = ""
 			
-			mapaView.addAnnotation(annotationInicioIda)
-			
-			let annotationFinIda = MKPointAnnotation()
 			annotationFinIda.coordinate = finIda
-			annotationFinIda.title = "Fin Ida"
-			annotationFinIda.subtitle = "Sub Fin Ida"
-			
-			mapaView.addAnnotation(annotationFinIda)
+			annotationFinIda.title = "Final recorrido de ida"
+//			annotationFinIda.subtitle = ""
 			
 		} else {
 			
@@ -77,7 +80,6 @@ class TransporteColeRecorridosMapaViewController: UIViewController, MKMapViewDel
 			
 		}
 		
-
 // leo recorrido de vuelta
 		
 		if let file = NSBundle.mainBundle().pathForResource("Recorridos.bundle/\(linea)-vuelta", ofType: "json"),
@@ -97,23 +99,16 @@ class TransporteColeRecorridosMapaViewController: UIViewController, MKMapViewDel
 					
 				}
 				
-				let polylineVuelta = MKPolyline(coordinates: &arrayPuntosVuelta, count: arrayPuntosVuelta.count)
+				polylineVuelta = MKPolyline(coordinates: &arrayPuntosVuelta, count: arrayPuntosVuelta.count)
 				polylineVuelta.title = "vuelta"
-				mapaView.addOverlay(polylineVuelta)
 				
-				let annotationInicioVuelta = MKPointAnnotation()
 				annotationInicioVuelta.coordinate = inicioVuelta
-				annotationInicioVuelta.title = "Inicio Vuelta"
-				annotationInicioVuelta.subtitle = "Sub Inicio Vuelta"
+				annotationInicioVuelta.title = "Inicio recorrido de vuelta"
+//				annotationInicioVuelta.subtitle = ""
 				
-				mapaView.addAnnotation(annotationInicioVuelta)
-				
-				let annotationFinVuelta = MKPointAnnotation()
 				annotationFinVuelta.coordinate = finVuelta
-				annotationFinVuelta.title = "Fin Vuelta"
-				annotationFinVuelta.subtitle = "Sub Fin Vuelta"
-				
-				mapaView.addAnnotation(annotationFinVuelta)
+				annotationFinVuelta.title = "Fin recorrido de vuelta"
+//				annotationFinVuelta.subtitle = ""
 				
 		} else {
 			
@@ -123,8 +118,41 @@ class TransporteColeRecorridosMapaViewController: UIViewController, MKMapViewDel
 		
 		mapaView.setRegion(MKCoordinateRegionMake(CLLocationCoordinate2DMake(-37.992820, -57.583932), MKCoordinateSpanMake(0.05, 0.05)), animated: false)
 
+		segmentarRecorrido()
+		
 	}
 
+	@IBAction func segmentarRecorrido() {
+		
+		mapaView.removeOverlay(polylineIda)
+		mapaView.removeAnnotation(annotationInicioIda)
+		mapaView.removeAnnotation(annotationFinIda)
+		mapaView.removeOverlay(polylineVuelta)
+		mapaView.removeAnnotation(annotationInicioVuelta)
+		mapaView.removeAnnotation(annotationFinVuelta)
+
+		switch segmentadorRecorridos.selectedSegmentIndex {
+		case 0:
+			mapaView.addOverlay(polylineIda)
+			mapaView.addAnnotation(annotationInicioIda)
+			mapaView.addAnnotation(annotationFinIda)
+		case 1:
+			mapaView.addOverlay(polylineVuelta)
+			mapaView.addAnnotation(annotationInicioVuelta)
+			mapaView.addAnnotation(annotationFinVuelta)
+		case 2:
+			mapaView.addOverlay(polylineIda)
+			mapaView.addAnnotation(annotationInicioIda)
+			mapaView.addAnnotation(annotationFinIda)
+			mapaView.addOverlay(polylineVuelta)
+			mapaView.addAnnotation(annotationInicioVuelta)
+			mapaView.addAnnotation(annotationFinVuelta)
+		default:
+			break
+		}
+		
+	}
+	
 	override func viewDidAppear(animated: Bool) {
 		super.viewDidAppear(animated)
 		
@@ -156,41 +184,14 @@ class TransporteColeRecorridosMapaViewController: UIViewController, MKMapViewDel
 	deinit {
 		println("deinit")
 	}
-		
-	func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-		
-		var autorizado = false
-		var autorizacionStatus = ""
-		
-		switch status {
-			case CLAuthorizationStatus.Restricted:
-				autorizacionStatus = "Restringido"
-			case CLAuthorizationStatus.Denied:
-				autorizacionStatus = "Denegado"
-			case CLAuthorizationStatus.NotDetermined:
-				autorizacionStatus = "No determinado aún"
-			default:
-				autorizacionStatus = "Permitido"
-				autorizado = true
-		}
-		
-		if autorizado == true {
-			
-			locationManager.startUpdatingLocation()
-			
-		}
-		
-	}
 	
 	override func viewDidDisappear(animated: Bool) {
 		
-		println("disapear")
-		
+		super.viewDidDisappear(animated)
+				
 		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
 		appDelegate.arrayVC.removeValueForKey("transporteColeRecorridosMapa")
 		
-		locationManager.stopUpdatingLocation()
-		locationManager.delegate = nil
 		mapaView.delegate = nil
 		
 		self.removeFromParentViewController()

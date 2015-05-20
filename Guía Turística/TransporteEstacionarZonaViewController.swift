@@ -15,6 +15,7 @@ class TransporteEstacionarZonaViewController: UIViewController, MKMapViewDelegat
 	@IBOutlet weak var mapaView: MKMapView!
 	@IBOutlet weak var labelVerificando: UILabel!
 	@IBOutlet weak var botonUbicacion: UIButton!
+	@IBOutlet weak var sinUbicacionLabel: UILabel!
 
 	var linea: String!
 	
@@ -31,14 +32,12 @@ class TransporteEstacionarZonaViewController: UIViewController, MKMapViewDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
 
-		if CLLocationManager.authorizationStatus() == .NotDetermined {
-			locationManager.requestWhenInUseAuthorization()
-		}
-
 		locationManager.delegate = self
-		locationManager.desiredAccuracy = kCLLocationAccuracyBest
-
-		mapaView.showsUserLocation = true
+		
+		if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse {
+			mapaView.showsUserLocation = true
+		}
+		
 		mapaView.delegate = self
 
 		var coordenadasZona = [
@@ -87,19 +86,16 @@ class TransporteEstacionarZonaViewController: UIViewController, MKMapViewDelegat
 			}
 			
 		}
-		
+
+		sinUbicacionLabel.layer.cornerRadius = 7
+		sinUbicacionLabel.clipsToBounds = true
+
 		labelVerificando.layer.cornerRadius = 10
 		labelVerificando.clipsToBounds = true
 		labelVerificando.backgroundColor = UIColor.clearColor()
 		labelVerificando.layer.backgroundColor = UIColor(red: 0.454775, green: 0.602937, blue: 0.787375, alpha: 1).CGColor
-		
+
 		botonUbicacion.layer.cornerRadius = 10
-		
-		UIView.animateWithDuration(0.6, delay: 0.0, options: .Repeat | .Autoreverse, animations: {
-			
-			self.labelVerificando.alpha = 0.8
-			
-			}, completion: nil)
 
 		mapaView.setRegion(MKCoordinateRegionMake(CLLocationCoordinate2DMake(-38.000125, -57.549382), MKCoordinateSpanMake(0.007, 0.007)), animated: false)
 
@@ -190,27 +186,68 @@ class TransporteEstacionarZonaViewController: UIViewController, MKMapViewDelegat
 	deinit {
 		println("deinit")
 	}
+	
+	func alertaLocalizacion() {
 		
+		UIView.animateWithDuration(0.4, delay: 0, options: .CurveEaseOut, animations: {
+			
+			self.sinUbicacionLabel.alpha = 1
+			self.labelVerificando.alpha = 0
+			
+			}, completion: nil)
+		
+		var alertController = UIAlertController (title: "Acceso a la localización", message: "Para detectar si estas dentro de la zona de estacionamiento medido, es necesario que permitas el acceso a la localización desde esta aplicación.\n\nPodes permitir el acceso desde \"Ajustes\".", preferredStyle: .Alert)
+		
+		var settingsAction = UIAlertAction(title: "Ir a Ajustes", style: .Default) { (_) -> Void in
+			let settingsUrl = NSURL(string: UIApplicationOpenSettingsURLString)
+			if let url = settingsUrl {
+				UIApplication.sharedApplication().openURL(url)
+			}
+		}
+		
+		var cancelAction = UIAlertAction(title: "Ignorar", style: .Default, handler: nil)
+		alertController.addAction(settingsAction)
+		alertController.addAction(cancelAction)
+		
+		presentViewController(alertController, animated: true, completion: nil);
+		
+	}
+	
 	func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
 		
 		var autorizado = false
 		var autorizacionStatus = ""
 		
 		switch status {
-			case CLAuthorizationStatus.Restricted:
-				autorizacionStatus = "Restringido"
-			case CLAuthorizationStatus.Denied:
-				autorizacionStatus = "Denegado"
-			case CLAuthorizationStatus.NotDetermined:
-				autorizacionStatus = "No determinado aún"
-			default:
-				autorizacionStatus = "Permitido"
-				autorizado = true
+		case CLAuthorizationStatus.Restricted:
+			autorizacionStatus = "Restringido"
+			alertaLocalizacion()
+		case CLAuthorizationStatus.Denied:
+			autorizacionStatus = "Denegado"
+			alertaLocalizacion()
+		case CLAuthorizationStatus.NotDetermined:
+			autorizacionStatus = "No determinado aún"
+		default:
+			autorizacionStatus = "Permitido"
+			autorizado = true
 		}
+		
+		println("Location: \(autorizacionStatus)")
 		
 		if autorizado == true {
 			
-//			locationManager.startUpdatingLocation()
+			mapaView.showsUserLocation = true
+			
+			UIView.animateWithDuration(0.6, delay: 0.0, options: .Repeat | .Autoreverse, animations: {
+				
+				self.labelVerificando.alpha = 0.8
+				self.sinUbicacionLabel.alpha = 0
+				
+				}, completion: nil)
+			
+		} else {
+			
+			locationManager.requestWhenInUseAuthorization()
 			
 		}
 		
@@ -218,12 +255,11 @@ class TransporteEstacionarZonaViewController: UIViewController, MKMapViewDelegat
 	
 	override func viewDidDisappear(animated: Bool) {
 		
-		println("disapear")
+		super.viewDidDisappear(animated)
 		
 		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
 		appDelegate.arrayVC.removeValueForKey("transporteEstacionarZona")
 		
-//		locationManager.stopUpdatingLocation()
 		locationManager.delegate = nil
 		mapaView.delegate = nil
 		
