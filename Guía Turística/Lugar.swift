@@ -151,7 +151,7 @@ class Lugar {
 							
 						} else {
 							
-							println("Error para bajar la imagen")
+//							println("Error para bajar la imagen")
 							
 						}
 					})

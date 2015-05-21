@@ -64,6 +64,12 @@ public class IJProgressView {
 			textoLabel.numberOfLines = 0
 			textoLabel.textAlignment = .Center
 			textoLabel.text = texto!
+			textoLabel.font = UIFont(name: "HelveticaNeue", size: 17.0)
+			
+			let height = heightForView(texto!, textoLabel.font, 240)
+			
+			textoLabel.frame.size.height = height
+			textoView.frame.size.height = height + 10
 			
 			textoView.addSubview(textoLabel)
 			

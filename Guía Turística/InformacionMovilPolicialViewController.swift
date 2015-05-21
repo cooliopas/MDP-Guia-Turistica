@@ -27,21 +27,28 @@ class InformacionMovilPolicialViewController: UIViewController, CLLocationManage
 	
 	let locationManager = CLLocationManager()
 	
-	var ubicacionActual: CLLocationCoordinate2D?
+	var ubicacionActual: CLLocation?
 	var comisariaCercana: [String:String]?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+
+		if hayRed() {
 		
-		locationManager.delegate = self
-		locationManager.desiredAccuracy = kCLLocationAccuracyBest
+			locationManager.delegate = self
+			locationManager.desiredAccuracy = kCLLocationAccuracyBest
+			
+		} else {
+			
+			detectandoLabel.text = "No hay conección a Internet."
+			
+		}
 		
 		emergenciaView.alpha = 0
 		emergenciaView.userInteractionEnabled = false
 		emergenciaView.layer.cornerRadius = 5
 
 		telefonosView.layer.cornerRadius = 5
-		telefonosView.alpha = 0
 		
 		comisariaTitulo.alpha = 0
 		comisariaDetalle.alpha = 0
@@ -72,8 +79,6 @@ class InformacionMovilPolicialViewController: UIViewController, CLLocationManage
 				
 				UIApplication.sharedApplication().openURL(url)
 				
-				println("Llamando al \(numeroSinEspacios)")
-				
 			}
 			
 		}
@@ -85,11 +90,11 @@ class InformacionMovilPolicialViewController: UIViewController, CLLocationManage
 		
 		locationManager.stopUpdatingLocation()
 		
-		ubicacionActual = (locations.last as! CLLocation).coordinate
+		ubicacionActual = locations.last as? CLLocation
 		
 		detectandoLabel.text = "Buscando movil policial más cercano ..."
 		
-		let parametros = [["latitud":"\(ubicacionActual!.latitude)"],["longitud":"\(ubicacionActual!.longitude)"]]
+		let parametros = [["latitud":"\(ubicacionActual!.coordinate.latitude)"],["longitud":"\(ubicacionActual!.coordinate.longitude)"]]
 		soapea("movilpolicial_lat_lng", parametros) { (respuesta, error) in
 			
 			if error == nil {
@@ -127,8 +132,8 @@ class InformacionMovilPolicialViewController: UIViewController, CLLocationManage
 				
 			} else {
 				
-				println("No se encontro el movil más cercano")
-				println(error)
+//				println("No se encontro el movil más cercano")
+//				println(error)
 				
 			}
 			
@@ -180,8 +185,8 @@ class InformacionMovilPolicialViewController: UIViewController, CLLocationManage
 				
 			} else {
 				
-				println("No se encontro la comisaria más cercana")
-				println(error)
+//				println("No se encontro la comisaria más cercana")
+//				println(error)
 				
 			}
 			
@@ -191,8 +196,8 @@ class InformacionMovilPolicialViewController: UIViewController, CLLocationManage
 	
 	func alertaLocalizacion() {
 		
-		self.emergenciaLabel.text = "No fue posible detectar tu ubicación."
-		self.emergenciaBoton.hidden = true
+		emergenciaLabel.text = "No fue posible detectar tu ubicación."
+		emergenciaBoton.hidden = true
 		
 		UIView.animateWithDuration(0.6, delay: 0.5, options: .CurveEaseOut, animations: {
 			
@@ -244,12 +249,10 @@ class InformacionMovilPolicialViewController: UIViewController, CLLocationManage
 			autorizacionStatus = "Permitido"
 			autorizado = true
 		}
-		
-		println("Location: \(autorizacionStatus)")
-		
+				
 		if autorizado == true {
 			
-			self.emergenciaBoton.hidden = false
+			emergenciaBoton.hidden = false
 			
 			UIView.animateWithDuration(0.6, delay: 0, options: .CurveEaseOut, animations: {
 				
@@ -310,7 +313,7 @@ class InformacionMovilPolicialViewController: UIViewController, CLLocationManage
 	}
 	
 	deinit {
-		println("deinit")
+//		println("deinit")
 	}
 	
 	override func viewDidDisappear(animated: Bool) {

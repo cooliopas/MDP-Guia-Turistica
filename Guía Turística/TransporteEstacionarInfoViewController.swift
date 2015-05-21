@@ -120,7 +120,7 @@ class TransporteEstacionarInfoViewController: UIViewController, UITableViewDataS
 	}
 
 	deinit {
-		println("deinit")
+//		println("deinit")
 	}
 
 	override func viewDidDisappear(animated: Bool) {

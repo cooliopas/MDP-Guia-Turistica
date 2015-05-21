@@ -20,11 +20,16 @@ class MuseosViewController: UIViewController, UITableViewDelegate, UITableViewDa
 	var museos = [Lugar]()
 
 	let locationManager = CLLocationManager()
-	var ubicacionActual: CLLocationCoordinate2D?
+	var ubicacionActual: CLLocation?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
+		locationManager.delegate = self
+		locationManager.desiredAccuracy = kCLLocationAccuracyBest
+
+		locationManager.startUpdatingLocation()
+		
 		buscar()
 		
 	}
@@ -35,10 +40,6 @@ class MuseosViewController: UIViewController, UITableViewDelegate, UITableViewDa
 		armaNavegacion()
 		self.revealViewController().delegate = self
 		
-		locationManager.delegate = self
-		
-		locationManager.desiredAccuracy = kCLLocationAccuracyBest
-
 	}
 	
 	func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
@@ -55,7 +56,7 @@ class MuseosViewController: UIViewController, UITableViewDelegate, UITableViewDa
 		
 		locationManager.stopUpdatingLocation()
 		
-		ubicacionActual = (locations.last as! CLLocation).coordinate
+		ubicacionActual = locations.last as? CLLocation
 		
 	}
 
@@ -79,12 +80,10 @@ class MuseosViewController: UIViewController, UITableViewDelegate, UITableViewDa
 		
 		})
 		
-		IJProgressView.shared.showProgressView(self.view, padding: true)
+		IJProgressView.shared.showProgressView(self.view, padding: true, texto: "Cargando listado de museos")
 		
 		restea("Museo","Buscar",["Token":"01234567890123456789012345678901"]) { (request, response, JSON, error) in
 
-			if self.revealViewController() != nil { IJProgressView.shared.hideProgressView() }
-			
 			if error == nil, let info = JSON as? NSDictionary where (info["Museos"] as! NSArray).count > 0 {
 
 				self.museos = Lugar.lugaresCargaDeJSON(info["Museos"] as! NSArray)
@@ -95,7 +94,7 @@ class MuseosViewController: UIViewController, UITableViewDelegate, UITableViewDa
 						
 						if museo.latitud != 0 {
 
-							museo.distancia = directMetersFromCoordinate(self.ubicacionActual!, CLLocationCoordinate2DMake(museo.latitud, museo.longitud))
+							museo.distancia = self.ubicacionActual!.distanceFromLocation(CLLocation(latitude: museo.latitud, longitude: museo.longitud))
 							
 						}
 						
@@ -115,7 +114,15 @@ class MuseosViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
 			} else {
 				
-				self.labelSinResultados.text = "Ocurrió un error al leer los datos.\nPor favor intente nuevamente."
+				if !self.hayRed() {
+					
+					self.labelSinResultados.text = "No se detecta conección a Internet.\nNo es posible continuar."
+					
+				} else {
+				
+					self.labelSinResultados.text = "Ocurrió un error al leer los datos.\nPor favor intente nuevamente."
+					
+				}
 				
 				UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
 					
@@ -125,6 +132,8 @@ class MuseosViewController: UIViewController, UITableViewDelegate, UITableViewDa
 					}, completion: nil)
 				
 			}
+			
+			if self.revealViewController() != nil { IJProgressView.shared.hideProgressView() }
 			
 		}
 		

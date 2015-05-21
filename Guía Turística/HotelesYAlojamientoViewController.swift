@@ -32,13 +32,16 @@ class HotelesYAlojamientoViewController: UIViewController, UITableViewDelegate, 
 	var hoteles = [Hotel]()
 
 	let locationManager = CLLocationManager()
-	var ubicacionActual: CLLocationCoordinate2D?
+	var ubicacionActual: CLLocation?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
 		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-		self.opcionesItems = appDelegate.opcionesItems[self.restorationIdentifier!]!
+		opcionesItems = appDelegate.opcionesItems[self.restorationIdentifier!]!
+		
+		locationManager.delegate = self
+		locationManager.desiredAccuracy = kCLLocationAccuracyBest
 		
 	}
 
@@ -47,11 +50,9 @@ class HotelesYAlojamientoViewController: UIViewController, UITableViewDelegate, 
 		
 		armaNavegacion()
 		self.revealViewController().delegate = self
-
-		locationManager.delegate = self
-
-		locationManager.desiredAccuracy = kCLLocationAccuracyBest
 		
+		locationManager.startUpdatingLocation()
+
 	}
 	
 	func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
@@ -68,8 +69,8 @@ class HotelesYAlojamientoViewController: UIViewController, UITableViewDelegate, 
 		
 		locationManager.stopUpdatingLocation()
 
-		ubicacionActual = (locations.last as! CLLocation).coordinate
-
+		ubicacionActual = locations.last as? CLLocation
+		
 	}
 	
 	override func viewDidLayoutSubviews() {
@@ -83,99 +84,106 @@ class HotelesYAlojamientoViewController: UIViewController, UITableViewDelegate, 
 	
 	@IBAction func buscar() {
 		
-		cellBusqueda!.filtroNombreTextField.endEditing(true)
-		
-		let idCategoria = (opcionesItems["categoria"]![(opcionesValores["categoria"]! as! Int)]["id"]! as String).toInt()!
-		let idZona = (opcionesItems["zona"]![(opcionesValores["zona"]! as! Int)]["id"]! as String).toInt()!
-		let filtroNombre = cellBusqueda!.filtroNombreTextField.text
-		
-		UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
+		if !hayRed() {
 			
-			self.tablaResultados.alpha = 0
-			self.labelSinResultados.alpha = 0
+			muestraError("No se detecta conección a Internet.\nNo es posible continuar.", volver: 0)
 			
-			}, completion: { finished in
+		} else {
 		
-				self.tablaResultados.scrollRectToVisible(CGRectMake(0, 0, 1, 1), animated: false)
-		
-		})
-		
-		IJProgressView.shared.showProgressView(self.view, padding: true, texto: "Por favor espere...\nLa búsqueda puede demorar aproximadamente 1 minuto.")
-		
-		restea("Hotel","Buscar",["Token":"01234567890123456789012345678901","IdCategoria":idCategoria,"IdZona":idZona,"Nombre":filtroNombre]) { (request, response, JSON, error) in
-
-			if self.revealViewController() != nil { IJProgressView.shared.hideProgressView() }
+			cellBusqueda!.filtroNombreTextField.endEditing(true)
 			
-			if error == nil, let info = JSON as? NSDictionary where (info["Hoteles"] as! NSArray).count > 0 {
+			let idCategoria = (opcionesItems["categoria"]![(opcionesValores["categoria"]! as! Int)]["id"]! as String).toInt()!
+			let idZona = (opcionesItems["zona"]![(opcionesValores["zona"]! as! Int)]["id"]! as String).toInt()!
+			let filtroNombre = cellBusqueda!.filtroNombreTextField.text
+			
+			UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
+				
+				self.tablaResultados.alpha = 0
+				self.labelSinResultados.alpha = 0
+				
+				}, completion: { finished in
+			
+					self.tablaResultados.scrollRectToVisible(CGRectMake(0, 0, 1, 1), animated: false)
+			
+			})
+			
+			IJProgressView.shared.showProgressView(self.view, padding: true, texto: "Por favor espere...\nLa búsqueda puede demorar aproximadamente 1 minuto.")
+			
+			restea("Hotel","Buscar",["Token":"01234567890123456789012345678901","IdCategoria":idCategoria,"IdZona":idZona,"Nombre":filtroNombre]) { (request, response, JSON, error) in
 
-				self.hoteles = Hotel.hotelesCargaDeJSON(info["Hoteles"] as! NSArray)
+				if self.revealViewController() != nil { IJProgressView.shared.hideProgressView() }
+				
+				if error == nil, let info = JSON as? NSDictionary where (info["Hoteles"] as! NSArray).count > 0 {
 
-				if self.ubicacionActual != nil {
-					
-					for hotel in self.hoteles {
+					self.hoteles = Hotel.hotelesCargaDeJSON(info["Hoteles"] as! NSArray)
+
+					if self.ubicacionActual != nil {
 						
-						if hotel.latitud != 0 {
+						for hotel in self.hoteles {
+							
+							if hotel.latitud != 0 {
 
-							hotel.distancia = directMetersFromCoordinate(self.ubicacionActual!, CLLocationCoordinate2DMake(hotel.latitud, hotel.longitud))
+								hotel.distancia = self.ubicacionActual!.distanceFromLocation(CLLocation(latitude: hotel.latitud, longitude: hotel.longitud))
+								
+							}
 							
 						}
 						
+						self.hoteles.sort(self.sorterForDistancia)
+						
 					}
 					
-					self.hoteles.sort(self.sorterForDistancia)
+					self.tablaResultados.reloadData()
 					
-				}
-				
-				self.tablaResultados.reloadData()
-				
-				UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
-					
-					self.tablaResultados.alpha = 1
-					
-					}, completion: nil)
-				
-			} else {
-				
-				if error?.code == -1001 {
-					
-					self.labelSinResultados.text = "Ocurrió un error al leer los datos.\nPor favor intente nuevamente."
+					UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
+						
+						self.tablaResultados.alpha = 1
+						
+						}, completion: nil)
 					
 				} else {
 					
-					var mensajeError = ""
-					
-					if let info = JSON as? NSDictionary {
+					if error?.code == -1001 {
 						
-						if (info["Estado"] as? String) == "ERROR" {
-							
-							mensajeError = "Es necesario elegir una categoría, zona o filtrar por nombre."
-							
-						} else {
-							
-							mensajeError = "No se encontraron hoteles para su búsqueda."
-							
-						}
+						self.labelSinResultados.text = "Ocurrió un error al leer los datos.\nPor favor intente nuevamente."
 						
 					} else {
 						
-						mensajeError = "Ocurrió un error."
+						var mensajeError = ""
+						
+						if let info = JSON as? NSDictionary {
+							
+							if (info["Estado"] as? String) == "ERROR" {
+								
+								mensajeError = "Es necesario elegir una categoría, zona o filtrar por nombre."
+								
+							} else {
+								
+								mensajeError = "No se encontraron hoteles para su búsqueda."
+								
+							}
+							
+						} else {
+							
+							mensajeError = "Ocurrió un error."
+							
+						}
+						
+						self.labelSinResultados.text = mensajeError
 						
 					}
 					
-					self.labelSinResultados.text = mensajeError
+					UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
+						
+						self.labelSinResultados.alpha = 1
+						
+						}, completion: nil)
 					
 				}
 				
-				UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
-					
-					self.labelSinResultados.alpha = 1
-					
-					}, completion: nil)
-				
 			}
-			
+
 		}
-		
 	}
 	
 	func sorterForDistancia(this:Hotel, that:Hotel) -> Bool {
@@ -311,7 +319,7 @@ class HotelesYAlojamientoViewController: UIViewController, UITableViewDelegate, 
 			} else {
 
 				let cell = tableView.dequeueReusableCellWithIdentifier("filtro", forIndexPath: indexPath) as! HotelesYAlojamientoCellFiltroTableViewCell
-				self.cellBusqueda = cell
+				cellBusqueda = cell
 				
 				if (cell.respondsToSelector(Selector("layoutMargins"))) {
 					cell.layoutMargins = UIEdgeInsetsZero

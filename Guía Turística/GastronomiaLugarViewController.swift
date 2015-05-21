@@ -26,7 +26,7 @@ class GastronomiaLugarViewController: UIViewController, UITableViewDelegate, UIT
 	var lugar: Lugar!
 	var cellMapa: GastronomiaLugarMapaTableViewCell!
 	
-	var ubicacionActual: CLLocationCoordinate2D?
+	var ubicacionActual: CLLocation?
 	let mapManager = MapManager()
 	var mapaDestino: MKPlacemark?
 	var mapaRoute: MKPolyline?
@@ -48,9 +48,14 @@ class GastronomiaLugarViewController: UIViewController, UITableViewDelegate, UIT
 				Lugar.armaInfo(self.lugar)
 				Lugar.armaObservaciones(self.lugar)
 				
-				self.tabla.reloadRowsAtIndexPaths([NSIndexPath(forRow: 2, inSection: 0),NSIndexPath(forRow: 3, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Fade)
+			} else {
+				
+				self.lugar.info = NSAttributedString(string: "No fue posible cargar esta información.", attributes: [NSFontAttributeName:UIFont(name: "HelveticaNeue", size: 13.0)!])
+				self.lugar.observaciones = NSAttributedString(string: "No fue posible cargar las observaciones.", attributes: [NSFontAttributeName:UIFont(name: "HelveticaNeue", size: 13.0)!])
 				
 			}
+			
+			self.tabla.reloadRowsAtIndexPaths([NSIndexPath(forRow: 2, inSection: 0),NSIndexPath(forRow: 3, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Fade)
 			
 		}
 		
@@ -67,15 +72,15 @@ class GastronomiaLugarViewController: UIViewController, UITableViewDelegate, UIT
 		statusLabel.layer.cornerRadius = 7
 		statusLabel.clipsToBounds = true
 
-		if self.lugar.latitud != 0 {
+		if lugar.latitud != 0 {
 		
-			let lugarCoordinate = CLLocationCoordinate2DMake(self.lugar.latitud,self.lugar.longitud)
+			let lugarCoordinate = CLLocationCoordinate2DMake(lugar.latitud,lugar.longitud)
 			let region = MKCoordinateRegionMakeWithDistance(lugarCoordinate, 800, 800)
 			
 			let annotation = MKPointAnnotation()
 			annotation.coordinate = lugarCoordinate
-			annotation.title = self.lugar.nombre
-			annotation.subtitle = "\(self.lugar.calleNombre) \(self.lugar.calleAltura)"
+			annotation.title = lugar.nombre
+			annotation.subtitle = "\(lugar.calleNombre) \(lugar.calleAltura)"
 			
 			mapa.setRegion(region, animated: false)
 			mapa.addAnnotation(annotation)
@@ -84,7 +89,7 @@ class GastronomiaLugarViewController: UIViewController, UITableViewDelegate, UIT
 			
 			let options = MKMapSnapshotOptions()
 			options.region = region
-			options.size = self.mapa.frame.size
+			options.size = mapa.frame.size
 			options.scale = UIScreen.mainScreen().scale
 			
 			let snapshotter = MKMapSnapshotter(options: options)
@@ -92,7 +97,7 @@ class GastronomiaLugarViewController: UIViewController, UITableViewDelegate, UIT
 				snapshot, error in
 				
 				if error != nil {
-					println(error)
+//					println(error)
 					return
 				}
 				
@@ -170,9 +175,9 @@ class GastronomiaLugarViewController: UIViewController, UITableViewDelegate, UIT
 		
 		locationManager.stopUpdatingLocation()
 		
-		ubicacionActual = (locations.last as! CLLocation).coordinate
+		ubicacionActual = locations.last as? CLLocation
 		
-		if self.statusLabel.alpha == 1 {
+		if statusLabel.alpha == 1 {
 			
 			UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut, animations: {
 				
@@ -191,9 +196,9 @@ class GastronomiaLugarViewController: UIViewController, UITableViewDelegate, UIT
 		let rectInTableView = tabla.rectForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 0))
 		let rectInSuperview = tabla.convertRect(rectInTableView, toView: tabla.superview)
 		
-		self.mapa.zoomEnabled = false
-		self.mapa.rotateEnabled = false
-		self.mapa.scrollEnabled = false
+		mapa.zoomEnabled = false
+		mapa.rotateEnabled = false
+		mapa.scrollEnabled = false
 		
 		UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
 			
@@ -252,23 +257,23 @@ class GastronomiaLugarViewController: UIViewController, UITableViewDelegate, UIT
 	
 	func mapaAbrir() {
 		
-		self.view.bringSubviewToFront(self.mapa)
-		self.view.bringSubviewToFront(self.mapaCerrarBoton)
-		self.view.bringSubviewToFront(self.mapaComoLlegarBoton)
-		self.view.bringSubviewToFront(self.mapaPasoAPasoBoton)
-		self.view.bringSubviewToFront(self.statusLabel)
+		self.view.bringSubviewToFront(mapa)
+		self.view.bringSubviewToFront(mapaCerrarBoton)
+		self.view.bringSubviewToFront(mapaComoLlegarBoton)
+		self.view.bringSubviewToFront(mapaPasoAPasoBoton)
+		self.view.bringSubviewToFront(statusLabel)
 
 		let rectInTableView = tabla.rectForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 0))
 		let rectInSuperview = tabla.convertRect(rectInTableView, toView: tabla.superview)
 		
-		self.mapa.frame.origin.y = rectInSuperview.origin.y //- self.topLayoutGuide.length
+		mapa.frame.origin.y = rectInSuperview.origin.y //- self.topLayoutGuide.length
 		self.view.layoutIfNeeded()
 		
-		self.mapa.zoomEnabled = true
-		self.mapa.rotateEnabled = true
-		self.mapa.scrollEnabled = true
+		mapa.zoomEnabled = true
+		mapa.rotateEnabled = true
+		mapa.scrollEnabled = true
 		
-		self.mapa.alpha = 1
+		mapa.alpha = 1
 		
 		UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseOut, animations: {
 			
@@ -311,113 +316,129 @@ class GastronomiaLugarViewController: UIViewController, UITableViewDelegate, UIT
 	
 	@IBAction func mapaComoLlegar() {
 		
-		if self.ubicacionActual != nil {
-		
-			IJProgressView.shared.showProgressView(self.view, padding: false)
+		if !hayRed() {
 			
-			UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseOut, animations: {
-				
-				self.mapaComoLlegarBoton.alpha = 0.5
-				self.mapaComoLlegarBoton.userInteractionEnabled = false
-				
-				}, completion: nil)
+			muestraError("No se detecta conección a Internet.\nNo es posible continuar.", volver: 0)
+			
+		} else {
+			
+			if ubicacionActual != nil {
 		
-			let origin = self.ubicacionActual!
-			let destination = CLLocationCoordinate2DMake(self.lugar.latitud, self.lugar.longitud)
-		
-			self.mapManager.directionsUsingGoogle(from: origin, to: destination) { [weak self] (route,directionInformation, boundingRegion, error) -> () in
+				IJProgressView.shared.showProgressView(self.view, padding: false, texto: "Calculando recorrido ...")
 				
-				if error != nil {
+				UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseOut, animations: {
 					
-					println(error)
+					self.mapaComoLlegarBoton.alpha = 0.5
+					self.mapaComoLlegarBoton.userInteractionEnabled = false
 					
-				} else {
+					}, completion: nil)
+			
+				let origin = ubicacionActual!.coordinate
+				let destination = CLLocationCoordinate2DMake(lugar.latitud, lugar.longitud)
+			
+				mapManager.directionsUsingGoogle(from: origin, to: destination) { [weak self] (route,directionInformation, boundingRegion, error) -> () in
 					
-					if self != nil {
-						
-						for annotation in self!.mapa.annotations {
-							
-							if let anotacion = annotation as? MKPointAnnotation {
-									
-								self!.mapa.removeAnnotation(anotacion)
-								
-							}
-							
-						}
-
-						self!.mapaRoute = route!
-					
-						let pointOfOrigin = MKPointAnnotation()
-						pointOfOrigin.title = "Tu ubicación actual"
-						let duracion = directionInformation?.objectForKey("duration") as! String
-						let distancia = directionInformation?.objectForKey("distance") as! String
-						pointOfOrigin.subtitle = "A \(distancia) - Tiempo: \(duracion)"
-						
-						let pointOfDestination = MKPointAnnotation()
-						pointOfDestination.title = self!.lugar.nombre
-						pointOfDestination.subtitle = "\(self!.lugar.calleNombre) \(self!.lugar.calleAltura)"
-						
-						let start_location = directionInformation?.objectForKey("start_location") as! NSDictionary
-						let originLat = start_location.objectForKey("lat")?.doubleValue
-						let originLng = start_location.objectForKey("lng")?.doubleValue
-						
-						let end_location = directionInformation?.objectForKey("end_location") as! NSDictionary
-						let destLat = end_location.objectForKey("lat")?.doubleValue
-						let destLng = end_location.objectForKey("lng")?.doubleValue
-						
-						let coordOrigin = CLLocationCoordinate2D(latitude: originLat!, longitude: originLng!)
-						let coordDesitination = CLLocationCoordinate2D(latitude: destLat!, longitude: destLng!)
-						
-						pointOfOrigin.coordinate = coordOrigin
-						pointOfDestination.coordinate = coordDesitination
-
-						let addressDestino = [
-							String(kABPersonAddressStreetKey): "\(self!.lugar.calleNombre) \(self!.lugar.calleAltura)",
-							String(kABPersonAddressCityKey): "Mar del Plata",
-							String(kABPersonAddressStateKey): "Buenos Aires",
-							String(kABPersonAddressZIPKey): "7600",
-							String(kABPersonAddressCountryKey): "Argentina",
-							String(kABPersonAddressCountryCodeKey): "AR"
-						]
-
-						self!.mapaDestino = MKPlacemark(coordinate: coordDesitination, addressDictionary: addressDestino)
+					if self!.revealViewController() != nil {
 						
 						dispatch_async(dispatch_get_main_queue()) {
 							
-							self!.mapa.addOverlay(self!.mapaRoute!)
-							self!.mapa.addAnnotation(pointOfOrigin)
-							self!.mapa.addAnnotation(pointOfDestination)
-							self!.mapa.setVisibleMapRect(boundingRegion!, edgePadding: UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30), animated: true)
+							IJProgressView.shared.hideProgressView()
 							
-							if self!.revealViewController() != nil { IJProgressView.shared.hideProgressView() }
+						}
+						
+					}
+					
+					if error != nil {
+						
+						self!.muestraError("No se pudo encontrar el recorrido.",volver: 0)
+//						println(error)
+						
+					} else {
+						
+						if self != nil {
 							
-							UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseOut, animations: {
+							for annotation in self!.mapa.annotations {
 								
-								self!.mapaPasoAPasoBoton.alpha = 0.9
-								self!.mapaPasoAPasoBoton.userInteractionEnabled = true
+								if let anotacion = annotation as? MKPointAnnotation {
+										
+									self!.mapa.removeAnnotation(anotacion)
+									
+								}
 								
-								}, completion: nil)
+							}
+
+							self!.mapaRoute = route!
+						
+							let pointOfOrigin = MKPointAnnotation()
+							pointOfOrigin.title = "Tu ubicación actual"
+							let duracion = directionInformation?.objectForKey("duration") as! String
+							let distancia = directionInformation?.objectForKey("distance") as! String
+							pointOfOrigin.subtitle = "A \(distancia) - Tiempo: \(duracion)"
+							
+							let pointOfDestination = MKPointAnnotation()
+							pointOfDestination.title = self!.lugar.nombre
+							pointOfDestination.subtitle = "\(self!.lugar.calleNombre) \(self!.lugar.calleAltura)"
+							
+							let start_location = directionInformation?.objectForKey("start_location") as! NSDictionary
+							let originLat = start_location.objectForKey("lat")?.doubleValue
+							let originLng = start_location.objectForKey("lng")?.doubleValue
+							
+							let end_location = directionInformation?.objectForKey("end_location") as! NSDictionary
+							let destLat = end_location.objectForKey("lat")?.doubleValue
+							let destLng = end_location.objectForKey("lng")?.doubleValue
+							
+							let coordOrigin = CLLocationCoordinate2D(latitude: originLat!, longitude: originLng!)
+							let coordDesitination = CLLocationCoordinate2D(latitude: destLat!, longitude: destLng!)
+							
+							pointOfOrigin.coordinate = coordOrigin
+							pointOfDestination.coordinate = coordDesitination
+
+							let addressDestino = [
+								String(kABPersonAddressStreetKey): "\(self!.lugar.calleNombre) \(self!.lugar.calleAltura)",
+								String(kABPersonAddressCityKey): "Mar del Plata",
+								String(kABPersonAddressStateKey): "Buenos Aires",
+								String(kABPersonAddressZIPKey): "7600",
+								String(kABPersonAddressCountryKey): "Argentina",
+								String(kABPersonAddressCountryCodeKey): "AR"
+							]
+
+							self!.mapaDestino = MKPlacemark(coordinate: coordDesitination, addressDictionary: addressDestino)
+							
+							dispatch_async(dispatch_get_main_queue()) {
 								
+								self!.mapa.addOverlay(self!.mapaRoute!)
+								self!.mapa.addAnnotation(pointOfOrigin)
+								self!.mapa.addAnnotation(pointOfDestination)
+								self!.mapa.setVisibleMapRect(boundingRegion!, edgePadding: UIEdgeInsets(top: 0, left: 30, bottom: 0, right: 30), animated: true)
+								
+								UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseOut, animations: {
+									
+									self!.mapaPasoAPasoBoton.alpha = 0.9
+									self!.mapaPasoAPasoBoton.userInteractionEnabled = true
+									
+									}, completion: nil)
+									
+							}
 						}
 					}
 				}
-			}
-		} else {
-			
-			if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse {
-				
-				UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut, animations: {
-					
-					self.statusLabel.alpha = 1
-					
-					}, completion: nil)
-				
 			} else {
 				
-				alertaLocalizacion()
+				if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse {
+					
+					UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut, animations: {
+						
+						self.statusLabel.alpha = 1
+						
+						}, completion: nil)
+					
+				} else {
+					
+					alertaLocalizacion()
+					
+				}
 				
 			}
-			
 		}
 	}
 	
@@ -444,7 +465,7 @@ class GastronomiaLugarViewController: UIViewController, UITableViewDelegate, UIT
 		
 		let origen = MKMapItem.mapItemForCurrentLocation()
 		
-		let destino = MKMapItem(placemark: self.mapaDestino!)
+		let destino = MKMapItem(placemark: mapaDestino!)
 		
 		destino.name = lugar.nombre
 		if lugar.telefono1 != "" || lugar.telefono2 != "" || lugar.telefono3 != "" {
@@ -627,17 +648,15 @@ class GastronomiaLugarViewController: UIViewController, UITableViewDelegate, UIT
 			
 			if indexPath.row == 2 {
 				
-				texto = self.lugar.info
+				texto = lugar.info
 				
 			} else {
 				
-				texto = self.lugar.observaciones
+				texto = lugar.observaciones
 				
 			}
-			
-			let font = UIFont(name: "HelveticaNeue", size: 13.0)!
-			
-			let height = heightForView(texto, width: (self.view.frame.size.width - 16))
+						
+			let height = heightForView(texto, (self.view.frame.size.width - 16))
 			
 			return height + 16 + 28 // 16 de padding top y bottom + 28 por el height del view para el título
 			
@@ -663,7 +682,7 @@ class GastronomiaLugarViewController: UIViewController, UITableViewDelegate, UIT
 	}
 	
 	deinit {
-		println("deinit")
+//		println("deinit")
 	}
 	
 	override func didReceiveMemoryWarning() {

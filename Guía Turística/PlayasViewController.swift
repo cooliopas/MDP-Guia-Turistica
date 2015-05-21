@@ -30,14 +30,17 @@ class PlayasViewController: UIViewController, UITableViewDelegate, UITableViewDa
 	var playas = [Lugar]()
 
 	let locationManager = CLLocationManager()
-	var ubicacionActual: CLLocationCoordinate2D?
+	var ubicacionActual: CLLocation?
 
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-		self.opcionesItems = appDelegate.opcionesItems[self.restorationIdentifier!]!
+		opcionesItems = appDelegate.opcionesItems[self.restorationIdentifier!]!
 		
+		locationManager.delegate = self
+		locationManager.desiredAccuracy = kCLLocationAccuracyBest
+
 	}
 	
 	override func viewDidAppear(animated: Bool) {
@@ -46,10 +49,8 @@ class PlayasViewController: UIViewController, UITableViewDelegate, UITableViewDa
 		armaNavegacion()
 		self.revealViewController().delegate = self
 
-		locationManager.delegate = self
+		locationManager.startUpdatingLocation()
 		
-		locationManager.desiredAccuracy = kCLLocationAccuracyBest
-
 	}
 	
 	func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
@@ -66,7 +67,7 @@ class PlayasViewController: UIViewController, UITableViewDelegate, UITableViewDa
 		
 		locationManager.stopUpdatingLocation()
 		
-		ubicacionActual = (locations.last as! CLLocation).coordinate
+		ubicacionActual = locations.last as? CLLocation
 		
 	}
 
@@ -81,98 +82,106 @@ class PlayasViewController: UIViewController, UITableViewDelegate, UITableViewDa
 	
 	@IBAction func buscar() {
 		
-		cellBusqueda!.filtroNombreTextField.endEditing(true)
+		if !hayRed() {
+			
+			muestraError("No se detecta conección a Internet.\nNo es posible continuar.", volver: 0)
+			
+		} else {
+			
+			cellBusqueda!.filtroNombreTextField.endEditing(true)
 		
-		let idZona = (opcionesItems["zona"]![(opcionesValores["zona"]! as! Int)]["id"]! as String).toInt()!
-		let filtroNombre = cellBusqueda!.filtroNombreTextField.text
+			let idZona = (opcionesItems["zona"]![(opcionesValores["zona"]! as! Int)]["id"]! as String).toInt()!
+			let filtroNombre = cellBusqueda!.filtroNombreTextField.text
 
-		UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
-			
-			self.tablaResultados.alpha = 0
-			self.labelSinResultados.alpha = 0
-			
-			}, completion: { finished in
+			UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
 				
-				self.tablaResultados.scrollRectToVisible(CGRectMake(0, 0, 1, 1), animated: false)
+				self.tablaResultados.alpha = 0
+				self.labelSinResultados.alpha = 0
 				
-		})
-		
-		IJProgressView.shared.showProgressView(self.view, padding: true)
-
-		restea("Playa","Buscar",["Token":"01234567890123456789012345678901","IdZona":idZona,"Nombre":filtroNombre]) { (request, response, JSON, error) in
-			
-			if self.revealViewController() != nil { IJProgressView.shared.hideProgressView() }
-			
-			if error == nil, let info = JSON as? NSDictionary where (info["Playas"] as! NSArray).count > 0 {
-				
-				self.playas = Lugar.lugaresCargaDeJSON(info["Playas"] as! NSArray)
-
-				if self.ubicacionActual != nil {
+				}, completion: { finished in
 					
-					for playa in self.playas {
+					self.tablaResultados.scrollRectToVisible(CGRectMake(0, 0, 1, 1), animated: false)
+					
+			})
+			
+			IJProgressView.shared.showProgressView(self.view, padding: true)
+
+			restea("Playa","Buscar",["Token":"01234567890123456789012345678901","IdZona":idZona,"Nombre":filtroNombre]) { (request, response, JSON, error) in
+				
+				if self.revealViewController() != nil { IJProgressView.shared.hideProgressView() }
+				
+				if error == nil, let info = JSON as? NSDictionary where (info["Playas"] as! NSArray).count > 0 {
+					
+					self.playas = Lugar.lugaresCargaDeJSON(info["Playas"] as! NSArray)
+
+					if self.ubicacionActual != nil {
 						
-						if playa.latitud != 0 {
+						for playa in self.playas {
 							
-							playa.distancia = directMetersFromCoordinate(self.ubicacionActual!, CLLocationCoordinate2DMake(playa.latitud, playa.longitud))
+							if playa.latitud != 0 {
+								
+								playa.distancia = self.ubicacionActual!.distanceFromLocation(CLLocation(latitude: playa.latitud, longitude: playa.longitud))
+								
+							}
 							
 						}
 						
+						self.playas.sort(self.sorterForDistancia)
+						
 					}
 					
-					self.playas.sort(self.sorterForDistancia)
+					self.tablaResultados.reloadData()
 					
-				}
-				
-				self.tablaResultados.reloadData()
-				
-				UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
-					
-					self.tablaResultados.alpha = 1
-					
-					}, completion: nil)
-				
-			} else {
-				
-				if error?.code == -1001 {
-					
-					self.labelSinResultados.text = "Ocurrió un error al leer los datos.\nPor favor intente nuevamente."
+					UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
+						
+						self.tablaResultados.alpha = 1
+						
+						}, completion: nil)
 					
 				} else {
 					
-					var mensajeError = ""
-					
-					if let info = JSON as? NSDictionary {
+					if error?.code == -1001 {
 						
-						if (info["Estado"] as? String) == "ERROR" {
-							
-							mensajeError = "Es necesario elegir una zona o filtrar por nombre."
-							
-						} else {
-							
-							mensajeError = "No se encontraron playas o balnearios para su búsqueda."
-							
-						}
+						self.labelSinResultados.text = "Ocurrió un error al leer los datos.\nPor favor intente nuevamente."
 						
 					} else {
 						
-						mensajeError = "Ocurrió un error."
+						var mensajeError = ""
+						
+						if let info = JSON as? NSDictionary {
+							
+							if (info["Estado"] as? String) == "ERROR" {
+								
+								mensajeError = "Es necesario elegir una zona o filtrar por nombre."
+								
+							} else {
+								
+								mensajeError = "No se encontraron playas o balnearios para su búsqueda."
+								
+							}
+							
+						} else {
+							
+							mensajeError = "Ocurrió un error."
+							
+						}
+						
+						self.labelSinResultados.text = mensajeError
 						
 					}
 					
-					self.labelSinResultados.text = mensajeError
+					UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
+						
+						self.labelSinResultados.alpha = 1
+						
+						}, completion: nil)
 					
 				}
 				
-				UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
-					
-					self.labelSinResultados.alpha = 1
-					
-					}, completion: nil)
-				
 			}
-			
+
 		}
-		
+			
 	}
 	
 	func sorterForDistancia(this:Lugar, that:Lugar) -> Bool {
@@ -308,7 +317,7 @@ class PlayasViewController: UIViewController, UITableViewDelegate, UITableViewDa
 			} else {
 				
 				let cell = tableView.dequeueReusableCellWithIdentifier("filtro", forIndexPath: indexPath) as! PlayasCellFiltroTableViewCell
-				self.cellBusqueda = cell
+				cellBusqueda = cell
 				
 				if (cell.respondsToSelector(Selector("layoutMargins"))) {
 					cell.layoutMargins = UIEdgeInsetsZero

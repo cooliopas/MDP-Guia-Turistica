@@ -20,7 +20,7 @@ class TransporteEstacionarTarjetaMapaViewController: UIViewController, MKMapView
 	
 	let locationManager = CLLocationManager()
 	
-	var ubicacionActual: CLLocationCoordinate2D?
+	var ubicacionActual: CLLocation?
 	
 	let mapManager = MapManager()
 	
@@ -29,23 +29,27 @@ class TransporteEstacionarTarjetaMapaViewController: UIViewController, MKMapView
     override func viewDidLoad() {
         super.viewDidLoad()
 
-		locationManager.delegate = self
+		if hayRed() {
+		
+			locationManager.delegate = self
 
-		if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse {
-			mapaView.showsUserLocation = true
-		}
-		
-		mapaView.delegate = self
-		
-		statusLabel.layer.cornerRadius = 7
-		statusLabel.clipsToBounds = true
-
-		if !actualizoRegion {
-		
-			mapaView.setRegion(MKCoordinateRegionMake(CLLocationCoordinate2DMake(-38.000125, -57.549382), MKCoordinateSpanMake(0.01, 0.01)), animated: false)
+			if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse {
+				mapaView.showsUserLocation = true
+			}
 			
-		}
+			mapaView.delegate = self
+			
+			statusLabel.layer.cornerRadius = 7
+			statusLabel.clipsToBounds = true
 
+			if !actualizoRegion {
+			
+				mapaView.setRegion(MKCoordinateRegionMake(CLLocationCoordinate2DMake(-38.000125, -57.549382), MKCoordinateSpanMake(0.01, 0.01)), animated: false)
+				
+			}
+
+		}
+			
 	}
 	
 	override func viewDidAppear(animated: Bool) {
@@ -53,27 +57,51 @@ class TransporteEstacionarTarjetaMapaViewController: UIViewController, MKMapView
 		
 		armaNavegacion()
 		self.revealViewController().delegate = self
+	
+		if !hayRed() {
+			
+			muestraError("No se detecta conección a Internet.\nNo es posible continuar.", volver: 1)
+			
+		}
 		
 	}
 	
 	func mapView(mapView: MKMapView!, didUpdateUserLocation userLocation: MKUserLocation!) {
-		
-		if ubicacionActual == nil || directMetersFromCoordinate(ubicacionActual!, userLocation.coordinate) > 100 {
-			
-			ubicacionActual = userLocation.coordinate
 
-			mostrarPuestos(ubicacionActual!)
+		UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut, animations: {
+			
+			self.statusLabel.alpha = 0
+			
+			}, completion: nil)
+		
+		if ubicacionActual == nil || ubicacionActual!.distanceFromLocation(userLocation.location) > 100 {
+			
+			ubicacionActual = userLocation.location
+
+			mostrarPuestos(ubicacionActual!.coordinate)
 
 		}
-			
-		if self.revealViewController() != nil { IJProgressView.shared.hideProgressView() }
-			
+		
 	}
 	
 	func mostrarPuestos(coordenadas: CLLocationCoordinate2D) {
 		
+		statusLabel.text = "Cargando datos ..."
+		
+		UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut, animations: {
+			
+			self.statusLabel.alpha = 1
+			
+			}, completion: nil)
+		
 		let parametros = [["latitud":"\(coordenadas.latitude)"],["longitud":"\(coordenadas.longitude)"]]
 		soapea("latlong_puestomedido", parametros) { (respuesta, error) in
+			
+			UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut, animations: {
+				
+				self.statusLabel.alpha = 0
+				
+				}, completion: nil)
 			
 			if error == nil {
 
@@ -129,8 +157,8 @@ class TransporteEstacionarTarjetaMapaViewController: UIViewController, MKMapView
 				
 			} else {
 				
-				println("No se encontraron puntos de venta de estacionamiento medido")
-				println(error)
+				self.muestraError("No se encontraron puntos de venta de estacionamiento medido.",volver: 1)
+//				println(error)
 				
 			}
 			
@@ -180,7 +208,7 @@ class TransporteEstacionarTarjetaMapaViewController: UIViewController, MKMapView
 	}
 	
 	deinit {
-		println("deinit")
+//		println("deinit")
 	}
 		
 	func alertaLocalizacion() {
@@ -228,22 +256,17 @@ class TransporteEstacionarTarjetaMapaViewController: UIViewController, MKMapView
 			autorizacionStatus = "Permitido"
 			autorizado = true
 		}
-		
-		println("Location: \(autorizacionStatus)")
-		
+				
 		if autorizado == true {
 			
 			UIView.animateWithDuration(0.4, delay: 0, options: .CurveEaseOut, animations: {
 				
 				self.sinUbicacionLabel.alpha = 0
+				self.statusLabel.alpha = 1
 				
 				}, completion: nil)
 			
 			mapaView.showsUserLocation = true
-			
-			self.view.sendSubviewToBack(mapaView)
-			
-			IJProgressView.shared.showProgressView(self.view, padding: true, texto: "Detectando ubicación")
 			
 		} else {
 			

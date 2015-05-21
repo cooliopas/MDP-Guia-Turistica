@@ -25,8 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		reveal.toggleAnimationType = SWRevealToggleAnimationType.Spring
 		
-		self.window?.rootViewController = reveal
-		self.window?.makeKeyAndVisible()
+		window?.rootViewController = reveal
+		window?.makeKeyAndVisible()
 		
 		// carga opcionesItems para las secciones correspondientes (vCs)
 		

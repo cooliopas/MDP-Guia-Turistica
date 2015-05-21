@@ -76,7 +76,8 @@ class TransporteColeRecorridosMapaViewController: UIViewController, MKMapViewDel
 			
 		} else {
 			
-			println("Error leyendo recorrido ida")
+			muestraError("Ocurrío un error al leer los recorridos.",volver: 1)
+//			println("Error leyendo recorrido ida")
 			
 		}
 		
@@ -112,7 +113,8 @@ class TransporteColeRecorridosMapaViewController: UIViewController, MKMapViewDel
 				
 		} else {
 			
-			println("Error leyendo recorrido vuelta")
+			muestraError("Ocurrío un error al leer los recorridos.",volver: 1)
+//			println("Error leyendo recorrido vuelta")
 			
 		}
 		
@@ -182,7 +184,7 @@ class TransporteColeRecorridosMapaViewController: UIViewController, MKMapViewDel
 	}
 	
 	deinit {
-		println("deinit")
+//		println("deinit")
 	}
 	
 	override func viewDidDisappear(animated: Bool) {

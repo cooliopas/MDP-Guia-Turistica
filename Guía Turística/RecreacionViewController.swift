@@ -30,14 +30,17 @@ class RecreacionViewController: UIViewController, UITableViewDelegate, UITableVi
 	var lugares = [Lugar]()
 
 	let locationManager = CLLocationManager()
-	var ubicacionActual: CLLocationCoordinate2D?
+	var ubicacionActual: CLLocation?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
 		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-		self.opcionesItems = appDelegate.opcionesItems[self.restorationIdentifier!]!
+		opcionesItems = appDelegate.opcionesItems[self.restorationIdentifier!]!
 		
+		locationManager.delegate = self
+		locationManager.desiredAccuracy = kCLLocationAccuracyBest
+
 	}
 	
 	override func viewDidAppear(animated: Bool) {
@@ -46,10 +49,8 @@ class RecreacionViewController: UIViewController, UITableViewDelegate, UITableVi
 		armaNavegacion()
 		self.revealViewController().delegate = self
 		
-		locationManager.delegate = self
+		locationManager.startUpdatingLocation()
 		
-		locationManager.desiredAccuracy = kCLLocationAccuracyBest
-
 	}
 	
 	func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
@@ -66,7 +67,7 @@ class RecreacionViewController: UIViewController, UITableViewDelegate, UITableVi
 		
 		locationManager.stopUpdatingLocation()
 		
-		ubicacionActual = (locations.last as! CLLocation).coordinate
+		ubicacionActual = locations.last as? CLLocation
 		
 	}
 	
@@ -81,96 +82,104 @@ class RecreacionViewController: UIViewController, UITableViewDelegate, UITableVi
 	
 	@IBAction func buscar() {
 		
-		cellBusqueda!.filtroNombreTextField.endEditing(true)
+		if !hayRed() {
+			
+			muestraError("No se detecta conección a Internet.\nNo es posible continuar.", volver: 0)
+			
+		} else {
+			
+			cellBusqueda!.filtroNombreTextField.endEditing(true)
 		
-		let idCategoria = (opcionesItems["categoria"]![(opcionesValores["categoria"]! as! Int)]["id"]! as String).toInt()!
-		let filtroNombre = cellBusqueda!.filtroNombreTextField.text
-		
-		UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
+			let idCategoria = (opcionesItems["categoria"]![(opcionesValores["categoria"]! as! Int)]["id"]! as String).toInt()!
+			let filtroNombre = cellBusqueda!.filtroNombreTextField.text
 			
-			self.tablaResultados.alpha = 0
-			self.labelSinResultados.alpha = 0
-			
-			}, completion: { finished in
+			UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
 				
-				self.tablaResultados.scrollRectToVisible(CGRectMake(0, 0, 1, 1), animated: false)
+				self.tablaResultados.alpha = 0
+				self.labelSinResultados.alpha = 0
 				
-		})
-		
-		IJProgressView.shared.showProgressView(self.view, padding: true, texto: "Por favor espere...\nLa búsqueda puede demorar aproximadamente 1 minuto.")
-
-		restea("Recreacion","Buscar",["Token":"01234567890123456789012345678901","IdCategoria":idCategoria,"Nombre":filtroNombre]) { (request, response, JSON, error) in
-			
-			if self.revealViewController() != nil { IJProgressView.shared.hideProgressView() }
-			
-			if error == nil, let info = JSON as? NSDictionary where (info["Recreaciones"] as! NSArray).count > 0 {
-				
-				self.lugares = Lugar.lugaresCargaDeJSON(info["Recreaciones"] as! NSArray)
-
-				if self.ubicacionActual != nil {
+				}, completion: { finished in
 					
-					for lugar in self.lugares {
+					self.tablaResultados.scrollRectToVisible(CGRectMake(0, 0, 1, 1), animated: false)
+					
+			})
+			
+			IJProgressView.shared.showProgressView(self.view, padding: true, texto: "Por favor espere...\nLa búsqueda puede demorar aproximadamente 1 minuto.")
+
+			restea("Recreacion","Buscar",["Token":"01234567890123456789012345678901","IdCategoria":idCategoria,"Nombre":filtroNombre]) { (request, response, JSON, error) in
+				
+				if self.revealViewController() != nil { IJProgressView.shared.hideProgressView() }
+				
+				if error == nil, let info = JSON as? NSDictionary where (info["Recreaciones"] as! NSArray).count > 0 {
+					
+					self.lugares = Lugar.lugaresCargaDeJSON(info["Recreaciones"] as! NSArray)
+
+					if self.ubicacionActual != nil {
 						
-						if lugar.latitud != 0 {
+						for lugar in self.lugares {
 							
-							lugar.distancia = directMetersFromCoordinate(self.ubicacionActual!, CLLocationCoordinate2DMake(lugar.latitud, lugar.longitud))
+							if lugar.latitud != 0 {
+								
+								lugar.distancia = self.ubicacionActual!.distanceFromLocation(CLLocation(latitude: lugar.latitud, longitude: lugar.longitud))
+								
+							}
 							
 						}
 						
+						self.lugares.sort(self.sorterForDistancia)
+						
 					}
 					
-					self.lugares.sort(self.sorterForDistancia)
+					self.tablaResultados.reloadData()
 					
-				}
-				
-				self.tablaResultados.reloadData()
-				
-				UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
-					
-					self.tablaResultados.alpha = 1
-					
-					}, completion: nil)
-				
-			} else {
-				
-				if error?.code == -1001 {
-					
-					self.labelSinResultados.text = "Ocurrió un error al leer los datos.\nPor favor intente nuevamente."
+					UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
+						
+						self.tablaResultados.alpha = 1
+						
+						}, completion: nil)
 					
 				} else {
 					
-					var mensajeError = ""
-					
-					if let info = JSON as? NSDictionary {
+					if error?.code == -1001 {
 						
-						if (info["Estado"] as? String) == "ERROR" {
-							
-							mensajeError = "Es necesario elegir una categoría o filtrar por nombre."
-							
-						} else {
-							
-							mensajeError = "No se encontraron lugares de recreación o excursiones para su búsqueda."
-							
-						}
+						self.labelSinResultados.text = "Ocurrió un error al leer los datos.\nPor favor intente nuevamente."
 						
 					} else {
 						
-						mensajeError = "Ocurrió un error."
+						var mensajeError = ""
+						
+						if let info = JSON as? NSDictionary {
+							
+							if (info["Estado"] as? String) == "ERROR" {
+								
+								mensajeError = "Es necesario elegir una categoría o filtrar por nombre."
+								
+							} else {
+								
+								mensajeError = "No se encontraron lugares de recreación o excursiones para su búsqueda."
+								
+							}
+							
+						} else {
+							
+							mensajeError = "Ocurrió un error."
+							
+						}
+						
+						self.labelSinResultados.text = mensajeError
 						
 					}
 					
-					self.labelSinResultados.text = mensajeError
+					UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
+						
+						self.labelSinResultados.alpha = 1
+						
+						}, completion: nil)
 					
 				}
 				
-				UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
-					
-					self.labelSinResultados.alpha = 1
-					
-					}, completion: nil)
-				
 			}
-			
+
 		}
 		
 	}
@@ -308,7 +317,7 @@ class RecreacionViewController: UIViewController, UITableViewDelegate, UITableVi
 			} else {
 				
 				let cell = tableView.dequeueReusableCellWithIdentifier("filtro", forIndexPath: indexPath) as! RecreacionCellFiltroTableViewCell
-				self.cellBusqueda = cell
+				cellBusqueda = cell
 				
 				if (cell.respondsToSelector(Selector("layoutMargins"))) {
 					cell.layoutMargins = UIEdgeInsetsZero

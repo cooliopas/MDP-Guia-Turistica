@@ -20,66 +20,82 @@ class InformacionComisariasViewController: UIViewController, MKMapViewDelegate, 
 	
 	let locationManager = CLLocationManager()
 	
-	var ubicacionActual: CLLocationCoordinate2D?
+	var ubicacionActual: CLLocation?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		locationManager.delegate = self
-		
-		if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse {
-			mapaView.showsUserLocation = true
-		}
-		
-		mapaView.delegate = self
-		
-		emergenciaView.alpha = 0
-		emergenciaView.userInteractionEnabled = false
-		emergenciaView.layer.cornerRadius = 10
-		
-		statusLabel.layer.cornerRadius = 7
-		statusLabel.clipsToBounds = true
-
-		emergenciaBoton.titleLabel?.adjustsFontSizeToFitWidth = true
-		emergenciaBoton.titleLabel?.minimumScaleFactor = 0.5
-		
-		let parametros = [[String: String]]()
-		soapea("comisarias", parametros) { (respuesta, error) in
+		if hayRed() {
 			
-			if error == nil {
+			locationManager.delegate = self
+			
+			mapaView.delegate = self
+			
+			emergenciaView.alpha = 0
+			emergenciaView.userInteractionEnabled = false
+			emergenciaView.layer.cornerRadius = 10
+			
+			statusLabel.layer.cornerRadius = 7
+			statusLabel.clipsToBounds = true
+
+			emergenciaBoton.titleLabel?.adjustsFontSizeToFitWidth = true
+			emergenciaBoton.titleLabel?.minimumScaleFactor = 0.5
+			
+			statusLabel.text = "Cargando datos ..."
+			
+			UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut, animations: {
 				
-				for comisaria in respuesta {
+				self.statusLabel.alpha = 1
+				
+				}, completion: nil)
+			
+			let parametros = [[String: String]]()
+			soapea("comisarias", parametros) { (respuesta, error) in
+				
+				self.statusLabel.text = "Detectando ubicación ..."
+				
+				if error == nil {
 					
-					let annotation = MKPointAnnotation()
-					annotation.coordinate = CLLocationCoordinate2DMake((comisaria["latitud"]! as NSString).doubleValue,(comisaria["longitud"]! as NSString).doubleValue)
-					let nombre = comisaria["nro"]!
-					let direccion = comisaria["ubicacion"]!
-					let tel = comisaria["telefono"] ?? ""
-					
-					annotation.title = "Comisaria \(nombre)"
-					
-					if tel != "" {
+					for comisaria in respuesta {
 						
-						annotation.title = "\(annotation.title) - \(tel)"
+						let annotation = MKPointAnnotation()
+						annotation.coordinate = CLLocationCoordinate2DMake((comisaria["latitud"]! as NSString).doubleValue,(comisaria["longitud"]! as NSString).doubleValue)
+						let nombre = comisaria["nro"]!
+						let direccion = comisaria["ubicacion"]!
+						let tel = comisaria["telefono"] ?? ""
+						
+						annotation.title = "Comisaria \(nombre)"
+						
+						if tel != "" {
+							
+							annotation.title = "\(annotation.title) - \(tel)"
+							
+						}
+						
+						annotation.subtitle = direccion
+						
+						self.mapaView.addAnnotation(annotation)
+						
+						if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse {
+
+							self.mapaView.showsUserLocation = true
+							
+						}
 						
 					}
 					
-					annotation.subtitle = direccion
+				} else {
 					
-					self.mapaView.addAnnotation(annotation)
+					self.muestraError("No se encontraron comisarias.",volver: 1)
+//					println(error)
 					
 				}
 				
-			} else {
-				
-				println("No se encontraron comisarias")
-				println(error)
-				
 			}
 			
+			mapaView.setRegion(MKCoordinateRegionMake(CLLocationCoordinate2DMake(-37.992820,-57.583932), MKCoordinateSpanMake(0.05, 0.05)), animated: false)
+			
 		}
-		
-		mapaView.setRegion(MKCoordinateRegionMake(CLLocationCoordinate2DMake(-37.992820,-57.583932), MKCoordinateSpanMake(0.05, 0.05)), animated: false)
 		
 	}
 	
@@ -88,6 +104,12 @@ class InformacionComisariasViewController: UIViewController, MKMapViewDelegate, 
 		
 		armaNavegacion()
 		self.revealViewController().delegate = self
+		
+		if !hayRed() {
+			
+			muestraError("No se detecta conección a Internet.\nNo es posible continuar.", volver: 1)
+			
+		}
 		
 	}
 	
@@ -157,8 +179,8 @@ class InformacionComisariasViewController: UIViewController, MKMapViewDelegate, 
 					
 				} else {
 					
-					println("No se encontro la comisaria más cercana")
-					println(error)
+//					println("No se encontro la comisaria más cercana")
+//					println(error)
 					
 				}
 				
@@ -183,14 +205,14 @@ class InformacionComisariasViewController: UIViewController, MKMapViewDelegate, 
 						
 					} else {
 						
-						println("No se encontro el movil más cercano")
+//						println("No se encontro el movil más cercano")
 						
 					}
 					
 				} else {
 					
-					println("No se encontro el movil más cercano")
-					println(error)
+//					println("No se encontro el movil más cercano")
+//					println(error)
 					
 				}
 				
@@ -200,12 +222,12 @@ class InformacionComisariasViewController: UIViewController, MKMapViewDelegate, 
 			
 		}
 		
-		ubicacionActual = userLocation.coordinate
+		ubicacionActual = userLocation.location
 		
 	}
 	
 	deinit {
-		println("deinit")
+//		println("deinit")
 	}
 	
 	func alertaLocalizacion() {
@@ -213,6 +235,7 @@ class InformacionComisariasViewController: UIViewController, MKMapViewDelegate, 
 		UIView.animateWithDuration(0.4, delay: 0, options: .CurveEaseOut, animations: {
 			
 			self.sinUbicacionLabel.alpha = 1
+			self.statusLabel.alpha = 0
 			
 			}, completion: nil)
 		
@@ -251,9 +274,7 @@ class InformacionComisariasViewController: UIViewController, MKMapViewDelegate, 
 			autorizacionStatus = "Permitido"
 			autorizado = true
 		}
-		
-		println("Location: \(autorizacionStatus)")
-		
+				
 		if autorizado == true {
 			
 			UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut, animations: {
@@ -263,7 +284,7 @@ class InformacionComisariasViewController: UIViewController, MKMapViewDelegate, 
 				
 				}, completion: nil)
 			
-			mapaView.showsUserLocation = true
+			self.mapaView.showsUserLocation = true
 			
 		} else {
 			

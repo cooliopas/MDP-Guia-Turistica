@@ -22,11 +22,9 @@ class TransporteColeTarjetaMapaViewController: UIViewController, MKMapViewDelega
 	
 	let locationManager = CLLocationManager()
 	
-	var ubicacionActual: CLLocationCoordinate2D?
+	var ubicacionActual: CLLocation?
 
 	let mapManager = MapManager()
-	
-	var actualizoRegion = false
 	
 	var popOver: WYPopoverController?
 	
@@ -36,49 +34,49 @@ class TransporteColeTarjetaMapaViewController: UIViewController, MKMapViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
 
-		locationManager.delegate = self
-
-		if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse {
-			mapaView.showsUserLocation = true
-		}
+		if hayRed() {
 		
-		mapaView.delegate = self
-		
-		statusLabel.layer.cornerRadius = 7
-		statusLabel.clipsToBounds = true
+			locationManager.delegate = self
 
-		if let file = NSBundle.mainBundle().pathForResource("Varios.bundle/puntosDeCargaUTE", ofType: "json"),
-			let data = NSData(contentsOfFile: file),
-			let puestosUTE = JSON(data:data).array {
-
-			for puesto in puestosUTE {
-
-				puestosCargaUTE.append(PuestoCarga(coordenadas: CLLocationCoordinate2DMake(puesto[0].doubleValue,puesto[1].doubleValue), nombre: "Puesto de Carga UTE", direccion: puesto[2].stringValue, tipo: 1))
-				
+			if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse {
+				mapaView.showsUserLocation = true
 			}
-				
-		}
+			
+			mapaView.delegate = self
+			
+			statusLabel.layer.cornerRadius = 7
+			statusLabel.clipsToBounds = true
 
-		if let file = NSBundle.mainBundle().pathForResource("Varios.bundle/puntosDeCargaSUBE", ofType: "json"),
-			let data = NSData(contentsOfFile: file),
-			let puestosSUBE = JSON(data:data).array {
-				
-			for puesto in puestosSUBE {
-				
-				puestosCargaSUBE.append(PuestoCarga(coordenadas: CLLocationCoordinate2DMake(puesto[0].doubleValue,puesto[1].doubleValue), nombre: "Puesto de Carga SUBE", direccion: puesto[2].stringValue, tipo: 0))
-				
+			if let file = NSBundle.mainBundle().pathForResource("Varios.bundle/puntosDeCargaUTE", ofType: "json"),
+				let data = NSData(contentsOfFile: file),
+				let puestosUTE = JSON(data:data).array {
+
+				for puesto in puestosUTE {
+
+					puestosCargaUTE.append(PuestoCarga(coordenadas: CLLocationCoordinate2DMake(puesto[0].doubleValue,puesto[1].doubleValue), nombre: "Puesto de Carga UTE", direccion: puesto[2].stringValue, tipo: 1))
+					
+				}
+					
 			}
-				
-		}
-		
-		if !actualizoRegion {
-		
+
+			if let file = NSBundle.mainBundle().pathForResource("Varios.bundle/puntosDeCargaSUBE", ofType: "json"),
+				let data = NSData(contentsOfFile: file),
+				let puestosSUBE = JSON(data:data).array {
+					
+				for puesto in puestosSUBE {
+					
+					puestosCargaSUBE.append(PuestoCarga(coordenadas: CLLocationCoordinate2DMake(puesto[0].doubleValue,puesto[1].doubleValue), nombre: "Puesto de Carga SUBE", direccion: puesto[2].stringValue, tipo: 0))
+					
+				}
+					
+			}
+			
 			mapaView.setRegion(MKCoordinateRegionMake(CLLocationCoordinate2DMake(-37.992820,-57.583932), MKCoordinateSpanMake(0.05, 0.05)), animated: false)
 			
-		}
-		
-		mostrarPuestos(segmentadorTipo.selectedSegmentIndex,todos: segmentadorTodos.selectedSegmentIndex)
+			mostrarPuestos(segmentadorTipo.selectedSegmentIndex,todos: segmentadorTodos.selectedSegmentIndex)
 
+		}
+			
 	}
 	
 	override func viewDidAppear(animated: Bool) {
@@ -87,18 +85,50 @@ class TransporteColeTarjetaMapaViewController: UIViewController, MKMapViewDelega
 		armaNavegacion()
 		self.revealViewController().delegate = self
 		
+		if !hayRed() {
+			
+			muestraError("No se detecta conección a Internet.\nNo es posible continuar.", volver: 1)
+			
+		}
+	
 	}
 	
 	@IBAction func mostrarPuestosActualiza() {
 		
-		if segmentadorTodos.selectedSegmentIndex == 0 && ubicacionActual == nil && mapaView.showsUserLocation == false {
-		
-			segmentadorTodos.selectedSegmentIndex = 1
-			alertaLocalizacion()
+		if segmentadorTodos.selectedSegmentIndex == 0 && ubicacionActual == nil {
+			
+			if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse {
+				
+				UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut, animations: {
+					
+					self.statusLabel.alpha = 1
+					
+					}, completion: nil)
+				
+			} else {
+				
+				segmentadorTodos.selectedSegmentIndex = 1
+				alertaLocalizacion()
+				
+			}
+			
+		} else {
+			
+			UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut, animations: {
+				
+				self.statusLabel.alpha = 0
+				
+				}, completion: nil)
+			
+			mostrarPuestos(segmentadorTipo.selectedSegmentIndex,todos: segmentadorTodos.selectedSegmentIndex)
+			
+			if segmentadorTodos.selectedSegmentIndex == 0 {
+				
+				mapaView.setRegion(MKCoordinateRegionMake(ubicacionActual!.coordinate, MKCoordinateSpanMake(0.02, 0.02)), animated: true)
+				
+			}
 			
 		}
-		
-		mostrarPuestos(segmentadorTipo.selectedSegmentIndex,todos: segmentadorTodos.selectedSegmentIndex)
 		
 	}
 	
@@ -284,19 +314,25 @@ class TransporteColeTarjetaMapaViewController: UIViewController, MKMapViewDelega
 	
 	func mapView(mapView: MKMapView!, didUpdateUserLocation userLocation: MKUserLocation!) {
 		
-		if ubicacionActual == nil || directMetersFromCoordinate(ubicacionActual!, userLocation.coordinate) > 100 {
+		if ubicacionActual == nil || ubicacionActual!.distanceFromLocation(userLocation.location) > 100 {
 			
-			ubicacionActual = userLocation.coordinate
+			if ubicacionActual == nil {
+				
+				mapaView.setRegion(MKCoordinateRegionMake(userLocation.coordinate, MKCoordinateSpanMake(0.02, 0.02)), animated: true)
+				
+			}
+			
+			ubicacionActual = userLocation.location
 		
 			for puestoCarga in puestosCargaSUBE {
 				
-				puestoCarga.distancia = directMetersFromCoordinate(ubicacionActual!, puestoCarga.coordenadas)
+				puestoCarga.distancia = ubicacionActual!.distanceFromLocation(CLLocation(latitude: puestoCarga.coordenadas.latitude, longitude: puestoCarga.coordenadas.longitude))
 				
 			}
 			
 			for puestoCarga in puestosCargaUTE {
 				
-				puestoCarga.distancia = directMetersFromCoordinate(ubicacionActual!, puestoCarga.coordenadas)
+				puestoCarga.distancia = ubicacionActual!.distanceFromLocation(CLLocation(latitude: puestoCarga.coordenadas.latitude, longitude: puestoCarga.coordenadas.longitude))
 				
 			}
 			
@@ -308,48 +344,28 @@ class TransporteColeTarjetaMapaViewController: UIViewController, MKMapViewDelega
 			
 		}
 		
-		if !actualizoRegion {
-
-			mapaView.setRegion(MKCoordinateRegionMake(userLocation.coordinate, MKCoordinateSpanMake(0.02, 0.02)), animated: true)
-			actualizoRegion = true
+		if statusLabel.alpha == 1 {
+			
+			UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut, animations: {
+				
+				self.statusLabel.alpha = 0
+				
+				}, completion: nil)
 			
 		}
 		
 	}
 	
 	deinit {
-		println("deinit")
+//		println("deinit")
 	}
 		
 	func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
 		
-		var autorizado = false
-		var autorizacionStatus = ""
-		
-		switch status {
-		case CLAuthorizationStatus.Restricted:
-			autorizacionStatus = "Restringido"
-//			alertaLocalizacion()
-		case CLAuthorizationStatus.Denied:
-			autorizacionStatus = "Denegado"
-//			alertaLocalizacion()
-		case CLAuthorizationStatus.NotDetermined:
-			autorizacionStatus = "No determinado aún"
-		default:
-			autorizacionStatus = "Permitido"
-			autorizado = true
-		}
-		
-		println("Location: \(autorizacionStatus)")
-		
-		if autorizado == true {
-			
+		if status == CLAuthorizationStatus.AuthorizedWhenInUse {
 			mapaView.showsUserLocation = true
-			
 		} else {
-			
 			locationManager.requestWhenInUseAuthorization()
-			
 		}
 		
 	}

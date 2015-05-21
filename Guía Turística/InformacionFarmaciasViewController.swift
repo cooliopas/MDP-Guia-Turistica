@@ -24,7 +24,7 @@ class InformacionFarmaciasViewController: UIViewController, MKMapViewDelegate, C
 	
 	let locationManager = CLLocationManager()
 	
-	var ubicacionActual: CLLocationCoordinate2D?
+	var ubicacionActual: CLLocation?
 	
 	let mapManager = MapManager()
 	
@@ -33,97 +33,102 @@ class InformacionFarmaciasViewController: UIViewController, MKMapViewDelegate, C
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		locationManager.delegate = self
+		if hayRed() {
 		
-		if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse {
-			mapaView.showsUserLocation = true
-		}
-		
-		mapaView.delegate = self
+			locationManager.delegate = self
+			
+			if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse {
+				mapaView.showsUserLocation = true
+			}
+			
+			mapaView.delegate = self
 
-		// leemos todas las farmacias
-		
-		if let file = NSBundle.mainBundle().pathForResource("Varios.bundle/farmacias", ofType: "json"),
-			let data = NSData(contentsOfFile: file),
-			let listadoFarmacias = JSON(data:data).array {
-				
-				for farmacia in listadoFarmacias {
-					
-					farmacias.append(Farmacia(coordenadas: CLLocationCoordinate2DMake(farmacia[3].doubleValue,farmacia[4].doubleValue), nombre: farmacia[0].stringValue, direccion: farmacia[1].stringValue, direccionDeTurno: farmacia[5].stringValue,tipo: 0))
-					
-				}
-				
-		}
-		
-		// preparamos farmacias de turno
-		
-		avisoFarmaciasDeTurnoView.layer.cornerRadius = 5
-		avisoFarmaciasDeTurnoView.alpha = 0
-		statusLabel.layer.cornerRadius = 7
-		statusLabel.clipsToBounds = true
-		
-		segmentadorTipo.setEnabled(false, forSegmentAtIndex: 0)
-		
-		let hora = NSCalendar.currentCalendar().components(.CalendarUnitHour | .CalendarUnitMinute, fromDate: NSDate()).hour
-		
-		let dateFormatter = NSDateFormatter()
-		dateFormatter.dateFormat = "dd/MM/yyyy"
-		let fechaHoy = dateFormatter.stringFromDate(NSDate())
-		
-		let fechaTurno: String
-		
-		if hora >= 9 { // pedimos el listado de farmacias de turno de acuerdo a la hora actual
+			// leemos todas las farmacias
 			
-			fechaTurno = dateFormatter.stringFromDate(NSDate()) // si es después de las 9am, pedimos el listado de farmacias del día actual
-			avisoFarmaciasDeTurnoLabel.text = "Farmacias de turno para HOY (\(fechaHoy)) desde las 9:00 hs."
-			
-		} else {
-			
-			fechaTurno = dateFormatter.stringFromDate(NSDate().dateByAddingTimeInterval(-86400)) // si es antes de las 9am, pedimos el listado del día anterior
-			avisoFarmaciasDeTurnoLabel.text = "Farmacias de turno para HOY (\(fechaHoy)) hasta las 9:00 hs."
-			
-		}
-		
-		Alamofire.request(.GET, "http://www.colfarmamdp.com.ar/farmaturno3.php?fecha=\(fechaTurno)").responseJSON { (req, res, json, error) in
-			
-			if (error == nil) {
-				
-				let farmaciasDeTurno = JSON(json!).arrayValue
-				
-				if farmaciasDeTurno.count > 0 {
+			if let file = NSBundle.mainBundle().pathForResource("Varios.bundle/farmacias", ofType: "json"),
+				let data = NSData(contentsOfFile: file),
+				let listadoFarmacias = JSON(data:data).array {
 					
-					self.segmentadorTipo.setEnabled(true, forSegmentAtIndex: 0)
-					
-				}
-				
-				for farmaciaDeTurno in farmaciasDeTurno {
-
-					let direccion = farmaciaDeTurno["address"]
-					let direccionString = "\(direccion)".stringByReplacingOccurrencesOfString(",MAR DEL PLATA,ARGENTINA", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-					
-					for farmacia in self.farmacias {
+					for farmacia in listadoFarmacias {
 						
-						if farmacia.direccionDeTurno == direccionString {
+						farmacias.append(Farmacia(coordenadas: CLLocationCoordinate2DMake(farmacia[3].doubleValue,farmacia[4].doubleValue), nombre: farmacia[0].stringValue, direccion: farmacia[1].stringValue, direccionDeTurno: farmacia[5].stringValue,tipo: 0))
+						
+					}
+					
+			}
+			
+			// preparamos farmacias de turno
+			
+			avisoFarmaciasDeTurnoView.layer.cornerRadius = 5
+			avisoFarmaciasDeTurnoView.alpha = 0
+			statusLabel.layer.cornerRadius = 7
+			statusLabel.clipsToBounds = true
+			
+			segmentadorTipo.setEnabled(false, forSegmentAtIndex: 0)
+			
+			let hora = NSCalendar.currentCalendar().components(.CalendarUnitHour | .CalendarUnitMinute, fromDate: NSDate()).hour
+			
+			let dateFormatter = NSDateFormatter()
+			dateFormatter.dateFormat = "dd/MM/yyyy"
+			let fechaHoy = dateFormatter.stringFromDate(NSDate())
+			
+			let fechaTurno: String
+			
+			if hora >= 9 { // pedimos el listado de farmacias de turno de acuerdo a la hora actual
+				
+				fechaTurno = dateFormatter.stringFromDate(NSDate()) // si es después de las 9am, pedimos el listado de farmacias del día actual
+				avisoFarmaciasDeTurnoLabel.text = "Farmacias de turno para HOY (\(fechaHoy)) desde las 9:00 hs."
+				
+			} else {
+				
+				fechaTurno = dateFormatter.stringFromDate(NSDate().dateByAddingTimeInterval(-86400)) // si es antes de las 9am, pedimos el listado del día anterior
+				avisoFarmaciasDeTurnoLabel.text = "Farmacias de turno para HOY (\(fechaHoy)) hasta las 9:00 hs."
+				
+			}
+			
+			Alamofire.request(.GET, "http://www.colfarmamdp.com.ar/farmaturno3.php?fecha=\(fechaTurno)").responseJSON { (req, res, json, error) in
+				
+				if (error == nil) {
+					
+					let farmaciasDeTurno = JSON(json!).arrayValue
+					
+					if farmaciasDeTurno.count > 0 {
+						
+						self.segmentadorTipo.setEnabled(true, forSegmentAtIndex: 0)
+						
+					}
+					
+					for farmaciaDeTurno in farmaciasDeTurno {
+
+						let direccion = farmaciaDeTurno["address"]
+						let direccionString = "\(direccion)".stringByReplacingOccurrencesOfString(",MAR DEL PLATA,ARGENTINA", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
+						
+						for farmacia in self.farmacias {
 							
-							farmacia.tipo = 1
-														
+							if farmacia.direccionDeTurno == direccionString {
+								
+								farmacia.tipo = 1
+															
+							}
+							
 						}
 						
 					}
 					
+				} else {
+					
+//					println("No se pudieron cargar las farmacias de turno.")
+//					println(req)
+//					println(res)
+					
 				}
-				
-			} else {
-				
-				println(req)
-				println(res)
 				
 			}
 			
+			mapaView.setRegion(MKCoordinateRegionMake(CLLocationCoordinate2DMake(-37.995526,-57.552260), MKCoordinateSpanMake(0.005, 0.005)), animated: false)
+			mostrarFarmacias(segmentadorTipo.selectedSegmentIndex)
+			
 		}
-		
-		mapaView.setRegion(MKCoordinateRegionMake(CLLocationCoordinate2DMake(-37.995526,-57.552260), MKCoordinateSpanMake(0.005, 0.005)), animated: false)
-		mostrarFarmacias(segmentadorTipo.selectedSegmentIndex)
 		
 	}
 	
@@ -132,6 +137,12 @@ class InformacionFarmaciasViewController: UIViewController, MKMapViewDelegate, C
 		
 		armaNavegacion()
 		self.revealViewController().delegate = self
+		
+		if !hayRed() {
+			
+			muestraError("No se detecta conección a Internet.\nNo es posible continuar.", volver: 1)
+			
+		}
 		
 	}
 	
@@ -198,7 +209,7 @@ class InformacionFarmaciasViewController: UIViewController, MKMapViewDelegate, C
 			
 			if segmentadorTipo.selectedSegmentIndex == 1 {
 				
-				mapaView.setRegion(MKCoordinateRegionMake(ubicacionActual!, MKCoordinateSpanMake(0.02, 0.02)), animated: true)
+				mapaView.setRegion(MKCoordinateRegionMake(ubicacionActual!.coordinate, MKCoordinateSpanMake(0.02, 0.02)), animated: true)
 				
 			}
 			
@@ -273,13 +284,19 @@ class InformacionFarmaciasViewController: UIViewController, MKMapViewDelegate, C
 	
 	func mapView(mapView: MKMapView!, didUpdateUserLocation userLocation: MKUserLocation!) {
 		
-		if ubicacionActual == nil || directMetersFromCoordinate(ubicacionActual!, userLocation.coordinate) > 100 {
+		if ubicacionActual == nil || ubicacionActual!.distanceFromLocation(userLocation.location) > 100 {
 			
-			ubicacionActual = userLocation.coordinate
+			if ubicacionActual == nil {
+				
+				mapaView.setRegion(MKCoordinateRegionMake(userLocation.coordinate, MKCoordinateSpanMake(0.02, 0.02)), animated: true)
+				
+			}
+			
+			ubicacionActual = userLocation.location
 			
 			for farmacia in farmacias {
 				
-				farmacia.distancia = directMetersFromCoordinate(ubicacionActual!, farmacia.coordenadas)
+				farmacia.distancia = ubicacionActual!.distanceFromLocation(CLLocation(latitude: farmacia.coordenadas.latitude,longitude: farmacia.coordenadas.longitude))
 				
 			}
 			
@@ -304,7 +321,7 @@ class InformacionFarmaciasViewController: UIViewController, MKMapViewDelegate, C
 	}
 	
 	deinit {
-		println("deinit")
+//		println("deinit")
 	}
 	
 	func alertaLocalizacion() {
@@ -328,31 +345,10 @@ class InformacionFarmaciasViewController: UIViewController, MKMapViewDelegate, C
 	
 	func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
 		
-		var autorizado = false
-		var autorizacionStatus = ""
-		
-		switch status {
-		case CLAuthorizationStatus.Restricted:
-			autorizacionStatus = "Restringido"
-		case CLAuthorizationStatus.Denied:
-			autorizacionStatus = "Denegado"
-		case CLAuthorizationStatus.NotDetermined:
-			autorizacionStatus = "No determinado aún"
-		default:
-			autorizacionStatus = "Permitido"
-			autorizado = true
-		}
-		
-		println("Location: \(autorizacionStatus)")
-		
-		if autorizado == true {
-			
+		if status == CLAuthorizationStatus.AuthorizedWhenInUse {
 			mapaView.showsUserLocation = true
-			
 		} else {
-			
 			locationManager.requestWhenInUseAuthorization()
-			
 		}
 		
 	}

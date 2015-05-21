@@ -17,30 +17,34 @@ class InformacionWiFiViewController: UIViewController, MKMapViewDelegate, CLLoca
 
 	let locationManager = CLLocationManager()
 	
-	var ubicacionActual: CLLocationCoordinate2D?
+	var ubicacionActual: CLLocation?
 	
 	var actualizoRegion = false
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		locationManager.delegate = self
-
-		if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse {
-			mapaView.showsUserLocation = true
-		}
-
-		mapaView.delegate = self
-		
-		statusLabel.layer.cornerRadius = 7
-		statusLabel.clipsToBounds = true
-
-		if !actualizoRegion {
+		if hayRed() {
 			
-			mapaView.setRegion(MKCoordinateRegionMake(CLLocationCoordinate2DMake(-37.992820,-57.583932), MKCoordinateSpanMake(0.05, 0.05)), animated: false)
+			locationManager.delegate = self
+
+			if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse {
+				mapaView.showsUserLocation = true
+			}
+
+			mapaView.delegate = self
 			
+			statusLabel.layer.cornerRadius = 7
+			statusLabel.clipsToBounds = true
+
+			if !actualizoRegion {
+				
+				mapaView.setRegion(MKCoordinateRegionMake(CLLocationCoordinate2DMake(-37.992820,-57.583932), MKCoordinateSpanMake(0.05, 0.05)), animated: false)
+				
+			}
+
 		}
-		
+			
 	}
 	
 	override func viewDidAppear(animated: Bool) {
@@ -49,11 +53,17 @@ class InformacionWiFiViewController: UIViewController, MKMapViewDelegate, CLLoca
 		armaNavegacion()
 		self.revealViewController().delegate = self
 		
+		if !hayRed() {
+			
+			muestraError("No se detecta conección a Internet.\nNo es posible continuar.", volver: 1)
+			
+		}
+		
 	}
 	
 	func mapView(mapView: MKMapView!, didUpdateUserLocation userLocation: MKUserLocation!) {
 		
-		if ubicacionActual == nil || directMetersFromCoordinate(ubicacionActual!, userLocation.coordinate) > 1000 {
+		if ubicacionActual == nil || ubicacionActual!.distanceFromLocation(userLocation.location) > 1000 {
 			
 			statusLabel.text = "Cargando datos ..."
 			
@@ -84,8 +94,8 @@ class InformacionWiFiViewController: UIViewController, MKMapViewDelegate, CLLoca
 	
 				} else {
 					
-					println("No se encontraron wifis")
-					println(error)
+					self.muestraError("No se encontraron los puntos de WiFi Público.",volver: 1)
+//					println(error)
 					
 				}
 				
@@ -100,7 +110,7 @@ class InformacionWiFiViewController: UIViewController, MKMapViewDelegate, CLLoca
 			
 		}
 		
-		ubicacionActual = userLocation.coordinate
+		ubicacionActual = userLocation.location
 		
 	}
 	
@@ -138,7 +148,7 @@ class InformacionWiFiViewController: UIViewController, MKMapViewDelegate, CLLoca
 	}
 	
 	deinit {
-		println("deinit")
+//		println("deinit")
 	}
 	
 	func alertaLocalizacion() {
@@ -184,9 +194,7 @@ class InformacionWiFiViewController: UIViewController, MKMapViewDelegate, CLLoca
 			autorizacionStatus = "Permitido"
 			autorizado = true
 		}
-		
-		println("Location: \(autorizacionStatus)")
-		
+				
 		if autorizado == true {
 			
 			UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut, animations: {

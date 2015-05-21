@@ -38,7 +38,7 @@ class TransporteEstacionarInfoContenidoViewController: UIViewController, SWRevea
 	}
 	
 	deinit {
-		println("deinit")
+//		println("deinit")
 	}
 	
 	override func viewDidDisappear(animated: Bool) {

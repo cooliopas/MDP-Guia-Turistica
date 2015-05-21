@@ -47,11 +47,16 @@ class CongresosYEventosEventoViewController: UIViewController, UITableViewDelega
 				
 				Evento.armaInfo(self.evento)
 				Evento.armaObservaciones(self.evento)
+
+			} else {
 				
-				self.tabla.reloadRowsAtIndexPaths([NSIndexPath(forRow: 1, inSection: 0),NSIndexPath(forRow: 2, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Fade)
+				self.evento.info = NSAttributedString(string: "No fue posible cargar esta información.", attributes: [NSFontAttributeName:UIFont(name: "HelveticaNeue", size: 13.0)!])
+				self.evento.observaciones = NSAttributedString(string: "No fue posible cargar las observaciones.", attributes: [NSFontAttributeName:UIFont(name: "HelveticaNeue", size: 13.0)!])
 				
 			}
 			
+			self.tabla.reloadRowsAtIndexPaths([NSIndexPath(forRow: 1, inSection: 0),NSIndexPath(forRow: 2, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Fade)
+				
 		}
 		
 	}
@@ -131,17 +136,15 @@ class CongresosYEventosEventoViewController: UIViewController, UITableViewDelega
 			
 			if indexPath.row == 1 {
 				
-				texto = self.evento.info
+				texto = evento.info
 				
 			} else {
 				
-				texto = self.evento.observaciones
+				texto = evento.observaciones
 				
 			}
-			
-			let font = UIFont(name: "HelveticaNeue", size: 13.0)!
-			
-			let height = heightForView(texto, width: (self.view.frame.size.width - 16))
+						
+			let height = heightForView(texto, (self.view.frame.size.width - 16))
 			
 			return height + 16 + 28 // 16 de padding top y bottom + 28 por el height del view para el título
 			
@@ -163,7 +166,7 @@ class CongresosYEventosEventoViewController: UIViewController, UITableViewDelega
 	}
 	
 	deinit {
-		println("deinit")
+//		println("deinit")
 	}
 	
 	override func didReceiveMemoryWarning() {

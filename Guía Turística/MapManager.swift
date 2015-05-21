@@ -269,7 +269,7 @@ class MapManager: NSObject{
 			
 			if(error != nil){
 				
-				println(error.localizedDescription)
+//				println(error.localizedDescription)
 				
 				self.directionsCompletionHandler!(route: nil,directionInformation:nil, boundingRegion: nil, error: error.localizedDescription)
 				

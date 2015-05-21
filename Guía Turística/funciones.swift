@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreLocation
+import IJReachability
 
 extension UIViewController {
 	
@@ -198,38 +199,47 @@ extension UIViewController {
 		
 	}
 	
-	// calculo el height que tendrá un UILabel con NSAttributedString en base al texto (text) y el ancho asignado (width)
-	
-	func heightForView(text:NSAttributedString, width:CGFloat) -> CGFloat{
-		let label:UILabel = UILabel(frame: CGRectMake(0, 0, width, CGFloat.max))
-		label.numberOfLines = 0
-		label.attributedText = text
-		label.lineBreakMode = NSLineBreakMode.ByWordWrapping
-		label.sizeToFit()
+	func muestraError(textoError: String,volver: Int) {
 		
-		return label.frame.height
+		var alertController = UIAlertController(title: "Hay un problema", message: textoError, preferredStyle: .Alert)
+		
+		var okAction = UIAlertAction(title: "Ok", style: .Default) { (_) -> Void in
+			if volver == 1 { self.volver() }
+		}
+		
+		alertController.addAction(okAction)
+		
+		presentViewController(alertController, animated: true, completion: nil);
+		
+	}
+	
+	func hayRed() -> Bool {
+		
+		return IJReachability.isConnectedToNetwork()
+		
 	}
 	
 }
 
-// metros desde las coordenadas point1 hasta point2
+// calculo el height que tendrá un UILabel con NSAttributedString en base al texto (text) y el ancho asignado (width)
 
-func directMetersFromCoordinate(point1: CLLocationCoordinate2D, point2: CLLocationCoordinate2D) -> Double {
+func heightForView(text:NSAttributedString, width:CGFloat) -> CGFloat{
+	let label:UILabel = UILabel(frame: CGRectMake(0, 0, width, CGFloat.max))
+	label.numberOfLines = 0
+	label.attributedText = text
+	label.lineBreakMode = NSLineBreakMode.ByWordWrapping
+	label.sizeToFit()
 	
-	let DEG_TO_RAD = 0.017453292519943295769236907684886
-	let EARTH_RADIUS_IN_METERS = 6372797.560856
+	return label.frame.height
+}
+
+func heightForView(text:String, font:UIFont, width:CGFloat) -> CGFloat{
+	let label:UILabel = UILabel(frame: CGRectMake(0, 0, width, CGFloat.max))
+	label.numberOfLines = 0
+	label.lineBreakMode = NSLineBreakMode.ByWordWrapping
+	label.font = font
+	label.text = text
+	label.sizeToFit()
 	
-	let latitudeArc = (point1.latitude - point2.latitude) * DEG_TO_RAD
-	let longitudeArc = (point1.longitude - point2.longitude) * DEG_TO_RAD
-	
-	var latitudeH = sin(latitudeArc * 0.5)
-	latitudeH *= latitudeH
-	
-	var lontitudeH = sin(longitudeArc * 0.5)
-	lontitudeH *= lontitudeH
-	
-	let tmp = cos(point1.latitude*DEG_TO_RAD) * cos(point2.latitude*DEG_TO_RAD)
-	
-	return EARTH_RADIUS_IN_METERS * 2.0 * asin(sqrt(latitudeH + tmp*lontitudeH))
-	
+	return label.frame.height
 }

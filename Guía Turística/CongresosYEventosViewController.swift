@@ -33,7 +33,7 @@ class CongresosYEventosViewController: UIViewController, UITableViewDelegate, UI
 		super.viewDidLoad()
 				
 		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-		self.opcionesItems = appDelegate.opcionesItems[self.restorationIdentifier!]!
+		opcionesItems = appDelegate.opcionesItems[self.restorationIdentifier!]!
 		
 	}
 	
@@ -56,80 +56,86 @@ class CongresosYEventosViewController: UIViewController, UITableViewDelegate, UI
 	
 	@IBAction func buscar() {
 		
-		cellBusqueda!.filtroNombreTextField.endEditing(true)
+		if !hayRed() {
+			
+			muestraError("No se detecta conección a Internet.\nNo es posible continuar.", volver: 0)
+			
+		} else {
+			
+			cellBusqueda!.filtroNombreTextField.endEditing(true)
 		
-		let idCategoria = (opcionesItems["categoria"]![(opcionesValores["categoria"]! as! Int)]["id"]! as String).toInt()!
+			let idCategoria = (opcionesItems["categoria"]![(opcionesValores["categoria"]! as! Int)]["id"]! as String).toInt()!
 
-		let filtroNombre = cellBusqueda!.filtroNombreTextField.text
-		
-		let dateFormatter = NSDateFormatter()
-		dateFormatter.dateFormat = "yyyyMMdd"
-		let fechaDesde = dateFormatter.stringFromDate(NSDate())
-		let fechaHasta = dateFormatter.stringFromDate(NSDate().dateByAddingTimeInterval(90 * 24 * 60 * 60))
-		
-		UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
+			let filtroNombre = cellBusqueda!.filtroNombreTextField.text
 			
-			self.tablaResultados.alpha = 0
-			self.labelSinResultados.alpha = 0
+			let dateFormatter = NSDateFormatter()
+			dateFormatter.dateFormat = "yyyyMMdd"
+			let fechaDesde = dateFormatter.stringFromDate(NSDate())
+			let fechaHasta = dateFormatter.stringFromDate(NSDate().dateByAddingTimeInterval(90 * 24 * 60 * 60))
 			
-			}, completion: { finished in
+			UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
 				
-				self.tablaResultados.scrollRectToVisible(CGRectMake(0, 0, 1, 1), animated: false)
+				self.tablaResultados.alpha = 0
+				self.labelSinResultados.alpha = 0
 				
-		})
-		
-		IJProgressView.shared.showProgressView(self.view, padding: true, texto: "Por favor espere...\nLa búsqueda puede demorar aproximadamente 1 minuto.")
+				}, completion: { finished in
+					
+					self.tablaResultados.scrollRectToVisible(CGRectMake(0, 0, 1, 1), animated: false)
+					
+			})
+			
+			IJProgressView.shared.showProgressView(self.view, padding: true, texto: "Por favor espere...\nLa búsqueda puede demorar aproximadamente 1 minuto.")
 
-		restea("Evento","Buscar",["Token":"01234567890123456789012345678901","IdCategoria":idCategoria,"FechaDesde":fechaDesde,"FechaHasta":fechaHasta,"Nombre":filtroNombre]) { (request, response, JSON, error) in
-			
-			if self.revealViewController() != nil { IJProgressView.shared.hideProgressView() }
-			
-			if error == nil, let info = JSON as? NSDictionary where (info["Eventos"] as! NSArray).count > 0 {
-			
-				self.eventos = Evento.eventosCargaDeJSON(info["Eventos"] as! NSArray)
+			restea("Evento","Buscar",["Token":"01234567890123456789012345678901","IdCategoria":idCategoria,"FechaDesde":fechaDesde,"FechaHasta":fechaHasta,"Nombre":filtroNombre]) { (request, response, JSON, error) in
+				
+				if self.revealViewController() != nil { IJProgressView.shared.hideProgressView() }
+				
+				if error == nil, let info = JSON as? NSDictionary where (info["Eventos"] as! NSArray).count > 0 {
+				
+					self.eventos = Evento.eventosCargaDeJSON(info["Eventos"] as! NSArray)
 
-				self.tablaResultados.reloadData()
-				
-				UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
+					self.tablaResultados.reloadData()
 					
-					self.tablaResultados.alpha = 1
-					
-					}, completion: nil)
-				
-			} else {
-				
-				if error?.code == -1001 {
-					
-					self.labelSinResultados.text = "Ocurrió un error al leer los datos.\nPor favor intente nuevamente."
+					UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
+						
+						self.tablaResultados.alpha = 1
+						
+						}, completion: nil)
 					
 				} else {
 					
-					var mensajeError = ""
-					
-					if let info = JSON as? NSDictionary {
-							
-						mensajeError = "No se encontraron eventos para su búsqueda."
+					if error?.code == -1001 {
+						
+						self.labelSinResultados.text = "Ocurrió un error al leer los datos.\nPor favor intente nuevamente."
 						
 					} else {
 						
-						mensajeError = "Ocurrió un error."
+						var mensajeError = ""
+						
+						if let info = JSON as? NSDictionary {
+								
+							mensajeError = "No se encontraron eventos para su búsqueda."
+							
+						} else {
+							
+							mensajeError = "Ocurrió un error."
+							
+						}
+						
+						self.labelSinResultados.text = mensajeError
 						
 					}
 					
-					self.labelSinResultados.text = mensajeError
+					UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
+						
+						self.labelSinResultados.alpha = 1
+						
+						}, completion: nil)
 					
 				}
 				
-				UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
-					
-					self.labelSinResultados.alpha = 1
-					
-					}, completion: nil)
-				
 			}
-			
 		}
-		
 	}
 	
 	//MARK: UITableViewDelegate
@@ -256,7 +262,7 @@ class CongresosYEventosViewController: UIViewController, UITableViewDelegate, UI
 				
 				let cell = tableView.dequeueReusableCellWithIdentifier("filtro", forIndexPath: indexPath) as! CongresosYEventosCellFiltroTableViewCell
 
-				self.cellBusqueda = cell
+				cellBusqueda = cell
 				
 				if cell.respondsToSelector(Selector("layoutMargins")) {
 					cell.layoutMargins = UIEdgeInsetsZero

@@ -52,7 +52,7 @@ class PaseosYLugaresViewController: UIViewController, UITableViewDataSource, UIT
 		let textFont = [NSFontAttributeName:UIFont(name: "HelveticaNeue-Bold", size: 13.0)!]
 		nombre.appendAttributedString(NSAttributedString(string: "\(paseos[indexPath.row])", attributes:textFont))
 			
-		let heightLabel = heightForView(nombre, width: cell.frame.size.width) + 6;
+		let heightLabel = heightForView(nombre, cell.frame.size.width) + 6;
 		
 		if cell.nombre == nil {
 		

@@ -78,8 +78,6 @@ class Hotel {
 			
 			for resultado in hotelesJSON {
 				
-//				println(resultado)
-				
 				let id: Int = resultado["IdLugar"] as! Int
 				let calleNombre: String = resultado["CalleRuta"] as? String ?? ""
 				var calleAltura: String = resultado["AlturaKM"] as? String ?? ""
@@ -151,7 +149,7 @@ class Hotel {
 								
 						} else {
 							
-							println("Error para bajar la imagen")
+//							println("Error para bajar la imagen")
 							
 						}
 					})

@@ -1856,10 +1856,10 @@ Lugares</string>
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="detectandoUbicacion" destination="MCe-6t-7Re" id="Qh4-fG-pSh"/>
                         <outlet property="mapaCerrarBoton" destination="Lda-jC-gis" id="iyR-AU-DVO"/>
                         <outlet property="mapaComoLlegarBoton" destination="od0-l1-wPX" id="cI3-c3-gcd"/>
                         <outlet property="mapaPasoAPasoBoton" destination="nNW-lT-rnk" id="tzS-hy-P4e"/>
+                        <outlet property="statusLabel" destination="MCe-6t-7Re" id="8TW-ik-uQr"/>
                         <outlet property="tabla" destination="C5e-Vw-D8j" id="3ka-dt-QTE"/>
                     </connections>
                 </viewController>
@@ -4754,10 +4754,10 @@ Desde la Ciudad Autónoma de Buenos Aires:
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="detectandoUbicacion" destination="7Kd-Ph-OIO" id="eHm-IW-8qV"/>
                         <outlet property="mapaCerrarBoton" destination="aPp-uG-lsp" id="P4G-iV-W01"/>
                         <outlet property="mapaComoLlegarBoton" destination="swn-U2-jki" id="gav-Xp-3Gl"/>
                         <outlet property="mapaPasoAPasoBoton" destination="pE8-f9-Gei" id="ljM-KT-RUY"/>
+                        <outlet property="statusLabel" destination="7Kd-Ph-OIO" id="xf7-Ir-2nS"/>
                         <outlet property="tabla" destination="PSC-xl-IwN" id="WVu-ac-SYJ"/>
                     </connections>
                 </viewController>
@@ -6005,10 +6005,10 @@ Desde la Ciudad Autónoma de Buenos Aires:
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="detectandoUbicacion" destination="6oD-3t-WRo" id="aJ2-w8-SCr"/>
                         <outlet property="mapaCerrarBoton" destination="PRc-1W-B0z" id="z4n-7Q-YhU"/>
                         <outlet property="mapaComoLlegarBoton" destination="676-d0-btw" id="Ok2-be-NwX"/>
                         <outlet property="mapaPasoAPasoBoton" destination="Ulh-Ig-8BJ" id="CHt-7O-ww9"/>
+                        <outlet property="statusLabel" destination="6oD-3t-WRo" id="U1i-Vf-fqY"/>
                         <outlet property="tabla" destination="IVv-vW-3eK" id="2hm-YK-NXX"/>
                     </connections>
                 </viewController>
@@ -6422,10 +6422,10 @@ Desde la Ciudad Autónoma de Buenos Aires:
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="detectandoUbicacion" destination="RRa-Vw-ecP" id="lf4-IE-rws"/>
                         <outlet property="mapaView" destination="hHb-Ih-q9P" id="umL-xF-CQb"/>
                         <outlet property="navigationBar" destination="WGg-Cv-K2E" id="jVl-Ah-YYm"/>
                         <outlet property="segmentadorRecorridos" destination="xmb-dE-y8m" id="daR-Jw-JYI"/>
+                        <outlet property="statusLabel" destination="RRa-Vw-ecP" id="JWf-sf-cC0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ix7-LD-yEf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -6581,10 +6581,10 @@ Desde la Ciudad Autónoma de Buenos Aires:
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="detectandoUbicacion" destination="e2M-rU-bBd" id="qIb-pM-NUc"/>
                         <outlet property="mapaView" destination="Vqg-dx-NyD" id="Uee-ZA-q70"/>
                         <outlet property="segmentadorTipo" destination="e5d-l1-yMI" id="2El-iJ-PJw"/>
                         <outlet property="segmentadorTodos" destination="tCR-aC-ZBo" id="YUf-Tk-rYQ"/>
+                        <outlet property="statusLabel" destination="e2M-rU-bBd" id="cyd-S9-VJU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yXL-Hw-G3I" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -6998,9 +6998,9 @@ Desde la Ciudad Autónoma de Buenos Aires:
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="detectandoUbicacion" destination="Whh-mj-tF1" id="JcC-7i-fyD"/>
                         <outlet property="mapaView" destination="bdC-IB-oBs" id="spr-ot-Y0O"/>
                         <outlet property="sinUbicacionLabel" destination="6y1-XR-ZQM" id="lA3-cb-6BF"/>
+                        <outlet property="statusLabel" destination="Whh-mj-tF1" id="gzO-5e-dUv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qL0-5h-KOn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -7479,10 +7479,10 @@ Desde la Ciudad Autónoma de Buenos Aires:
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="BSj-R6-NvS">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                             </mapView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0nz-PE-Pav" userLabel="avisoFarmaciasDeTurno">
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0nz-PE-Pav" userLabel="avisoFarmaciasDeTurno">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kbv-Wd-JiM" userLabel="avisoTexto">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kbv-Wd-JiM" userLabel="avisoTexto">
                                         <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                         <color key="textColor" red="0.86970758438110352" green="0.92044973373413086" blue="0.97994726896286011" alpha="1" colorSpace="calibratedRGB"/>
@@ -7646,9 +7646,9 @@ Desde la Ciudad Autónoma de Buenos Aires:
                     <connections>
                         <outlet property="avisoFarmaciasDeTurnoLabel" destination="kbv-Wd-JiM" id="uLo-g8-S0s"/>
                         <outlet property="avisoFarmaciasDeTurnoView" destination="0nz-PE-Pav" id="IN1-xU-mFx"/>
-                        <outlet property="detectandoUbicacion" destination="lLc-8S-bXp" id="tUw-fG-jJo"/>
                         <outlet property="mapaView" destination="BSj-R6-NvS" id="Nq8-G6-vbO"/>
                         <outlet property="segmentadorTipo" destination="oKC-nq-M1L" id="dX5-Hx-VBj"/>
+                        <outlet property="statusLabel" destination="lLc-8S-bXp" id="f5t-Y0-8vu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8LU-At-rCV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -7716,7 +7716,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                     </mask>
                                 </variation>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k0W-jS-qLO">
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k0W-jS-qLO">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="En caso de emergencia, el teléfono celular del móvil policial más cercano es: " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PwP-Ic-NCM">
@@ -7906,12 +7906,12 @@ Desde la Ciudad Autónoma de Buenos Aires:
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="detectandoUbicacion" destination="wQR-4p-Fdt" id="j3m-iF-bIT"/>
                         <outlet property="emergenciaBoton" destination="CIy-Om-I5a" id="ASh-Me-aPi"/>
                         <outlet property="emergenciaLabel" destination="PwP-Ic-NCM" id="w8a-Z8-Jkz"/>
                         <outlet property="emergenciaView" destination="k0W-jS-qLO" id="Lli-ab-ja0"/>
                         <outlet property="mapaView" destination="FON-au-hPi" id="p2s-E0-TqQ"/>
                         <outlet property="sinUbicacionLabel" destination="1j6-Ev-FKc" id="6C2-np-S1e"/>
+                        <outlet property="statusLabel" destination="wQR-4p-Fdt" id="aYG-p0-INr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ckw-dL-EWf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -8608,6 +8608,11 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                 <exclude reference="iF8-Vj-5nb"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="BsM-Qk-eBE"/>
+                                <exclude reference="xlL-Ov-6c5"/>
+                                <exclude reference="8pL-iA-WyI"/>
+                                <exclude reference="KnL-XS-3fP"/>
+                                <exclude reference="RSs-w9-d8A"/>
                                 <exclude reference="Uat-Bw-dBb"/>
                                 <exclude reference="wEA-Td-XJK"/>
                                 <exclude reference="xSp-k7-Hg6"/>
@@ -8616,11 +8621,6 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                 <exclude reference="DCL-fb-RXK"/>
                                 <exclude reference="vJ9-1A-MaJ"/>
                                 <exclude reference="wkK-cF-mXc"/>
-                                <exclude reference="BsM-Qk-eBE"/>
-                                <exclude reference="xlL-Ov-6c5"/>
-                                <exclude reference="8pL-iA-WyI"/>
-                                <exclude reference="KnL-XS-3fP"/>
-                                <exclude reference="RSs-w9-d8A"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -8630,6 +8630,11 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                 <include reference="iF8-Vj-5nb"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="BsM-Qk-eBE"/>
+                                <include reference="xlL-Ov-6c5"/>
+                                <include reference="8pL-iA-WyI"/>
+                                <include reference="KnL-XS-3fP"/>
+                                <exclude reference="RSs-w9-d8A"/>
                                 <include reference="Uat-Bw-dBb"/>
                                 <include reference="wEA-Td-XJK"/>
                                 <include reference="xSp-k7-Hg6"/>
@@ -8638,11 +8643,6 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                 <exclude reference="DCL-fb-RXK"/>
                                 <exclude reference="vJ9-1A-MaJ"/>
                                 <include reference="wkK-cF-mXc"/>
-                                <include reference="BsM-Qk-eBE"/>
-                                <include reference="xlL-Ov-6c5"/>
-                                <include reference="8pL-iA-WyI"/>
-                                <include reference="KnL-XS-3fP"/>
-                                <exclude reference="RSs-w9-d8A"/>
                             </mask>
                         </variation>
                     </view>
@@ -9489,10 +9489,10 @@ Desde la Ciudad Autónoma de Buenos Aires:
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="detectandoUbicacion" destination="6m6-Ot-1Mn" id="bKS-CG-rHH"/>
                         <outlet property="mapaCerrarBoton" destination="5cV-Ae-zP6" id="G5X-Pk-LUf"/>
                         <outlet property="mapaComoLlegarBoton" destination="Oer-nb-O01" id="igM-Qn-eKL"/>
                         <outlet property="mapaPasoAPasoBoton" destination="Op2-Pn-Bh7" id="8az-rv-B8c"/>
+                        <outlet property="statusLabel" destination="6m6-Ot-1Mn" id="Ys7-BP-IdX"/>
                         <outlet property="tabla" destination="akO-Lk-GIC" id="dg5-3z-dgh"/>
                     </connections>
                 </viewController>
@@ -10653,10 +10653,10 @@ Desde la Ciudad Autónoma de Buenos Aires:
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="detectandoUbicacion" destination="jN1-fS-JBe" id="625-Bx-j6K"/>
                         <outlet property="mapaCerrarBoton" destination="asu-Pn-obC" id="n0i-1S-4yr"/>
                         <outlet property="mapaComoLlegarBoton" destination="qe5-U7-0TN" id="7gV-lF-8Cc"/>
                         <outlet property="mapaPasoAPasoBoton" destination="PcO-TF-x9c" id="VdB-xe-RP8"/>
+                        <outlet property="statusLabel" destination="jN1-fS-JBe" id="YgD-AY-jwD"/>
                         <outlet property="tabla" destination="UZR-p9-bj4" id="lTN-eG-6QG"/>
                     </connections>
                 </viewController>
@@ -10871,7 +10871,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                             </label>
                             <button opaque="NO" alpha="0.0" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nmC-LG-52I">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                <state key="normal" title="Button">
+                                <state key="normal" title="Volver a intentar">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -11789,10 +11789,10 @@ Desde la Ciudad Autónoma de Buenos Aires:
                         </variation>
                     </view>
                     <connections>
-                        <outlet property="detectandoUbicacion" destination="5ym-lg-qaJ" id="fkw-xK-rgi"/>
                         <outlet property="mapaCerrarBoton" destination="dqS-jE-dGx" id="M3l-LM-jK7"/>
                         <outlet property="mapaComoLlegarBoton" destination="u14-OU-4Ew" id="DMz-Ie-tSv"/>
                         <outlet property="mapaPasoAPasoBoton" destination="ZVl-VW-bzs" id="t3h-pA-p5M"/>
+                        <outlet property="statusLabel" destination="5ym-lg-qaJ" id="ttu-IB-WUh"/>
                         <outlet property="tabla" destination="eZB-mU-PCC" id="lrv-Xg-457"/>
                     </connections>
                 </viewController>

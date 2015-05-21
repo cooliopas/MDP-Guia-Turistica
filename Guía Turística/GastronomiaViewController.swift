@@ -30,14 +30,17 @@ class GastronomiaViewController: UIViewController, UITableViewDelegate, UITableV
 	var lugares = [Lugar]()
 
 	let locationManager = CLLocationManager()
-	var ubicacionActual: CLLocationCoordinate2D?
+	var ubicacionActual: CLLocation?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-		self.opcionesItems = appDelegate.opcionesItems[self.restorationIdentifier!]!
+		opcionesItems = appDelegate.opcionesItems[self.restorationIdentifier!]!
 		
+		locationManager.delegate = self
+		locationManager.desiredAccuracy = kCLLocationAccuracyBest
+
 	}
 
 	override func viewDidAppear(animated: Bool) {
@@ -46,9 +49,7 @@ class GastronomiaViewController: UIViewController, UITableViewDelegate, UITableV
 		armaNavegacion()
 		self.revealViewController().delegate = self
 
-		locationManager.delegate = self
-		
-		locationManager.desiredAccuracy = kCLLocationAccuracyBest
+		locationManager.startUpdatingLocation()
 
 	}
 	
@@ -66,7 +67,7 @@ class GastronomiaViewController: UIViewController, UITableViewDelegate, UITableV
 		
 		locationManager.stopUpdatingLocation()
 		
-		ubicacionActual = (locations.last as! CLLocation).coordinate
+		ubicacionActual = locations.last as? CLLocation
 		
 	}
 
@@ -81,96 +82,104 @@ class GastronomiaViewController: UIViewController, UITableViewDelegate, UITableV
 	
 	@IBAction func buscar() {
 		
-		cellBusqueda!.filtroNombreTextField.endEditing(true)
-		
-		let idTipoComercio = (opcionesItems["tipo"]![(opcionesValores["tipo"]! as! Int)]["id"]! as String).toInt()!
-		let filtroNombre = cellBusqueda!.filtroNombreTextField.text
-		
-		UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
+		if !hayRed() {
 			
-			self.tablaResultados.alpha = 0
-			self.labelSinResultados.alpha = 0
+			muestraError("No se detecta conección a Internet.\nNo es posible continuar.", volver: 0)
 			
-			}, completion: { finished in
-		
-				self.tablaResultados.scrollRectToVisible(CGRectMake(0, 0, 1, 1), animated: false)
-		
-		})
-		
-		IJProgressView.shared.showProgressView(self.view, padding: true, texto: "Por favor espere...\nLa búsqueda puede demorar aproximadamente 1 minuto.")
-
-		restea("Gastronomia","Buscar",["Token":"01234567890123456789012345678901","IdTipoComercio":idTipoComercio,"Nombre":filtroNombre]) { (request, response, JSON, error) in
-
-			if self.revealViewController() != nil { IJProgressView.shared.hideProgressView() }
-
-			if error == nil, let info = JSON as? NSDictionary where (info["Gastronomias"] as! NSArray).count > 0 {
+		} else {
 			
-				self.lugares = Lugar.lugaresCargaDeJSON(info["Gastronomias"] as! NSArray)
+			cellBusqueda!.filtroNombreTextField.endEditing(true)
+		
+			let idTipoComercio = (opcionesItems["tipo"]![(opcionesValores["tipo"]! as! Int)]["id"]! as String).toInt()!
+			let filtroNombre = cellBusqueda!.filtroNombreTextField.text
+			
+			UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
+				
+				self.tablaResultados.alpha = 0
+				self.labelSinResultados.alpha = 0
+				
+				}, completion: { finished in
+			
+					self.tablaResultados.scrollRectToVisible(CGRectMake(0, 0, 1, 1), animated: false)
+			
+			})
+			
+			IJProgressView.shared.showProgressView(self.view, padding: true, texto: "Por favor espere...\nLa búsqueda puede demorar aproximadamente 1 minuto.")
 
-				if self.ubicacionActual != nil {
+			restea("Gastronomia","Buscar",["Token":"01234567890123456789012345678901","IdTipoComercio":idTipoComercio,"Nombre":filtroNombre]) { (request, response, JSON, error) in
 
-					for lugar in self.lugares {
-						
-						if lugar.latitud != 0 {
-						
-							lugar.distancia = directMetersFromCoordinate(self.ubicacionActual!, CLLocationCoordinate2DMake(lugar.latitud, lugar.longitud))
+				if self.revealViewController() != nil { IJProgressView.shared.hideProgressView() }
+
+				if error == nil, let info = JSON as? NSDictionary where (info["Gastronomias"] as! NSArray).count > 0 {
+				
+					self.lugares = Lugar.lugaresCargaDeJSON(info["Gastronomias"] as! NSArray)
+
+					if self.ubicacionActual != nil {
+
+						for lugar in self.lugares {
+							
+							if lugar.latitud != 0 {
+							
+								lugar.distancia = self.ubicacionActual!.distanceFromLocation(CLLocation(latitude: lugar.latitud, longitude: lugar.longitud))
+								
+							}
 							
 						}
+						
+						self.lugares.sort(self.sorterForDistancia)
 						
 					}
 					
-					self.lugares.sort(self.sorterForDistancia)
+					self.tablaResultados.reloadData()
 					
-				}
-				
-				self.tablaResultados.reloadData()
-				
-				UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
-					
-					self.tablaResultados.alpha = 1
-					
-					}, completion: nil)
+					UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
+						
+						self.tablaResultados.alpha = 1
+						
+						}, completion: nil)
 
-			} else {
-				
-				if error?.code == -1001 {
-					
-					self.labelSinResultados.text = "Ocurrió un error al leer los datos.\nPor favor intente nuevamente."
-					
 				} else {
 					
-					var mensajeError = ""
-					
-					if let info = JSON as? NSDictionary {
+					if error?.code == -1001 {
 						
-						if (info["Estado"] as? String) == "ERROR" {
-							
-							mensajeError = "Es necesario elegir un tipo de comercio o filtrar por nombre."
-							
-						} else {
-							
-							mensajeError = "No se encontraron comercios para su búsqueda."
-							
-						}
+						self.labelSinResultados.text = "Ocurrió un error al leer los datos.\nPor favor intente nuevamente."
 						
 					} else {
 						
-						mensajeError = "Ocurrió un error."
+						var mensajeError = ""
+						
+						if let info = JSON as? NSDictionary {
+							
+							if (info["Estado"] as? String) == "ERROR" {
+								
+								mensajeError = "Es necesario elegir un tipo de comercio o filtrar por nombre."
+								
+							} else {
+								
+								mensajeError = "No se encontraron comercios para su búsqueda."
+								
+							}
+							
+						} else {
+							
+							mensajeError = "Ocurrió un error."
+							
+						}
+						
+						self.labelSinResultados.text = mensajeError
 						
 					}
 					
-					self.labelSinResultados.text = mensajeError
+					UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
+						
+						self.labelSinResultados.alpha = 1
+						
+						}, completion: nil)
 					
 				}
-				
-				UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
 					
-					self.labelSinResultados.alpha = 1
-					
-					}, completion: nil)
-				
 			}
-				
+			
 		}
 		
 	}
@@ -308,7 +317,7 @@ class GastronomiaViewController: UIViewController, UITableViewDelegate, UITableV
 			} else {
 
 				let cell = tableView.dequeueReusableCellWithIdentifier("filtro", forIndexPath: indexPath) as! GastronomiaCellFiltroTableViewCell
-				self.cellBusqueda = cell
+				cellBusqueda = cell
 				
 				if (cell.respondsToSelector(Selector("layoutMargins"))) {
 					cell.layoutMargins = UIEdgeInsetsZero

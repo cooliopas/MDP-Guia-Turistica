@@ -7,57 +7,75 @@
 
 import UIKit
 import MapKit
-import CoreLocation
 
 class InformacionCentrosSaludViewController: UIViewController, MKMapViewDelegate, SWRevealViewControllerDelegate {
 	
 	@IBOutlet weak var mapaView: MKMapView!
 	@IBOutlet weak var statusLabel: UILabel!
-
-	let locationManager = CLLocationManager()
 	
 	var actualizoRegion = false
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse {
-			mapaView.showsUserLocation = true
-		}
+		if hayRed() {
 		
-		mapaView.delegate = self
-
-		let parametros = [[String: String]]()
-		soapea("centros_de_salud", parametros) { (respuesta, error) in
+			if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse {
+				mapaView.showsUserLocation = true
+			}
 			
-			if error == nil {
+			mapaView.delegate = self
+
+			statusLabel.layer.cornerRadius = 7
+			statusLabel.clipsToBounds = true
+			
+			statusLabel.text = "Cargando datos ..."
+
+			UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut, animations: {
 				
-				for centro in respuesta {
+				self.statusLabel.alpha = 1
+				
+				}, completion: nil)
+			
+			let parametros = [[String: String]]()
+			soapea("centros_de_salud", parametros) { (respuesta, error) in
+				
+				UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut | .BeginFromCurrentState, animations: {
 					
-					let annotation = MKPointAnnotation()
-					annotation.coordinate = CLLocationCoordinate2DMake((centro["latitud"]! as NSString).doubleValue,(centro["longitud"]! as NSString).doubleValue)
-					let nombre = centro["descripcion"]!
-					let direccion = centro["ubicacion"]!
+					self.statusLabel.alpha = 0
 					
-					annotation.title = nombre
-					annotation.subtitle = direccion
+					}, completion: nil)
+				
+				if error == nil {
 					
-					self.mapaView.addAnnotation(annotation)
+					for centro in respuesta {
+						
+						let annotation = MKPointAnnotation()
+						annotation.coordinate = CLLocationCoordinate2DMake((centro["latitud"]! as NSString).doubleValue,(centro["longitud"]! as NSString).doubleValue)
+						let nombre = centro["descripcion"]!
+						let direccion = centro["ubicacion"]!
+						
+						annotation.title = nombre
+						annotation.subtitle = direccion
+						
+						self.mapaView.addAnnotation(annotation)
+						
+					}
+					
+				} else {
+					
+					self.muestraError("No se encontraron Centros de Salud.",volver: 1)
+//					println(error)
 					
 				}
 				
-			} else {
-				
-				println("No se encontraron Centros de Salud")
-				println(error)
-				
 			}
 			
-		}
-		
-		if !actualizoRegion {
-			
-			mapaView.setRegion(MKCoordinateRegionMake(CLLocationCoordinate2DMake(-37.992820,-57.583932), MKCoordinateSpanMake(0.04, 0.04)), animated: false)
+			if !actualizoRegion {
+				
+				mapaView.setRegion(MKCoordinateRegionMake(CLLocationCoordinate2DMake(-37.992820,-57.583932), MKCoordinateSpanMake(0.04, 0.04)), animated: false)
+				
+			}
 			
 		}
 		
@@ -68,6 +86,12 @@ class InformacionCentrosSaludViewController: UIViewController, MKMapViewDelegate
 		
 		armaNavegacion()
 		self.revealViewController().delegate = self
+		
+		if !hayRed() {
+			
+			muestraError("No se detecta conección a Internet.\nNo es posible continuar.", volver: 1)
+			
+		}
 		
 	}
 	
@@ -115,7 +139,7 @@ class InformacionCentrosSaludViewController: UIViewController, MKMapViewDelegate
 	}
 	
 	deinit {
-		println("deinit")
+//		println("deinit")
 	}
 	
 	override func viewDidDisappear(animated: Bool) {

@@ -30,17 +30,20 @@ class InmobiliariasViewController: UIViewController, UITableViewDelegate, UITabl
 	var inmobiliarias = [Lugar]()
 
 	let locationManager = CLLocationManager()
-	var ubicacionActual: CLLocationCoordinate2D?
+	var ubicacionActual: CLLocation?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
-		self.labelSinResultados.alpha = 1
-		self.labelSinResultados.text = "Se muestran únicamente las inmobiliarias que ofrecen alquiler turístico."
+		labelSinResultados.alpha = 1
+		labelSinResultados.text = "Se muestran únicamente las inmobiliarias que ofrecen alquiler turístico."
 
 		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-		self.opcionesItems = appDelegate.opcionesItems[self.restorationIdentifier!]!
+		opcionesItems = appDelegate.opcionesItems[self.restorationIdentifier!]!
 		
+		locationManager.delegate = self
+		locationManager.desiredAccuracy = kCLLocationAccuracyBest
+
 	}
 
 	override func viewDidAppear(animated: Bool) {
@@ -49,9 +52,7 @@ class InmobiliariasViewController: UIViewController, UITableViewDelegate, UITabl
 		armaNavegacion()
 		self.revealViewController().delegate = self
 
-		locationManager.delegate = self
-		
-		locationManager.desiredAccuracy = kCLLocationAccuracyBest
+		locationManager.startUpdatingLocation()
 
 	}
 	
@@ -69,7 +70,7 @@ class InmobiliariasViewController: UIViewController, UITableViewDelegate, UITabl
 		
 		locationManager.stopUpdatingLocation()
 		
-		ubicacionActual = (locations.last as! CLLocation).coordinate
+		ubicacionActual = locations.last as? CLLocation
 		
 	}
 
@@ -84,85 +85,93 @@ class InmobiliariasViewController: UIViewController, UITableViewDelegate, UITabl
 	
 	@IBAction func buscar() {
 		
-		cellBusqueda!.filtroNombreTextField.endEditing(true)
-		
-		let idZona = (opcionesItems["zona"]![(opcionesValores["zona"]! as! Int)]["id"]! as String).toInt()!
-		let filtroNombre = cellBusqueda!.filtroNombreTextField.text
-		
-		UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
+		if !hayRed() {
 			
-			self.tablaResultados.alpha = 0
-			self.labelSinResultados.alpha = 0
+			muestraError("No se detecta conección a Internet.\nNo es posible continuar.", volver: 0)
 			
-			}, completion: { finished in
-		
-				self.tablaResultados.scrollRectToVisible(CGRectMake(0, 0, 1, 1), animated: false)
-		
-		})
-		
-		IJProgressView.shared.showProgressView(self.view, padding: true, texto: "Por favor espere...\nLa búsqueda puede demorar aproximadamente 1 minuto.")
-
-		restea("Inmobiliaria","Buscar",["Token":"01234567890123456789012345678901","SoloConAlquilerTuristico":"true","IdZona":idZona,"Nombre":filtroNombre]) { (request, response, JSON, error) in
-
-			if self.revealViewController() != nil { IJProgressView.shared.hideProgressView() }
+		} else {
 			
-			if error == nil, let info = JSON as? NSDictionary where (info["Inmobiliarias"] as! NSArray).count > 0 {
+			cellBusqueda!.filtroNombreTextField.endEditing(true)
+		
+			let idZona = (opcionesItems["zona"]![(opcionesValores["zona"]! as! Int)]["id"]! as String).toInt()!
+			let filtroNombre = cellBusqueda!.filtroNombreTextField.text
+			
+			UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
 				
-				self.inmobiliarias = Lugar.lugaresCargaDeJSON(info["Inmobiliarias"] as! NSArray)
+				self.tablaResultados.alpha = 0
+				self.labelSinResultados.alpha = 0
+				
+				}, completion: { finished in
+			
+					self.tablaResultados.scrollRectToVisible(CGRectMake(0, 0, 1, 1), animated: false)
+			
+			})
+			
+			IJProgressView.shared.showProgressView(self.view, padding: true, texto: "Por favor espere...\nLa búsqueda puede demorar aproximadamente 1 minuto.")
 
-				if self.ubicacionActual != nil {
+			restea("Inmobiliaria","Buscar",["Token":"01234567890123456789012345678901","SoloConAlquilerTuristico":"true","IdZona":idZona,"Nombre":filtroNombre]) { (request, response, JSON, error) in
 
-					for inmobiliaria in self.inmobiliarias {
-						
-						if inmobiliaria.latitud != 0 {
-						
-							inmobiliaria.distancia = directMetersFromCoordinate(self.ubicacionActual!, CLLocationCoordinate2DMake(inmobiliaria.latitud, inmobiliaria.longitud))
+				if self.revealViewController() != nil { IJProgressView.shared.hideProgressView() }
+				
+				if error == nil, let info = JSON as? NSDictionary where (info["Inmobiliarias"] as! NSArray).count > 0 {
+					
+					self.inmobiliarias = Lugar.lugaresCargaDeJSON(info["Inmobiliarias"] as! NSArray)
+
+					if self.ubicacionActual != nil {
+
+						for inmobiliaria in self.inmobiliarias {
+							
+							if inmobiliaria.latitud != 0 {
+							
+								inmobiliaria.distancia = self.ubicacionActual!.distanceFromLocation(CLLocation(latitude: inmobiliaria.latitud, longitude: inmobiliaria.longitud))
+								
+							}
 							
 						}
 						
+						self.inmobiliarias.sort(self.sorterForDistancia)
+						
 					}
 					
-					self.inmobiliarias.sort(self.sorterForDistancia)
+					self.tablaResultados.reloadData()
 					
-				}
-				
-				self.tablaResultados.reloadData()
-				
-				UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
-					
-					self.tablaResultados.alpha = 1
-					
-					}, completion: nil)
+					UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
+						
+						self.tablaResultados.alpha = 1
+						
+						}, completion: nil)
 
-			} else {
-				
-				if error?.code == -1001 {
-					
-					self.labelSinResultados.text = "Ocurrió un error al leer los datos.\nPor favor intente nuevamente."
-					
 				} else {
 					
-					var mensajeError = ""
-					
-					if let info = JSON as? NSDictionary {
+					if error?.code == -1001 {
 						
-						mensajeError = "No se encontraron inmobiliarias para su búsqueda."
+						self.labelSinResultados.text = "Ocurrió un error al leer los datos.\nPor favor intente nuevamente."
 						
 					} else {
 						
-						mensajeError = "Ocurrió un error."
+						var mensajeError = ""
+						
+						if let info = JSON as? NSDictionary {
+							
+							mensajeError = "No se encontraron inmobiliarias para su búsqueda."
+							
+						} else {
+							
+							mensajeError = "Ocurrió un error."
+							
+						}
+						
+						self.labelSinResultados.text = mensajeError
 						
 					}
 					
-					self.labelSinResultados.text = mensajeError
+					UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
+						
+						self.labelSinResultados.alpha = 1
+						
+						}, completion: nil)
 					
 				}
-				
-				UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
-					
-					self.labelSinResultados.alpha = 1
-					
-					}, completion: nil)
 				
 			}
 			
@@ -303,7 +312,7 @@ class InmobiliariasViewController: UIViewController, UITableViewDelegate, UITabl
 			} else {
 
 				let cell = tableView.dequeueReusableCellWithIdentifier("filtro", forIndexPath: indexPath) as! InmobiliariasCellFiltroTableViewCell
-				self.cellBusqueda = cell
+				cellBusqueda = cell
 				
 				if (cell.respondsToSelector(Selector("layoutMargins"))) {
 					cell.layoutMargins = UIEdgeInsetsZero

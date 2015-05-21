@@ -34,7 +34,7 @@ class PaseosYLugaresPDFViewController: UIViewController, UIWebViewDelegate, UIAl
 	}
 	
 	deinit {
-		println("deinit")
+//		println("deinit")
 	}
 	
 	override func viewDidDisappear(animated: Bool) {

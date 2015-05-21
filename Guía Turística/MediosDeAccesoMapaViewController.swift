@@ -21,23 +21,27 @@ class MediosDeAccesoMapaViewController: UIViewController, MKMapViewDelegate, CLL
 	
 	let mapManager = MapManager()
 	
-	var ubicacionActual: CLLocationCoordinate2D?
+	var ubicacionActual: CLLocation?
 	var mapaDestino: MKPlacemark?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-		locationManager.delegate = self
+		if hayRed() {
+			
+			locationManager.delegate = self
 
-		if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse {
-			mapaView.showsUserLocation = true
+			if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse {
+				mapaView.showsUserLocation = true
+			}
+			
+			mapaView.delegate = self
+
+			mapaPasoAPasoBoton.layer.cornerRadius = 5
+			sinUbicacionLabel.layer.cornerRadius = 7
+			sinUbicacionLabel.clipsToBounds = true
+			
 		}
-		
-		mapaView.delegate = self
-
-		mapaPasoAPasoBoton.layer.cornerRadius = 5
-		sinUbicacionLabel.layer.cornerRadius = 7
-		sinUbicacionLabel.clipsToBounds = true
 		
 	}
 	
@@ -47,6 +51,12 @@ class MediosDeAccesoMapaViewController: UIViewController, MKMapViewDelegate, CLL
 		armaNavegacion()
 		self.revealViewController().delegate = self
 		
+		if !hayRed() {
+			
+			muestraError("No se detecta conección a Internet.\nNo es posible continuar.", volver: 1)
+			
+		}
+
 	}
 	
 	func alertaLocalizacion() {
@@ -94,19 +104,19 @@ class MediosDeAccesoMapaViewController: UIViewController, MKMapViewDelegate, CLL
 		
 		mapaView.showsUserLocation = false
 		
-		ubicacionActual = userLocation.coordinate
+		ubicacionActual = userLocation.location
 		
 		muestroRuta()
 		
 	}
 	
 	deinit {
-		println("deinit")
+//		println("deinit")
 	}
 
 	func muestroRuta() {
 
-		let origin = self.ubicacionActual!
+		let origin = ubicacionActual!.coordinate
 		
 		let destination = CLLocationCoordinate2DMake(-37.995526, -57.552260) // Luro e Independencia
 		
@@ -114,7 +124,8 @@ class MediosDeAccesoMapaViewController: UIViewController, MKMapViewDelegate, CLL
 			
 			if error != nil {
 				
-				println(error)
+				self!.muestraError("No se pudo encontrar el recorrido.",volver: 0)
+//				println(error)
 				
 			} else {
 
@@ -181,7 +192,7 @@ class MediosDeAccesoMapaViewController: UIViewController, MKMapViewDelegate, CLL
 
 		let origen = MKMapItem.mapItemForCurrentLocation()
 		
-		let destino = MKMapItem(placemark: self.mapaDestino!)
+		let destino = MKMapItem(placemark: mapaDestino!)
 		
 		destino.name = "Mar del Plata"
 		
@@ -212,9 +223,7 @@ class MediosDeAccesoMapaViewController: UIViewController, MKMapViewDelegate, CLL
 				autorizacionStatus = "Permitido"
 				autorizado = true
 		}
-		
-		println("Location: \(autorizacionStatus)")
-		
+				
 		if autorizado == true {
 			
 			UIView.animateWithDuration(0.4, delay: 0, options: .CurveEaseOut, animations: {

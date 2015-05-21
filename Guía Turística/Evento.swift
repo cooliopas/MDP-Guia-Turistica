@@ -48,10 +48,6 @@ class Evento {
 		self.periodos = periodos
 	}
 	
-//	deinit {
-//		println("deinit \(self.nombre)")
-//	}
-	
 	class func eventosCargaDeJSON(eventosJSON: NSArray) -> [Evento] {
 		
 		var eventos = [Evento]()
@@ -156,8 +152,6 @@ class Evento {
 	}
 	
 	class func armaObservaciones(evento: Evento) {
-
-//		println(evento.detalle!)
 		
 		if let detalle = evento.detalle, let observaciones = detalle["Observaciones"] as? String {
 			

@@ -21,8 +21,12 @@ class TransporteColeMyBusViewController: UIViewController, UIWebViewDelegate, UI
 		
 		link = "http://www.mybus.com.ar/m/"
 		
-		if link != nil {
-			webView.loadRequest(NSURLRequest(URL: NSURL(string: link!)!))
+		if hayRed() {
+	
+			if link != nil {
+				webView.loadRequest(NSURLRequest(URL: NSURL(string: link!)!))
+			}
+			
 		}
 		
     }
@@ -32,11 +36,17 @@ class TransporteColeMyBusViewController: UIViewController, UIWebViewDelegate, UI
 		
 		armaNavegacion()
 		self.revealViewController().delegate = self
+	
+		if !hayRed() {
+			
+			muestraError("No se detecta conección a Internet.\nNo es posible continuar.", volver: 1)
+			
+		}
 		
 	}
 	
 	deinit {
-		println("deinit")
+//		println("deinit")
 	}
 	
 	override func viewDidDisappear(animated: Bool) {
@@ -56,9 +66,16 @@ class TransporteColeMyBusViewController: UIViewController, UIWebViewDelegate, UI
 		
 		if self.revealViewController() != nil { IJProgressView.shared.hideProgressView() }
 		
-		let alertView = UIAlertView(title: "Error", message: error.localizedDescription, delegate: self, cancelButtonTitle: "OK", otherButtonTitles: "")
-		alertView.alertViewStyle = .Default
-		alertView.show()
+		if error.code != -999 {
+		
+			UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+			
+			var alertView = UIAlertController(title: "Ocurrió un error", message: error.localizedDescription, preferredStyle: .Alert)
+			var okAction = UIAlertAction(title: "Ok", style: .Default, handler: nil)
+			alertView.addAction(okAction)
+			presentViewController(alertView, animated: true, completion: nil);
+			
+		}
 		
 	}
 	

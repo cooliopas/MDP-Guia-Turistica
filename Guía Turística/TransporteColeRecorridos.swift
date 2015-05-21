@@ -58,15 +58,23 @@ class TransporteColeRecorridosViewController: UIViewController, UITableViewDeleg
 	
 	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 
-		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+		if !hayRed() {
+			
+			muestraError("No se detecta conección a Internet.\nNo es posible continuar.", volver: 1)
+			
+		} else {
+		
+			let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
 
-		let transporteColeRecorridosMapaVC = appDelegate.traeVC("transporteColeRecorridosMapa") as! TransporteColeRecorridosMapaViewController
-		
-		transporteColeRecorridosMapaVC.linea = lineas[indexPath.row]
-		
-		self.revealViewController().setFrontViewController(transporteColeRecorridosMapaVC, animated: true)
-		
-		tableView.deselectRowAtIndexPath(indexPath, animated: true)
+			let transporteColeRecorridosMapaVC = appDelegate.traeVC("transporteColeRecorridosMapa") as! TransporteColeRecorridosMapaViewController
+			
+			transporteColeRecorridosMapaVC.linea = lineas[indexPath.row]
+			
+			self.revealViewController().setFrontViewController(transporteColeRecorridosMapaVC, animated: true)
+			
+			tableView.deselectRowAtIndexPath(indexPath, animated: true)
+			
+		}
 
 	}
 	
