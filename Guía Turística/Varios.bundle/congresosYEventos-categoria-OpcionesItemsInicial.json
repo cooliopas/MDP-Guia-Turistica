@@ -1,0 +1,78 @@
+[
+    {
+        "id": "0",
+        "texto": "Todas las categor\u00edas"
+    },
+    {
+        "id": "5",
+        "texto": "Acontecimientos Deportivos"
+    },
+    {
+        "id": "1",
+        "texto": "Ballet y Danzas"
+    },
+    {
+        "id": "16",
+        "texto": "Cena, Show, Pe\u00f1a, Baile"
+    },
+    {
+        "id": "2",
+        "texto": "Charlas y Conferencias"
+    },
+    {
+        "id": "3",
+        "texto": "Cine"
+    },
+    {
+        "id": "14",
+        "texto": "Circos"
+    },
+    {
+        "id": "4",
+        "texto": "Concursos"
+    },
+    {
+        "id": "13",
+        "texto": "Congresos y Otros Acontecimientos Programados"
+    },
+    {
+        "id": "18",
+        "texto": "Desfiles"
+    },
+    {
+        "id": "6",
+        "texto": "Espect\u00e1culos Integrales"
+    },
+    {
+        "id": "7",
+        "texto": "Exposiciones, Muestras y Ferias"
+    },
+    {
+        "id": "19",
+        "texto": "Festivales"
+    },
+    {
+        "id": "8",
+        "texto": "Fiestas"
+    },
+    {
+        "id": "9",
+        "texto": "Homenajes"
+    },
+    {
+        "id": "10",
+        "texto": "Infantiles"
+    },
+    {
+        "id": "11",
+        "texto": "M\u00fasica"
+    },
+    {
+        "id": "17",
+        "texto": "Talleres"
+    },
+    {
+        "id": "12",
+        "texto": "Teatros"
+    }
+]
