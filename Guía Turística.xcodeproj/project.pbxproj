@@ -312,7 +312,6 @@
 				E2C8136F1B05141300BECFA8 /* Main.storyboard */,
 				E28735C91AFB24E9005ED91B /* AppDelegate.swift */,
 				E28736041AFB2758005ED91B /* coverViewController.swift */,
-				E28736071AFB2758005ED91B /* funciones.swift */,
 				E287360A1AFB2758005ED91B /* MenuTableViewCell1.swift */,
 				E287360B1AFB2758005ED91B /* MenuViewController.swift */,
 				E287360D1AFB2758005ED91B /* PuestoCargaAnnotation.swift */,
@@ -339,6 +338,7 @@
 		E28735C71AFB24E9005ED91B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E28736071AFB2758005ED91B /* funciones.swift */,
 				E287360E1AFB2758005ED91B /* Soaper.swift */,
 				E28735F71AFB271F005ED91B /* NSDateExtendida.swift */,
 				E28735F81AFB271F005ED91B /* IJProgressView.swift */,
@@ -814,6 +814,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -858,6 +859,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
