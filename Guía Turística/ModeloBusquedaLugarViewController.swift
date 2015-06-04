@@ -1,5 +1,5 @@
 //
-//  HotelesYAlojamientoHotelViewController.swift
+//  ModeloBusquedaLugarViewController.swift
 //  GT1
 //
 //  Created by Pablo Pasqualino on 4/4/15.
@@ -10,8 +10,12 @@ import UIKit
 import MapKit
 import AddressBook
 
-class HotelesYAlojamientoHotelViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate, CLLocationManagerDelegate, SWRevealViewControllerDelegate {
+class ModeloBusquedaLugarViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate, CLLocationManagerDelegate, SWRevealViewControllerDelegate {
 	
+    var titulo: String = ""
+    var idSeccion = ""
+    var api: String = ""
+    
 	@IBOutlet weak var tabla: UITableView!
 	
 	@IBOutlet weak var mapaCerrarBoton: UIButton!
@@ -20,11 +24,12 @@ class HotelesYAlojamientoHotelViewController: UIViewController, UITableViewDeleg
 	@IBOutlet weak var statusLabel: UILabel!
 	
 	var mapa: MKMapView!
+    var viewDatos: UIView!
 	
 	let locationManager = CLLocationManager()
 	
-	var hotel: Hotel!
-	var cellMapa: HotelesYAlojamientoHotelMapaTableViewCell!
+	var lugar: Lugar!
+	var cellMapa: ModeloBusquedaLugarMapaTableViewCell!
 	
 	var ubicacionActual: CLLocation?
 	let mapManager = MapManager()
@@ -35,23 +40,28 @@ class HotelesYAlojamientoHotelViewController: UIViewController, UITableViewDeleg
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
+        navBar?.topItem?.title = titulo
+        
 		locationManager.delegate = self
 		
 		locationManager.desiredAccuracy = kCLLocationAccuracyBest
 
-		restea("Hotel","Detalle",["Token":"01234567890123456789012345678901","IdLugar":hotel.id]) { (request, response, JSON, error) in
+        viewDatos = UIView(frame: CGRect(x: 8, y: 4, width: view.frame.size.width - 16, height: 0))
+        Lugar.datosDetalle(idSeccion, lugar: lugar, view: viewDatos)
+        
+		restea(api,"Detalle",["Token":"01234567890123456789012345678901","IdLugar":lugar.id]) { (request, response, JSON, error) in
 			
 			if error == nil, let info = JSON as? NSDictionary {
 				
-				self.hotel.detalle = info
+				self.lugar.detalle = info
 				
-				Hotel.armaInfo(self.hotel)
-				Hotel.armaObservaciones(self.hotel)
+				Lugar.armaInfo(self.lugar)
+				Lugar.armaObservaciones(self.lugar)
 				
 			} else {
 				
-				self.hotel.info = NSAttributedString(string: "No fue posible cargar esta información.", attributes: [NSFontAttributeName:UIFont(name: "HelveticaNeue", size: 13.0)!])
-				self.hotel.observaciones = NSAttributedString(string: "No fue posible cargar las observaciones.", attributes: [NSFontAttributeName:UIFont(name: "HelveticaNeue", size: 13.0)!])
+				self.lugar.info = NSAttributedString(string: "No fue posible cargar esta información.", attributes: [NSFontAttributeName:UIFont(name: "HelveticaNeue", size: 13.0)!])
+				self.lugar.observaciones = NSAttributedString(string: "No fue posible cargar las observaciones.", attributes: [NSFontAttributeName:UIFont(name: "HelveticaNeue", size: 13.0)!])
 				
 			}
 			
@@ -67,20 +77,15 @@ class HotelesYAlojamientoHotelViewController: UIViewController, UITableViewDeleg
 		
 		mapa.delegate = self
 		
-		mapaComoLlegarBoton.layer.cornerRadius = 5
-		mapaPasoAPasoBoton.layer.cornerRadius = 5
-		statusLabel.layer.cornerRadius = 7
-		statusLabel.clipsToBounds = true
-
-		if hotel.latitud != 0 {
+		if lugar.latitud != 0 {
 		
-			let hotelCoordinate = CLLocationCoordinate2DMake(hotel.latitud,hotel.longitud)
-			let region = MKCoordinateRegionMakeWithDistance(hotelCoordinate, 800, 800)
+			let lugarCoordinate = CLLocationCoordinate2DMake(lugar.latitud,lugar.longitud)
+			let region = MKCoordinateRegionMakeWithDistance(lugarCoordinate, 800, 800)
 			
 			let annotation = MKPointAnnotation()
-			annotation.coordinate = hotelCoordinate
-			annotation.title = hotel.nombre
-			annotation.subtitle = "\(hotel.calleNombre) \(hotel.calleAltura)"
+			annotation.coordinate = lugarCoordinate
+			annotation.title = lugar.nombre
+			annotation.subtitle = "\(lugar.calleNombre) \(lugar.calleAltura)"
 			
 			mapa.setRegion(region, animated: false)
 			mapa.addAnnotation(annotation)
@@ -113,7 +118,7 @@ class HotelesYAlojamientoHotelViewController: UIViewController, UITableViewDeleg
 				
 				image.drawAtPoint(CGPointMake(0, 0))
 				
-				var point = snapshot.pointForCoordinate(hotelCoordinate)
+				var point = snapshot.pointForCoordinate(lugarCoordinate)
 				
 				if CGRectContainsPoint(finalImageRect, point) {
 					
@@ -155,13 +160,13 @@ class HotelesYAlojamientoHotelViewController: UIViewController, UITableViewDeleg
 			
 	}
 	
-	override func viewDidAppear(animated: Bool) {
-		super.viewDidAppear(animated)
-		
-		armaNavegacion()
-		self.revealViewController().delegate = self
-		
-	}
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        armaNavegacion()
+        self.revealViewController().delegate = self
+        
+    }
 	
 	func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
 		
@@ -244,7 +249,7 @@ class HotelesYAlojamientoHotelViewController: UIViewController, UITableViewDeleg
 								
 								self.view.layoutIfNeeded()
 								
-								let region = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake(self.hotel.latitud,self.hotel.longitud), 800, 800)
+								let region = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake(self.lugar.latitud,self.lugar.longitud), 800, 800)
 								self.mapa.setRegion(region, animated: false)
 								
 						})
@@ -334,7 +339,7 @@ class HotelesYAlojamientoHotelViewController: UIViewController, UITableViewDeleg
 					}, completion: nil)
 			
 				let origin = ubicacionActual!.coordinate
-				let destination = CLLocationCoordinate2DMake(hotel.latitud, hotel.longitud)
+				let destination = CLLocationCoordinate2DMake(lugar.latitud, lugar.longitud)
 			
 				mapManager.directionsUsingGoogle(from: origin, to: destination) { [weak self] (route,directionInformation, boundingRegion, error) -> () in
 					
@@ -375,8 +380,8 @@ class HotelesYAlojamientoHotelViewController: UIViewController, UITableViewDeleg
 							pointOfOrigin.subtitle = "A \(distancia) - Tiempo: \(duracion)"
 							
 							let pointOfDestination = MKPointAnnotation()
-							pointOfDestination.title = self!.hotel.nombre
-							pointOfDestination.subtitle = "\(self!.hotel.calleNombre) \(self!.hotel.calleAltura)"
+							pointOfDestination.title = self!.lugar.nombre
+							pointOfDestination.subtitle = "\(self!.lugar.calleNombre) \(self!.lugar.calleAltura)"
 							
 							let start_location = directionInformation?.objectForKey("start_location") as! NSDictionary
 							let originLat = start_location.objectForKey("lat")?.doubleValue
@@ -393,7 +398,7 @@ class HotelesYAlojamientoHotelViewController: UIViewController, UITableViewDeleg
 							pointOfDestination.coordinate = coordDesitination
 
 							let addressDestino = [
-								String(kABPersonAddressStreetKey): "\(self!.hotel.calleNombre) \(self!.hotel.calleAltura)",
+								String(kABPersonAddressStreetKey): "\(self!.lugar.calleNombre) \(self!.lugar.calleAltura)",
 								String(kABPersonAddressCityKey): "Mar del Plata",
 								String(kABPersonAddressStateKey): "Buenos Aires",
 								String(kABPersonAddressZIPKey): "7600",
@@ -443,7 +448,7 @@ class HotelesYAlojamientoHotelViewController: UIViewController, UITableViewDeleg
 	
 	func alertaLocalizacion() {
 		
-		var alertController = UIAlertController (title: "Acceso a la localización", message: "Para mostrar la ruta hasta el hotel, es necesario que permitas el acceso a la localización desde esta aplicación.\n\nPodes permitir el acceso desde \"Ajustes\".", preferredStyle: .Alert)
+		var alertController = UIAlertController (title: "Acceso a la localización", message: "Para mostrar la ruta, es necesario que permitas el acceso a la localización desde esta aplicación.\n\nPodes permitir el acceso desde \"Ajustes\".", preferredStyle: .Alert)
 		
 		var settingsAction = UIAlertAction(title: "Ir a Ajustes", style: .Default) { (_) -> Void in
 			let settingsUrl = NSURL(string: UIApplicationOpenSettingsURLString)
@@ -466,13 +471,13 @@ class HotelesYAlojamientoHotelViewController: UIViewController, UITableViewDeleg
 		
 		let destino = MKMapItem(placemark: mapaDestino!)
 		
-		destino.name = hotel.nombre
-		if hotel.telefono1 != "" || hotel.telefono2 != "" || hotel.telefono3 != "" {
+		destino.name = lugar.nombre
+		if lugar.telefono1 != "" || lugar.telefono2 != "" || lugar.telefono3 != "" {
 			
-			destino.phoneNumber = hotel.telefono1 ?? hotel.telefono2 ?? hotel.telefono3
+			destino.phoneNumber = lugar.telefono1 ?? lugar.telefono2 ?? lugar.telefono3
 			
 		}
-		if hotel.web != "" { destino.url = NSURL(string: hotel.web) }
+		if lugar.web != "" { destino.url = NSURL(string: lugar.web) }
 		
 		let mapItems = [origen,destino]
 		
@@ -498,26 +503,26 @@ class HotelesYAlojamientoHotelViewController: UIViewController, UITableViewDeleg
 		var idCell = ""
 		
 		if indexPath.row == 0 {
-			idCell = "hotelFotos"
+			idCell = "lugarFotos"
 		} else if indexPath.row == 1 {
-			idCell = "hotelEncabezado"
+			idCell = "lugarDatos"
 		} else if indexPath.row == 2 {
-			idCell = "hotelMapa"
+			idCell = "lugarMapa"
 		} else if indexPath.row == 3 {
-			idCell = "hotelInformacion"
+			idCell = "lugarInformacion"
 		} else if indexPath.row == 4 {
-			idCell = "hotelObservaciones"
+			idCell = "lugarObservaciones"
 		}
 		
 		if indexPath.row == 0 {
 			
-			let cell = tableView.dequeueReusableCellWithIdentifier(idCell, forIndexPath: indexPath) as! HotelesYAlojamientosHotelFotosTableViewCell
+			let cell = tableView.dequeueReusableCellWithIdentifier(idCell, forIndexPath: indexPath) as! ModeloBusquedaLugarFotosTableViewCell
 			
-			if hotel.foto != "" {
+			if lugar.foto != "" {
 				
-				if hotel.fotoCache != nil {
+				if lugar.fotoCache != nil {
 
-					cell.foto.image = hotel.fotoCache!
+					cell.foto.image = lugar.fotoCache!
 					cell.foto.frame.size.width = 320
 					cell.foto.frame.size.height = 200
 					
@@ -531,7 +536,7 @@ class HotelesYAlojamientoHotelViewController: UIViewController, UITableViewDeleg
 					
 					IJProgressView.shared.showProgressView(cell, padding: false)
 					
-					let urlImagen = hotel.foto.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
+					let urlImagen = lugar.foto.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
 					
 					if urlImagen != "" {
 						
@@ -542,14 +547,14 @@ class HotelesYAlojamientoHotelViewController: UIViewController, UITableViewDeleg
 							
 							if error == nil {
 								
-								self.hotel.fotoCache = UIImage(data: data)
+								self.lugar.fotoCache = UIImage(data: data)
 								
 								dispatch_async(dispatch_get_main_queue(), {
 									
-									if let cellVisible = self.tabla.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as? HotelesYAlojamientosHotelFotosTableViewCell {
+									if let cellVisible = self.tabla.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as? ModeloBusquedaLugarFotosTableViewCell {
 										
 										if self.revealViewController() != nil { IJProgressView.shared.hideProgressView() }
-										cellVisible.foto.image = self.hotel.fotoCache
+										cellVisible.foto.image = self.lugar.fotoCache
 										
 										UIView.animateWithDuration(1.0, delay: 0.0, options: .CurveEaseOut, animations: {
 											
@@ -577,28 +582,15 @@ class HotelesYAlojamientoHotelViewController: UIViewController, UITableViewDeleg
 			
 		} else if indexPath.row == 1 {
 			
-			let cell = tableView.dequeueReusableCellWithIdentifier(idCell, forIndexPath: indexPath) as! HotelesYAlojamientoHotelDatosTableViewCell
+			let cell = tableView.dequeueReusableCellWithIdentifier(idCell, forIndexPath: indexPath) as! ModeloBusquedaLugarDatosTableViewCell
 			
-			cell.hotelNombre.text = hotel.nombre
-			cell.hotelDireccion.text = hotel.calleNombre + " " + hotel.calleAltura
-			cell.hotelTelefonoLink.setTitle((hotel.telefono1 ?? hotel.telefono2 ?? hotel.telefono3 ?? "No disponible"), forState: .Normal)
-			cell.hotelTelefonoLink.addTarget(self, action: "botonTel:", forControlEvents: .TouchUpInside)
-			cell.hotelTelefonoLink.titleLabel!.adjustsFontSizeToFitWidth = true
-			cell.hotelTelefonoLink.titleLabel!.minimumScaleFactor = 0.7
-			cell.hotelEmailLink.setTitle(hotel.email, forState: .Normal)
-			cell.hotelEmailLink.addTarget(self, action: "botonEmail:", forControlEvents: .TouchUpInside)
-			cell.hotelEmailLink.titleLabel!.adjustsFontSizeToFitWidth = true
-			cell.hotelEmailLink.titleLabel!.minimumScaleFactor = 0.7
-			cell.hotelWebLink.setTitle(hotel.web, forState: .Normal)
-			cell.hotelWebLink.addTarget(self, action: "botonWeb:", forControlEvents: .TouchUpInside)
-			cell.hotelWebLink.titleLabel!.adjustsFontSizeToFitWidth = true
-			cell.hotelWebLink.titleLabel!.minimumScaleFactor = 0.7
-			
+            cell.addSubview(viewDatos)
+            
 			return cell
 			
 		} else if indexPath.row == 2 {
 			
-			let cell = tableView.dequeueReusableCellWithIdentifier(idCell, forIndexPath: indexPath) as! HotelesYAlojamientoHotelMapaTableViewCell
+			let cell = tableView.dequeueReusableCellWithIdentifier(idCell, forIndexPath: indexPath) as! ModeloBusquedaLugarMapaTableViewCell
 			
 			cellMapa = cell
 			
@@ -606,17 +598,17 @@ class HotelesYAlojamientoHotelViewController: UIViewController, UITableViewDeleg
 			
 		} else if indexPath.row == 3 {
 			
-			let cell = tableView.dequeueReusableCellWithIdentifier(idCell, forIndexPath: indexPath) as! HotelesYAlojamientoHotelInfoTableViewCell
+			let cell = tableView.dequeueReusableCellWithIdentifier(idCell, forIndexPath: indexPath) as! ModeloBusquedaLugarInfoTableViewCell
 			
-			cell.texto.attributedText = hotel.info
+			cell.texto.attributedText = lugar.info
 			
 			return cell
 			
 		} else if indexPath.row == 4 {
 			
-			let cell = tableView.dequeueReusableCellWithIdentifier(idCell, forIndexPath: indexPath) as! HotelesYAlojamientoHotelObservacionesTableViewCell
+			let cell = tableView.dequeueReusableCellWithIdentifier(idCell, forIndexPath: indexPath) as! ModeloBusquedaLugarObservacionesTableViewCell
 			
-			cell.texto.attributedText = hotel.observaciones
+			cell.texto.attributedText = lugar.observaciones
 			
 			return cell
 			
@@ -628,8 +620,8 @@ class HotelesYAlojamientoHotelViewController: UIViewController, UITableViewDeleg
 	func botonTel(sender: UIButton!) {
 		
 		if let numero = sender.titleLabel?.text where numero != "No disponible" {
-			
-			if let url = NSURL(string: "tel://\(numero)") {
+
+            if let url = NSURL(string: "tel://\(numero)") {
 				
 				UIApplication.sharedApplication().openURL(url)
 				
@@ -642,8 +634,8 @@ class HotelesYAlojamientoHotelViewController: UIViewController, UITableViewDeleg
 	func botonEmail(sender: UIButton!) {
 		
 		if let email = sender.titleLabel?.text {
-			
-			if let url = NSURL(string: "mailto://\(email)") {
+
+            if let url = NSURL(string: "mailto://\(email)") {
 				
 				UIApplication.sharedApplication().openURL(url)
 				
@@ -656,8 +648,8 @@ class HotelesYAlojamientoHotelViewController: UIViewController, UITableViewDeleg
 	func botonWeb(sender: UIButton!) {
 		
 		if let web = sender.titleLabel?.text {
-			
-			if let url = NSURL(string: "http://\(web)") {
+
+            if let url = NSURL(string: "http://\(web)") {
 				
 				UIApplication.sharedApplication().openURL(url)
 				
@@ -673,7 +665,7 @@ class HotelesYAlojamientoHotelViewController: UIViewController, UITableViewDeleg
 		
 		if indexPath.row == 0 {
 			
-			if hotel.foto != "" {
+			if lugar.foto != "" {
 				
 				return 200
 				
@@ -685,11 +677,11 @@ class HotelesYAlojamientoHotelViewController: UIViewController, UITableViewDeleg
 			
 		} else if indexPath.row == 1 {
 			
-			return 116
+			return viewDatos.frame.size.height
 			
 		} else if indexPath.row == 2 {
 			
-			if hotel.latitud != 0 {
+			if lugar.latitud != 0 {
 			
 				return 200
 				
@@ -705,11 +697,11 @@ class HotelesYAlojamientoHotelViewController: UIViewController, UITableViewDeleg
 			
 			if indexPath.row == 3 {
 				
-				texto = hotel.info
+				texto = lugar.info
 				
 			} else {
 				
-				texto = hotel.observaciones
+				texto = lugar.observaciones
 				
 			}
 						
@@ -728,7 +720,7 @@ class HotelesYAlojamientoHotelViewController: UIViewController, UITableViewDeleg
 		super.viewDidDisappear(animated)
 		
 		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-		appDelegate.arrayVC.removeValueForKey("hotelesYAlojamientoHotel")
+		appDelegate.arrayVC.removeValueForKey("modeloBusquedaLugar")
 		
 		mapa.delegate = nil
 

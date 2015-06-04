@@ -1,5 +1,5 @@
 //
-//  HotelesYAlojamientoCellFiltroTableViewCell.swift
+//  ModeloBusquedaCellFiltroTableViewCell.swift
 //  GT1
 //
 //  Created by Pablo Pasqualino on 4/1/15.
@@ -8,17 +8,17 @@
 
 import UIKit
 
-class HotelesYAlojamientoCellFiltroTableViewCell: UITableViewCell {
+class ModeloBusquedaCellFiltroTableViewCell: UITableViewCell {
 	
+    var viewPrincial: ModeloBusquedaViewController!
+    
 	@IBOutlet weak var filtroNombreTextField: UITextField!
+    
 	@IBAction func filtroNombreTextFieldAction(sender: UITextField) {
 		
 		sender.resignFirstResponder()
 
-		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-		let hotelesYAlojamientoVC = appDelegate.traeVC("hotelesYAlojamiento") as! HotelesYAlojamientoViewController
-		
-		hotelesYAlojamientoVC.buscar()
+		viewPrincial.buscar()
 		
 	}
 	

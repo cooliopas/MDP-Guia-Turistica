@@ -1,5 +1,5 @@
 //
-//  HotelesYAlojamientoHotelDatosTableViewCell.swift
+//  ModeloBusquedaLugarDatosTableViewCell.swift
 //  GT1
 //
 //  Created by Pablo Pasqualino on 4/10/15.
@@ -8,13 +8,9 @@
 
 import UIKit
 
-class HotelesYAlojamientoHotelDatosTableViewCell: UITableViewCell {
+class ModeloBusquedaLugarDatosTableViewCell: UITableViewCell {
 
-	@IBOutlet weak var hotelNombre: UILabel!
-	@IBOutlet weak var hotelDireccion: UILabel!
-	@IBOutlet weak var hotelTelefonoLink: UIButton!
-	@IBOutlet weak var hotelEmailLink: UIButton!
-	@IBOutlet weak var hotelWebLink: UIButton!
+    @IBOutlet weak var datos: UIView!
 	
 	override func awakeFromNib() {
         super.awakeFromNib()

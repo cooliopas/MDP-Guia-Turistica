@@ -67,11 +67,6 @@ class GastronomiaLugarViewController: UIViewController, UITableViewDelegate, UIT
 		
 		mapa.delegate = self
 		
-		mapaComoLlegarBoton.layer.cornerRadius = 5
-		mapaPasoAPasoBoton.layer.cornerRadius = 5
-		statusLabel.layer.cornerRadius = 7
-		statusLabel.clipsToBounds = true
-
 		if lugar.latitud != 0 {
 		
 			let lugarCoordinate = CLLocationCoordinate2DMake(lugar.latitud,lugar.longitud)

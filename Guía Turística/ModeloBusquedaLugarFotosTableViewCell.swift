@@ -1,5 +1,5 @@
 //
-//  HotelesYAlojamientosHotelFotosTableViewCell.swift
+//  ModeloBusquedaLugarFotosTableViewCell.swift
 //  GT1
 //
 //  Created by Pablo Pasqualino on 4/14/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HotelesYAlojamientosHotelFotosTableViewCell: UITableViewCell {
+class ModeloBusquedaLugarFotosTableViewCell: UITableViewCell {
 
 	@IBOutlet weak var foto: UIImageView!
 	

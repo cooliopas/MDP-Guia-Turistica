@@ -13,24 +13,24 @@ class MediosDeAccesoViewController: UIViewController, UITableViewDataSource, UIT
 	@IBOutlet weak var labelTexto: UILabel!
 
 	let accesos = [
-		[	"texto": "Acceso en avión",
-			"subtexto": "Sitio web Aeropuertos Argentina 2000",
+		[	"titulo": "Acceso en avión",
+			"subtitulo": "Sitio web Aeropuertos Argentina 2000",
 			"tipo": "link",
 			"link": "http://www.aa2000.com.ar/"],
-		[	"texto": "Acceso en tren",
-			"subtexto": "Horarios y tarifas Trenes Argentinos",
+		[	"titulo": "Acceso en tren",
+			"subtitulo": "Horarios y tarifas Trenes Argentinos",
 			"tipo": "link",
 			"link": "http://www.sofse.gob.ar/servicios/pdf/horarios-bsas-mdp.pdf"],
-		[	"texto": "Acceso en ómnibus",
-			"subtexto": "Información Terminal Mar del Plata",
+		[	"titulo": "Acceso en ómnibus",
+			"subtitulo": "Información Terminal Mar del Plata",
 			"tipo": "link",
 			"link": "http://www.nuevaterminalmardel.com.ar/"],
-		[	"texto": "Venta pasajes ómnibus",
-			"subtexto": "Sitio web Plataforma10.com",
+		[	"titulo": "Venta pasajes ómnibus",
+			"subtitulo": "Sitio web Plataforma10.com",
 			"tipo": "link",
 			"link": "http://www.plataforma10.com/ar"],
-		[	"texto": "Acceso en auto",
-			"subtexto": "Mapa e instrucciones paso a paso para llegar",
+		[	"titulo": "Acceso en auto",
+			"subtitulo": "Mapa e instrucciones paso a paso para llegar",
 			"tipo": "mapa",
 			"link": ""]
 	]
@@ -61,9 +61,9 @@ class MediosDeAccesoViewController: UIViewController, UITableViewDataSource, UIT
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCellWithIdentifier("cellAcceso", forIndexPath: indexPath) as! UITableViewCell
 
-		cell.textLabel?.text = accesos[indexPath.row]["texto"]!
-		if accesos[indexPath.row]["subtexto"] != nil {
-			cell.detailTextLabel?.text = accesos[indexPath.row]["subtexto"]!
+		cell.textLabel?.text = accesos[indexPath.row]["titulo"]!
+		if accesos[indexPath.row]["subtitulo"] != nil {
+			cell.detailTextLabel?.text = accesos[indexPath.row]["subtitulo"]!
 		}
 		
 		return cell
@@ -79,6 +79,7 @@ class MediosDeAccesoViewController: UIViewController, UITableViewDataSource, UIT
 			
 			let mediosDeAccesoLinkVC = appDelegate.traeVC("mediosDeAccesoLink") as! MediosDeAccesoLinkViewController
 			mediosDeAccesoLinkVC.link = accesos[indexPath.row]["link"]
+			mediosDeAccesoLinkVC.titulo = accesos[indexPath.row]["titulo"]
 			
 			self.revealViewController().setFrontViewController(mediosDeAccesoLinkVC, animated: true)
 			

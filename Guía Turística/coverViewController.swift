@@ -9,10 +9,8 @@
 import UIKit
 
 class coverViewController: UIViewController {
-
-	@IBOutlet weak var navigationBar: UINavigationBar!
 	
-	var navigationHeight:CGFloat!
+	var navigationHeight:CGFloat = 0
 	var superWidth:CGFloat!
 	var superHeight:CGFloat!
 	var itemWidth:CGFloat!
@@ -24,7 +22,7 @@ class coverViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 		
-		navigationHeight = navigationBar.frame.size.height
+        if navBar != nil { navigationHeight = navBar!.frame.size.height }
 		superWidth = self.view.frame.width
 		superHeight = self.view.frame.height - navigationHeight - UIApplication.sharedApplication().statusBarFrame.height
 		itemWidth = superWidth / 3

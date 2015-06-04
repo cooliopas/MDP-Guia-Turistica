@@ -14,7 +14,6 @@ import SwiftyJSON
 class TransporteColeRecorridosMapaViewController: UIViewController, MKMapViewDelegate, SWRevealViewControllerDelegate {
 
 	@IBOutlet weak var mapaView: MKMapView!
-	@IBOutlet weak var navigationBar: UINavigationBar!
 	@IBOutlet weak var segmentadorRecorridos: UISegmentedControl!
 	@IBOutlet weak var statusLabel: UILabel!
 
@@ -33,7 +32,7 @@ class TransporteColeRecorridosMapaViewController: UIViewController, MKMapViewDel
     override func viewDidLoad() {
         super.viewDidLoad()
 
-		navigationBar.topItem?.title = "Recorrido linea \(linea)"
+		navBar?.topItem?.title = "Recorrido linea \(linea)"
 		
 		if CLLocationManager.authorizationStatus() == CLAuthorizationStatus.AuthorizedWhenInUse {
 			mapaView.showsUserLocation = true

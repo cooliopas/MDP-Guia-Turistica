@@ -13,28 +13,31 @@ class MediosDeAccesoLinkViewController: UIViewController, UIWebViewDelegate, UIA
 	@IBOutlet weak var webView: UIWebView!
 	
 	var link: String?
+	var titulo: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-		
-        webView.delegate = self
-		
-		if hayRed() {
-
-			if link != nil {
-				webView.loadRequest(NSURLRequest(URL: NSURL(string: link!)!))
-			}
-			
-		}
-		
+						
     }
 
 	override func viewDidAppear(animated: Bool) {
 		super.viewDidAppear(animated)
 		
+        navBar?.topItem?.title = titulo!
+        
+        webView.delegate = self
+        
+        if hayRed() {
+            
+            if link != nil {
+                webView.loadRequest(NSURLRequest(URL: NSURL(string: link!)!))
+            }
+            
+        }
+        
 		armaNavegacion()
 		self.revealViewController().delegate = self
-		
+        
 		if !hayRed() {
 			
 			muestraError("No se detecta conección a Internet.\nNo es posible continuar.", volver: 1)

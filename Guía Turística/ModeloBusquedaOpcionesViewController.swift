@@ -1,5 +1,5 @@
 //
-//  HotelesYAlojamientoOpcionesViewController.swift
+//  ModeloBusquedaOpcionesViewController.swift
 //  GT1
 //
 //  Created by Pablo Pasqualino on 3/31/15.
@@ -8,29 +8,30 @@
 
 import UIKit
 
-class HotelesYAlojamientoOpcionesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SWRevealViewControllerDelegate {
+class ModeloBusquedaOpcionesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SWRevealViewControllerDelegate {
 
 	@IBOutlet weak var tablaItems: UITableView!
 	
 	var opcion: String?
-	var hotelesYAlojamientoVC: HotelesYAlojamientoViewController!
+	var modeloBusquedaVC: ModeloBusquedaViewController!
+    var idSeccion = ""
+    var titulo: String = ""
 	
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navBar?.topItem?.title = titulo
 
-		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-		hotelesYAlojamientoVC = appDelegate.traeVC("hotelesYAlojamiento") as! HotelesYAlojamientoViewController
-		
     }
 	
-	override func viewDidAppear(animated: Bool) {
-		super.viewDidAppear(animated)
-		
-		armaNavegacion()
-		self.revealViewController().delegate = self
-		
-	}
-	
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        armaNavegacion()
+        self.revealViewController().delegate = self
+        
+    }
+    
 	override func viewDidLayoutSubviews() {
 		if (tablaItems.respondsToSelector(Selector("layoutMargins"))) {
 			tablaItems.layoutMargins = UIEdgeInsetsZero;
@@ -44,11 +45,11 @@ class HotelesYAlojamientoOpcionesViewController: UIViewController, UITableViewDa
 	}
 	
 	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return hotelesYAlojamientoVC.opcionesItems[opcion!]!.count
+		return modeloBusquedaVC.opcionesItems[opcion!]!.count
 	}
 	
 	func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-		return hotelesYAlojamientoVC.opcionesTitulos[opcion!]!
+		return modeloBusquedaVC.opcionesTitulos[opcion!]!
 	}
 	
 	func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -58,9 +59,9 @@ class HotelesYAlojamientoOpcionesViewController: UIViewController, UITableViewDa
 	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCellWithIdentifier("items", forIndexPath: indexPath) as! UITableViewCell
 
-		cell.textLabel?.text = hotelesYAlojamientoVC.opcionesItems[opcion!]![indexPath.row]["texto"]!
+		cell.textLabel?.text = modeloBusquedaVC.opcionesItems[opcion!]![indexPath.row]["texto"]!
 		
-		if hotelesYAlojamientoVC.opcionesValores[opcion!]! == indexPath.row {
+		if modeloBusquedaVC.opcionesValores[opcion!]! == indexPath.row {
 			
 			cell.accessoryType = UITableViewCellAccessoryType.Checkmark
 			
@@ -86,9 +87,9 @@ class HotelesYAlojamientoOpcionesViewController: UIViewController, UITableViewDa
 		let cell = tableView.cellForRowAtIndexPath(indexPath)
 		cell!.accessoryType = UITableViewCellAccessoryType.Checkmark
 		
-		hotelesYAlojamientoVC.opcionesValores[opcion!] = indexPath.row
-		hotelesYAlojamientoVC.tablaOpciones.reloadData()
-		self.revealViewController().setFrontViewController(hotelesYAlojamientoVC, animated: true)
+		modeloBusquedaVC.opcionesValores[opcion!] = indexPath.row
+		modeloBusquedaVC.tablaOpciones.reloadData()
+		self.revealViewController().setFrontViewController(modeloBusquedaVC, animated: true)
 		
 	}
 	
@@ -97,7 +98,7 @@ class HotelesYAlojamientoOpcionesViewController: UIViewController, UITableViewDa
 		super.viewDidDisappear(animated)
 		
 		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-		appDelegate.arrayVC.removeValueForKey("hotelesYAlojamientoOpciones")
+		appDelegate.arrayVC.removeValueForKey("modeloBusquedaOpciones")
 		
 		self.removeFromParentViewController()
 		

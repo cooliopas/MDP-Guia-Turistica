@@ -1,5 +1,5 @@
 //
-//  HotelesYAlojamientoHotelMapaTableViewCell.swift
+//  ModeloBusquedaLugarMapaTableViewCell.swift
 //  GT1
 //
 //  Created by Pablo Pasqualino on 4/6/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HotelesYAlojamientoHotelMapaTableViewCell: UITableViewCell {
+class ModeloBusquedaLugarMapaTableViewCell: UITableViewCell {
 
 	var imagenMapa: UIImageView!
 	

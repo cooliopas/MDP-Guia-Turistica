@@ -270,7 +270,7 @@ class PlayasViewController: UIViewController, UITableViewDelegate, UITableViewDa
 	
 	func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
 		
-		var cellHeight: CGFloat = 30
+		var cellHeight: CGFloat = 44
 		
 		if tableView == tablaResultados {
 			

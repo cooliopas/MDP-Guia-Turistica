@@ -28,6 +28,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		window?.rootViewController = reveal
 		window?.makeKeyAndVisible()
 		
+		UINavigationBar.appearance().barTintColor = UIColor(red: 196/255, green: 217/255, blue: 242/255, alpha: 1)
+		UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.7)]
+		
 		// carga opcionesItems para las secciones correspondientes (vCs)
 		
 		let fileManager = NSFileManager.defaultManager()
@@ -38,12 +41,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 		// los VC que tienen opcionesItems
 		// algunos, como hotelesYAlojamiento, tienen más de un tipo de opcion
-		let vCs = ["congresosYEventos": ["categoria"],
-			"gastronomia": ["tipo"],
-			"hotelesYAlojamiento": ["categoria","zona"],
-			"inmobiliarias": ["zona"],
-			"playas": ["zona"],
-			"recreacion": ["categoria"]]
+		let vCs = [ "congresosYEventos": ["categoria"],
+                    "gastronomia": ["tipo"],
+                    "hotelesYAlojamiento": ["categoria","zona"],
+                    "inmobiliarias": ["zona"],
+                    "playas": ["zona"],
+                    "recreacion": ["categoria"]]
 		
 		for (idVC,opciones) in vCs {
 
@@ -91,6 +94,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 			}
 			
 		}
+        
+        // fin carga opcionesItems para las secciones correspondientes (vCs)
 	
 		return true
 	}
@@ -231,8 +236,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 							let vc = self.arrayVC[idVC] as! GastronomiaViewController
 							vc.opcionesItems[opcion] = opcionesItems[opcion]!
 							vc.tablaOpciones.reloadData()
-						case is HotelesYAlojamientoViewController:
-							let vc = self.arrayVC[idVC] as! HotelesYAlojamientoViewController
+						case is ModeloBusquedaViewController:
+							let vc = self.arrayVC[idVC] as! ModeloBusquedaViewController
 							vc.opcionesItems[opcion] = opcionesItems[opcion]!
 							vc.tablaOpciones.reloadData()
 						case is InmobiliariasViewController:
@@ -264,8 +269,95 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		if let vc = arrayVC[nombreVC] {
 			return vc
 		} else {
+            
+            var identifier = ""
+            
+            let vcQueUsanModelo = [ "hotelesYAlojamiento",
+                                    "inmobiliarias",
+                                    "gastronomia",
+                                    "playas",
+                                    "recreacion",
+                                    "museos"]
+            
+            if contains(vcQueUsanModelo,nombreVC) {
+                
+                identifier = "modeloBusqueda"
+                
+            } else {
+                
+                identifier = nombreVC
+                
+            }
+            
 			let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-			arrayVC[nombreVC] = mainStoryboard.instantiateViewControllerWithIdentifier(nombreVC) as? UIViewController
+            if let vc = mainStoryboard.instantiateViewControllerWithIdentifier(identifier) as? UIViewController {
+                arrayVC[nombreVC] = vc
+                
+                switch nombreVC {
+                    case "hotelesYAlojamiento":
+                        let vcd = vc as! ModeloBusquedaViewController // vcd = View Controller Downcasted
+                        vcd.opciones = ["categoria","zona","nombre"]
+                        vcd.opcionesTitulos = [	"categoria":"Categoria",
+                                                "zona":"Zona",
+                                                "nombre":"Nombre"]
+                        vcd.opcionesValores = [	"categoria":0,
+                                                "zona":0,
+                                                "nombre":""]
+                        vcd.idSeccion = nombreVC
+                        vcd.titulo = "Hoteles y Alojamiento"
+                        vcd.api = "Hotel"
+                    case "inmobiliarias":
+                        let vcd = vc as! ModeloBusquedaViewController // vcd = View Controller Downcasted
+                        vcd.opciones = ["zona","nombre"]
+                        vcd.opcionesTitulos = [ "zona":"Zona",
+                                                "nombre":"Nombre"]
+                        vcd.opcionesValores = [	"zona":0,
+                                                "nombre":""]
+                        vcd.idSeccion = nombreVC
+                        vcd.titulo = "Inmobiliarias"
+                        vcd.api = "Inmobiliaria"
+                    
+                        vcd.statusInicial = "Se muestran únicamente las inmobiliarias que ofrecen alquiler turístico."
+                    case "gastronomia":
+                        let vcd = vc as! ModeloBusquedaViewController // vcd = View Controller Downcasted
+                        vcd.opciones = ["tipo","nombre"]
+                        vcd.opcionesTitulos = [	"tipo":"Tipo de comercio",
+                                                "nombre":"Nombre"]
+                        vcd.opcionesValores = [	"tipo":0,
+                                                "nombre":""]
+                        vcd.idSeccion = nombreVC
+                        vcd.titulo = "Gastronomía"
+                        vcd.api = "Gastronomia"
+                    case "playas":
+                        let vcd = vc as! ModeloBusquedaViewController // vcd = View Controller Downcasted
+                        vcd.opciones = ["zona","nombre"]
+                        vcd.opcionesTitulos = [	"zona":"Zona",
+                                                "nombre":"Nombre"]
+                        vcd.opcionesValores = [	"zona":0,
+                                                "nombre":""]
+                        vcd.idSeccion = nombreVC
+                        vcd.titulo = "Playas"
+                        vcd.api = "Playa"
+                    case "recreacion":
+                        let vcd = vc as! ModeloBusquedaViewController // vcd = View Controller Downcasted
+                        vcd.opciones = ["categoria","nombre"]
+                        vcd.opcionesTitulos = [	"categoria":"Categoria",
+                                                "nombre":"Nombre"]
+                        vcd.opcionesValores = [	"categoria":0,
+                                                "nombre":""]
+                        vcd.idSeccion = nombreVC
+                        vcd.titulo = "Recreación y Excursiones"
+                        vcd.api = "Recreacion"
+                    case "museos":
+                        let vcd = vc as! ModeloBusquedaViewController // vcd = View Controller Downcasted
+                        vcd.idSeccion = nombreVC
+                        vcd.titulo = "Museos"
+                        vcd.api = "Museo"
+
+                    default: break
+                }
+                
+            }
 			return arrayVC[nombreVC]!
 		}
 		
@@ -293,6 +385,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		// Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 	}
 
-
 }
-

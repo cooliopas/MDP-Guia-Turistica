@@ -30,17 +30,7 @@ class InformacionComisariasViewController: UIViewController, MKMapViewDelegate, 
 			locationManager.delegate = self
 			
 			mapaView.delegate = self
-			
-			emergenciaView.alpha = 0
-			emergenciaView.userInteractionEnabled = false
-			emergenciaView.layer.cornerRadius = 10
-			
-			statusLabel.layer.cornerRadius = 7
-			statusLabel.clipsToBounds = true
-
-			emergenciaBoton.titleLabel?.adjustsFontSizeToFitWidth = true
-			emergenciaBoton.titleLabel?.minimumScaleFactor = 0.5
-			
+						
 			statusLabel.text = "Cargando datos ..."
 			
 			UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut, animations: {

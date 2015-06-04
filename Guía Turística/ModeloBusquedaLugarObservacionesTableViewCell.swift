@@ -1,5 +1,5 @@
 //
-//  HotelesYAlojamientoHotelObservacionesTableViewCell.swift
+//  ModeloBusquedaLugarObservacionesTableViewCell.swift
 //  GT1
 //
 //  Created by Pablo Pasqualino on 4/10/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HotelesYAlojamientoHotelObservacionesTableViewCell: UITableViewCell {
+class ModeloBusquedaLugarObservacionesTableViewCell: UITableViewCell {
 
 	@IBOutlet weak var texto: UILabel!
 	

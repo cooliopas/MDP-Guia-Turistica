@@ -26,9 +26,6 @@ class InformacionCentrosSaludViewController: UIViewController, MKMapViewDelegate
 			
 			mapaView.delegate = self
 
-			statusLabel.layer.cornerRadius = 7
-			statusLabel.clipsToBounds = true
-			
 			statusLabel.text = "Cargando datos ..."
 
 			UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut, animations: {

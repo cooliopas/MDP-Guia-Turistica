@@ -14,40 +14,44 @@ extension UIViewController {
 	
 	// desde las secciones, llamamos armaNavegacion() para:
 	// poner el boton de menu
-	// agregar el boton de volver (cuando esHijo == true)
+	// agregar el boton de volver (cuando !contains(vcPadres,identifier))
 	// asignar el panGestureRecognizer en UINavigationBar, para mostrar el menu lateral
 	
+    var navBar: UINavigationBar? {
+        
+        for view in self.view.subviews {
+            
+            if view is UINavigationBar {
+                
+                return view as? UINavigationBar
+                
+            }
+            
+        }
+        
+        return nil
+
+    }
+    
 	func armaNavegacion() {
+        
+        let vcPadres = ["transporte",
+                        "mediosDeAcceso",
+                        "hotelesYAlojamiento",
+                        "museos",
+                        "gastronomia",
+                        "inmobiliarias",
+                        "congresosYEventos",
+                        "paseosYLugares",
+                        "playas",
+                        "recreacion",
+                        "informacion",
+                        "modeloBusqueda"]
 
 		if self.revealViewController() != nil {
 			
-			var navegacion: UINavigationBar?
-			
-			for view in self.view.subviews {
-				
-				if view is UINavigationBar {
-			
-					navegacion = view as? UINavigationBar
-					break
-					
-				}
-				
-			}
-			
-			if navegacion != nil {
-			
-				var esHijo = false
-				
-				if let identifier = self.restorationIdentifier {
-				
-					if !contains(["transporte","mediosDeAcceso","hotelesYAlojamiento","museos","gastronomia","inmobiliarias","congresosYEventos","paseosYLugares","playas","recreacion","informacion"],identifier) {
-						
-						esHijo = true
-						
-					}
-					
-				}
-				
+            if let navigationBar = navBar {
+							
 				let botonMenuImagen = UIImage(named: "hamburguer")
 				
 				let botonMenu = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
@@ -59,7 +63,7 @@ extension UIViewController {
 
 				let navigationItem = UINavigationItem()
 				
-				if (esHijo) {
+                if let identifier = self.restorationIdentifier where !contains(vcPadres,identifier) {
 				
 					let botonVolverImagen = UIImage(named: "back")
 					let botonVolver = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
@@ -77,22 +81,22 @@ extension UIViewController {
 
 				}
 
-				navigationItem.title = navegacion!.items[0].title
+				navigationItem.title = navigationBar.items[0].title
 
-				navegacion!.items = [navigationItem]
+				navigationBar.items = [navigationItem]
 		
-				navegacion!.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+				navigationBar.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
 				
-			} else {
-				
-				// hay un bug
-				
-				let dispatchTime: dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64(0.1 * Double(NSEC_PER_SEC)))
-				dispatch_after(dispatchTime, dispatch_get_main_queue(), {
-
-					self.armaNavegacion()
-				
-				})
+//			} else {
+//				
+//				// hay un bug
+//				
+//				let dispatchTime: dispatch_time_t = dispatch_time(DISPATCH_TIME_NOW, Int64(0.1 * Double(NSEC_PER_SEC)))
+//				dispatch_after(dispatchTime, dispatch_get_main_queue(), {
+//
+//					self.armaNavegacion()
+//				
+//				})
 				
 			}
 			
@@ -119,8 +123,14 @@ extension UIViewController {
 						padre = "transporte"
 					case "mediosDeAccesoMapa","mediosDeAccesoLink":
 						padre = "mediosDeAcceso"
-					case "hotelesYAlojamientoOpciones","hotelesYAlojamientoHotel":
-						padre = "hotelesYAlojamiento"
+//					case "hotelesYAlojamientoOpciones","hotelesYAlojamientoHotel":
+//						padre = "hotelesYAlojamiento"
+                    case "modeloBusquedaOpciones","modeloBusquedaLugar":
+                        if let vcd = self as? ModeloBusquedaOpcionesViewController {
+                            padre = vcd.idSeccion
+                        } else if let vcd = self as? ModeloBusquedaLugarViewController {
+                            padre = vcd.idSeccion
+                        }
 					case "gastronomiaOpciones","gastronomiaLugar":
 						padre = "gastronomia"
 					case "museosMuseo":
@@ -184,16 +194,17 @@ extension UIViewController {
 				if view.tag == 555 {
 					
 					view.removeFromSuperview()
-					
+                    break
+                    
 				}
-			
-				if view is UINavigationBar {
-					
-					view.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
-					
-				}
-				
+							
 			}
+            
+            if let navigationBar = navBar {
+                
+                navigationBar.addGestureRecognizer(self.revealViewController().panGestureRecognizer())
+                
+            }
 			
 		}
 		
