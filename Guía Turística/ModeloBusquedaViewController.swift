@@ -23,6 +23,7 @@ class ModeloBusquedaViewController: UIViewController, UITableViewDelegate, UITab
     var titulo = ""
     var api = ""
     var statusInicial = ""
+    var resultadosConFoto = true
     
 	var cellBusqueda: ModeloBusquedaCellFiltroTableViewCell?
 	
@@ -35,6 +36,7 @@ class ModeloBusquedaViewController: UIViewController, UITableViewDelegate, UITab
 	var opcionesItems: [String: [[String: String]]] = [:]
 	
     var lugares: [Lugar] = []
+    var eventos: [Evento] = []
 
 	let locationManager = CLLocationManager()
 	var ubicacionActual: CLLocation?
@@ -137,47 +139,83 @@ class ModeloBusquedaViewController: UIViewController, UITableViewDelegate, UITab
 			
 			IJProgressView.shared.showProgressView(self.view, padding: true, texto: "Por favor espere...\nLa búsqueda puede demorar aproximadamente 1 minuto.")
 			
-            Lugar.buscar(idSeccion,opcionesItems: opcionesItems,opcionesValores: opcionesValores) { (lugares, error) in
+            if idSeccion != "congresosYEventos" {
+            
+                Lugar.buscar(idSeccion,opcionesItems: opcionesItems,opcionesValores: opcionesValores) { (lugares, error) in
              
-                if self.revealViewController() != nil { IJProgressView.shared.hideProgressView() }
-                
-                if error == nil && lugares.count > 0 {
+                    if self.revealViewController() != nil { IJProgressView.shared.hideProgressView() }
                     
-                    self.lugares = lugares
-                    
-                    if self.ubicacionActual != nil {
+                    if error == nil && lugares.count > 0 {
                         
-                        for lugar in self.lugares {
+                        self.lugares = lugares
+                        
+                        if self.ubicacionActual != nil {
                             
-                            if lugar.latitud != 0 {
+                            for lugar in self.lugares {
                                 
-                                lugar.distancia = self.ubicacionActual!.distanceFromLocation(CLLocation(latitude: lugar.latitud, longitude: lugar.longitud))
+                                if lugar.latitud != 0 {
+                                    
+                                    lugar.distancia = self.ubicacionActual!.distanceFromLocation(CLLocation(latitude: lugar.latitud, longitude: lugar.longitud))
+                                    
+                                }
                                 
                             }
                             
+                            self.lugares.sort(self.sorterForDistancia)
+                            
                         }
                         
-                        self.lugares.sort(self.sorterForDistancia)
+                        self.tablaResultados.reloadData()
+                        
+                        UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
+                            
+                            self.tablaResultados.alpha = 1
+                            
+                            }, completion: nil)
+                        
+                    } else {
+                        
+                        self.labelStatus.text = error
+                        
+                        UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
+                            
+                            self.labelStatus.alpha = 1
+                            
+                            }, completion: nil)
                         
                     }
                     
-                    self.tablaResultados.reloadData()
+                }
+                
+            } else {
+                
+                Evento.buscar(opcionesItems,opcionesValores: opcionesValores) { (eventos, error) in
                     
-                    UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
-                        
-                        self.tablaResultados.alpha = 1
-                        
-                        }, completion: nil)
+                    if self.revealViewController() != nil { IJProgressView.shared.hideProgressView() }
                     
-                } else {
-                    
-                    self.labelStatus.text = error
-                    
-                    UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
+                    if error == nil && eventos.count > 0 {
                         
-                        self.labelStatus.alpha = 1
+                        self.eventos = eventos
                         
-                        }, completion: nil)
+                        self.tablaResultados.reloadData()
+                        
+                        UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
+                            
+                            self.tablaResultados.alpha = 1
+                            
+                            }, completion: nil)
+                        
+                    } else {
+                        
+                        self.labelStatus.text = error
+                        
+                        UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
+                            
+                            self.labelStatus.alpha = 1
+                            
+                            }, completion: nil)
+                        
+                    }
                     
                 }
                 
@@ -220,8 +258,17 @@ class ModeloBusquedaViewController: UIViewController, UITableViewDelegate, UITab
 		} else if tableView == tablaResultados {
 		
 			let modeloBusquedaLugarVC = appDelegate.traeVC("modeloBusquedaLugar") as! ModeloBusquedaLugarViewController
-			
-			modeloBusquedaLugarVC.lugar = lugares[indexPath.row]
+
+            if lugares.count > 0 {
+                
+                modeloBusquedaLugarVC.lugar = lugares[indexPath.row]
+                
+            } else {
+
+                modeloBusquedaLugarVC.evento = eventos[indexPath.row]
+                
+            }
+            
             modeloBusquedaLugarVC.titulo = navBar?.topItem?.title ?? ""
             modeloBusquedaLugarVC.idSeccion = idSeccion
             modeloBusquedaLugarVC.api = api
@@ -245,7 +292,15 @@ class ModeloBusquedaViewController: UIViewController, UITableViewDelegate, UITab
 			
 		} else if tableView == tablaResultados {
 
-			return lugares.count
+            if lugares.count > 0 {
+            
+                return lugares.count
+                
+            } else if eventos.count > 0 {
+
+                return eventos.count
+
+            }
 			
 		}
 	
@@ -342,29 +397,47 @@ class ModeloBusquedaViewController: UIViewController, UITableViewDelegate, UITab
 			
 		} else if tableView == tablaResultados {
 	
-			let lugar = lugares[indexPath.row] as Lugar
-			
-			let cell = tableView.dequeueReusableCellWithIdentifier("lugar", forIndexPath: indexPath) as! ModeloBusquedaResultadosCellTableViewCell
-
+            let cell = tableView.dequeueReusableCellWithIdentifier("lugar", forIndexPath: indexPath) as! ModeloBusquedaResultadosCellTableViewCell
+            
             for view in cell.datos.subviews {
                 view.removeFromSuperview()
             }
             
-            Lugar.datos(idSeccion, lugar: lugar, view: cell.datos)
+            if !resultadosConFoto {
             
-			if lugar.fotoCache != nil {
+                cell.imagenWidthConstraint.constant = 0
+                
+                self.view.layoutIfNeeded()
+
+            }
+                
+            if lugares.count > 0 {
+            
+                let lugar = lugares[indexPath.row] as Lugar
 			
-				cell.imagen.image = lugar.fotoCache!
+                Lugar.datos(idSeccion, lugar: lugar, view: cell.datos)
+            
+                if lugar.fotoCache != nil {
+                
+                    cell.imagen.image = lugar.fotoCache!
 
-			} else {
-				
-				cell.imagen.image = UIImage(named: "dummy-hotel")
+                } else {
+                    
+                    cell.imagen.image = UIImage(named: "dummy-hotel")
 
-			}
+                }
 
-			lugar.row = indexPath.row
-			lugar.tabla = tableView
-			
+                lugar.row = indexPath.row
+                lugar.tabla = tableView
+                
+            } else if eventos.count > 0 {
+                
+                let evento = eventos[indexPath.row] as Evento
+                
+                Evento.datos(idSeccion, evento: evento, view: cell.datos)
+             
+            }
+                
 			if (cell.respondsToSelector(Selector("layoutMargins"))) {
 				cell.layoutMargins = UIEdgeInsetsZero
 			}
@@ -418,9 +491,4 @@ class ModeloBusquedaViewController: UIViewController, UITableViewDelegate, UITab
 		
 	}
 	
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
 }

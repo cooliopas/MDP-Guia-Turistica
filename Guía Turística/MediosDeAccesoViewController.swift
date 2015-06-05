@@ -35,13 +35,8 @@ class MediosDeAccesoViewController: UIViewController, UITableViewDataSource, UIT
 			"link": ""]
 	]
 	
-    override func viewDidLoad() {
-        super.viewDidLoad()
-		
-	}
-	
-	override func viewDidAppear(animated: Bool) {
-		super.viewDidAppear(animated)
+	override func viewWillAppear(animated: Bool) {
+		super.viewWillAppear(animated)
 		
 		armaNavegacion()
 		self.revealViewController().delegate = self
@@ -93,8 +88,4 @@ class MediosDeAccesoViewController: UIViewController, UITableViewDataSource, UIT
 		
 	}
 	
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-
 }

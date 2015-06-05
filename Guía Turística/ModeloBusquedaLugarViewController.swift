@@ -28,7 +28,8 @@ class ModeloBusquedaLugarViewController: UIViewController, UITableViewDelegate, 
 	
 	let locationManager = CLLocationManager()
 	
-	var lugar: Lugar!
+	var lugar: Lugar?
+    var evento: Evento?
 	var cellMapa: ModeloBusquedaLugarMapaTableViewCell!
 	
 	var ubicacionActual: CLLocation?
@@ -47,116 +48,145 @@ class ModeloBusquedaLugarViewController: UIViewController, UITableViewDelegate, 
 		locationManager.desiredAccuracy = kCLLocationAccuracyBest
 
         viewDatos = UIView(frame: CGRect(x: 8, y: 4, width: view.frame.size.width - 16, height: 0))
-        Lugar.datosDetalle(idSeccion, lugar: lugar, view: viewDatos)
         
-		restea(api,"Detalle",["Token":"01234567890123456789012345678901","IdLugar":lugar.id]) { (request, response, JSON, error) in
-			
-			if error == nil, let info = JSON as? NSDictionary {
-				
-				self.lugar.detalle = info
-				
-				Lugar.armaInfo(self.lugar)
-				Lugar.armaObservaciones(self.lugar)
-				
-			} else {
-				
-				self.lugar.info = NSAttributedString(string: "No fue posible cargar esta información.", attributes: [NSFontAttributeName:UIFont(name: "HelveticaNeue", size: 13.0)!])
-				self.lugar.observaciones = NSAttributedString(string: "No fue posible cargar las observaciones.", attributes: [NSFontAttributeName:UIFont(name: "HelveticaNeue", size: 13.0)!])
-				
-			}
-			
-			self.tabla.reloadRowsAtIndexPaths([NSIndexPath(forRow: 3, inSection: 0),NSIndexPath(forRow: 4, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Fade)
-			
-		}
-		
-		mapa = MKMapView()
-		
-		mapa.frame = CGRectMake(0, -300, self.view.frame.size.width, 200)
-		mapa.mapType = MKMapType.Standard
-		self.view.addSubview(mapa)
-		
-		mapa.delegate = self
-		
-		if lugar.latitud != 0 {
-		
-			let lugarCoordinate = CLLocationCoordinate2DMake(lugar.latitud,lugar.longitud)
-			let region = MKCoordinateRegionMakeWithDistance(lugarCoordinate, 800, 800)
-			
-			let annotation = MKPointAnnotation()
-			annotation.coordinate = lugarCoordinate
-			annotation.title = lugar.nombre
-			annotation.subtitle = "\(lugar.calleNombre) \(lugar.calleAltura)"
-			
-			mapa.setRegion(region, animated: false)
-			mapa.addAnnotation(annotation)
-			
-			mapaPin = annotation
+        if let lugar = lugar {
+            
+            Lugar.datosDetalle(idSeccion, lugar: lugar, view: viewDatos)
+         
+            restea(api,"Detalle",["Token":"01234567890123456789012345678901","IdLugar":lugar.id]) { (request, response, JSON, error) in
+                
+                if error == nil, let info = JSON as? NSDictionary {
+                    
+                    lugar.detalle = info
+                    
+                    Lugar.armaInfo(lugar)
+                    Lugar.armaObservaciones(lugar)
+                    
+                } else {
+                    
+                    lugar.info = NSAttributedString(string: "No fue posible cargar esta información.", attributes: [NSFontAttributeName:UIFont(name: "HelveticaNeue", size: 13.0)!])
+                    lugar.observaciones = NSAttributedString(string: "No fue posible cargar las observaciones.", attributes: [NSFontAttributeName:UIFont(name: "HelveticaNeue", size: 13.0)!])
+                    
+                }
+                
+                self.tabla.reloadRowsAtIndexPaths([NSIndexPath(forRow: 3, inSection: 0),NSIndexPath(forRow: 4, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Fade)
+                
+            }
+            
+            mapa = MKMapView()
+            
+            mapa.frame = CGRectMake(0, -300, self.view.frame.size.width, 200)
+            mapa.mapType = MKMapType.Standard
+            self.view.addSubview(mapa)
+            
+            mapa.delegate = self
+            
+            if lugar.latitud != 0 {
+                
+                let lugarCoordinate = CLLocationCoordinate2DMake(lugar.latitud,lugar.longitud)
+                let region = MKCoordinateRegionMakeWithDistance(lugarCoordinate, 800, 800)
+                
+                let annotation = MKPointAnnotation()
+                annotation.coordinate = lugarCoordinate
+                annotation.title = lugar.nombre
+                annotation.subtitle = "\(lugar.calleNombre) \(lugar.calleAltura)"
+                
+                mapa.setRegion(region, animated: false)
+                mapa.addAnnotation(annotation)
+                
+                mapaPin = annotation
+                
+                let options = MKMapSnapshotOptions()
+                options.region = region
+                options.size = mapa.frame.size
+                options.scale = UIScreen.mainScreen().scale
+                
+                let snapshotter = MKMapSnapshotter(options: options)
+                snapshotter.startWithCompletionHandler() {
+                    snapshot, error in
+                    
+                    if error != nil {
+                        //					println(error)
+                        return
+                    }
+                    
+                    let image = snapshot.image
+                    
+                    let finalImageRect = CGRectMake(0, 0, image.size.width, image.size.height)
+                    
+                    let pin = MKPinAnnotationView(annotation: nil, reuseIdentifier: "")
+                    
+                    let pinImage = pin.image
+                    
+                    UIGraphicsBeginImageContextWithOptions(image.size, true, image.scale);
+                    
+                    image.drawAtPoint(CGPointMake(0, 0))
+                    
+                    var point = snapshot.pointForCoordinate(lugarCoordinate)
+                    
+                    if CGRectContainsPoint(finalImageRect, point) {
+                        
+                        let pinCenterOffset = pin.centerOffset
+                        point.x -= pin.bounds.size.width / 2.0;
+                        point.y -= pin.bounds.size.height / 2.0;
+                        point.x += pinCenterOffset.x;
+                        point.y += pinCenterOffset.y;
+                        
+                        pinImage.drawAtPoint(point)
+                        
+                    }
+                    
+                    let finalImage = UIGraphicsGetImageFromCurrentImageContext();
+                    UIGraphicsEndImageContext();
+                    
+                    dispatch_async(dispatch_get_main_queue()) {
+                        
+                        self.cellMapa.imagenMapa.image = finalImage
+                        
+                        self.cellMapa.imagenMapa.frame.size.width = self.view.frame.size.width
+                        self.cellMapa.imagenMapa.frame.size.height = finalImage.size.height
+                        
+                        UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
+                            
+                            self.cellMapa.imagenMapa.alpha = 1
+                            
+                            }, completion: nil)
+                        
+                        let tap = UITapGestureRecognizer(target: self,action: "mapaAbrir")
+                        tap.numberOfTapsRequired = 1
+                        self.cellMapa.addGestureRecognizer(tap)
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        } else if let evento = evento {
+            
+            Evento.datosDetalle(idSeccion, evento: evento, view: viewDatos)
 
-			let options = MKMapSnapshotOptions()
-			options.region = region
-			options.size = mapa.frame.size
-			options.scale = UIScreen.mainScreen().scale
-			
-			let snapshotter = MKMapSnapshotter(options: options)
-			snapshotter.startWithCompletionHandler() {
-				snapshot, error in
-				
-				if error != nil {
-//					println(error)
-					return
-				}
-				
-				let image = snapshot.image
-				
-				let finalImageRect = CGRectMake(0, 0, image.size.width, image.size.height)
-				
-				let pin = MKPinAnnotationView(annotation: nil, reuseIdentifier: "")
-				
-				let pinImage = pin.image
-				
-				UIGraphicsBeginImageContextWithOptions(image.size, true, image.scale);
-				
-				image.drawAtPoint(CGPointMake(0, 0))
-				
-				var point = snapshot.pointForCoordinate(lugarCoordinate)
-				
-				if CGRectContainsPoint(finalImageRect, point) {
-					
-					let pinCenterOffset = pin.centerOffset
-					point.x -= pin.bounds.size.width / 2.0;
-					point.y -= pin.bounds.size.height / 2.0;
-					point.x += pinCenterOffset.x;
-					point.y += pinCenterOffset.y;
-					
-					pinImage.drawAtPoint(point)
-					
-				}
-				
-				let finalImage = UIGraphicsGetImageFromCurrentImageContext();
-				UIGraphicsEndImageContext();
-				
-				dispatch_async(dispatch_get_main_queue()) {
-					
-					self.cellMapa.imagenMapa.image = finalImage
-					
-					self.cellMapa.imagenMapa.frame.size.width = self.view.frame.size.width
-					self.cellMapa.imagenMapa.frame.size.height = finalImage.size.height
-					
-					UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
-						
-						self.cellMapa.imagenMapa.alpha = 1
-						
-						}, completion: nil)
-					
-					let tap = UITapGestureRecognizer(target: self,action: "mapaAbrir")
-					tap.numberOfTapsRequired = 1
-					self.cellMapa.addGestureRecognizer(tap)
-					
-				}
-				
-			}
-			
-		}
+            restea("Evento","Detalle",["Token":"01234567890123456789012345678901","IdEvento":evento.id]) { (request, response, JSON, error) in
+                
+                if error == nil, let info = JSON as? NSDictionary, let detalle = info["Evento"] as? NSDictionary {
+                    
+                    evento.detalle = detalle
+                    
+                    Evento.armaInfo(evento)
+                    Evento.armaObservaciones(evento)
+                    
+                } else {
+                    
+                    evento.info = NSAttributedString(string: "No fue posible cargar esta información.", attributes: [NSFontAttributeName:UIFont(name: "HelveticaNeue", size: 13.0)!])
+                    evento.observaciones = NSAttributedString(string: "No fue posible cargar las observaciones.", attributes: [NSFontAttributeName:UIFont(name: "HelveticaNeue", size: 13.0)!])
+                    
+                }
+                
+                self.tabla.reloadRowsAtIndexPaths([NSIndexPath(forRow: 3, inSection: 0),NSIndexPath(forRow: 4, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Fade)
+                
+            }
+            
+        }
 			
 	}
 	
@@ -249,7 +279,7 @@ class ModeloBusquedaLugarViewController: UIViewController, UITableViewDelegate, 
 								
 								self.view.layoutIfNeeded()
 								
-								let region = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake(self.lugar.latitud,self.lugar.longitud), 800, 800)
+								let region = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake(self.lugar!.latitud,self.lugar!.longitud), 800, 800)
 								self.mapa.setRegion(region, animated: false)
 								
 						})
@@ -339,7 +369,7 @@ class ModeloBusquedaLugarViewController: UIViewController, UITableViewDelegate, 
 					}, completion: nil)
 			
 				let origin = ubicacionActual!.coordinate
-				let destination = CLLocationCoordinate2DMake(lugar.latitud, lugar.longitud)
+				let destination = CLLocationCoordinate2DMake(lugar!.latitud, lugar!.longitud)
 			
 				mapManager.directionsUsingGoogle(from: origin, to: destination) { [weak self] (route,directionInformation, boundingRegion, error) -> () in
 					
@@ -380,8 +410,8 @@ class ModeloBusquedaLugarViewController: UIViewController, UITableViewDelegate, 
 							pointOfOrigin.subtitle = "A \(distancia) - Tiempo: \(duracion)"
 							
 							let pointOfDestination = MKPointAnnotation()
-							pointOfDestination.title = self!.lugar.nombre
-							pointOfDestination.subtitle = "\(self!.lugar.calleNombre) \(self!.lugar.calleAltura)"
+							pointOfDestination.title = self!.lugar!.nombre
+							pointOfDestination.subtitle = "\(self!.lugar!.calleNombre) \(self!.lugar!.calleAltura)"
 							
 							let start_location = directionInformation?.objectForKey("start_location") as! NSDictionary
 							let originLat = start_location.objectForKey("lat")?.doubleValue
@@ -398,7 +428,7 @@ class ModeloBusquedaLugarViewController: UIViewController, UITableViewDelegate, 
 							pointOfDestination.coordinate = coordDesitination
 
 							let addressDestino = [
-								String(kABPersonAddressStreetKey): "\(self!.lugar.calleNombre) \(self!.lugar.calleAltura)",
+								String(kABPersonAddressStreetKey): "\(self!.lugar!.calleNombre) \(self!.lugar!.calleAltura)",
 								String(kABPersonAddressCityKey): "Mar del Plata",
 								String(kABPersonAddressStateKey): "Buenos Aires",
 								String(kABPersonAddressZIPKey): "7600",
@@ -471,13 +501,13 @@ class ModeloBusquedaLugarViewController: UIViewController, UITableViewDelegate, 
 		
 		let destino = MKMapItem(placemark: mapaDestino!)
 		
-		destino.name = lugar.nombre
-		if lugar.telefono1 != "" || lugar.telefono2 != "" || lugar.telefono3 != "" {
+		destino.name = lugar!.nombre
+		if lugar!.telefono1 != "" || lugar!.telefono2 != "" || lugar!.telefono3 != "" {
 			
-			destino.phoneNumber = lugar.telefono1 ?? lugar.telefono2 ?? lugar.telefono3
+			destino.phoneNumber = lugar!.telefono1 ?? lugar!.telefono2 ?? lugar!.telefono3
 			
 		}
-		if lugar.web != "" { destino.url = NSURL(string: lugar.web) }
+		if lugar!.web != "" { destino.url = NSURL(string: lugar!.web) }
 		
 		let mapItems = [origen,destino]
 		
@@ -503,78 +533,82 @@ class ModeloBusquedaLugarViewController: UIViewController, UITableViewDelegate, 
 		var idCell = ""
 		
 		if indexPath.row == 0 {
-			idCell = "lugarFotos"
+			idCell = "fotos"
 		} else if indexPath.row == 1 {
-			idCell = "lugarDatos"
+			idCell = "datos"
 		} else if indexPath.row == 2 {
-			idCell = "lugarMapa"
+			idCell = "mapa"
 		} else if indexPath.row == 3 {
-			idCell = "lugarInformacion"
+			idCell = "informacion"
 		} else if indexPath.row == 4 {
-			idCell = "lugarObservaciones"
+			idCell = "observaciones"
 		}
 		
 		if indexPath.row == 0 {
 			
 			let cell = tableView.dequeueReusableCellWithIdentifier(idCell, forIndexPath: indexPath) as! ModeloBusquedaLugarFotosTableViewCell
 			
-			if lugar.foto != "" {
+            if let lugar = lugar {
+                
+                if lugar.foto != "" {
 				
-				if lugar.fotoCache != nil {
+                    if lugar.fotoCache != nil {
 
-					cell.foto.image = lugar.fotoCache!
-					cell.foto.frame.size.width = 320
-					cell.foto.frame.size.height = 200
-					
-					UIView.animateWithDuration(1.0, delay: 0.0, options: .CurveEaseOut, animations: {
-						
-						cell.foto.alpha = 1
-						
-						}, completion: nil)
-					
-				} else {
-					
-					IJProgressView.shared.showProgressView(cell, padding: false)
-					
-					let urlImagen = lugar.foto.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
-					
-					if urlImagen != "" {
-						
-						let imgURL = NSURL(string: urlImagen!)
-						
-						let request: NSURLRequest = NSURLRequest(URL: imgURL!)
-						NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {(response: NSURLResponse!,data: NSData!,error: NSError!) -> Void in
-							
-							if error == nil {
-								
-								self.lugar.fotoCache = UIImage(data: data)
-								
-								dispatch_async(dispatch_get_main_queue(), {
-									
-									if let cellVisible = self.tabla.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as? ModeloBusquedaLugarFotosTableViewCell {
-										
-										if self.revealViewController() != nil { IJProgressView.shared.hideProgressView() }
-										cellVisible.foto.image = self.lugar.fotoCache
-										
-										UIView.animateWithDuration(1.0, delay: 0.0, options: .CurveEaseOut, animations: {
-											
-											cellVisible.foto.alpha = 1
-											
-											}, completion: nil)
-										
-									}
-								})
-								
-							} else {
-								
-//								println("Error para bajar la imagen")
-								
-							}
-						})
-						
-					}
-					
-				}
+                        cell.foto.image = lugar.fotoCache!
+                        cell.foto.frame.size.width = 320
+                        cell.foto.frame.size.height = 200
+                        
+                        UIView.animateWithDuration(1.0, delay: 0.0, options: .CurveEaseOut, animations: {
+                            
+                            cell.foto.alpha = 1
+                            
+                            }, completion: nil)
+                        
+                    } else {
+                        
+                        IJProgressView.shared.showProgressView(cell, padding: false)
+                        
+                        let urlImagen = lugar.foto.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).stringByAddingPercentEscapesUsingEncoding(NSUTF8StringEncoding)
+                        
+                        if urlImagen != "" {
+                            
+                            let imgURL = NSURL(string: urlImagen!)
+                            
+                            let request: NSURLRequest = NSURLRequest(URL: imgURL!)
+                            NSURLConnection.sendAsynchronousRequest(request, queue: NSOperationQueue.mainQueue(), completionHandler: {(response: NSURLResponse!,data: NSData!,error: NSError!) -> Void in
+                                
+                                if error == nil {
+                                    
+                                    lugar.fotoCache = UIImage(data: data)
+                                    
+                                    dispatch_async(dispatch_get_main_queue(), {
+                                        
+                                        if let cellVisible = self.tabla.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as? ModeloBusquedaLugarFotosTableViewCell {
+                                            
+                                            if self.revealViewController() != nil { IJProgressView.shared.hideProgressView() }
+                                            cellVisible.foto.image = lugar.fotoCache
+                                            
+                                            UIView.animateWithDuration(1.0, delay: 0.0, options: .CurveEaseOut, animations: {
+                                                
+                                                cellVisible.foto.alpha = 1
+                                                
+                                                }, completion: nil)
+                                            
+                                        }
+                                    })
+                                    
+                                } else {
+                                    
+    //								println("Error para bajar la imagen")
+                                    
+                                }
+                            })
+                            
+                        }
+                        
+                    }
+                    
+                }
 				
 			}
 			
@@ -600,7 +634,7 @@ class ModeloBusquedaLugarViewController: UIViewController, UITableViewDelegate, 
 			
 			let cell = tableView.dequeueReusableCellWithIdentifier(idCell, forIndexPath: indexPath) as! ModeloBusquedaLugarInfoTableViewCell
 			
-			cell.texto.attributedText = lugar.info
+			cell.texto.attributedText = lugar?.info ?? evento?.info
 			
 			return cell
 			
@@ -608,7 +642,7 @@ class ModeloBusquedaLugarViewController: UIViewController, UITableViewDelegate, 
 			
 			let cell = tableView.dequeueReusableCellWithIdentifier(idCell, forIndexPath: indexPath) as! ModeloBusquedaLugarObservacionesTableViewCell
 			
-			cell.texto.attributedText = lugar.observaciones
+			cell.texto.attributedText = lugar?.observaciones ?? evento?.observaciones
 			
 			return cell
 			
@@ -665,7 +699,7 @@ class ModeloBusquedaLugarViewController: UIViewController, UITableViewDelegate, 
 		
 		if indexPath.row == 0 {
 			
-			if lugar.foto != "" {
+			if lugar != nil && lugar!.foto != "" {
 				
 				return 200
 				
@@ -681,7 +715,7 @@ class ModeloBusquedaLugarViewController: UIViewController, UITableViewDelegate, 
 			
 		} else if indexPath.row == 2 {
 			
-			if lugar.latitud != 0 {
+			if lugar != nil && lugar!.latitud != 0 {
 			
 				return 200
 				
@@ -697,11 +731,11 @@ class ModeloBusquedaLugarViewController: UIViewController, UITableViewDelegate, 
 			
 			if indexPath.row == 3 {
 				
-				texto = lugar.info
+				texto = lugar?.info ?? evento?.info
 				
 			} else {
 				
-				texto = lugar.observaciones
+				texto = lugar?.observaciones ?? evento?.observaciones
 				
 			}
 						
@@ -722,8 +756,6 @@ class ModeloBusquedaLugarViewController: UIViewController, UITableViewDelegate, 
 		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
 		appDelegate.arrayVC.removeValueForKey("modeloBusquedaLugar")
 		
-		mapa.delegate = nil
-
 		IJProgressView.shared.hideProgressView()
 
 		self.removeFromParentViewController()
@@ -732,11 +764,6 @@ class ModeloBusquedaLugarViewController: UIViewController, UITableViewDelegate, 
 	
 	deinit {
 //		println("deinit")
-	}
-	
-	override func didReceiveMemoryWarning() {
-		super.didReceiveMemoryWarning()
-		// Dispose of any resources that can be recreated.
 	}
 	
 }

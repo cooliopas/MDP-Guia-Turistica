@@ -59,11 +59,6 @@ class InformacionFarmaciasViewController: UIViewController, MKMapViewDelegate, C
 			
 			// preparamos farmacias de turno
 			
-			avisoFarmaciasDeTurnoView.layer.cornerRadius = 5
-			avisoFarmaciasDeTurnoView.alpha = 0
-			statusLabel.layer.cornerRadius = 7
-			statusLabel.clipsToBounds = true
-			
 			segmentadorTipo.setEnabled(false, forSegmentAtIndex: 0)
 			
 			let hora = NSCalendar.currentCalendar().components(.CalendarUnitHour | .CalendarUnitMinute, fromDate: NSDate()).hour
@@ -132,8 +127,8 @@ class InformacionFarmaciasViewController: UIViewController, MKMapViewDelegate, C
 		
 	}
 	
-	override func viewDidAppear(animated: Bool) {
-		super.viewDidAppear(animated)
+	override func viewWillAppear(animated: Bool) {
+		super.viewWillAppear(animated)
 		
 		armaNavegacion()
 		self.revealViewController().delegate = self
@@ -366,11 +361,6 @@ class InformacionFarmaciasViewController: UIViewController, MKMapViewDelegate, C
 		
 		self.removeFromParentViewController()
 		
-	}
-	
-	override func didReceiveMemoryWarning() {
-		super.didReceiveMemoryWarning()
-		// Dispose of any resources that can be recreated.
 	}
 	
 }

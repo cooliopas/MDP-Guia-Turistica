@@ -31,8 +31,8 @@ class TransporteColeMyBusViewController: UIViewController, UIWebViewDelegate, UI
 		
     }
 
-	override func viewDidAppear(animated: Bool) {
-		super.viewDidAppear(animated)
+	override func viewWillAppear(animated: Bool) {
+		super.viewWillAppear(animated)
 		
 		armaNavegacion()
 		self.revealViewController().delegate = self
@@ -93,10 +93,6 @@ class TransporteColeMyBusViewController: UIViewController, UIWebViewDelegate, UI
 				
 		if self.revealViewController() != nil { IJProgressView.shared.hideProgressView() }
 		
-	}
-
-	override func didReceiveMemoryWarning() {
-		super.didReceiveMemoryWarning()
 	}
 
 }

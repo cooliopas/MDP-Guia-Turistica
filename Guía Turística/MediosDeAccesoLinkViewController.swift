@@ -20,8 +20,8 @@ class MediosDeAccesoLinkViewController: UIViewController, UIWebViewDelegate, UIA
 						
     }
 
-	override func viewDidAppear(animated: Bool) {
-		super.viewDidAppear(animated)
+	override func viewWillAppear(animated: Bool) {
+		super.viewWillAppear(animated)
 		
         navBar?.topItem?.title = titulo!
         
@@ -90,10 +90,6 @@ class MediosDeAccesoLinkViewController: UIViewController, UIWebViewDelegate, UIA
 				
 		UIApplication.sharedApplication().networkActivityIndicatorVisible = false
 		
-	}
-
-	override func didReceiveMemoryWarning() {
-		super.didReceiveMemoryWarning()
 	}
 
 }

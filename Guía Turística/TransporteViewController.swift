@@ -57,13 +57,8 @@ class TransporteViewController: UIViewController, UITableViewDataSource, UITable
 		"Estacionamiento Medido"
 	]
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-		
-    }
-	
-	override func viewDidAppear(animated: Bool) {
-		super.viewDidAppear(animated)
+	override func viewWillAppear(animated: Bool) {
+		super.viewWillAppear(animated)
 		
 		armaNavegacion()
 		self.revealViewController().delegate = self
@@ -117,14 +112,5 @@ class TransporteViewController: UIViewController, UITableViewDataSource, UITable
 		tableView.deselectRowAtIndexPath(indexPath, animated: true)
 		
 	}
-	
-//	func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-//		
-//	}
-	
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-	
+		
 }

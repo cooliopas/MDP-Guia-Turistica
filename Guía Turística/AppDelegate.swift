@@ -228,28 +228,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 				if self.arrayVC[idVC] != nil {
 					
 					switch self.arrayVC[idVC] {
-						case is CongresosYEventosViewController:
-							let vc = self.arrayVC[idVC] as! CongresosYEventosViewController
-							vc.opcionesItems[opcion] = opcionesItems[opcion]!
-							vc.tablaOpciones.reloadData()
-						case is GastronomiaViewController:
-							let vc = self.arrayVC[idVC] as! GastronomiaViewController
-							vc.opcionesItems[opcion] = opcionesItems[opcion]!
-							vc.tablaOpciones.reloadData()
 						case is ModeloBusquedaViewController:
 							let vc = self.arrayVC[idVC] as! ModeloBusquedaViewController
-							vc.opcionesItems[opcion] = opcionesItems[opcion]!
-							vc.tablaOpciones.reloadData()
-						case is InmobiliariasViewController:
-							let vc = self.arrayVC[idVC] as! InmobiliariasViewController
-							vc.opcionesItems[opcion] = opcionesItems[opcion]!
-							vc.tablaOpciones.reloadData()
-						case is PlayasViewController:
-							let vc = self.arrayVC[idVC] as! PlayasViewController
-							vc.opcionesItems[opcion] = opcionesItems[opcion]!
-							vc.tablaOpciones.reloadData()
-						case is RecreacionViewController:
-							let vc = self.arrayVC[idVC] as! RecreacionViewController
 							vc.opcionesItems[opcion] = opcionesItems[opcion]!
 							vc.tablaOpciones.reloadData()
 						default:
@@ -277,7 +257,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                     "gastronomia",
                                     "playas",
                                     "recreacion",
-                                    "museos"]
+                                    "museos",
+                                    "congresosYEventos"]
             
             if contains(vcQueUsanModelo,nombreVC) {
                 
@@ -306,6 +287,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         vcd.idSeccion = nombreVC
                         vcd.titulo = "Hoteles y Alojamiento"
                         vcd.api = "Hotel"
+                        vcd.resultadosConFoto = true
                     case "inmobiliarias":
                         let vcd = vc as! ModeloBusquedaViewController // vcd = View Controller Downcasted
                         vcd.opciones = ["zona","nombre"]
@@ -316,6 +298,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         vcd.idSeccion = nombreVC
                         vcd.titulo = "Inmobiliarias"
                         vcd.api = "Inmobiliaria"
+                        vcd.resultadosConFoto = false
                     
                         vcd.statusInicial = "Se muestran únicamente las inmobiliarias que ofrecen alquiler turístico."
                     case "gastronomia":
@@ -328,6 +311,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         vcd.idSeccion = nombreVC
                         vcd.titulo = "Gastronomía"
                         vcd.api = "Gastronomia"
+                        vcd.resultadosConFoto = false
                     case "playas":
                         let vcd = vc as! ModeloBusquedaViewController // vcd = View Controller Downcasted
                         vcd.opciones = ["zona","nombre"]
@@ -338,6 +322,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         vcd.idSeccion = nombreVC
                         vcd.titulo = "Playas"
                         vcd.api = "Playa"
+                        vcd.resultadosConFoto = true
                     case "recreacion":
                         let vcd = vc as! ModeloBusquedaViewController // vcd = View Controller Downcasted
                         vcd.opciones = ["categoria","nombre"]
@@ -348,12 +333,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         vcd.idSeccion = nombreVC
                         vcd.titulo = "Recreación y Excursiones"
                         vcd.api = "Recreacion"
+                        vcd.resultadosConFoto = true
                     case "museos":
                         let vcd = vc as! ModeloBusquedaViewController // vcd = View Controller Downcasted
                         vcd.idSeccion = nombreVC
                         vcd.titulo = "Museos"
                         vcd.api = "Museo"
-
+                        vcd.resultadosConFoto = true
+                    case "congresosYEventos":
+                        let vcd = vc as! ModeloBusquedaViewController // vcd = View Controller Downcasted
+                        vcd.opciones = ["categoria","nombre"]
+                        vcd.opcionesTitulos = [	"categoria":"Categoria",
+                                                "nombre":"Nombre"]
+                        vcd.opcionesValores = [	"categoria":0,
+                                                "nombre":""]
+                        vcd.idSeccion = nombreVC
+                        vcd.titulo = "Eventos"
+                        vcd.api = "Evento"
+                        vcd.resultadosConFoto = false
                     default: break
                 }
                 

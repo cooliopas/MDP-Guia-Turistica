@@ -46,7 +46,7 @@ class coverViewController: UIViewController {
 				arrayConstraints[id]["height"] = NSLayoutConstraint(item: viewId, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: itemHeight)
 				self.view.addConstraint(arrayConstraints[id]["height"]!);
 				
-				arrayConstraints[id]["left"] = NSLayoutConstraint(item: viewId, attribute: NSLayoutAttribute.Leading, relatedBy: NSLayoutRelation.Equal, toItem: viewId.superview!, attribute: NSLayoutAttribute.LeadingMargin, multiplier: 1, constant: superWidth / 2 - superWidth / 6 - 16)
+				arrayConstraints[id]["left"] = NSLayoutConstraint(item: viewId, attribute: NSLayoutAttribute.Leading, relatedBy: NSLayoutRelation.Equal, toItem: viewId.superview!, attribute: NSLayoutAttribute.Leading, multiplier: 1, constant: superWidth / 2 - superWidth / 6)
 				self.view.addConstraint(arrayConstraints[id]["left"]!);
 				
 				arrayConstraints[id]["top"] = NSLayoutConstraint(item: viewId, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self.topLayoutGuide, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: superHeight)
@@ -65,7 +65,7 @@ class coverViewController: UIViewController {
 	override func viewDidAppear(animated: Bool) {
 		super.viewDidAppear(animated)
 		
-		var ubicacionX:CGFloat = -16
+		var ubicacionX:CGFloat = 0
 		var ubicacionY:CGFloat = navigationHeight
 		var delay = 0.0
 		
@@ -80,7 +80,7 @@ class coverViewController: UIViewController {
 				
 				self.arrayConstraints[id]["left"]!.constant = ubicacionX
 				ubicacionX += self.superWidth / 3
-				if (ubicacionX+16 >= self.superWidth) { ubicacionX = -16 }
+				if (ubicacionX+16 >= self.superWidth) { ubicacionX = 0 }
 				
 				viewId.alpha = 1.0
 				
@@ -155,7 +155,7 @@ class coverViewController: UIViewController {
 				self.arrayConstraints[tagActual]["height"]!.constant = self.superHeight
 
 				self.arrayConstraints[tagActual]["top"]!.constant = self.navigationHeight
-				self.arrayConstraints[tagActual]["left"]!.constant = -16
+				self.arrayConstraints[tagActual]["left"]!.constant = 0
 				
 				label.alpha = 0
 				
@@ -170,9 +170,4 @@ class coverViewController: UIViewController {
 		}
 	}
 	
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
 }

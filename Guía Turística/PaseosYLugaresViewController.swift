@@ -20,14 +20,9 @@ class PaseosYLugaresViewController: UIViewController, UITableViewDataSource, UIT
 		"QUINTAS Y CANTERAS – CAMPOS ONDULADOS",
 		"CIRCUITO TURISTICO ASTOR PIAZZOLLA"
 	]
-	
-    override func viewDidLoad() {
-        super.viewDidLoad()
-		
-	}
 
-	override func viewDidAppear(animated: Bool) {
-		super.viewDidAppear(animated)
+	override func viewWillAppear(animated: Bool) {
+		super.viewWillAppear(animated)
 		
 		armaNavegacion()
 		self.revealViewController().delegate = self
@@ -63,7 +58,6 @@ class PaseosYLugaresViewController: UIViewController, UITableViewDataSource, UIT
 			cell.nombre!.backgroundColor = UIColor.clearColor()
 			cell.nombre!.textColor = UIColor.whiteColor()
 			cell.nombre!.numberOfLines = 0
-//			cell.nombre!.frame = cell.nombre!.bounds
 
 			cell.labelBackground!.layer.addSublayer(cell.gradLayer!)
 			cell.labelBackground!.addSubview(cell.nombre!)
@@ -109,9 +103,4 @@ class PaseosYLugaresViewController: UIViewController, UITableViewDataSource, UIT
 		
 	}
 	
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
 }

@@ -44,9 +44,6 @@ class TransporteColeTarjetaMapaViewController: UIViewController, MKMapViewDelega
 			
 			mapaView.delegate = self
 			
-			statusLabel.layer.cornerRadius = 7
-			statusLabel.clipsToBounds = true
-
 			if let file = NSBundle.mainBundle().pathForResource("Varios.bundle/puntosDeCargaUTE", ofType: "json"),
 				let data = NSData(contentsOfFile: file),
 				let puestosUTE = JSON(data:data).array {
@@ -79,8 +76,8 @@ class TransporteColeTarjetaMapaViewController: UIViewController, MKMapViewDelega
 			
 	}
 	
-	override func viewDidAppear(animated: Bool) {
-		super.viewDidAppear(animated)
+	override func viewWillAppear(animated: Bool) {
+		super.viewWillAppear(animated)
 		
 		armaNavegacion()
 		self.revealViewController().delegate = self
@@ -382,10 +379,5 @@ class TransporteColeTarjetaMapaViewController: UIViewController, MKMapViewDelega
 		self.removeFromParentViewController()
 		
 	}
-
-	override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 	
 }

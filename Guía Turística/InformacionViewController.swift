@@ -38,13 +38,8 @@ class InformacionViewController: UIViewController, UITableViewDataSource, UITabl
 			]
 	]
 	
-	override func viewDidLoad() {
-		super.viewDidLoad()
-		
-	}
-	
-	override func viewDidAppear(animated: Bool) {
-		super.viewDidAppear(animated)
+	override func viewWillAppear(animated: Bool) {
+		super.viewWillAppear(animated)
 		
 		armaNavegacion()
 		self.revealViewController().delegate = self
@@ -83,12 +78,8 @@ class InformacionViewController: UIViewController, UITableViewDataSource, UITabl
 		}
 		
 	}
-	
-//	func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//		return informacionSeccionesNombres[section]
-//	}
-//	
-	//MARK: UITableViewDelegate
+
+    //MARK: UITableViewDelegate
 	
 	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 		
@@ -98,14 +89,5 @@ class InformacionViewController: UIViewController, UITableViewDataSource, UITabl
 		tableView.deselectRowAtIndexPath(indexPath, animated: true)
 		
 	}
-	
-	//	func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-	//
-	//	}
-	
-	override func didReceiveMemoryWarning() {
-		super.didReceiveMemoryWarning()
-		// Dispose of any resources that can be recreated.
-	}
-	
+		
 }

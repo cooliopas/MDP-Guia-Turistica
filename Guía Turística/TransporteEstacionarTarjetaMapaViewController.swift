@@ -39,9 +39,6 @@ class TransporteEstacionarTarjetaMapaViewController: UIViewController, MKMapView
 			
 			mapaView.delegate = self
 			
-			statusLabel.layer.cornerRadius = 7
-			statusLabel.clipsToBounds = true
-
 			if !actualizoRegion {
 			
 				mapaView.setRegion(MKCoordinateRegionMake(CLLocationCoordinate2DMake(-38.000125, -57.549382), MKCoordinateSpanMake(0.01, 0.01)), animated: false)
@@ -52,8 +49,8 @@ class TransporteEstacionarTarjetaMapaViewController: UIViewController, MKMapView
 			
 	}
 	
-	override func viewDidAppear(animated: Bool) {
-		super.viewDidAppear(animated)
+	override func viewWillAppear(animated: Bool) {
+		super.viewWillAppear(animated)
 		
 		armaNavegacion()
 		self.revealViewController().delegate = self
@@ -294,9 +291,4 @@ class TransporteEstacionarTarjetaMapaViewController: UIViewController, MKMapView
 		
 	}
 
-	override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-	
 }

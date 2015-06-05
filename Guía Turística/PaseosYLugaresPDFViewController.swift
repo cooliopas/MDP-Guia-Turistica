@@ -25,8 +25,8 @@ class PaseosYLugaresPDFViewController: UIViewController, UIWebViewDelegate, UIAl
 		
     }
 
-	override func viewDidAppear(animated: Bool) {
-		super.viewDidAppear(animated)
+	override func viewWillAppear(animated: Bool) {
+		super.viewWillAppear(animated)
 		
 		armaNavegacion()
 		self.revealViewController().delegate = self
@@ -52,8 +52,4 @@ class PaseosYLugaresPDFViewController: UIViewController, UIWebViewDelegate, UIAl
 		return true
 	}
 	
-	override func didReceiveMemoryWarning() {
-		super.didReceiveMemoryWarning()
-	}
-
 }

@@ -39,9 +39,6 @@ class TransporteColeRecorridosMapaViewController: UIViewController, MKMapViewDel
 		}
 		
 		mapaView.delegate = self
-		
-		statusLabel.layer.cornerRadius = 7
-		statusLabel.clipsToBounds = true
 
 // leo recorrido de ida
 		
@@ -67,16 +64,13 @@ class TransporteColeRecorridosMapaViewController: UIViewController, MKMapViewDel
 
 			annotationInicioIda.coordinate = inicioIda
 			annotationInicioIda.title = "Inicio recorrido de ida"
-//			annotationInicioIda.subtitle = ""
 			
 			annotationFinIda.coordinate = finIda
 			annotationFinIda.title = "Final recorrido de ida"
-//			annotationFinIda.subtitle = ""
 			
 		} else {
 			
 			muestraError("Ocurrío un error al leer los recorridos.",volver: 1)
-//			println("Error leyendo recorrido ida")
 			
 		}
 		
@@ -104,16 +98,13 @@ class TransporteColeRecorridosMapaViewController: UIViewController, MKMapViewDel
 				
 				annotationInicioVuelta.coordinate = inicioVuelta
 				annotationInicioVuelta.title = "Inicio recorrido de vuelta"
-//				annotationInicioVuelta.subtitle = ""
 				
 				annotationFinVuelta.coordinate = finVuelta
 				annotationFinVuelta.title = "Fin recorrido de vuelta"
-//				annotationFinVuelta.subtitle = ""
 				
 		} else {
 			
 			muestraError("Ocurrío un error al leer los recorridos.",volver: 1)
-//			println("Error leyendo recorrido vuelta")
 			
 		}
 		
@@ -154,8 +145,8 @@ class TransporteColeRecorridosMapaViewController: UIViewController, MKMapViewDel
 		
 	}
 	
-	override func viewDidAppear(animated: Bool) {
-		super.viewDidAppear(animated)
+	override func viewWillAppear(animated: Bool) {
+		super.viewWillAppear(animated)
 		
 		armaNavegacion()
 		self.revealViewController().delegate = self
@@ -199,9 +190,4 @@ class TransporteColeRecorridosMapaViewController: UIViewController, MKMapViewDel
 		
 	}
 
-	override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-	
 }

@@ -29,8 +29,8 @@ class TransporteEstacionarInfoWebViewController: UIViewController, UIWebViewDele
 		
     }
 
-	override func viewDidAppear(animated: Bool) {
-		super.viewDidAppear(animated)
+	override func viewWillAppear(animated: Bool) {
+		super.viewWillAppear(animated)
 		
 		armaNavegacion()
 		self.revealViewController().delegate = self
@@ -91,10 +91,6 @@ class TransporteEstacionarInfoWebViewController: UIViewController, UIWebViewDele
 				
 		if self.revealViewController() != nil { IJProgressView.shared.hideProgressView() }
 		
-	}
-
-	override func didReceiveMemoryWarning() {
-		super.didReceiveMemoryWarning()
 	}
 
 }

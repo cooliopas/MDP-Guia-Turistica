@@ -43,26 +43,11 @@ class InformacionMovilPolicialViewController: UIViewController, CLLocationManage
 			detectandoLabel.text = "No hay conección a Internet."
 			
 		}
-		
-		emergenciaView.alpha = 0
-		emergenciaView.userInteractionEnabled = false
-		emergenciaView.layer.cornerRadius = 5
-
-		telefonosView.layer.cornerRadius = 5
-		
-		comisariaTitulo.alpha = 0
-		comisariaDetalle.alpha = 0
-		comisariaBoton.alpha = 0
-		
-		emergenciaBoton.titleLabel?.adjustsFontSizeToFitWidth = true
-		emergenciaBoton.titleLabel?.minimumScaleFactor = 0.5
-		
-		detectandoView.layer.cornerRadius = 5
-
+				
 	}
 	
-	override func viewDidAppear(animated: Bool) {
-		super.viewDidAppear(animated)
+	override func viewWillAppear(animated: Bool) {
+		super.viewWillAppear(animated)
 		
 		armaNavegacion()
 		self.revealViewController().delegate = self
@@ -328,11 +313,6 @@ class InformacionMovilPolicialViewController: UIViewController, CLLocationManage
 		
 		self.removeFromParentViewController()
 		
-	}
-	
-	override func didReceiveMemoryWarning() {
-		super.didReceiveMemoryWarning()
-		// Dispose of any resources that can be recreated.
 	}
 	
 }

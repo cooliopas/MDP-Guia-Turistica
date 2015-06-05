@@ -34,9 +34,6 @@ class InformacionWiFiViewController: UIViewController, MKMapViewDelegate, CLLoca
 
 			mapaView.delegate = self
 			
-			statusLabel.layer.cornerRadius = 7
-			statusLabel.clipsToBounds = true
-
 			if !actualizoRegion {
 				
 				mapaView.setRegion(MKCoordinateRegionMake(CLLocationCoordinate2DMake(-37.992820,-57.583932), MKCoordinateSpanMake(0.05, 0.05)), animated: false)
@@ -47,8 +44,8 @@ class InformacionWiFiViewController: UIViewController, MKMapViewDelegate, CLLoca
 			
 	}
 	
-	override func viewDidAppear(animated: Bool) {
-		super.viewDidAppear(animated)
+	override func viewWillAppear(animated: Bool) {
+		super.viewWillAppear(animated)
 		
 		armaNavegacion()
 		self.revealViewController().delegate = self
@@ -227,11 +224,6 @@ class InformacionWiFiViewController: UIViewController, MKMapViewDelegate, CLLoca
 		
 		self.removeFromParentViewController()
 		
-	}
-	
-	override func didReceiveMemoryWarning() {
-		super.didReceiveMemoryWarning()
-		// Dispose of any resources that can be recreated.
 	}
 	
 }

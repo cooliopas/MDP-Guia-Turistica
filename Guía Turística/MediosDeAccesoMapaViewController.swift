@@ -36,17 +36,13 @@ class MediosDeAccesoMapaViewController: UIViewController, MKMapViewDelegate, CLL
 			}
 			
 			mapaView.delegate = self
-
-			mapaPasoAPasoBoton.layer.cornerRadius = 5
-			sinUbicacionLabel.layer.cornerRadius = 7
-			sinUbicacionLabel.clipsToBounds = true
 			
 		}
 		
 	}
 	
-	override func viewDidAppear(animated: Bool) {
-		super.viewDidAppear(animated)
+	override func viewWillAppear(animated: Bool) {
+		super.viewWillAppear(animated)
 		
 		armaNavegacion()
 		self.revealViewController().delegate = self
@@ -263,10 +259,5 @@ class MediosDeAccesoMapaViewController: UIViewController, MKMapViewDelegate, CLL
 		self.removeFromParentViewController()
 		
 	}
-
-	override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 	
 }

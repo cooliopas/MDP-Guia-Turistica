@@ -11,10 +11,7 @@ import UIKit
 class ModeloBusquedaResultadosCellTableViewCell: UITableViewCell {
 
 	@IBOutlet weak var imagen: UIImageView!
-//	@IBOutlet weak var nombre: UILabel!
-//	@IBOutlet weak var categoriaNombre: UILabel!
-//	@IBOutlet weak var direccion: UILabel!
-//	@IBOutlet weak var distancia: UILabel!
+    @IBOutlet weak var imagenWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var datos: UIView!
     
 }

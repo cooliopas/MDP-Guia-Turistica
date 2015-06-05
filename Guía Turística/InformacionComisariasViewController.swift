@@ -89,8 +89,8 @@ class InformacionComisariasViewController: UIViewController, MKMapViewDelegate, 
 		
 	}
 	
-	override func viewDidAppear(animated: Bool) {
-		super.viewDidAppear(animated)
+	override func viewWillAppear(animated: Bool) {
+		super.viewWillAppear(animated)
 		
 		armaNavegacion()
 		self.revealViewController().delegate = self
@@ -297,11 +297,6 @@ class InformacionComisariasViewController: UIViewController, MKMapViewDelegate, 
 		
 		self.removeFromParentViewController()
 		
-	}
-	
-	override func didReceiveMemoryWarning() {
-		super.didReceiveMemoryWarning()
-		// Dispose of any resources that can be recreated.
 	}
 	
 }

@@ -132,21 +132,29 @@ class Lugar {
 						
 						if error == nil {
 							
-							nuevoLugar.fotoCache = UIImage(data: data)
+                            if let fotoCache = UIImage(data: data) {
 							
-							if nuevoLugar.row != nil {
-								
-								dispatch_async(dispatch_get_main_queue(), {
-									
-									if let cellVisible = nuevoLugar.tabla!.cellForRowAtIndexPath(NSIndexPath(forRow: nuevoLugar.row!, inSection: 0)) as? MuseosResultadosMuseoCellTableViewCell {
-										cellVisible.imagen.image = nuevoLugar.fotoCache
-										cellVisible.imagen.frame.size.width = 100
-										cellVisible.imagen.frame.size.height = 80
-									}
-								})
-								
-							}
-							
+                                nuevoLugar.fotoCache = fotoCache
+                                
+                                if nuevoLugar.row != nil {
+                                    
+                                    dispatch_async(dispatch_get_main_queue(), {
+                                        
+                                        if let cellVisible = nuevoLugar.tabla!.cellForRowAtIndexPath(NSIndexPath(forRow: nuevoLugar.row!, inSection: 0)) as? ModeloBusquedaResultadosCellTableViewCell {
+                                            cellVisible.imagen.image = nuevoLugar.fotoCache
+                                            cellVisible.imagen.frame.size.width = 100
+                                            cellVisible.imagen.frame.size.height = 80
+                                        }
+                                    })
+                                    
+                                }
+   
+                            } else {
+                                
+                                nuevoLugar.foto = ""
+                                
+                            }
+                                
 						} else {
 							
 //							println("Error para bajar la imagen")
@@ -482,14 +490,14 @@ class Lugar {
             
                 if dato["boton"]! == "" {
                 
-                    let label = UILabel(frame: CGRect(x: 0, y: yActual + (dato["paddingTop"]! as! CGFloat), width: view.frame.size.width, height: 40))
+                    let label = UILabel(frame: CGRect(x: 0, y: yActual + (dato["paddingTop"]! as! CGFloat), width: view.frame.size.width, height: (dato["lineas"]! as! Int) > 1 ? 40 : 20))
                     label.font = dato["font"]! as! UIFont
                     label.textColor = dato["color"]! as! UIColor
                     label.numberOfLines = dato["lineas"]! as! Int
                     label.text = dato["texto"]! as? String
                     label.adjustsFontSizeToFitWidth = true
                     label.minimumScaleFactor = 0.7
-                    label.frame.size = label.sizeThatFits(CGSize(width: view.frame.size.width, height: 80))
+                    if (dato["lineas"]! as! Int) > 1 { label.frame.size = label.sizeThatFits(CGSize(width: view.frame.size.width, height: 80)) }
                     view.addSubview(label)
                     
                     yActual += label.frame.size.height + (dato["paddingTop"]! as! CGFloat)

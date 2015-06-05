@@ -89,15 +89,8 @@ class TransporteEstacionarZonaViewController: UIViewController, MKMapViewDelegat
 				
 			}
 
-			sinUbicacionLabel.layer.cornerRadius = 7
-			sinUbicacionLabel.clipsToBounds = true
-
-			labelVerificando.layer.cornerRadius = 10
-			labelVerificando.clipsToBounds = true
 			labelVerificando.backgroundColor = UIColor.clearColor()
 			labelVerificando.layer.backgroundColor = UIColor(red: 0.454775, green: 0.602937, blue: 0.787375, alpha: 1).CGColor
-
-			botonUbicacion.layer.cornerRadius = 10
 
 			mapaView.setRegion(MKCoordinateRegionMake(CLLocationCoordinate2DMake(-38.000125, -57.549382), MKCoordinateSpanMake(0.007, 0.007)), animated: false)
 
@@ -105,8 +98,8 @@ class TransporteEstacionarZonaViewController: UIViewController, MKMapViewDelegat
 			
 	}
 	
-	override func viewDidAppear(animated: Bool) {
-		super.viewDidAppear(animated)
+	override func viewWillAppear(animated: Bool) {
+		super.viewWillAppear(animated)
 		
 		armaNavegacion()
 		self.revealViewController().delegate = self
@@ -274,10 +267,5 @@ class TransporteEstacionarZonaViewController: UIViewController, MKMapViewDelegat
 		self.removeFromParentViewController()
 		
 	}
-
-	override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 	
 }

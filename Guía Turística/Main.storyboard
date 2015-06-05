@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TcJ-IA-Ugj">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
-        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -383,7 +382,7 @@ Lugares</string>
                             <constraint firstItem="v3O-yE-Y9w" firstAttribute="top" secondItem="cnN-oK-iBU" secondAttribute="bottom" constant="365" placeholder="YES" id="Xch-IU-vQh"/>
                             <constraint firstItem="eJM-E9-Yev" firstAttribute="leading" secondItem="A1P-p6-2Rj" secondAttribute="leadingMargin" constant="91" placeholder="YES" id="YFx-d9-DTE"/>
                             <constraint firstItem="vNG-8G-xBT" firstAttribute="top" secondItem="cnN-oK-iBU" secondAttribute="top" constant="44" placeholder="YES" id="ate-Bg-a54"/>
-                            <constraint firstItem="2la-9P-FlG" firstAttribute="leading" secondItem="A1P-p6-2Rj" secondAttribute="leadingMargin" constant="-16" placeholder="YES" id="bba-aN-kKh"/>
+                            <constraint firstItem="2la-9P-FlG" firstAttribute="leading" secondItem="A1P-p6-2Rj" secondAttribute="leading" placeholder="YES" id="bba-aN-kKh"/>
                             <constraint firstItem="WBq-cR-yyH" firstAttribute="leading" secondItem="A1P-p6-2Rj" secondAttribute="leadingMargin" constant="198" placeholder="YES" id="eDS-fO-G3U"/>
                             <constraint firstItem="v3O-yE-Y9w" firstAttribute="leading" secondItem="A1P-p6-2Rj" secondAttribute="leadingMargin" constant="-16" placeholder="YES" id="gck-sa-wrK"/>
                             <constraint firstItem="Ipa-oU-Iq5" firstAttribute="top" secondItem="cnN-oK-iBU" secondAttribute="bottom" constant="258" placeholder="YES" id="ikV-cX-jZO"/>
@@ -454,9 +453,9 @@ Lugares</string>
                         <color key="backgroundColor" red="0.86970758438110352" green="0.92044973373413086" blue="0.97994726896286011" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="0Sh-9s-oZd" firstAttribute="top" secondItem="3xq-yc-RXw" secondAttribute="top" constant="20" id="7Zb-mS-TPl"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="0Sh-9s-oZd" secondAttribute="trailing" constant="-16" id="amu-aO-Kag"/>
+                            <constraint firstItem="0Sh-9s-oZd" firstAttribute="width" secondItem="3xq-yc-RXw" secondAttribute="width" id="Qsb-ZH-mC7"/>
                             <constraint firstItem="FQa-Gd-nFp" firstAttribute="top" secondItem="0Sh-9s-oZd" secondAttribute="bottom" id="c36-jY-TMP"/>
-                            <constraint firstItem="0Sh-9s-oZd" firstAttribute="leading" secondItem="3xq-yc-RXw" secondAttribute="leadingMargin" constant="-16" id="sIZ-rL-YzN"/>
+                            <constraint firstItem="0Sh-9s-oZd" firstAttribute="leading" secondItem="3xq-yc-RXw" secondAttribute="leading" id="sIZ-rL-YzN"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
@@ -493,10 +492,10 @@ Lugares</string>
                         <constraints>
                             <constraint firstItem="u7C-Fn-hbt" firstAttribute="top" secondItem="I7F-VZ-OBF" secondAttribute="bottom" id="OzW-GR-K2q"/>
                             <constraint firstItem="7Mn-5T-NmF" firstAttribute="top" secondItem="0Pd-4H-LfY" secondAttribute="bottom" id="fgt-3v-YWj"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="0Pd-4H-LfY" secondAttribute="trailing" constant="-16" id="mHs-cg-h4F"/>
-                            <constraint firstItem="0Pd-4H-LfY" firstAttribute="leading" secondItem="2eE-PB-Nh4" secondAttribute="leadingMargin" constant="-16" id="p2Q-Yb-xpx"/>
+                            <constraint firstItem="0Pd-4H-LfY" firstAttribute="leading" secondItem="2eE-PB-Nh4" secondAttribute="leading" id="p2Q-Yb-xpx"/>
                             <constraint firstAttribute="width" secondItem="u7C-Fn-hbt" secondAttribute="width" id="phm-Qg-lNd"/>
                             <constraint firstItem="0Pd-4H-LfY" firstAttribute="top" secondItem="u7C-Fn-hbt" secondAttribute="bottom" constant="2" id="xKP-rT-84v"/>
+                            <constraint firstItem="0Pd-4H-LfY" firstAttribute="width" secondItem="2eE-PB-Nh4" secondAttribute="width" id="xv9-II-GWG"/>
                             <constraint firstAttribute="centerX" secondItem="u7C-Fn-hbt" secondAttribute="centerX" id="xzF-zZ-AHM"/>
                         </constraints>
                     </view>
@@ -541,6 +540,11 @@ Lugares</string>
                                 <state key="normal" title="Ver indicaciones paso a paso (GPS)">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                 </variation>
@@ -549,7 +553,7 @@ Lugares</string>
                                     <action selector="mostrarMapa" destination="otb-Zg-cDg" eventType="touchUpInside" id="Vgd-Kq-xOy"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No fue posible detectar tu ubicación." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lST-4a-Ynt">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No fue posible detectar tu ubicación." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lST-4a-Ynt">
                                 <rect key="frame" x="16" y="532" width="288" height="28"/>
                                 <color key="backgroundColor" red="0.99819964169999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -558,6 +562,11 @@ Lugares</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="7"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.86970758438110352" green="0.92044973373413086" blue="0.97994726896286011" alpha="1" colorSpace="calibratedRGB"/>
@@ -568,12 +577,12 @@ Lugares</string>
                             <constraint firstAttribute="width" secondItem="wnj-Ie-ohu" secondAttribute="width" id="Qi4-Aq-ap7"/>
                             <constraint firstItem="HFh-dC-4ER" firstAttribute="top" secondItem="wcR-90-Vfc" secondAttribute="bottom" id="TWf-6D-Ey7"/>
                             <constraint firstItem="HFh-dC-4ER" firstAttribute="top" secondItem="skm-6E-KNh" secondAttribute="bottom" constant="23" id="Uvd-XR-nC1"/>
-                            <constraint firstItem="wcR-90-Vfc" firstAttribute="leading" secondItem="0bT-FF-yrM" secondAttribute="leadingMargin" constant="-16" id="XqW-9Q-Spy"/>
                             <constraint firstItem="lST-4a-Ynt" firstAttribute="leading" secondItem="0bT-FF-yrM" secondAttribute="leadingMargin" id="bju-TS-0bU"/>
                             <constraint firstItem="wcR-90-Vfc" firstAttribute="top" secondItem="wnj-Ie-ohu" secondAttribute="bottom" constant="2" id="cM0-oE-dJ2"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="wcR-90-Vfc" secondAttribute="trailing" constant="-16" id="dn2-86-Ei4"/>
                             <constraint firstAttribute="centerX" secondItem="wnj-Ie-ohu" secondAttribute="centerX" id="jnV-dq-LLJ"/>
                             <constraint firstItem="HFh-dC-4ER" firstAttribute="top" secondItem="lST-4a-Ynt" secondAttribute="bottom" constant="8" id="neM-Gu-Hlb"/>
+                            <constraint firstAttribute="width" secondItem="wcR-90-Vfc" secondAttribute="width" id="otr-WL-XDy"/>
+                            <constraint firstItem="wcR-90-Vfc" firstAttribute="leading" secondItem="0bT-FF-yrM" secondAttribute="leading" id="ys1-C5-iTo"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
@@ -636,10 +645,10 @@ Lugares</string>
                         <color key="backgroundColor" red="0.86970758438110352" green="0.92044973373413086" blue="0.97994726896286011" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="NnC-vD-1As" secondAttribute="centerX" id="JdR-58-JbG"/>
+                            <constraint firstAttribute="width" secondItem="wn7-JS-QYl" secondAttribute="width" id="V4a-x1-Hcm"/>
                             <constraint firstItem="P6j-m2-xZc" firstAttribute="top" secondItem="wn7-JS-QYl" secondAttribute="bottom" id="bsF-n7-Zp0"/>
                             <constraint firstItem="NnC-vD-1As" firstAttribute="top" secondItem="nSW-Ut-7bE" secondAttribute="bottom" id="fKb-4N-xSV"/>
-                            <constraint firstItem="wn7-JS-QYl" firstAttribute="leading" secondItem="2rP-jD-bC7" secondAttribute="leadingMargin" constant="-16" id="iHo-ZO-0s2"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="wn7-JS-QYl" secondAttribute="trailing" constant="-16" id="jEo-uh-LhX"/>
+                            <constraint firstItem="wn7-JS-QYl" firstAttribute="leading" secondItem="2rP-jD-bC7" secondAttribute="leading" id="iHo-ZO-0s2"/>
                             <constraint firstAttribute="width" secondItem="NnC-vD-1As" secondAttribute="width" id="mjz-ck-v89"/>
                             <constraint firstItem="wn7-JS-QYl" firstAttribute="top" secondItem="NnC-vD-1As" secondAttribute="bottom" constant="2" id="wDc-DC-VZg"/>
                         </constraints>
@@ -672,10 +681,10 @@ Lugares</string>
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="C5e-Vw-D8j">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                                <rect key="frame" x="0.0" y="65" width="320" height="503"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="lugarFotos" rowHeight="80" id="fK3-91-BVh" customClass="ModeloBusquedaLugarFotosTableViewCell" customModule="Gui_a_Turi_stica" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="fotos" rowHeight="80" id="fK3-91-BVh" customClass="ModeloBusquedaLugarFotosTableViewCell" customModule="Gui_a_Turi_stica" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fK3-91-BVh" id="WNb-WY-BVF">
@@ -702,7 +711,7 @@ Lugares</string>
                                             <outlet property="foto" destination="mMW-Jg-OwD" id="1KV-sQ-nwD"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="lugarDatos" id="8uQ-NC-yUh" customClass="ModeloBusquedaLugarDatosTableViewCell" customModule="Gui_a_Turi_stica" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="datos" id="8uQ-NC-yUh" customClass="ModeloBusquedaLugarDatosTableViewCell" customModule="Gui_a_Turi_stica" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8uQ-NC-yUh" id="tY5-O8-mv2">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -723,14 +732,14 @@ Lugares</string>
                                             <outlet property="datos" destination="FVU-JL-c4K" id="A06-qZ-Kqr"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="lugarMapa" id="rse-dY-j1T" customClass="ModeloBusquedaLugarMapaTableViewCell" customModule="Gui_a_Turi_stica" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="mapa" id="rse-dY-j1T" customClass="ModeloBusquedaLugarMapaTableViewCell" customModule="Gui_a_Turi_stica" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rse-dY-j1T" id="1UC-KX-Xu7">
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.80784313725490198" green="0.88235294117647056" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="lugarInformacion" rowHeight="65" id="GpO-Fd-TZ0" customClass="ModeloBusquedaLugarInfoTableViewCell" customModule="Gui_a_Turi_stica" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="informacion" rowHeight="65" id="GpO-Fd-TZ0" customClass="ModeloBusquedaLugarInfoTableViewCell" customModule="Gui_a_Turi_stica" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GpO-Fd-TZ0" id="iZk-TL-T02">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -792,7 +801,7 @@ Lugares</string>
                                             <outlet property="texto" destination="aUN-Jy-Jun" id="osM-Io-wOK"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="lugarObservaciones" rowHeight="65" id="crB-pN-7zi" customClass="ModeloBusquedaLugarObservacionesTableViewCell" customModule="Gui_a_Turi_stica" customModuleProvider="target">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="observaciones" rowHeight="65" id="crB-pN-7zi" customClass="ModeloBusquedaLugarObservacionesTableViewCell" customModule="Gui_a_Turi_stica" customModuleProvider="target">
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="crB-pN-7zi" id="II8-7X-Zse">
                                             <autoresizingMask key="autoresizingMask"/>
@@ -947,21 +956,15 @@ Lugares</string>
                             <constraint firstItem="Lda-jC-gis" firstAttribute="top" secondItem="wIJ-hx-REk" secondAttribute="bottom" id="Qln-00-PmL"/>
                             <constraint firstItem="MCe-6t-7Re" firstAttribute="leading" secondItem="Gdt-Rs-RzL" secondAttribute="leadingMargin" id="Reb-Dn-PeB"/>
                             <constraint firstItem="b2A-Be-5jb" firstAttribute="top" secondItem="od0-l1-wPX" secondAttribute="bottom" constant="40" id="SaT-0a-KtU"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="C5e-Vw-D8j" secondAttribute="trailing" constant="-16" id="Tvj-Ui-Ngf"/>
-                            <constraint firstItem="C5e-Vw-D8j" firstAttribute="top" secondItem="Wzx-Fl-k2M" secondAttribute="bottom" id="cPO-Rb-Ydb"/>
+                            <constraint firstItem="C5e-Vw-D8j" firstAttribute="top" secondItem="Wzx-Fl-k2M" secondAttribute="bottom" constant="1" id="cPO-Rb-Ydb"/>
                             <constraint firstItem="b2A-Be-5jb" firstAttribute="top" secondItem="C5e-Vw-D8j" secondAttribute="bottom" id="cjr-lw-f82"/>
                             <constraint firstItem="Wzx-Fl-k2M" firstAttribute="top" secondItem="wIJ-hx-REk" secondAttribute="bottom" id="d99-rR-nTL"/>
                             <constraint firstItem="Wzx-Fl-k2M" firstAttribute="width" secondItem="Gdt-Rs-RzL" secondAttribute="width" id="djk-Bh-Ol2"/>
-                            <constraint firstItem="C5e-Vw-D8j" firstAttribute="leading" secondItem="Gdt-Rs-RzL" secondAttribute="leadingMargin" constant="-16" id="eCM-mL-b5l"/>
+                            <constraint firstItem="C5e-Vw-D8j" firstAttribute="leading" secondItem="Gdt-Rs-RzL" secondAttribute="leading" id="eCM-mL-b5l"/>
                             <constraint firstAttribute="centerX" secondItem="od0-l1-wPX" secondAttribute="centerX" id="g5X-iZ-VFV"/>
                             <constraint firstAttribute="centerX" secondItem="Wzx-Fl-k2M" secondAttribute="centerX" id="k7p-S2-UfA"/>
-                            <constraint firstAttribute="width" secondItem="C5e-Vw-D8j" secondAttribute="width" id="mbr-rN-dMh"/>
+                            <constraint firstItem="C5e-Vw-D8j" firstAttribute="width" secondItem="Gdt-Rs-RzL" secondAttribute="width" id="oCn-4P-Sde"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="mbr-rN-dMh"/>
-                            </mask>
-                        </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
@@ -1050,12 +1053,12 @@ Desde la Ciudad Autónoma de Buenos Aires:
                             <constraint firstItem="cWg-Ze-nmj" firstAttribute="leading" secondItem="fam-dy-Her" secondAttribute="leadingMargin" id="6tX-G1-aRO"/>
                             <constraint firstItem="IKW-vn-HfK" firstAttribute="top" secondItem="z7V-eI-z6z" secondAttribute="bottom" id="CpV-bf-F9u"/>
                             <constraint firstItem="YiA-iF-pQt" firstAttribute="top" secondItem="cWg-Ze-nmj" secondAttribute="bottom" constant="8" symbolic="YES" id="Jn5-Z3-hWz"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="YiA-iF-pQt" secondAttribute="trailing" constant="-16" id="Kbj-Zl-2Xp"/>
                             <constraint firstItem="LO7-nh-KGh" firstAttribute="top" secondItem="YiA-iF-pQt" secondAttribute="bottom" id="Ogq-EM-MyO"/>
                             <constraint firstAttribute="centerX" secondItem="IKW-vn-HfK" secondAttribute="centerX" id="QkY-q8-Ws4"/>
+                            <constraint firstItem="YiA-iF-pQt" firstAttribute="width" secondItem="fam-dy-Her" secondAttribute="width" id="aPJ-n8-AOF"/>
                             <constraint firstItem="cWg-Ze-nmj" firstAttribute="trailing" secondItem="fam-dy-Her" secondAttribute="trailingMargin" id="ag7-CY-ekp"/>
                             <constraint firstItem="cWg-Ze-nmj" firstAttribute="top" secondItem="IKW-vn-HfK" secondAttribute="bottom" constant="8" id="gdy-OD-Rrz"/>
-                            <constraint firstItem="YiA-iF-pQt" firstAttribute="leading" secondItem="fam-dy-Her" secondAttribute="leadingMargin" constant="-16" id="t2I-r9-lu7"/>
+                            <constraint firstItem="YiA-iF-pQt" firstAttribute="leading" secondItem="fam-dy-Her" secondAttribute="leading" id="t2I-r9-lu7"/>
                             <constraint firstAttribute="width" secondItem="IKW-vn-HfK" secondAttribute="width" id="zUR-Mg-45j"/>
                         </constraints>
                     </view>
@@ -1166,7 +1169,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iBB-mO-JxJ">
-                                <rect key="frame" x="255" y="236" width="49" height="30"/>
+                                <rect key="frame" x="263" y="232" width="49" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="49" id="NNk-e0-sZb"/>
                                 </constraints>
@@ -1178,13 +1181,13 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label Status" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.70000000000000018" translatesAutoresizingMaskIntoConstraints="NO" id="DQT-3e-e8S">
-                                <rect key="frame" x="16" y="267" width="288" height="20"/>
+                                <rect key="frame" x="16" y="265" width="288" height="20"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" alpha="0.0" contentMode="scaleToFill" restorationIdentifier="tablaResultados" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="sEE-hM-nSg">
-                                <rect key="frame" x="0.0" y="267" width="320" height="301"/>
+                                <rect key="frame" x="0.0" y="265" width="320" height="303"/>
                                 <color key="separatorColor" red="0.45477524399757385" green="0.60293745994567871" blue="0.78737491369247437" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" reuseIdentifier="lugar" rowHeight="80" id="R6g-Tr-E4M" customClass="ModeloBusquedaResultadosCellTableViewCell" customModule="Gui_a_Turi_stica" customModuleProvider="target">
@@ -1192,7 +1195,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="R6g-Tr-E4M" id="G0H-rE-Bky">
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Muv-8L-nJL">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dummy-hotel" translatesAutoresizingMaskIntoConstraints="NO" id="Muv-8L-nJL">
                                                     <rect key="frame" x="0.0" y="0.0" width="100" height="80"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="80" id="ELl-9n-RB9"/>
@@ -1216,6 +1219,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                         <connections>
                                             <outlet property="datos" destination="3B2-8g-11r" id="oyc-cI-lyP"/>
                                             <outlet property="imagen" destination="Muv-8L-nJL" id="DNS-7c-uBD"/>
+                                            <outlet property="imagenWidthConstraint" destination="vag-wi-Ib0" id="tDI-e5-UlA"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1227,21 +1231,21 @@ Desde la Ciudad Autónoma de Buenos Aires:
                         </subviews>
                         <color key="backgroundColor" red="0.86970758438110352" green="0.92044973373413086" blue="0.97994726896286011" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstAttribute="width" secondItem="sEE-hM-nSg" secondAttribute="width" id="59Y-v7-rt6"/>
                             <constraint firstAttribute="trailingMargin" secondItem="DQT-3e-e8S" secondAttribute="trailing" id="BtL-0t-iLF"/>
-                            <constraint firstItem="iBB-mO-JxJ" firstAttribute="trailing" secondItem="IAT-xk-FUV" secondAttribute="trailingMargin" id="GIY-P7-ktz"/>
+                            <constraint firstItem="iBB-mO-JxJ" firstAttribute="trailing" secondItem="IAT-xk-FUV" secondAttribute="trailing" constant="-8" id="GIY-P7-ktz"/>
                             <constraint firstAttribute="centerX" secondItem="oTN-dl-xw5" secondAttribute="centerX" id="Jwl-WR-6fv"/>
                             <constraint firstItem="oTN-dl-xw5" firstAttribute="top" secondItem="41J-xE-Qhc" secondAttribute="bottom" id="Lg0-Mi-P2J"/>
-                            <constraint firstItem="sEE-hM-nSg" firstAttribute="top" secondItem="iBB-mO-JxJ" secondAttribute="bottom" constant="1" id="Nhm-yE-q0g"/>
-                            <constraint firstItem="sEE-hM-nSg" firstAttribute="leading" secondItem="IAT-xk-FUV" secondAttribute="leadingMargin" constant="-16" id="PMG-nS-i6D"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="qeq-zw-DwD" secondAttribute="trailing" constant="-16" id="chk-Fu-aUd"/>
-                            <constraint firstItem="iBB-mO-JxJ" firstAttribute="top" secondItem="qeq-zw-DwD" secondAttribute="bottom" constant="8" id="dy8-mb-Mv4"/>
-                            <constraint firstItem="qeq-zw-DwD" firstAttribute="leading" secondItem="IAT-xk-FUV" secondAttribute="leadingMargin" constant="-16" id="gM2-6x-xa4"/>
+                            <constraint firstItem="sEE-hM-nSg" firstAttribute="top" secondItem="iBB-mO-JxJ" secondAttribute="bottom" constant="3" id="Nhm-yE-q0g"/>
+                            <constraint firstItem="sEE-hM-nSg" firstAttribute="leading" secondItem="IAT-xk-FUV" secondAttribute="leading" id="PMG-nS-i6D"/>
+                            <constraint firstItem="iBB-mO-JxJ" firstAttribute="top" secondItem="qeq-zw-DwD" secondAttribute="bottom" constant="4" id="dy8-mb-Mv4"/>
+                            <constraint firstItem="qeq-zw-DwD" firstAttribute="leading" secondItem="IAT-xk-FUV" secondAttribute="leading" id="gM2-6x-xa4"/>
+                            <constraint firstAttribute="width" secondItem="qeq-zw-DwD" secondAttribute="width" id="h26-aw-HbV"/>
                             <constraint firstItem="DQT-3e-e8S" firstAttribute="leading" secondItem="IAT-xk-FUV" secondAttribute="leadingMargin" id="lkg-V1-mC6"/>
                             <constraint firstItem="j1b-yb-Ril" firstAttribute="top" secondItem="sEE-hM-nSg" secondAttribute="bottom" id="mp6-rf-FEH"/>
-                            <constraint firstItem="DQT-3e-e8S" firstAttribute="top" secondItem="iBB-mO-JxJ" secondAttribute="bottom" constant="1" id="mvs-nh-fbp"/>
+                            <constraint firstItem="DQT-3e-e8S" firstAttribute="top" secondItem="iBB-mO-JxJ" secondAttribute="bottom" constant="3" id="mvs-nh-fbp"/>
                             <constraint firstAttribute="width" secondItem="oTN-dl-xw5" secondAttribute="width" id="oph-fA-fQh"/>
                             <constraint firstItem="qeq-zw-DwD" firstAttribute="top" secondItem="oTN-dl-xw5" secondAttribute="bottom" constant="2" id="v5w-NT-2fa"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="sEE-hM-nSg" secondAttribute="trailing" constant="-16" id="y62-oR-w1N"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
@@ -1333,9 +1337,9 @@ Desde la Ciudad Autónoma de Buenos Aires:
                         </subviews>
                         <color key="backgroundColor" red="0.86970758438110352" green="0.92044973373413086" blue="0.97994726896286011" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="1UO-ss-rDe" firstAttribute="trailing" secondItem="RR4-V1-5H5" secondAttribute="trailing" id="ALF-t1-sUX"/>
                             <constraint firstAttribute="centerX" secondItem="d2O-UB-3P4" secondAttribute="centerX" id="AOF-KJ-GBH"/>
                             <constraint firstItem="1UO-ss-rDe" firstAttribute="top" secondItem="d2O-UB-3P4" secondAttribute="bottom" id="CAq-tf-WvE"/>
+                            <constraint firstAttribute="width" secondItem="1UO-ss-rDe" secondAttribute="width" id="O7K-dr-su9"/>
                             <constraint firstItem="d2O-UB-3P4" firstAttribute="top" secondItem="c4j-cI-LGR" secondAttribute="bottom" id="UXv-SU-mhP"/>
                             <constraint firstItem="NSq-6g-SA0" firstAttribute="top" secondItem="1UO-ss-rDe" secondAttribute="bottom" id="XOo-BZ-aqS"/>
                             <constraint firstItem="1UO-ss-rDe" firstAttribute="leading" secondItem="RR4-V1-5H5" secondAttribute="leading" id="ak7-8s-5Rc"/>
@@ -1346,7 +1350,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yyi-cA-wDo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="292" y="1025"/>
+            <point key="canvasLocation" x="324" y="1041"/>
         </scene>
         <!--Paseos y Lugares-->
         <scene sceneID="QiT-7L-V2K">
@@ -1405,20 +1409,20 @@ Desde la Ciudad Autónoma de Buenos Aires:
                         </subviews>
                         <color key="backgroundColor" red="0.86970758438110352" green="0.92044973373413086" blue="0.97994726896286011" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="lg6-Dz-7Ul" secondAttribute="trailing" constant="-16" id="3vG-4f-hjb"/>
-                            <constraint firstItem="lg6-Dz-7Ul" firstAttribute="leading" secondItem="jgH-nd-cfn" secondAttribute="leadingMargin" constant="-16" id="5zf-Av-MTP"/>
+                            <constraint firstItem="lg6-Dz-7Ul" firstAttribute="leading" secondItem="jgH-nd-cfn" secondAttribute="leading" id="5zf-Av-MTP"/>
                             <constraint firstItem="lg6-Dz-7Ul" firstAttribute="top" secondItem="5B9-ha-JwR" secondAttribute="bottom" id="CVl-cN-Sdl"/>
                             <constraint firstAttribute="width" secondItem="5B9-ha-JwR" secondAttribute="width" id="EC6-10-KZO"/>
                             <constraint firstItem="5B9-ha-JwR" firstAttribute="top" secondItem="3hk-BP-kBM" secondAttribute="bottom" id="JO8-TE-iIz"/>
                             <constraint firstAttribute="centerX" secondItem="5B9-ha-JwR" secondAttribute="centerX" id="QVM-JU-h20"/>
                             <constraint firstItem="Ud2-b4-3mD" firstAttribute="top" secondItem="lg6-Dz-7Ul" secondAttribute="bottom" id="qHS-Nh-C6q"/>
+                            <constraint firstAttribute="width" secondItem="lg6-Dz-7Ul" secondAttribute="width" id="xXj-hl-kIb"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tuF-5H-0xf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1342" y="1035"/>
+            <point key="canvasLocation" x="910" y="1063"/>
         </scene>
         <!--Transporte Pop View Controller-->
         <scene sceneID="A0H-Y7-8tU">
@@ -1474,539 +1478,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gio-Qf-CZ9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="326" y="664"/>
-        </scene>
-        <!--Eventos-->
-        <scene sceneID="cws-nN-8Am">
-            <objects>
-                <viewController storyboardIdentifier="congresosYEventos" title="Eventos" useStoryboardIdentifierAsRestorationIdentifier="YES" id="M9d-m1-0xi" userLabel="Eventos" customClass="CongresosYEventosViewController" customModule="Gui_a_Turi_stica" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Ikh-zz-HYl"/>
-                        <viewControllerLayoutGuide type="bottom" id="T2R-EZ-Wdf"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="bIk-Ei-lez">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8rl-HT-chu">
-                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
-                                <items>
-                                    <navigationItem title="Eventos" id="PQA-vA-rex"/>
-                                </items>
-                            </navigationBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="tablaOpciones" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="WmU-bP-U8z">
-                                <rect key="frame" x="0.0" y="64" width="320" height="162"/>
-                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="162" id="dL7-jk-Adf"/>
-                                </constraints>
-                                <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="opciones" textLabel="3py-Me-Hf2" detailTextLabel="3Oj-ZI-LpH" style="IBUITableViewCellStyleValue1" id="a7f-0c-ILa">
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="a7f-0c-ILa" id="8jC-kH-4ff">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3py-Me-Hf2">
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact">
-                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    </variation>
-                                                </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3Oj-ZI-LpH">
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact">
-                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    </variation>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="filtro" id="rcG-eR-6RI" customClass="CongresosYEventosCellFiltroTableViewCell" customModule="Gui_a_Turi_stica" customModuleProvider="target">
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rcG-eR-6RI" id="3fJ-pR-WUU">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Nombre" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R5O-UF-4l6">
-                                                    <rect key="frame" x="15" y="9" width="59" height="25"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="59" id="bIA-7J-Hoz"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact">
-                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    </variation>
-                                                </label>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Filtrar por nombre" textAlignment="right" minimumFontSize="17" clearButtonMode="always" translatesAutoresizingMaskIntoConstraints="NO" id="1bR-6g-dGc">
-                                                    <rect key="frame" x="114" y="4" width="198" height="35"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="search"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="114" y="4" width="198" height="21"/>
-                                                    </variation>
-                                                    <connections>
-                                                        <action selector="filtroNombreTextFieldAction:" destination="rcG-eR-6RI" eventType="editingDidEndOnExit" id="oTc-dI-J4j"/>
-                                                    </connections>
-                                                </textField>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="bottomMargin" secondItem="1bR-6g-dGc" secondAttribute="bottom" constant="-4" id="0UD-bn-xdp"/>
-                                                <constraint firstItem="1bR-6g-dGc" firstAttribute="trailing" secondItem="3fJ-pR-WUU" secondAttribute="trailingMargin" id="1nt-fI-BSz"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="R5O-UF-4l6" secondAttribute="bottom" constant="1" id="2IM-RK-8dq"/>
-                                                <constraint firstItem="1bR-6g-dGc" firstAttribute="leading" secondItem="R5O-UF-4l6" secondAttribute="trailing" constant="40" id="HuV-ot-UmG"/>
-                                                <constraint firstItem="R5O-UF-4l6" firstAttribute="top" secondItem="3fJ-pR-WUU" secondAttribute="topMargin" constant="1" id="kTT-sT-ebC"/>
-                                                <constraint firstItem="R5O-UF-4l6" firstAttribute="leading" secondItem="3fJ-pR-WUU" secondAttribute="leadingMargin" constant="7" id="qGD-eA-0FT"/>
-                                                <constraint firstItem="1bR-6g-dGc" firstAttribute="top" secondItem="3fJ-pR-WUU" secondAttribute="topMargin" constant="-4" id="xL7-uX-g1J"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="filtroNombreTextField" destination="1bR-6g-dGc" id="Mbs-bd-V1M"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="M9d-m1-0xi" id="Vs1-83-0BO"/>
-                                    <outlet property="delegate" destination="M9d-m1-0xi" id="5rX-kT-12z"/>
-                                </connections>
-                            </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vJa-no-LUb">
-                                <rect key="frame" x="255" y="226" width="49" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="49" id="Ja3-Hh-ic1"/>
-                                </constraints>
-                                <state key="normal" title="Buscar">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="buscar" destination="M9d-m1-0xi" eventType="touchUpInside" id="zed-5D-bYO"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No se encontraron eventos para su búsqueda" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.70000000000000018" translatesAutoresizingMaskIntoConstraints="NO" id="Ii6-u4-gij">
-                                <rect key="frame" x="16" y="257" width="266" height="36"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <tableView clipsSubviews="YES" alpha="0.0" contentMode="scaleToFill" restorationIdentifier="tablaResultados" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="m6X-U4-7OD">
-                                <rect key="frame" x="0.0" y="257" width="320" height="311"/>
-                                <color key="backgroundColor" red="0.76695811749999998" green="0.85238462690000005" blue="0.95030701159999997" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="separatorColor" red="0.45477524400000002" green="0.60293745990000003" blue="0.78737491370000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" reuseIdentifier="evento" rowHeight="90" id="aN5-rv-flM" customClass="CongresosYEventosResultadosEventoCellTableViewCell" customModule="Gui_a_Turi_stica" customModuleProvider="target">
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aN5-rv-flM" id="SKy-5I-Hda">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nombre del Evento" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999973" translatesAutoresizingMaskIntoConstraints="NO" id="qfc-AU-zdT">
-                                                    <rect key="frame" x="8" y="4" width="304" height="20"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                    <color key="textColor" red="0.45477524400000002" green="0.60293745990000003" blue="0.78737491370000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="8" y="4" width="304" height="20"/>
-                                                    </variation>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Categoría del Evento" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jDx-eW-8yI">
-                                                    <rect key="frame" x="8" y="24" width="304" height="14"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="8" y="24" width="304" height="14"/>
-                                                    </variation>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subcategoría del Evento" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="023-7C-0Je">
-                                                    <rect key="frame" x="8" y="38" width="304" height="14"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="8" y="38" width="304" height="14"/>
-                                                    </variation>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fecha del Evento" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bJ5-hQ-fHI">
-                                                    <rect key="frame" x="8" y="73" width="304" height="14"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="8" y="73" width="304" height="14"/>
-                                                    </variation>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="jDx-eW-8yI" firstAttribute="leading" secondItem="SKy-5I-Hda" secondAttribute="leadingMargin" id="7xB-p7-r2k"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="jDx-eW-8yI" secondAttribute="trailing" id="GEF-nS-s0X"/>
-                                                <constraint firstItem="bJ5-hQ-fHI" firstAttribute="leading" secondItem="SKy-5I-Hda" secondAttribute="leadingMargin" id="P7p-iR-tPd"/>
-                                                <constraint firstItem="023-7C-0Je" firstAttribute="top" secondItem="jDx-eW-8yI" secondAttribute="bottom" id="Wec-cV-gTd"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="023-7C-0Je" secondAttribute="trailing" id="YOC-VI-50e"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="bJ5-hQ-fHI" secondAttribute="trailing" id="Ymv-vr-zDA"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="bJ5-hQ-fHI" secondAttribute="bottom" constant="-6" id="Yt1-wj-0ad"/>
-                                                <constraint firstItem="qfc-AU-zdT" firstAttribute="top" secondItem="SKy-5I-Hda" secondAttribute="topMargin" constant="-4" id="Zio-Vg-qf7"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="qfc-AU-zdT" secondAttribute="trailing" id="axp-eO-hNb"/>
-                                                <constraint firstItem="qfc-AU-zdT" firstAttribute="leading" secondItem="SKy-5I-Hda" secondAttribute="leadingMargin" id="j7A-La-Fme"/>
-                                                <constraint firstItem="jDx-eW-8yI" firstAttribute="top" secondItem="qfc-AU-zdT" secondAttribute="bottom" id="ku0-M9-jdO"/>
-                                                <constraint firstItem="023-7C-0Je" firstAttribute="leading" secondItem="SKy-5I-Hda" secondAttribute="leadingMargin" id="qvl-G4-8Zc"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.76695811748504639" green="0.85238462686538696" blue="0.95030701160430908" alpha="1" colorSpace="calibratedRGB"/>
-                                        <connections>
-                                            <outlet property="categoriaNombre" destination="jDx-eW-8yI" id="LRL-Hz-Ajv"/>
-                                            <outlet property="fecha" destination="bJ5-hQ-fHI" id="NGn-Dw-Dp3"/>
-                                            <outlet property="nombre" destination="qfc-AU-zdT" id="cnA-GS-BAz"/>
-                                            <outlet property="subCategoriaNombre" destination="023-7C-0Je" id="cIh-x2-Jub"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="M9d-m1-0xi" id="4ja-Z1-cKQ"/>
-                                    <outlet property="delegate" destination="M9d-m1-0xi" id="hJ4-LL-NmT"/>
-                                </connections>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" red="0.86970758438110352" green="0.92044973373413086" blue="0.97994726896286011" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="vJa-no-LUb" firstAttribute="top" secondItem="WmU-bP-U8z" secondAttribute="bottom" id="2Cj-QE-bKZ"/>
-                            <constraint firstItem="Ii6-u4-gij" firstAttribute="top" secondItem="vJa-no-LUb" secondAttribute="bottom" constant="1" id="2if-ju-dE7"/>
-                            <constraint firstItem="m6X-U4-7OD" firstAttribute="leading" secondItem="bIk-Ei-lez" secondAttribute="leadingMargin" constant="-16" id="58c-RL-AwV"/>
-                            <constraint firstItem="8rl-HT-chu" firstAttribute="top" secondItem="Ikh-zz-HYl" secondAttribute="bottom" id="YBy-Pg-m8R"/>
-                            <constraint firstItem="vJa-no-LUb" firstAttribute="trailing" secondItem="bIk-Ei-lez" secondAttribute="trailingMargin" id="eM7-bZ-OsZ"/>
-                            <constraint firstItem="m6X-U4-7OD" firstAttribute="top" secondItem="vJa-no-LUb" secondAttribute="bottom" constant="1" id="ebx-LE-TKg"/>
-                            <constraint firstItem="WmU-bP-U8z" firstAttribute="top" secondItem="8rl-HT-chu" secondAttribute="bottom" id="fNh-J5-mZM"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="m6X-U4-7OD" secondAttribute="trailing" constant="-16" id="fcQ-Am-82k"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Ii6-u4-gij" secondAttribute="trailing" constant="22" id="iWr-QN-X61"/>
-                            <constraint firstAttribute="centerX" secondItem="8rl-HT-chu" secondAttribute="centerX" id="icT-ac-cqk"/>
-                            <constraint firstItem="Ii6-u4-gij" firstAttribute="leading" secondItem="bIk-Ei-lez" secondAttribute="leadingMargin" id="kY7-82-W91"/>
-                            <constraint firstAttribute="centerX" secondItem="WmU-bP-U8z" secondAttribute="centerX" id="pzn-Qr-Xir"/>
-                            <constraint firstAttribute="width" secondItem="WmU-bP-U8z" secondAttribute="width" id="sIx-V6-FGH"/>
-                            <constraint firstAttribute="width" secondItem="8rl-HT-chu" secondAttribute="width" id="w4u-ey-3VL"/>
-                            <constraint firstItem="T2R-EZ-Wdf" firstAttribute="top" secondItem="m6X-U4-7OD" secondAttribute="bottom" id="zln-FN-rPL"/>
-                        </constraints>
-                    </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                    <connections>
-                        <outlet property="labelSinResultados" destination="Ii6-u4-gij" id="1Yh-vZ-3KS"/>
-                        <outlet property="tablaOpciones" destination="WmU-bP-U8z" id="Z1O-dz-pxj"/>
-                        <outlet property="tablaResultados" destination="m6X-U4-7OD" id="Xt1-MA-Yxn"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pjc-Vb-Hvd" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="889" y="1024"/>
-        </scene>
-        <!--Eventos Evento-->
-        <scene sceneID="Rfj-1b-PnK">
-            <objects>
-                <viewController storyboardIdentifier="congresosYEventosEvento" title="Eventos Evento" useStoryboardIdentifierAsRestorationIdentifier="YES" id="V3k-SR-6ut" userLabel="Eventos Evento" customClass="CongresosYEventosEventoViewController" customModule="Gui_a_Turi_stica" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="zy1-A5-5xW"/>
-                        <viewControllerLayoutGuide type="bottom" id="Cj2-nj-NJH"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="6Xy-Ix-fBK">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5N5-Un-t47">
-                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
-                                <items>
-                                    <navigationItem title="Eventos" id="IqD-A5-XbM"/>
-                                </items>
-                            </navigationBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="GlC-QZ-lwJ">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="eventoEncabezado" rowHeight="130" id="Mq6-gK-AW6" customClass="CongresosYEventosEventoDatosTableViewCell" customModule="Gui_a_Turi_stica" customModuleProvider="target">
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Mq6-gK-AW6" id="U0Q-KS-jgM">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nombre del Evento" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.60000000000000009" translatesAutoresizingMaskIntoConstraints="NO" id="PvI-JC-WD6">
-                                                    <rect key="frame" x="8" y="8" width="304" height="20"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="8" y="8" width="304" height="20"/>
-                                                    </variation>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Categoría del Evento" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999998807907104" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LE4-Pb-xpy">
-                                                    <rect key="frame" x="8" y="31" width="304" height="17"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="8" y="31" width="304" height="17"/>
-                                                    </variation>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SubCategoría del Evento" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999998807907104" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v6P-2I-WIo">
-                                                    <rect key="frame" x="8" y="50" width="304" height="17"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="8" y="50" width="304" height="17"/>
-                                                    </variation>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999998807907104" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fecha del Evento" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999998807907104" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TYg-5J-oaY">
-                                                    <rect key="frame" x="8" y="104" width="304" height="17"/>
-                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="8" y="104" width="304" height="17"/>
-                                                    </variation>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="TYg-5J-oaY" secondAttribute="trailing" id="0Tx-mF-5BL"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="v6P-2I-WIo" secondAttribute="trailing" id="5oY-NQ-m2y"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="TYg-5J-oaY" secondAttribute="bottom" id="8fQ-Sb-gFa"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="PvI-JC-WD6" secondAttribute="trailing" id="Kog-tM-fYt"/>
-                                                <constraint firstItem="LE4-Pb-xpy" firstAttribute="leading" secondItem="U0Q-KS-jgM" secondAttribute="leadingMargin" id="RJV-wK-Csg"/>
-                                                <constraint firstItem="v6P-2I-WIo" firstAttribute="leading" secondItem="U0Q-KS-jgM" secondAttribute="leadingMargin" id="Uec-F8-fbN"/>
-                                                <constraint firstItem="v6P-2I-WIo" firstAttribute="top" secondItem="LE4-Pb-xpy" secondAttribute="bottom" constant="2" id="VOf-NV-MAU"/>
-                                                <constraint firstItem="LE4-Pb-xpy" firstAttribute="top" secondItem="PvI-JC-WD6" secondAttribute="bottom" constant="3" id="aGJ-hV-gK4"/>
-                                                <constraint firstItem="TYg-5J-oaY" firstAttribute="leading" secondItem="U0Q-KS-jgM" secondAttribute="leadingMargin" id="cei-st-hM0"/>
-                                                <constraint firstItem="PvI-JC-WD6" firstAttribute="leading" secondItem="U0Q-KS-jgM" secondAttribute="leadingMargin" id="qk4-Rq-eQZ"/>
-                                                <constraint firstItem="PvI-JC-WD6" firstAttribute="top" secondItem="U0Q-KS-jgM" secondAttribute="topMargin" id="rbT-B6-cLF"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="LE4-Pb-xpy" secondAttribute="trailing" id="zHp-Kd-HOR"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.86970758439999996" green="0.92044973370000005" blue="0.97994726899999995" alpha="1" colorSpace="calibratedRGB"/>
-                                        <connections>
-                                            <outlet property="eventoCategoria" destination="LE4-Pb-xpy" id="sm0-Hp-7qR"/>
-                                            <outlet property="eventoFecha" destination="TYg-5J-oaY" id="zXC-Xh-Zel"/>
-                                            <outlet property="eventoNombre" destination="PvI-JC-WD6" id="4N5-Xw-Wjh"/>
-                                            <outlet property="eventoSubCategoria" destination="v6P-2I-WIo" id="VuN-XR-WG5"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="eventoInformacion" rowHeight="65" id="eEy-iw-oKT" customClass="CongresosYEventosEventoInfoTableViewCell" customModule="Gui_a_Turi_stica" customModuleProvider="target">
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eEy-iw-oKT" id="lBE-dg-kNK">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vNh-Ah-AMx">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="28"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Información" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="84X-zW-BVA">
-                                                            <rect key="frame" x="8" y="0.0" width="312" height="28"/>
-                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                            <color key="textColor" red="0.86970758439999996" green="0.92044973370000005" blue="0.97994726899999995" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                <rect key="frame" x="8" y="0.0" width="312" height="28"/>
-                                                            </variation>
-                                                        </label>
-                                                    </subviews>
-                                                    <color key="backgroundColor" red="0.45477524400000002" green="0.60293745990000003" blue="0.78737491370000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="bottom" secondItem="84X-zW-BVA" secondAttribute="bottom" id="3k6-Yb-Atg"/>
-                                                        <constraint firstItem="84X-zW-BVA" firstAttribute="leading" secondItem="vNh-Ah-AMx" secondAttribute="leading" constant="8" id="6ZC-lp-wYa"/>
-                                                        <constraint firstAttribute="trailing" secondItem="84X-zW-BVA" secondAttribute="trailing" id="7Ix-vk-eFP"/>
-                                                        <constraint firstAttribute="height" constant="28" id="sTf-Em-J0F"/>
-                                                        <constraint firstItem="84X-zW-BVA" firstAttribute="top" secondItem="vNh-Ah-AMx" secondAttribute="top" id="vFm-JS-8oE"/>
-                                                    </constraints>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="28"/>
-                                                    </variation>
-                                                </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tab-0V-2oi">
-                                                    <rect key="frame" x="8" y="36" width="304" height="16"/>
-                                                    <attributedString key="attributedText">
-                                                        <fragment content="Información">
-                                                            <attributes>
-                                                                <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                                <font key="NSFont" size="13" name="HelveticaNeue"/>
-                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                                            </attributes>
-                                                        </fragment>
-                                                    </attributedString>
-                                                    <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <rect key="frame" x="8" y="36" width="304" height="16"/>
-                                                    </variation>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="vNh-Ah-AMx" firstAttribute="top" secondItem="lBE-dg-kNK" secondAttribute="topMargin" constant="-8" id="6fS-0p-AK5">
-                                                    <variation key="heightClass=regular-widthClass=compact" constant="-8"/>
-                                                </constraint>
-                                                <constraint firstItem="vNh-Ah-AMx" firstAttribute="leading" secondItem="lBE-dg-kNK" secondAttribute="leadingMargin" constant="-8" id="JZo-J2-7Hs"/>
-                                                <constraint firstItem="Tab-0V-2oi" firstAttribute="top" secondItem="vNh-Ah-AMx" secondAttribute="bottom" constant="8" id="KYV-Tm-9uO"/>
-                                                <constraint firstItem="Tab-0V-2oi" firstAttribute="leading" secondItem="lBE-dg-kNK" secondAttribute="leadingMargin" id="OaK-WN-uRs"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="vNh-Ah-AMx" secondAttribute="trailing" constant="-8" id="Wlf-em-srb"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="Tab-0V-2oi" secondAttribute="trailing" id="YGs-vQ-flr"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.89411764709999997" green="0.93725490199999995" blue="0.98431372549999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <connections>
-                                            <outlet property="texto" destination="Tab-0V-2oi" id="dkv-J6-WKI"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="eventoObservaciones" rowHeight="65" id="D5Q-xr-5QQ" customClass="CongresosYEventosEventoObservacionesTableViewCell" customModule="Gui_a_Turi_stica" customModuleProvider="target">
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="D5Q-xr-5QQ" id="ciF-cX-lRg">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Aqe-O9-gJu">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="28"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Observaciones" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iEs-ar-ZAB">
-                                                            <rect key="frame" x="8" y="0.0" width="312" height="28"/>
-                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                            <color key="textColor" red="0.86970758439999996" green="0.92044973370000005" blue="0.97994726899999995" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                                <rect key="frame" x="8" y="0.0" width="312" height="28"/>
-                                                            </variation>
-                                                        </label>
-                                                    </subviews>
-                                                    <color key="backgroundColor" red="0.45477524400000002" green="0.60293745990000003" blue="0.78737491370000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <constraints>
-                                                        <constraint firstItem="iEs-ar-ZAB" firstAttribute="leading" secondItem="Aqe-O9-gJu" secondAttribute="leading" constant="8" id="55p-P8-6jt"/>
-                                                        <constraint firstAttribute="trailing" secondItem="iEs-ar-ZAB" secondAttribute="trailing" id="MT7-fU-QG6"/>
-                                                        <constraint firstAttribute="height" constant="28" id="agw-Zk-5XH"/>
-                                                        <constraint firstAttribute="bottom" secondItem="iEs-ar-ZAB" secondAttribute="bottom" id="gXQ-vX-Mp0"/>
-                                                        <constraint firstItem="iEs-ar-ZAB" firstAttribute="top" secondItem="Aqe-O9-gJu" secondAttribute="top" id="shQ-f3-oAI"/>
-                                                    </constraints>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="0.0" y="0.0" width="320" height="28"/>
-                                                    </variation>
-                                                </view>
-                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.80000001192092896" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v32-Cl-Uz5">
-                                                    <rect key="frame" x="8" y="36" width="304" height="16"/>
-                                                    <attributedString key="attributedText">
-                                                        <fragment content="Observaciones">
-                                                            <attributes>
-                                                                <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                                <font key="NSFont" size="13" name="HelveticaNeue"/>
-                                                                <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                                                            </attributes>
-                                                        </fragment>
-                                                    </attributedString>
-                                                    <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <rect key="frame" x="8" y="36" width="304" height="16"/>
-                                                    </variation>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="v32-Cl-Uz5" firstAttribute="leading" secondItem="ciF-cX-lRg" secondAttribute="leadingMargin" id="BFV-Tw-Yzv"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="Aqe-O9-gJu" secondAttribute="trailing" constant="-8" id="MIo-Mu-hJ9"/>
-                                                <constraint firstItem="Aqe-O9-gJu" firstAttribute="top" secondItem="ciF-cX-lRg" secondAttribute="topMargin" constant="-8" id="Ww1-7Q-HrH"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="v32-Cl-Uz5" secondAttribute="trailing" id="Wyl-X5-CyH"/>
-                                                <constraint firstItem="v32-Cl-Uz5" firstAttribute="top" secondItem="Aqe-O9-gJu" secondAttribute="bottom" constant="8" id="eEX-DH-Cg8"/>
-                                                <constraint firstItem="Aqe-O9-gJu" firstAttribute="leading" secondItem="ciF-cX-lRg" secondAttribute="leadingMargin" constant="-8" id="zZ9-6c-R9R"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.86970758439999996" green="0.92044973370000005" blue="0.97994726899999995" alpha="1" colorSpace="calibratedRGB"/>
-                                        <connections>
-                                            <outlet property="texto" destination="v32-Cl-Uz5" id="Y86-B2-M3v"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
-                                <sections/>
-                                <connections>
-                                    <outlet property="dataSource" destination="V3k-SR-6ut" id="Vti-0B-Y2R"/>
-                                    <outlet property="delegate" destination="V3k-SR-6ut" id="czN-t5-qzP"/>
-                                </connections>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" red="0.86970758438110352" green="0.92044973373413086" blue="0.97994726896286011" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="GlC-QZ-lwJ" firstAttribute="top" secondItem="5N5-Un-t47" secondAttribute="bottom" id="5B1-dg-Oi8"/>
-                            <constraint firstAttribute="centerX" secondItem="5N5-Un-t47" secondAttribute="centerX" id="Cqq-Xr-pxv"/>
-                            <constraint firstItem="GlC-QZ-lwJ" firstAttribute="leading" secondItem="6Xy-Ix-fBK" secondAttribute="leadingMargin" constant="-16" id="S8D-cQ-gjX"/>
-                            <constraint firstAttribute="width" secondItem="GlC-QZ-lwJ" secondAttribute="width" id="WSx-So-IqH"/>
-                            <constraint firstItem="5N5-Un-t47" firstAttribute="top" secondItem="zy1-A5-5xW" secondAttribute="bottom" id="ZMl-SK-GbW"/>
-                            <constraint firstItem="Cj2-nj-NJH" firstAttribute="top" secondItem="GlC-QZ-lwJ" secondAttribute="bottom" id="doW-JV-ApK"/>
-                            <constraint firstItem="5N5-Un-t47" firstAttribute="width" secondItem="6Xy-Ix-fBK" secondAttribute="width" id="o9R-Te-lET"/>
-                        </constraints>
-                    </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                    <connections>
-                        <outlet property="tabla" destination="GlC-QZ-lwJ" id="hlq-3k-4DV"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="NTw-KR-TH1" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="941" y="1050"/>
-        </scene>
-        <!--Eventos Opciones-->
-        <scene sceneID="qfx-V3-Cp1">
-            <objects>
-                <viewController storyboardIdentifier="congresosYEventosOpciones" title="Eventos Opciones" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0et-AZ-tJn" userLabel="Eventos Opciones" customClass="CongresosYEventosOpcionesViewController" customModule="Gui_a_Turi_stica" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="aOJ-pG-g7f"/>
-                        <viewControllerLayoutGuide type="bottom" id="48r-BI-9D2"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="EI7-gm-DJg">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5MS-7L-3kM">
-                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
-                                <items>
-                                    <navigationItem title="Eventos" id="db2-MM-a7n"/>
-                                </items>
-                            </navigationBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="Olc-qG-fbE">
-                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
-                                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="items" textLabel="fwJ-6l-u7H" style="IBUITableViewCellStyleDefault" id="rKb-NC-Dcc">
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rKb-NC-Dcc" id="cIS-Ps-Ibd">
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fwJ-6l-u7H">
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=compact">
-                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                    </variation>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="0et-AZ-tJn" id="CGb-F8-yya"/>
-                                    <outlet property="delegate" destination="0et-AZ-tJn" id="0Ab-k0-lyR"/>
-                                </connections>
-                            </tableView>
-                        </subviews>
-                        <color key="backgroundColor" red="0.86970758438110352" green="0.92044973373413086" blue="0.97994726896286011" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="Olc-qG-fbE" firstAttribute="top" secondItem="5MS-7L-3kM" secondAttribute="bottom" id="4A9-d7-LEe"/>
-                            <constraint firstItem="Olc-qG-fbE" firstAttribute="width" secondItem="EI7-gm-DJg" secondAttribute="width" id="7Ki-Bf-HUY"/>
-                            <constraint firstItem="5MS-7L-3kM" firstAttribute="top" secondItem="aOJ-pG-g7f" secondAttribute="bottom" id="MY5-2v-Vci"/>
-                            <constraint firstItem="48r-BI-9D2" firstAttribute="top" secondItem="Olc-qG-fbE" secondAttribute="bottom" id="O2j-dF-gEt"/>
-                            <constraint firstAttribute="centerX" secondItem="Olc-qG-fbE" secondAttribute="centerX" id="VKm-xo-71e"/>
-                            <constraint firstAttribute="centerX" secondItem="5MS-7L-3kM" secondAttribute="centerX" id="VWy-7V-ZS3"/>
-                            <constraint firstAttribute="width" secondItem="5MS-7L-3kM" secondAttribute="width" id="wKM-Rc-Zda"/>
-                        </constraints>
-                    </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                    <connections>
-                        <outlet property="tablaItems" destination="Olc-qG-fbE" id="iTr-CF-270"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="lQ1-bz-A7q" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="913" y="1037"/>
+            <point key="canvasLocation" x="358" y="680"/>
         </scene>
         <!--Paseos y Lugares-->
         <scene sceneID="5Rz-8q-atB">
@@ -2034,13 +1506,13 @@ Desde la Ciudad Autónoma de Buenos Aires:
                         </subviews>
                         <color key="backgroundColor" red="0.86970758438110352" green="0.92044973373413086" blue="0.97994726896286011" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="6j9-N2-aRP" secondAttribute="trailing" constant="-16" id="002-E9-APt"/>
                             <constraint firstItem="2hh-wi-eFc" firstAttribute="top" secondItem="EQ1-bh-E1U" secondAttribute="bottom" id="MFa-zd-Kp3"/>
                             <constraint firstItem="6j9-N2-aRP" firstAttribute="top" secondItem="EQ1-bh-E1U" secondAttribute="bottom" constant="44" id="P5N-MD-4ZA"/>
-                            <constraint firstItem="6j9-N2-aRP" firstAttribute="leading" secondItem="Lr0-Bz-HEt" secondAttribute="leadingMargin" constant="-16" id="eTR-hg-Xlv"/>
+                            <constraint firstItem="6j9-N2-aRP" firstAttribute="leading" secondItem="Lr0-Bz-HEt" secondAttribute="leading" id="eTR-hg-Xlv"/>
                             <constraint firstAttribute="centerX" secondItem="2hh-wi-eFc" secondAttribute="centerX" id="fTh-zC-K6a"/>
                             <constraint firstAttribute="width" secondItem="2hh-wi-eFc" secondAttribute="width" id="hEi-zM-s9h"/>
                             <constraint firstItem="Uet-ZW-5ml" firstAttribute="top" secondItem="6j9-N2-aRP" secondAttribute="bottom" id="lwU-qw-YqJ"/>
+                            <constraint firstAttribute="width" secondItem="6j9-N2-aRP" secondAttribute="width" id="vqV-5W-9op"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
@@ -2050,7 +1522,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z1r-cc-Gdw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1365" y="1046"/>
+            <point key="canvasLocation" x="933" y="1074"/>
         </scene>
         <!--Transporte Recorridos-->
         <scene sceneID="fR6-Mj-9zU">
@@ -2102,9 +1574,9 @@ Desde la Ciudad Autónoma de Buenos Aires:
                         <constraints>
                             <constraint firstAttribute="width" secondItem="cFf-2j-2kI" secondAttribute="width" id="6vc-ml-Dt9"/>
                             <constraint firstItem="cFf-2j-2kI" firstAttribute="top" secondItem="QUn-RL-11U" secondAttribute="bottom" id="9S7-Tg-7o7"/>
-                            <constraint firstAttribute="centerX" secondItem="Yni-ZM-L0T" secondAttribute="centerX" id="RHx-Kj-El2"/>
                             <constraint firstItem="kjR-2B-0hk" firstAttribute="top" secondItem="Yni-ZM-L0T" secondAttribute="bottom" id="XuH-X0-qvl"/>
                             <constraint firstItem="Yni-ZM-L0T" firstAttribute="top" secondItem="cFf-2j-2kI" secondAttribute="bottom" id="jLU-YY-kp5"/>
+                            <constraint firstItem="Yni-ZM-L0T" firstAttribute="leading" secondItem="5lj-o1-qF2" secondAttribute="leading" id="qT9-Qh-dNV"/>
                             <constraint firstAttribute="centerX" secondItem="cFf-2j-2kI" secondAttribute="centerX" id="sCR-oB-vCd"/>
                             <constraint firstAttribute="width" secondItem="Yni-ZM-L0T" secondAttribute="width" id="upW-ti-cjC"/>
                         </constraints>
@@ -2116,7 +1588,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GS1-3T-EVg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="308" y="1035"/>
+            <point key="canvasLocation" x="340" y="1051"/>
         </scene>
         <!--Transporte Recorridos Mapa-->
         <scene sceneID="CH4-J6-gwU">
@@ -2151,7 +1623,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                     <action selector="segmentarRecorrido" destination="P7n-L6-uom" eventType="valueChanged" id="cBx-hQ-HPD"/>
                                 </connections>
                             </segmentedControl>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detectando ubicación ..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RRa-Vw-ecP">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detectando ubicación ..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RRa-Vw-ecP">
                                 <rect key="frame" x="16" y="532" width="288" height="28"/>
                                 <color key="backgroundColor" red="0.45477524400000002" green="0.60293745990000003" blue="0.78737491370000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -2160,6 +1632,11 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="7"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.86970758438110352" green="0.92044973373413086" blue="0.97994726896286011" alpha="1" colorSpace="calibratedRGB"/>
@@ -2168,13 +1645,13 @@ Desde la Ciudad Autónoma de Buenos Aires:
                             <constraint firstItem="hHb-Ih-q9P" firstAttribute="top" secondItem="xmb-dE-y8m" secondAttribute="bottom" constant="-40" id="5Md-5y-5pw"/>
                             <constraint firstItem="fh0-NE-BJX" firstAttribute="top" secondItem="hHb-Ih-q9P" secondAttribute="bottom" id="GLA-1W-zk4"/>
                             <constraint firstAttribute="centerX" secondItem="xmb-dE-y8m" secondAttribute="centerX" id="J97-Sf-JCx"/>
-                            <constraint firstItem="hHb-Ih-q9P" firstAttribute="leading" secondItem="1ju-Ff-Oz1" secondAttribute="leadingMargin" constant="-16" id="NEi-Q4-PuE"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="hHb-Ih-q9P" secondAttribute="trailing" constant="-16" id="awy-RZ-cDN"/>
+                            <constraint firstItem="hHb-Ih-q9P" firstAttribute="leading" secondItem="1ju-Ff-Oz1" secondAttribute="leading" id="NEi-Q4-PuE"/>
                             <constraint firstAttribute="centerX" secondItem="WGg-Cv-K2E" secondAttribute="centerX" id="b2T-ub-W4b"/>
                             <constraint firstItem="hHb-Ih-q9P" firstAttribute="top" secondItem="WGg-Cv-K2E" secondAttribute="bottom" id="buo-mb-oDc"/>
                             <constraint firstItem="fh0-NE-BJX" firstAttribute="top" secondItem="RRa-Vw-ecP" secondAttribute="bottom" constant="8" id="kaR-aJ-vak"/>
                             <constraint firstAttribute="width" secondItem="WGg-Cv-K2E" secondAttribute="width" id="qAJ-zt-tah"/>
                             <constraint firstItem="RRa-Vw-ecP" firstAttribute="leading" secondItem="1ju-Ff-Oz1" secondAttribute="leadingMargin" id="rRQ-qD-fzN"/>
+                            <constraint firstAttribute="width" secondItem="hHb-Ih-q9P" secondAttribute="width" id="urn-NH-8Sg"/>
                             <constraint firstItem="WGg-Cv-K2E" firstAttribute="top" secondItem="PUb-dV-WbF" secondAttribute="bottom" id="wuO-yq-PuT"/>
                         </constraints>
                     </view>
@@ -2187,7 +1664,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ix7-LD-yEf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="329" y="1047"/>
+            <point key="canvasLocation" x="361" y="1063"/>
         </scene>
         <!--Transporte Cole Tarjeta Mapa-->
         <scene sceneID="PfZ-8U-Ex8">
@@ -2211,7 +1688,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                             </mapView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="e5d-l1-yMI">
-                                <rect key="frame" x="76" y="76" width="170" height="29"/>
+                                <rect key="frame" x="75" y="76" width="170" height="29"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <segments>
                                     <segment title="SUBE"/>
@@ -2233,7 +1710,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                     <action selector="mostrarPuestosActualiza" destination="kSQ-pw-cHi" eventType="valueChanged" id="rU3-UI-rAu"/>
                                 </connections>
                             </segmentedControl>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detectando ubicación ..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e2M-rU-bBd">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detectando ubicación ..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e2M-rU-bBd">
                                 <rect key="frame" x="16" y="532" width="288" height="28"/>
                                 <color key="backgroundColor" red="0.45477524400000002" green="0.60293745990000003" blue="0.78737491370000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -2242,6 +1719,11 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="7"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.86970758438110352" green="0.92044973373413086" blue="0.97994726896286011" alpha="1" colorSpace="calibratedRGB"/>
@@ -2249,9 +1731,8 @@ Desde la Ciudad Autónoma de Buenos Aires:
                             <constraint firstItem="tCR-aC-ZBo" firstAttribute="top" secondItem="e5d-l1-yMI" secondAttribute="bottom" constant="8" id="Cq4-De-5ds"/>
                             <constraint firstItem="Jh0-MM-pif" firstAttribute="top" secondItem="Vqg-dx-NyD" secondAttribute="bottom" id="DmU-rZ-Qe5"/>
                             <constraint firstItem="e2M-rU-bBd" firstAttribute="leading" secondItem="rux-CT-2WJ" secondAttribute="leadingMargin" id="ECS-eK-eCx"/>
-                            <constraint firstItem="Vqg-dx-NyD" firstAttribute="leading" secondItem="rux-CT-2WJ" secondAttribute="leadingMargin" constant="-16" id="Igb-0h-OiD"/>
-                            <constraint firstItem="e5d-l1-yMI" firstAttribute="centerX" secondItem="Vqg-dx-NyD" secondAttribute="centerX" constant="0.5" id="KBE-qx-fEo"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Vqg-dx-NyD" secondAttribute="trailing" constant="-16" id="PgQ-EI-jWX"/>
+                            <constraint firstItem="Vqg-dx-NyD" firstAttribute="leading" secondItem="rux-CT-2WJ" secondAttribute="leading" id="Igb-0h-OiD"/>
+                            <constraint firstItem="e5d-l1-yMI" firstAttribute="centerX" secondItem="Vqg-dx-NyD" secondAttribute="centerX" id="KBE-qx-fEo"/>
                             <constraint firstItem="9Ov-oE-0H9" firstAttribute="top" secondItem="m2s-xf-clV" secondAttribute="bottom" id="TMs-Zq-I09"/>
                             <constraint firstItem="Vqg-dx-NyD" firstAttribute="top" secondItem="9Ov-oE-0H9" secondAttribute="bottom" id="TvS-xw-06a"/>
                             <constraint firstAttribute="centerX" secondItem="9Ov-oE-0H9" secondAttribute="centerX" id="VYz-bl-rkS"/>
@@ -2259,6 +1740,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                             <constraint firstItem="Jh0-MM-pif" firstAttribute="top" secondItem="e2M-rU-bBd" secondAttribute="bottom" constant="8" id="cJV-ly-56v"/>
                             <constraint firstAttribute="centerX" secondItem="tCR-aC-ZBo" secondAttribute="centerX" id="grv-yJ-HKA"/>
                             <constraint firstItem="Vqg-dx-NyD" firstAttribute="top" secondItem="e5d-l1-yMI" secondAttribute="bottom" constant="-40" id="kbR-Zb-Y2c"/>
+                            <constraint firstItem="Vqg-dx-NyD" firstAttribute="width" secondItem="rux-CT-2WJ" secondAttribute="width" id="nrn-f5-1fe"/>
                             <constraint firstAttribute="width" secondItem="9Ov-oE-0H9" secondAttribute="width" id="oF5-d4-BGs"/>
                         </constraints>
                     </view>
@@ -2272,7 +1754,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yXL-Hw-G3I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="356" y="1060"/>
+            <point key="canvasLocation" x="388" y="1076"/>
         </scene>
         <!--Transporte Cole MyBus-->
         <scene sceneID="Syv-Vg-Qde">
@@ -2303,10 +1785,10 @@ Desde la Ciudad Autónoma de Buenos Aires:
                             <constraint firstAttribute="centerX" secondItem="xym-aD-ay8" secondAttribute="centerX" id="2rs-o0-BMt"/>
                             <constraint firstItem="YzW-G5-3gJ" firstAttribute="top" secondItem="1ar-6B-IOr" secondAttribute="bottom" id="6ik-gN-Yet"/>
                             <constraint firstAttribute="width" secondItem="xym-aD-ay8" secondAttribute="width" id="D4j-1J-c30"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="1ar-6B-IOr" secondAttribute="trailing" constant="-16" id="RXW-CT-avr"/>
+                            <constraint firstAttribute="width" secondItem="1ar-6B-IOr" secondAttribute="width" id="SPB-TI-5LI"/>
                             <constraint firstItem="1ar-6B-IOr" firstAttribute="top" secondItem="GrL-QU-qgP" secondAttribute="bottom" constant="44" id="XkR-IC-3hC"/>
                             <constraint firstItem="xym-aD-ay8" firstAttribute="top" secondItem="GrL-QU-qgP" secondAttribute="bottom" id="hsf-SH-UdR"/>
-                            <constraint firstItem="1ar-6B-IOr" firstAttribute="leading" secondItem="mjK-xq-jVR" secondAttribute="leadingMargin" constant="-16" id="vgr-HX-vGR"/>
+                            <constraint firstItem="1ar-6B-IOr" firstAttribute="leading" secondItem="mjK-xq-jVR" secondAttribute="leading" id="vgr-HX-vGR"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
@@ -2316,7 +1798,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GSf-Aw-3EK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="377" y="1068"/>
+            <point key="canvasLocation" x="409" y="1084"/>
         </scene>
         <!--Transporte Estacionar Zona-->
         <scene sceneID="sPU-tJ-WcO">
@@ -2339,7 +1821,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="FtU-Lx-wWF">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                             </mapView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detectando tu ubicación actual ..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.75000000000000022" translatesAutoresizingMaskIntoConstraints="NO" id="Y9q-1V-NPM">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detectando tu ubicación actual ..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.75000000000000022" translatesAutoresizingMaskIntoConstraints="NO" id="Y9q-1V-NPM">
                                 <rect key="frame" x="15" y="78" width="290" height="31"/>
                                 <color key="backgroundColor" red="0.45477524399757385" green="0.60293745994567871" blue="0.78737491369247437" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -2349,6 +1831,11 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                 <color key="textColor" red="0.86970758438110352" green="0.92044973373413086" blue="0.97994726896286011" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </label>
                             <button opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KVd-3C-8U6">
                                 <rect key="frame" x="185" y="117" width="120" height="26"/>
@@ -2362,11 +1849,16 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                     <color key="titleColor" red="0.45477524399757385" green="0.60293745994567871" blue="0.78737491369247437" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="mostrarUbicacion" destination="Wx9-1E-fn8" eventType="touchUpInside" id="xSa-Ko-6rL"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No fue posible detectar tu ubicación." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7fF-Tz-zFb">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No fue posible detectar tu ubicación." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7fF-Tz-zFb">
                                 <rect key="frame" x="16" y="532" width="288" height="28"/>
                                 <color key="backgroundColor" red="0.99819964169999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -2375,6 +1867,11 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="7"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.86970758438110352" green="0.92044973373413086" blue="0.97994726896286011" alpha="1" colorSpace="calibratedRGB"/>
@@ -2383,7 +1880,6 @@ Desde la Ciudad Autónoma de Buenos Aires:
                             <constraint firstItem="KVd-3C-8U6" firstAttribute="trailing" secondItem="Y9q-1V-NPM" secondAttribute="trailing" id="9Db-SF-AbV"/>
                             <constraint firstItem="Y9q-1V-NPM" firstAttribute="top" secondItem="FtU-Lx-wWF" secondAttribute="top" constant="14" id="GiO-FI-hsz"/>
                             <constraint firstItem="Y9q-1V-NPM" firstAttribute="centerX" secondItem="FtU-Lx-wWF" secondAttribute="centerX" id="IKw-qX-qea"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="FtU-Lx-wWF" secondAttribute="trailing" constant="-16" id="Ivu-PU-2cc"/>
                             <constraint firstItem="pX0-iF-AQt" firstAttribute="top" secondItem="7fF-Tz-zFb" secondAttribute="bottom" constant="8" id="MAv-4O-YlO"/>
                             <constraint firstItem="BxM-iZ-uhI" firstAttribute="top" secondItem="Xvb-tn-RZh" secondAttribute="bottom" id="Ofb-Hd-2YZ"/>
                             <constraint firstItem="pX0-iF-AQt" firstAttribute="top" secondItem="FtU-Lx-wWF" secondAttribute="bottom" id="bFt-Tj-SC1"/>
@@ -2392,7 +1888,8 @@ Desde la Ciudad Autónoma de Buenos Aires:
                             <constraint firstItem="KVd-3C-8U6" firstAttribute="top" secondItem="Y9q-1V-NPM" secondAttribute="bottom" constant="8" id="ofQ-Wi-iUm"/>
                             <constraint firstItem="7fF-Tz-zFb" firstAttribute="trailing" secondItem="A5a-sk-4bV" secondAttribute="trailingMargin" id="ryA-AC-Q2P"/>
                             <constraint firstAttribute="centerX" secondItem="BxM-iZ-uhI" secondAttribute="centerX" id="wqd-or-wmM"/>
-                            <constraint firstItem="FtU-Lx-wWF" firstAttribute="leading" secondItem="A5a-sk-4bV" secondAttribute="leadingMargin" constant="-16" id="yj9-74-ptv"/>
+                            <constraint firstAttribute="width" secondItem="FtU-Lx-wWF" secondAttribute="width" id="x7o-lc-VV4"/>
+                            <constraint firstItem="FtU-Lx-wWF" firstAttribute="leading" secondItem="A5a-sk-4bV" secondAttribute="leading" id="yj9-74-ptv"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
@@ -2405,7 +1902,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DKi-m1-HlU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="397" y="1155"/>
+            <point key="canvasLocation" x="429" y="1171"/>
         </scene>
         <!--Transporte Estacionar Tarjeta Mapa-->
         <scene sceneID="FCQ-yg-erd">
@@ -2428,7 +1925,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="bdC-IB-oBs">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                             </mapView>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detectando ubicación ..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Whh-mj-tF1">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detectando ubicación ..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Whh-mj-tF1">
                                 <rect key="frame" x="16" y="532" width="288" height="28"/>
                                 <color key="backgroundColor" red="0.45477524400000002" green="0.60293745990000003" blue="0.78737491370000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -2437,8 +1934,13 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="7"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No fue posible detectar tu ubicación." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6y1-XR-ZQM">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No fue posible detectar tu ubicación." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6y1-XR-ZQM">
                                 <rect key="frame" x="16" y="532" width="288" height="28"/>
                                 <color key="backgroundColor" red="0.99819964169999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -2447,6 +1949,11 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="7"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.86970758438110352" green="0.92044973373413086" blue="0.97994726896286011" alpha="1" colorSpace="calibratedRGB"/>
@@ -2454,15 +1961,15 @@ Desde la Ciudad Autónoma de Buenos Aires:
                             <constraint firstItem="6y1-XR-ZQM" firstAttribute="trailing" secondItem="Duk-Q7-MvK" secondAttribute="trailingMargin" id="8h2-Ix-t19"/>
                             <constraint firstItem="VOM-Mw-YKZ" firstAttribute="top" secondItem="Whh-mj-tF1" secondAttribute="bottom" constant="8" id="FRi-lM-xUk"/>
                             <constraint firstItem="6y1-XR-ZQM" firstAttribute="leading" secondItem="Duk-Q7-MvK" secondAttribute="leadingMargin" id="Kml-ii-BcV"/>
+                            <constraint firstItem="bdC-IB-oBs" firstAttribute="width" secondItem="Duk-Q7-MvK" secondAttribute="width" id="MSO-B4-rUK"/>
                             <constraint firstItem="bdC-IB-oBs" firstAttribute="top" secondItem="g5y-Yo-gHT" secondAttribute="bottom" id="Qtz-II-W3X"/>
                             <constraint firstAttribute="width" secondItem="g5y-Yo-gHT" secondAttribute="width" id="Ro5-8O-psk"/>
                             <constraint firstItem="VOM-Mw-YKZ" firstAttribute="top" secondItem="bdC-IB-oBs" secondAttribute="bottom" id="XOt-Qa-WOb"/>
                             <constraint firstItem="Whh-mj-tF1" firstAttribute="trailing" secondItem="Duk-Q7-MvK" secondAttribute="trailingMargin" id="b7e-M2-apP"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="bdC-IB-oBs" secondAttribute="trailing" constant="-16" id="dpj-yv-kZq"/>
                             <constraint firstItem="VOM-Mw-YKZ" firstAttribute="top" secondItem="6y1-XR-ZQM" secondAttribute="bottom" constant="8" id="fed-A3-Aug"/>
                             <constraint firstItem="g5y-Yo-gHT" firstAttribute="top" secondItem="p4M-l6-zTg" secondAttribute="bottom" id="i9F-cD-F9B"/>
                             <constraint firstAttribute="centerX" secondItem="g5y-Yo-gHT" secondAttribute="centerX" id="rIb-NA-YZL"/>
-                            <constraint firstItem="bdC-IB-oBs" firstAttribute="leading" secondItem="Duk-Q7-MvK" secondAttribute="leadingMargin" constant="-16" id="rs2-Bi-KFP"/>
+                            <constraint firstItem="bdC-IB-oBs" firstAttribute="leading" secondItem="Duk-Q7-MvK" secondAttribute="leading" id="rs2-Bi-KFP"/>
                             <constraint firstItem="Whh-mj-tF1" firstAttribute="leading" secondItem="Duk-Q7-MvK" secondAttribute="leadingMargin" id="uX5-Km-Tss"/>
                         </constraints>
                     </view>
@@ -2475,7 +1982,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qL0-5h-KOn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="421" y="1166"/>
+            <point key="canvasLocation" x="453" y="1182"/>
         </scene>
         <!--Transporte Estacionar Info-->
         <scene sceneID="RvR-0M-MuD">
@@ -2554,7 +2061,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                         <constraints>
                             <constraint firstItem="idR-Tt-mgH" firstAttribute="leading" secondItem="IkZ-iE-Oj0" secondAttribute="leading" id="3Ck-V6-tcK"/>
                             <constraint firstItem="Z6j-JN-7Bh" firstAttribute="top" secondItem="idR-Tt-mgH" secondAttribute="bottom" id="44b-8y-270"/>
-                            <constraint firstItem="idR-Tt-mgH" firstAttribute="trailing" secondItem="IkZ-iE-Oj0" secondAttribute="trailing" id="FIR-9p-Y4g"/>
+                            <constraint firstAttribute="width" secondItem="idR-Tt-mgH" secondAttribute="width" id="7bk-a6-r8e"/>
                             <constraint firstItem="idR-Tt-mgH" firstAttribute="top" secondItem="17V-lH-vel" secondAttribute="bottom" id="HUJ-oX-je0"/>
                             <constraint firstAttribute="centerX" secondItem="17V-lH-vel" secondAttribute="centerX" id="dBn-XQ-yj3"/>
                             <constraint firstItem="17V-lH-vel" firstAttribute="top" secondItem="kvg-B6-hf1" secondAttribute="bottom" id="ja8-wL-B1P"/>
@@ -2565,7 +2072,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p6L-hx-Box" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="442" y="1176"/>
+            <point key="canvasLocation" x="474" y="1192"/>
         </scene>
         <!--Transporte Estacionar Info Contenido-->
         <scene sceneID="PRO-6O-Ymn">
@@ -2610,7 +2117,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wAQ-yx-ItY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="461" y="1184"/>
+            <point key="canvasLocation" x="493" y="1200"/>
         </scene>
         <!--Transporte Estacionar Online-->
         <scene sceneID="hAk-fh-dX5">
@@ -2639,10 +2146,10 @@ Desde la Ciudad Autónoma de Buenos Aires:
                         <color key="backgroundColor" red="0.86970758438110352" green="0.92044973373413086" blue="0.97994726896286011" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="rOL-re-fT8" secondAttribute="centerX" id="6nC-4D-7OC"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="ZGW-mD-nOK" secondAttribute="trailing" constant="-16" id="BDn-UY-P0M"/>
-                            <constraint firstItem="ZGW-mD-nOK" firstAttribute="leading" secondItem="y55-zv-y6X" secondAttribute="leadingMargin" constant="-16" id="RDn-aC-n17"/>
+                            <constraint firstItem="ZGW-mD-nOK" firstAttribute="leading" secondItem="y55-zv-y6X" secondAttribute="leading" id="RDn-aC-n17"/>
                             <constraint firstItem="rOL-re-fT8" firstAttribute="top" secondItem="In7-eH-iFM" secondAttribute="bottom" id="RlL-PN-BYI"/>
                             <constraint firstItem="ZGW-mD-nOK" firstAttribute="top" secondItem="In7-eH-iFM" secondAttribute="bottom" constant="44" id="Ugf-Qw-V7e"/>
+                            <constraint firstItem="ZGW-mD-nOK" firstAttribute="width" secondItem="y55-zv-y6X" secondAttribute="width" id="hKi-9R-rNP"/>
                             <constraint firstAttribute="width" secondItem="rOL-re-fT8" secondAttribute="width" id="pIq-LS-KNf"/>
                             <constraint firstItem="dxe-AO-YqF" firstAttribute="top" secondItem="ZGW-mD-nOK" secondAttribute="bottom" id="pyx-YT-yG1"/>
                         </constraints>
@@ -2654,7 +2161,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H7j-CD-UUC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="487" y="1195"/>
+            <point key="canvasLocation" x="519" y="1211"/>
         </scene>
         <!--Transporte Estacionar Info Web-->
         <scene sceneID="Mfi-vk-1V0">
@@ -2682,13 +2189,13 @@ Desde la Ciudad Autónoma de Buenos Aires:
                         </subviews>
                         <color key="backgroundColor" red="0.86970758438110352" green="0.92044973373413086" blue="0.97994726896286011" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstAttribute="width" secondItem="MtV-ir-Cgl" secondAttribute="width" id="Pc6-y9-YlO"/>
                             <constraint firstAttribute="centerX" secondItem="G6l-9V-yq5" secondAttribute="centerX" id="XIy-22-PzR"/>
                             <constraint firstItem="JKx-Mk-I3x" firstAttribute="top" secondItem="MtV-ir-Cgl" secondAttribute="bottom" id="Yj4-Wx-D5s"/>
                             <constraint firstItem="G6l-9V-yq5" firstAttribute="top" secondItem="5tn-OZ-d8m" secondAttribute="bottom" id="cp0-q5-mmz"/>
                             <constraint firstAttribute="width" secondItem="G6l-9V-yq5" secondAttribute="width" id="kYx-L5-pGP"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="MtV-ir-Cgl" secondAttribute="trailing" constant="-16" id="nAv-V3-9Df"/>
                             <constraint firstItem="MtV-ir-Cgl" firstAttribute="top" secondItem="5tn-OZ-d8m" secondAttribute="bottom" constant="44" id="pUy-DE-8OO"/>
-                            <constraint firstItem="MtV-ir-Cgl" firstAttribute="leading" secondItem="hOd-X8-Ukc" secondAttribute="leadingMargin" constant="-16" id="v7j-ry-L4h"/>
+                            <constraint firstItem="MtV-ir-Cgl" firstAttribute="leading" secondItem="hOd-X8-Ukc" secondAttribute="leading" id="v7j-ry-L4h"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
@@ -2698,7 +2205,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ryn-Tu-jmk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="512" y="1205"/>
+            <point key="canvasLocation" x="544" y="1221"/>
         </scene>
         <!--Información Útil-->
         <scene sceneID="UVw-A1-xoK">
@@ -2776,10 +2283,10 @@ Desde la Ciudad Autónoma de Buenos Aires:
                         <color key="backgroundColor" red="0.86970758438110352" green="0.92044973373413086" blue="0.97994726896286011" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="etG-Sa-WiA" firstAttribute="top" secondItem="Ybe-ff-Pin" secondAttribute="bottom" id="2Gg-a8-eJt"/>
+                            <constraint firstItem="Ybe-ff-Pin" firstAttribute="width" secondItem="XhA-Em-4gQ" secondAttribute="width" id="32m-TA-o9t"/>
                             <constraint firstItem="Ybe-ff-Pin" firstAttribute="top" secondItem="N3A-0o-5tZ" secondAttribute="bottom" id="H8X-ze-PJa"/>
                             <constraint firstItem="N3A-0o-5tZ" firstAttribute="top" secondItem="CzC-Ne-kFk" secondAttribute="bottom" id="Lnv-Vy-vUa"/>
                             <constraint firstAttribute="centerX" secondItem="N3A-0o-5tZ" secondAttribute="centerX" id="UO6-r1-CWd"/>
-                            <constraint firstItem="Ybe-ff-Pin" firstAttribute="trailing" secondItem="XhA-Em-4gQ" secondAttribute="trailing" id="h2t-6d-sly"/>
                             <constraint firstAttribute="width" secondItem="N3A-0o-5tZ" secondAttribute="width" id="hKp-kO-XCr"/>
                             <constraint firstItem="Ybe-ff-Pin" firstAttribute="leading" secondItem="XhA-Em-4gQ" secondAttribute="leading" id="nhP-wg-WGJ"/>
                         </constraints>
@@ -2788,7 +2295,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hfP-wd-P3p" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1781" y="1036"/>
+            <point key="canvasLocation" x="1349" y="1064"/>
         </scene>
         <!--Información Útil Farmacias Mapa-->
         <scene sceneID="SI9-OB-OCJ">
@@ -2829,6 +2336,11 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                     <constraint firstAttribute="trailing" secondItem="kbv-Wd-JiM" secondAttribute="trailing" constant="8" id="pZW-ud-ac7"/>
                                     <constraint firstAttribute="bottom" secondItem="kbv-Wd-JiM" secondAttribute="bottom" constant="8" id="yuc-K3-PpB"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="2" translatesAutoresizingMaskIntoConstraints="NO" id="oKC-nq-M1L">
                                 <rect key="frame" x="8" y="76" width="305" height="29"/>
@@ -2842,7 +2354,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                     <action selector="mostrarFarmaciasActualiza" destination="yLP-vt-0mT" eventType="valueChanged" id="yq5-kt-5ii"/>
                                 </connections>
                             </segmentedControl>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detectando ubicación ..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lLc-8S-bXp">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detectando ubicación ..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lLc-8S-bXp">
                                 <rect key="frame" x="16" y="532" width="288" height="28"/>
                                 <color key="backgroundColor" red="0.45477524400000002" green="0.60293745990000003" blue="0.78737491370000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -2851,11 +2363,16 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="7"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.86970758438110352" green="0.92044973373413086" blue="0.97994726896286011" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="BSj-R6-NvS" firstAttribute="leading" secondItem="L74-j3-oa6" secondAttribute="leadingMargin" constant="-16" id="2R0-9a-Gqh"/>
+                            <constraint firstItem="BSj-R6-NvS" firstAttribute="leading" secondItem="L74-j3-oa6" secondAttribute="leading" id="2R0-9a-Gqh"/>
                             <constraint firstItem="0nz-PE-Pav" firstAttribute="trailing" secondItem="L74-j3-oa6" secondAttribute="trailingMargin" id="6cB-BF-usl"/>
                             <constraint firstItem="mq5-eU-FMs" firstAttribute="top" secondItem="AFC-bN-YMr" secondAttribute="bottom" id="BLu-mx-Dlh"/>
                             <constraint firstItem="UN2-a0-cuI" firstAttribute="top" secondItem="0nz-PE-Pav" secondAttribute="bottom" constant="8" id="QOW-vi-6OK"/>
@@ -2866,8 +2383,8 @@ Desde la Ciudad Autónoma de Buenos Aires:
                             <constraint firstItem="0nz-PE-Pav" firstAttribute="leading" secondItem="L74-j3-oa6" secondAttribute="leadingMargin" id="cDT-g7-nhW"/>
                             <constraint firstItem="UN2-a0-cuI" firstAttribute="top" secondItem="BSj-R6-NvS" secondAttribute="bottom" id="eu1-hh-iTO"/>
                             <constraint firstItem="lLc-8S-bXp" firstAttribute="leading" secondItem="L74-j3-oa6" secondAttribute="leadingMargin" id="fBu-ij-jip"/>
-                            <constraint firstItem="oKC-nq-M1L" firstAttribute="centerX" secondItem="BSj-R6-NvS" secondAttribute="centerX" constant="0.5" id="mq6-Hy-G1C"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="BSj-R6-NvS" secondAttribute="trailing" constant="-16" id="r4W-cz-fKF"/>
+                            <constraint firstAttribute="width" secondItem="BSj-R6-NvS" secondAttribute="width" id="gLy-iz-Qzo"/>
+                            <constraint firstItem="oKC-nq-M1L" firstAttribute="centerX" secondItem="BSj-R6-NvS" secondAttribute="centerX" id="mq6-Hy-G1C"/>
                             <constraint firstItem="UN2-a0-cuI" firstAttribute="top" secondItem="lLc-8S-bXp" secondAttribute="bottom" constant="8" id="xWL-2f-uvE"/>
                             <constraint firstItem="BSj-R6-NvS" firstAttribute="top" secondItem="oKC-nq-M1L" secondAttribute="bottom" constant="-40" id="zJT-DD-6qp"/>
                         </constraints>
@@ -2883,7 +2400,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8LU-At-rCV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1801" y="1046"/>
+            <point key="canvasLocation" x="1369" y="1074"/>
         </scene>
         <!--Información Útil Comisarias Mapa-->
         <scene sceneID="4lz-Hk-XRT">
@@ -2906,7 +2423,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="FON-au-hPi">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                             </mapView>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No fue posible detectar tu ubicación." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1j6-Ev-FKc">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No fue posible detectar tu ubicación." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1j6-Ev-FKc">
                                 <rect key="frame" x="16" y="532" width="288" height="28"/>
                                 <color key="backgroundColor" red="0.99819964169999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -2917,7 +2434,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                 <nil key="highlightedColor"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="5"/>
+                                        <integer key="value" value="7"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </label>
@@ -2991,6 +2508,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                             <constraint firstItem="XlQ-hK-mMV" firstAttribute="top" secondItem="wQR-4p-Fdt" secondAttribute="bottom" constant="8" id="1bM-Tx-nnN"/>
                             <constraint firstItem="XlQ-hK-mMV" firstAttribute="top" secondItem="FON-au-hPi" secondAttribute="bottom" id="6i8-yX-X0O"/>
                             <constraint firstItem="1j6-Ev-FKc" firstAttribute="leading" secondItem="TAr-jn-LIF" secondAttribute="leadingMargin" id="7xx-kA-vOM"/>
+                            <constraint firstAttribute="width" secondItem="FON-au-hPi" secondAttribute="width" id="9rK-Ah-5xY"/>
                             <constraint firstItem="k0W-jS-qLO" firstAttribute="trailing" secondItem="TAr-jn-LIF" secondAttribute="trailingMargin" id="NdC-ox-fq7"/>
                             <constraint firstItem="FON-au-hPi" firstAttribute="top" secondItem="KAy-5B-hVW" secondAttribute="bottom" id="OME-KX-YVe"/>
                             <constraint firstItem="wQR-4p-Fdt" firstAttribute="leading" secondItem="TAr-jn-LIF" secondAttribute="leadingMargin" id="Os6-kj-eKh"/>
@@ -2999,11 +2517,10 @@ Desde la Ciudad Autónoma de Buenos Aires:
                             <constraint firstAttribute="width" secondItem="KAy-5B-hVW" secondAttribute="width" id="bdB-cP-TyX"/>
                             <constraint firstItem="XlQ-hK-mMV" firstAttribute="top" secondItem="1j6-Ev-FKc" secondAttribute="bottom" constant="8" id="dUQ-NG-rSw"/>
                             <constraint firstAttribute="centerX" secondItem="KAy-5B-hVW" secondAttribute="centerX" id="eHd-0V-lvF"/>
-                            <constraint firstItem="FON-au-hPi" firstAttribute="leading" secondItem="TAr-jn-LIF" secondAttribute="leadingMargin" constant="-16" id="iCA-Fx-Fqe"/>
+                            <constraint firstItem="FON-au-hPi" firstAttribute="leading" secondItem="TAr-jn-LIF" secondAttribute="leading" id="iCA-Fx-Fqe"/>
                             <constraint firstItem="k0W-jS-qLO" firstAttribute="bottom" secondItem="XlQ-hK-mMV" secondAttribute="top" constant="-8" id="inD-o0-YeV"/>
                             <constraint firstItem="wQR-4p-Fdt" firstAttribute="trailing" secondItem="TAr-jn-LIF" secondAttribute="trailingMargin" id="nWg-ld-Hzg"/>
                             <constraint firstItem="KAy-5B-hVW" firstAttribute="top" secondItem="750-cy-qXR" secondAttribute="bottom" id="sY7-Sz-QpO"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="FON-au-hPi" secondAttribute="trailing" constant="-16" id="yY9-qT-sKh"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
@@ -3018,7 +2535,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ckw-dL-EWf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1823" y="1058"/>
+            <point key="canvasLocation" x="1391" y="1086"/>
         </scene>
         <!--Información Útil Móvil Policial-->
         <scene sceneID="Rdw-dn-x0g">
@@ -3055,8 +2572,13 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                     <constraint firstAttribute="centerY" secondItem="eHd-m9-rQs" secondAttribute="centerY" id="Ada-tm-5f4"/>
                                     <constraint firstAttribute="height" constant="70" id="fx2-cY-Cyw"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e7Z-wG-BPk" userLabel="Respuesta">
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="e7Z-wG-BPk" userLabel="Respuesta">
                                 <rect key="frame" x="16" y="72" width="288" height="70"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="En caso de emergencia, el teléfono celular del móvil policial más cercano es: " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NDf-Iq-uz3">
@@ -3075,6 +2597,12 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                             <color key="titleColor" red="0.86970758439999996" green="0.92044973370000005" blue="0.97994726899999995" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="titleLabel.adjustsFontSizeToFitWidth" value="YES"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="titleLabel.minimumScaleFactor">
+                                                <real key="value" value="0.5"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="emergenciaLlamar:" destination="AOo-uU-Ta3" eventType="touchUpInside" id="5vX-Ua-fQd"/>
                                         </connections>
@@ -3090,6 +2618,14 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                     <constraint firstAttribute="height" constant="70" id="ihA-wd-qDK"/>
                                     <constraint firstAttribute="trailing" secondItem="NDf-Iq-uz3" secondAttribute="trailing" constant="8" id="zgH-0e-2JS"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="alpha">
+                                        <integer key="value" value="0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vgk-Rq-TrB" userLabel="Teléfonos Útiles">
                                 <rect key="frame" x="16" y="150" width="288" height="150"/>
@@ -3118,7 +2654,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                         <color key="textColor" red="0.76695811749999998" green="0.85238462690000005" blue="0.95030701159999997" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comisaría correspondiente a su zona:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="54b-4n-PTP">
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comisaría correspondiente a su zona:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="54b-4n-PTP">
                                         <rect key="frame" x="8" y="151" width="272" height="22"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <color key="textColor" red="0.76695811749999998" green="0.85238462690000005" blue="0.95030701159999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -3146,13 +2682,13 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                             <action selector="emergenciaLlamar:" destination="AOo-uU-Ta3" eventType="touchUpInside" id="o0B-ml-542"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nombre de la comisaría" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rng-s2-ndX">
+                                    <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nombre de la comisaría" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rng-s2-ndX">
                                         <rect key="frame" x="8" y="173" width="272" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="0.76695811748504639" green="0.85238462686538696" blue="0.95030701160430908" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lfb-F5-UnM">
+                                    <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lfb-F5-UnM">
                                         <rect key="frame" x="8" y="190" width="272" height="29"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <state key="normal" title="Indicaciones para llegar">
@@ -3203,6 +2739,11 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                     <constraint firstAttribute="trailing" secondItem="Bnq-by-6yf" secondAttribute="trailing" constant="8" id="z41-t2-fKs"/>
                                     <constraint firstItem="XsP-vX-qjG" firstAttribute="top" secondItem="Qtv-Wt-mr1" secondAttribute="bottom" constant="2" id="z6h-90-h6y"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.86970758438110352" green="0.92044973373413086" blue="0.97994726896286011" alpha="1" colorSpace="calibratedRGB"/>
@@ -3239,7 +2780,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hos-NH-ap7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1849" y="1071"/>
+            <point key="canvasLocation" x="1417" y="1099"/>
         </scene>
         <!--Información Útil Wifi Mapa-->
         <scene sceneID="3TX-wJ-Dco">
@@ -3262,7 +2803,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Bu1-pH-XfC">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                             </mapView>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detectando ubicación ..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K52-jI-WNy">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detectando ubicación ..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K52-jI-WNy">
                                 <rect key="frame" x="16" y="532" width="288" height="28"/>
                                 <color key="backgroundColor" red="0.45477524400000002" green="0.60293745990000003" blue="0.78737491370000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -3271,8 +2812,13 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="7"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No fue posible detectar tu ubicación." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Urv-nG-Wts">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No fue posible detectar tu ubicación." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Urv-nG-Wts">
                                 <rect key="frame" x="16" y="532" width="288" height="28"/>
                                 <color key="backgroundColor" red="0.99819964169999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -3281,18 +2827,23 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="7"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.86970758438110352" green="0.92044973373413086" blue="0.97994726896286011" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="GGg-Ci-zz0" firstAttribute="top" secondItem="vnG-7L-dct" secondAttribute="bottom" id="0do-Xo-ePz"/>
                             <constraint firstItem="K52-jI-WNy" firstAttribute="leading" secondItem="QIe-Wd-ulh" secondAttribute="leadingMargin" id="BC0-rr-ZHz"/>
+                            <constraint firstAttribute="width" secondItem="Bu1-pH-XfC" secondAttribute="width" id="FJ3-GJ-6tj"/>
                             <constraint firstItem="N07-V6-QNi" firstAttribute="top" secondItem="K52-jI-WNy" secondAttribute="bottom" constant="8" id="H63-Zx-414"/>
                             <constraint firstAttribute="width" secondItem="GGg-Ci-zz0" secondAttribute="width" id="HJt-Q6-KSa"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Bu1-pH-XfC" secondAttribute="trailing" constant="-16" id="Hey-7W-OBe"/>
                             <constraint firstItem="Urv-nG-Wts" firstAttribute="trailing" secondItem="QIe-Wd-ulh" secondAttribute="trailingMargin" id="QPa-TM-drK"/>
                             <constraint firstItem="N07-V6-QNi" firstAttribute="top" secondItem="Urv-nG-Wts" secondAttribute="bottom" constant="8" id="S2b-nO-CIq"/>
-                            <constraint firstItem="Bu1-pH-XfC" firstAttribute="leading" secondItem="QIe-Wd-ulh" secondAttribute="leadingMargin" constant="-16" id="SUw-fz-eLc"/>
+                            <constraint firstItem="Bu1-pH-XfC" firstAttribute="leading" secondItem="QIe-Wd-ulh" secondAttribute="leading" id="SUw-fz-eLc"/>
                             <constraint firstItem="Urv-nG-Wts" firstAttribute="leading" secondItem="QIe-Wd-ulh" secondAttribute="leadingMargin" id="Wa0-zl-1op"/>
                             <constraint firstAttribute="centerX" secondItem="GGg-Ci-zz0" secondAttribute="centerX" id="gr8-Bp-tDZ"/>
                             <constraint firstItem="K52-jI-WNy" firstAttribute="trailing" secondItem="QIe-Wd-ulh" secondAttribute="trailingMargin" id="mHD-dZ-7rk"/>
@@ -3309,7 +2860,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="okA-6g-M9z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1876" y="1084"/>
+            <point key="canvasLocation" x="1444" y="1112"/>
         </scene>
         <!--Información Útil Centros de Salud Mapa-->
         <scene sceneID="zjL-oo-eRJ">
@@ -3352,12 +2903,12 @@ Desde la Ciudad Autónoma de Buenos Aires:
                         <constraints>
                             <constraint firstItem="tC6-tB-Nk2" firstAttribute="top" secondItem="iF8-Vj-5nb" secondAttribute="bottom" constant="8" id="8pL-iA-WyI"/>
                             <constraint firstItem="gZC-jL-0su" firstAttribute="top" secondItem="XXb-Wn-P2c" secondAttribute="bottom" id="9Bm-pB-tVR"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="gZC-jL-0su" secondAttribute="trailing" constant="-16" id="9b0-Zs-IdN"/>
                             <constraint firstItem="iF8-Vj-5nb" firstAttribute="trailing" secondItem="CjI-9J-syv" secondAttribute="trailingMargin" id="BsM-Qk-eBE"/>
+                            <constraint firstItem="gZC-jL-0su" firstAttribute="width" secondItem="CjI-9J-syv" secondAttribute="width" id="KAN-w7-jLK"/>
                             <constraint firstItem="tC6-tB-Nk2" firstAttribute="top" secondItem="gZC-jL-0su" secondAttribute="bottom" id="KnL-XS-3fP"/>
                             <constraint firstItem="XXb-Wn-P2c" firstAttribute="top" secondItem="bAk-N8-ghA" secondAttribute="bottom" id="Uat-Bw-dBb"/>
                             <constraint firstAttribute="width" secondItem="XXb-Wn-P2c" secondAttribute="width" id="wEA-Td-XJK"/>
-                            <constraint firstItem="gZC-jL-0su" firstAttribute="leading" secondItem="CjI-9J-syv" secondAttribute="leadingMargin" constant="-16" id="wkK-cF-mXc"/>
+                            <constraint firstItem="gZC-jL-0su" firstAttribute="leading" secondItem="CjI-9J-syv" secondAttribute="leading" id="wkK-cF-mXc"/>
                             <constraint firstAttribute="centerX" secondItem="XXb-Wn-P2c" secondAttribute="centerX" id="xSp-k7-Hg6"/>
                             <constraint firstItem="iF8-Vj-5nb" firstAttribute="leading" secondItem="CjI-9J-syv" secondAttribute="leadingMargin" id="xlL-Ov-6c5"/>
                         </constraints>
@@ -3370,7 +2921,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pl9-jc-7ew" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1900" y="1096"/>
+            <point key="canvasLocation" x="1468" y="1124"/>
         </scene>
     </scenes>
     <resources>
@@ -3386,5 +2937,6 @@ Desde la Ciudad Autónoma de Buenos Aires:
         <image name="cover-7" width="499" height="465"/>
         <image name="cover-8" width="800" height="1200"/>
         <image name="cover-9" width="720" height="540"/>
+        <image name="dummy-hotel" width="100" height="80"/>
     </resources>
 </document>
