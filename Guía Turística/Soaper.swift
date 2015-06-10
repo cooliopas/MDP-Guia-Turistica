@@ -17,12 +17,7 @@ func soapea(servicio: String, parametros: [[String: String]], completionHandler:
 
 	let apiURL = "http://gisdesa.mardelplata.gob.ar/opendata/ws.php?wsdl"
 	
-	let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
-	configuration.timeoutIntervalForRequest = 60
-	
-	let manager = Alamofire.Manager(configuration: configuration)
-	
-	manager.request(.POST, apiURL, parameters: [:], encoding: .Custom({
+	Alamofire.request(.POST, apiURL, parameters: [:], encoding: .Custom({
 	
 		(convertible, params) in
 
@@ -145,11 +140,7 @@ func restea(api: String, servicio: String, parametros: [String:AnyObject], compl
 	
 	if apiURL != nil {
 	
-		let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
-		configuration.timeoutIntervalForRequest = 60
-		let manager = Alamofire.Manager(configuration: configuration)
-
-		manager.request(.POST, apiURL!, parameters: parametros, encoding: .JSON).responseJSON { (request, response, JSON, error) in
+        Alamofire.request(.POST, apiURL!, parameters: parametros, encoding: .JSON).responseJSON { (request, response, JSON, error) in
 
 			completionHandler(request, response, JSON, error)
 

@@ -13,6 +13,7 @@ import AddressBook
 class ModeloBusquedaLugarViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, MKMapViewDelegate, CLLocationManagerDelegate, SWRevealViewControllerDelegate {
 	
     var titulo: String = ""
+    var modeloBusquedaVC: ModeloBusquedaViewController!
     var idSeccion = ""
     var api: String = ""
     
@@ -756,8 +757,6 @@ class ModeloBusquedaLugarViewController: UIViewController, UITableViewDelegate, 
 		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
 		appDelegate.arrayVC.removeValueForKey("modeloBusquedaLugar")
 		
-		IJProgressView.shared.hideProgressView()
-
 		self.removeFromParentViewController()
 		
 	}

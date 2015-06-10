@@ -254,8 +254,6 @@ class MediosDeAccesoMapaViewController: UIViewController, MKMapViewDelegate, CLL
 		
 		mapaView.delegate = nil
 		
-		IJProgressView.shared.hideProgressView()
-
 		self.removeFromParentViewController()
 		
 	}

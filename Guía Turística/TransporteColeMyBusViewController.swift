@@ -55,9 +55,7 @@ class TransporteColeMyBusViewController: UIViewController, UIWebViewDelegate, UI
 		
 		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
 		appDelegate.arrayVC.removeValueForKey("transporteColeMyBus")
-		
-		IJProgressView.shared.hideProgressView()
-		
+				
 		self.removeFromParentViewController()
 		
 	}

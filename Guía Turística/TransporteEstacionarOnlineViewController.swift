@@ -54,8 +54,6 @@ class TransporteEstacionarInfoWebViewController: UIViewController, UIWebViewDele
 		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
 		appDelegate.arrayVC.removeValueForKey("transporteEstacionarInfoWeb")
 		
-		IJProgressView.shared.hideProgressView()
-
 		self.removeFromParentViewController()
 		
 	}

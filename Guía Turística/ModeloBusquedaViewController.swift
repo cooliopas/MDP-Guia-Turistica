@@ -25,6 +25,8 @@ class ModeloBusquedaViewController: UIViewController, UITableViewDelegate, UITab
     var statusInicial = ""
     var resultadosConFoto = true
     
+    var esperandoResultados = false
+    
 	var cellBusqueda: ModeloBusquedaCellFiltroTableViewCell?
 	
     var opciones: [String] = []
@@ -67,12 +69,6 @@ class ModeloBusquedaViewController: UIViewController, UITableViewDelegate, UITab
 		
         locationManager.startUpdatingLocation()
         
-        if opciones.count == 0 {
-            
-            buscar()
-            
-        }
-        
 	}
 
     override func viewWillAppear(animated: Bool) {
@@ -80,6 +76,12 @@ class ModeloBusquedaViewController: UIViewController, UITableViewDelegate, UITab
         
         armaNavegacion()
         self.revealViewController().delegate = self
+     
+        if opciones.count == 0 && lugares.count == 0 {
+            
+            buscar()
+            
+        }
         
     }
     
@@ -118,6 +120,8 @@ class ModeloBusquedaViewController: UIViewController, UITableViewDelegate, UITab
 			
 		} else {
 		
+            esperandoResultados = true
+            
             if opcionesValores["nombre"] != nil {
                 
                 opcionesValores["nombre"] = cellBusqueda!.filtroNombreTextField.text
@@ -136,55 +140,61 @@ class ModeloBusquedaViewController: UIViewController, UITableViewDelegate, UITab
 					self.tablaResultados.scrollRectToVisible(CGRectMake(0, 0, 1, 1), animated: false)
 			
 			})
-			
+
 			IJProgressView.shared.showProgressView(self.view, padding: true, texto: "Por favor espere...\nLa búsqueda puede demorar aproximadamente 1 minuto.")
 			
             if idSeccion != "congresosYEventos" {
             
                 Lugar.buscar(idSeccion,opcionesItems: opcionesItems,opcionesValores: opcionesValores) { (lugares, error) in
              
-                    if self.revealViewController() != nil { IJProgressView.shared.hideProgressView() }
+                    if self.esperandoResultados {
                     
-                    if error == nil && lugares.count > 0 {
+                        self.esperandoResultados = false
                         
-                        self.lugares = lugares
-                        
-                        if self.ubicacionActual != nil {
+                        if self.revealViewController() != nil { IJProgressView.shared.hideProgressView() }
+
+                        if error == nil && lugares.count > 0 {
                             
-                            for lugar in self.lugares {
+                            self.lugares = lugares
+                            
+                            if self.ubicacionActual != nil {
                                 
-                                if lugar.latitud != 0 {
+                                for lugar in self.lugares {
                                     
-                                    lugar.distancia = self.ubicacionActual!.distanceFromLocation(CLLocation(latitude: lugar.latitud, longitude: lugar.longitud))
+                                    if lugar.latitud != 0 {
+                                        
+                                        lugar.distancia = self.ubicacionActual!.distanceFromLocation(CLLocation(latitude: lugar.latitud, longitude: lugar.longitud))
+                                        
+                                    }
                                     
                                 }
                                 
+                                self.lugares.sort(self.sorterForDistancia)
+                                
                             }
                             
-                            self.lugares.sort(self.sorterForDistancia)
+                            self.tablaResultados.reloadData()
+                            
+                            UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
+                            
+                                self.tablaResultados.alpha = 1
+                                
+                                }, completion: nil)
+                            
+                        } else {
+                            
+                            self.labelStatus.text = error
+                            
+                            UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
+                                
+                                self.labelStatus.alpha = 1
+                                
+                                }, completion: nil)
                             
                         }
-                        
-                        self.tablaResultados.reloadData()
-                        
-                        UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
-                            
-                            self.tablaResultados.alpha = 1
-                            
-                            }, completion: nil)
-                        
-                    } else {
-                        
-                        self.labelStatus.text = error
-                        
-                        UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
-                            
-                            self.labelStatus.alpha = 1
-                            
-                            }, completion: nil)
-                        
+
                     }
-                    
+                        
                 }
                 
             } else {
@@ -270,6 +280,7 @@ class ModeloBusquedaViewController: UIViewController, UITableViewDelegate, UITab
             }
             
             modeloBusquedaLugarVC.titulo = navBar?.topItem?.title ?? ""
+            modeloBusquedaLugarVC.modeloBusquedaVC = self
             modeloBusquedaLugarVC.idSeccion = idSeccion
             modeloBusquedaLugarVC.api = api
             
@@ -483,12 +494,30 @@ class ModeloBusquedaViewController: UIViewController, UITableViewDelegate, UITab
 		}
 	}
 	
-	override func viewDidDisappear(animated: Bool) {
-
-		super.viewDidDisappear(animated)
-		
-		IJProgressView.shared.hideProgressView()
-		
-	}
-	
+    func limpiar() {
+        
+        esperandoResultados = false
+        
+        lugares.removeAll(keepCapacity: false)
+        eventos.removeAll(keepCapacity: false)
+        
+        self.tablaResultados.alpha = 0
+        self.tablaResultados.reloadData()
+        
+        labelStatus.text = statusInicial
+        
+        if statusInicial == "" {
+            
+            labelStatus.alpha = 0
+            
+        } else {
+            
+            labelStatus.alpha = 1
+            
+        }
+        
+        IJProgressView.shared.hideProgressView()
+        
+    }
+    	
 }

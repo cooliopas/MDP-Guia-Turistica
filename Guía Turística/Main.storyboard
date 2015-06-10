@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TcJ-IA-Ugj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8121.17" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TcJ-IA-Ugj">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8101.14"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -42,8 +43,8 @@
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.69999999999999973" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cover-1" translatesAutoresizingMaskIntoConstraints="NO" id="gS8-pj-3yh">
                                         <rect key="frame" x="0.0" y="0.0" width="107" height="107"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="msb-xT-kEm">
-                                        <rect key="frame" x="10" y="32" width="88" height="44"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="msb-xT-kEm" userLabel="Medios de acceso">
+                                        <rect key="frame" x="9" y="32" width="89" height="44"/>
                                         <string key="text">Medios
 de acceso</string>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
@@ -72,7 +73,7 @@ de acceso</string>
                                         <rect key="frame" x="0.0" y="0.0" width="107" height="107"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wfS-pA-ZfX">
-                                        <rect key="frame" x="4" y="21" width="100" height="66"/>
+                                        <rect key="frame" x="1" y="21" width="105" height="66"/>
                                         <string key="text">Hoteles
 y
 Alojamiento</string>
@@ -102,7 +103,7 @@ Alojamiento</string>
                                         <rect key="frame" x="0.0" y="0.0" width="107" height="107"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Inmobiliarias" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="reV-1K-m1u">
-                                        <rect key="frame" x="0.0" y="42" width="107" height="23"/>
+                                        <rect key="frame" x="-3" y="42" width="113" height="23"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <color key="textColor" red="0.86970758439999996" green="0.92044973370000005" blue="0.97994726899999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -113,13 +114,13 @@ Alojamiento</string>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="107" placeholder="YES" id="3sk-PP-aJo"/>
-                                    <constraint firstAttribute="centerX" secondItem="reV-1K-m1u" secondAttribute="centerX" constant="0.5" id="FoH-9R-7Fe"/>
+                                    <constraint firstAttribute="centerX" secondItem="reV-1K-m1u" secondAttribute="centerX" id="FoH-9R-7Fe"/>
                                     <constraint firstAttribute="trailing" secondItem="ql3-3a-eiU" secondAttribute="trailing" id="Lqb-BT-SxV"/>
                                     <constraint firstItem="ql3-3a-eiU" firstAttribute="top" secondItem="vNG-8G-xBT" secondAttribute="top" id="fcU-6x-1Tf"/>
                                     <constraint firstAttribute="bottom" secondItem="ql3-3a-eiU" secondAttribute="bottom" id="gAy-OL-uUN"/>
                                     <constraint firstItem="ql3-3a-eiU" firstAttribute="leading" secondItem="vNG-8G-xBT" secondAttribute="leading" id="jWN-CM-g6z"/>
                                     <constraint firstAttribute="width" constant="107" placeholder="YES" id="mjQ-uv-6Jb"/>
-                                    <constraint firstAttribute="centerY" secondItem="reV-1K-m1u" secondAttribute="centerY" constant="-0.5" id="oUZ-Xl-0hJ"/>
+                                    <constraint firstAttribute="centerY" secondItem="reV-1K-m1u" secondAttribute="centerY" id="oUZ-Xl-0hJ"/>
                                 </constraints>
                             </view>
                             <view tag="4" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GbW-y6-bgh" userLabel="View4">
@@ -129,7 +130,7 @@ Alojamiento</string>
                                         <rect key="frame" x="0.0" y="0.0" width="107" height="107"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gastronomía" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aj8-K4-5Hn">
-                                        <rect key="frame" x="-1" y="42" width="109" height="23"/>
+                                        <rect key="frame" x="-3" y="42" width="113" height="23"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <color key="textColor" red="0.86970758439999996" green="0.92044973370000005" blue="0.97994726899999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -140,13 +141,13 @@ Alojamiento</string>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="M8r-11-zxn" secondAttribute="trailing" id="0fI-C8-mLP"/>
-                                    <constraint firstAttribute="centerX" secondItem="aj8-K4-5Hn" secondAttribute="centerX" constant="0.5" id="3hx-Lj-T7n"/>
+                                    <constraint firstAttribute="centerX" secondItem="aj8-K4-5Hn" secondAttribute="centerX" id="3hx-Lj-T7n"/>
                                     <constraint firstAttribute="width" constant="107" placeholder="YES" id="56X-oE-3F0"/>
                                     <constraint firstAttribute="height" constant="107" placeholder="YES" id="BLx-Lr-e0e"/>
                                     <constraint firstItem="M8r-11-zxn" firstAttribute="top" secondItem="GbW-y6-bgh" secondAttribute="top" id="V7E-lQ-I9j"/>
                                     <constraint firstItem="M8r-11-zxn" firstAttribute="leading" secondItem="GbW-y6-bgh" secondAttribute="leading" id="oe7-Vw-EsA"/>
                                     <constraint firstAttribute="bottom" secondItem="M8r-11-zxn" secondAttribute="bottom" id="sSA-qW-qIV"/>
-                                    <constraint firstAttribute="centerY" secondItem="aj8-K4-5Hn" secondAttribute="centerY" constant="-0.5" id="xil-QJ-Y4L"/>
+                                    <constraint firstAttribute="centerY" secondItem="aj8-K4-5Hn" secondAttribute="centerY" id="xil-QJ-Y4L"/>
                                 </constraints>
                             </view>
                             <view tag="5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cwo-Gj-U0w" userLabel="View5">
@@ -156,7 +157,7 @@ Alojamiento</string>
                                         <rect key="frame" x="0.0" y="0.0" width="107" height="107"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Playas" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EcR-M0-TH2">
-                                        <rect key="frame" x="25" y="42" width="57" height="23"/>
+                                        <rect key="frame" x="24" y="42" width="58" height="23"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <color key="textColor" red="0.86970758439999996" green="0.92044973370000005" blue="0.97994726899999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -166,12 +167,12 @@ Alojamiento</string>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="centerX" secondItem="EcR-M0-TH2" secondAttribute="centerX" constant="0.5" id="C1S-qH-3OI"/>
+                                    <constraint firstAttribute="centerX" secondItem="EcR-M0-TH2" secondAttribute="centerX" id="C1S-qH-3OI"/>
                                     <constraint firstAttribute="trailing" secondItem="myB-x5-hI7" secondAttribute="trailing" id="DX3-6L-Azk"/>
                                     <constraint firstAttribute="width" constant="107" placeholder="YES" id="Sdn-dd-i8Z"/>
                                     <constraint firstAttribute="height" constant="107" placeholder="YES" id="StU-C3-2vz"/>
                                     <constraint firstAttribute="bottom" secondItem="myB-x5-hI7" secondAttribute="bottom" id="UNW-wJ-mAS"/>
-                                    <constraint firstAttribute="centerY" secondItem="EcR-M0-TH2" secondAttribute="centerY" constant="-0.5" id="aQl-vT-J7F"/>
+                                    <constraint firstAttribute="centerY" secondItem="EcR-M0-TH2" secondAttribute="centerY" id="aQl-vT-J7F"/>
                                     <constraint firstItem="myB-x5-hI7" firstAttribute="top" secondItem="Cwo-Gj-U0w" secondAttribute="top" id="huw-k3-aiK"/>
                                     <constraint firstItem="myB-x5-hI7" firstAttribute="leading" secondItem="Cwo-Gj-U0w" secondAttribute="leading" id="qtc-j7-g3n"/>
                                 </constraints>
@@ -183,7 +184,7 @@ Alojamiento</string>
                                         <rect key="frame" x="0.0" y="0.0" width="106" height="107"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Transporte" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J9b-HM-X3f">
-                                        <rect key="frame" x="8" y="42" width="91" height="23"/>
+                                        <rect key="frame" x="5" y="42" width="97" height="23"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <color key="textColor" red="0.86970758439999996" green="0.92044973370000005" blue="0.97994726899999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -200,7 +201,7 @@ Alojamiento</string>
                                     <constraint firstAttribute="centerX" secondItem="J9b-HM-X3f" secondAttribute="centerX" id="dpl-FQ-gLe"/>
                                     <constraint firstAttribute="width" constant="106" placeholder="YES" id="mCk-TG-hrA"/>
                                     <constraint firstItem="HtI-Py-bcg" firstAttribute="top" secondItem="z1r-nd-RPo" secondAttribute="top" id="uy0-Ot-Rum"/>
-                                    <constraint firstAttribute="centerY" secondItem="J9b-HM-X3f" secondAttribute="centerY" constant="-0.5" id="z0K-3a-f48"/>
+                                    <constraint firstAttribute="centerY" secondItem="J9b-HM-X3f" secondAttribute="centerY" id="z0K-3a-f48"/>
                                 </constraints>
                             </view>
                             <view tag="7" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ipa-oU-Iq5" userLabel="View7">
@@ -210,7 +211,7 @@ Alojamiento</string>
                                         <rect key="frame" x="0.0" y="0.0" width="107" height="107"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Eventos" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wbn-2W-PTZ">
-                                        <rect key="frame" x="19" y="42" width="69" height="23"/>
+                                        <rect key="frame" x="18" y="42" width="71" height="23"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <color key="textColor" red="0.86970758439999996" green="0.92044973370000005" blue="0.97994726899999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -222,8 +223,8 @@ Alojamiento</string>
                                 <constraints>
                                     <constraint firstItem="b1y-fC-tQQ" firstAttribute="leading" secondItem="Ipa-oU-Iq5" secondAttribute="leading" id="Ara-ck-wSN"/>
                                     <constraint firstAttribute="width" constant="107" placeholder="YES" id="DOX-Zu-2IE"/>
-                                    <constraint firstAttribute="centerX" secondItem="wbn-2W-PTZ" secondAttribute="centerX" constant="0.5" id="SpH-ch-NOz"/>
-                                    <constraint firstAttribute="centerY" secondItem="wbn-2W-PTZ" secondAttribute="centerY" constant="-0.5" id="bhy-rG-wRs"/>
+                                    <constraint firstAttribute="centerX" secondItem="wbn-2W-PTZ" secondAttribute="centerX" id="SpH-ch-NOz"/>
+                                    <constraint firstAttribute="centerY" secondItem="wbn-2W-PTZ" secondAttribute="centerY" id="bhy-rG-wRs"/>
                                     <constraint firstAttribute="bottom" secondItem="b1y-fC-tQQ" secondAttribute="bottom" id="mdh-Id-6lh"/>
                                     <constraint firstAttribute="height" constant="107" placeholder="YES" id="veQ-tT-L8U"/>
                                     <constraint firstAttribute="trailing" secondItem="b1y-fC-tQQ" secondAttribute="trailing" id="y82-sj-309"/>
@@ -237,7 +238,7 @@ Alojamiento</string>
                                         <rect key="frame" x="0.0" y="0.0" width="107" height="107"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Bp-YW-ELR">
-                                        <rect key="frame" x="2" y="21" width="103" height="66"/>
+                                        <rect key="frame" x="0.0" y="21" width="107" height="66"/>
                                         <string key="text">Recreación
 y
 Excursiones</string>
@@ -253,11 +254,11 @@ Excursiones</string>
                                     <constraint firstAttribute="trailing" secondItem="qv9-cj-Tqw" secondAttribute="trailing" id="GOo-KS-NlO"/>
                                     <constraint firstItem="qv9-cj-Tqw" firstAttribute="top" secondItem="Kef-XE-jgs" secondAttribute="top" id="b6V-P7-Xme"/>
                                     <constraint firstAttribute="bottom" secondItem="qv9-cj-Tqw" secondAttribute="bottom" id="d6L-Wq-8qk"/>
-                                    <constraint firstAttribute="centerX" secondItem="2Bp-YW-ELR" secondAttribute="centerX" constant="0.5" id="gZL-kx-FNe"/>
+                                    <constraint firstAttribute="centerX" secondItem="2Bp-YW-ELR" secondAttribute="centerX" id="gZL-kx-FNe"/>
                                     <constraint firstAttribute="height" constant="107" placeholder="YES" id="i6N-2n-LAq"/>
                                     <constraint firstItem="qv9-cj-Tqw" firstAttribute="leading" secondItem="Kef-XE-jgs" secondAttribute="leading" id="n93-2m-MT0"/>
                                     <constraint firstAttribute="width" constant="107" placeholder="YES" id="pNz-gl-ddU"/>
-                                    <constraint firstAttribute="centerY" secondItem="2Bp-YW-ELR" secondAttribute="centerY" constant="-0.5" id="tIe-Ts-t06"/>
+                                    <constraint firstAttribute="centerY" secondItem="2Bp-YW-ELR" secondAttribute="centerY" id="tIe-Ts-t06"/>
                                 </constraints>
                             </view>
                             <view tag="9" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WBq-cR-yyH" userLabel="View9">
@@ -267,7 +268,7 @@ Excursiones</string>
                                         <rect key="frame" x="0.0" y="0.0" width="106" height="107"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I8d-Yj-Pab">
-                                        <rect key="frame" x="19" y="21" width="68" height="66"/>
+                                        <rect key="frame" x="17" y="21" width="72" height="66"/>
                                         <string key="text">Paseos
 y
 Lugares</string>
@@ -300,7 +301,7 @@ Lugares</string>
                                         <rect key="frame" x="0.0" y="0.0" width="107" height="107"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Museos" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XoJ-8z-a8M">
-                                        <rect key="frame" x="20" y="42" width="67" height="23"/>
+                                        <rect key="frame" x="19" y="42" width="69" height="23"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <color key="textColor" red="0.86970758438110352" green="0.92044973373413086" blue="0.97994726896286011" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -327,7 +328,7 @@ Lugares</string>
                                         <rect key="frame" x="0.0" y="0.0" width="107" height="107"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YHX-7s-nS9">
-                                        <rect key="frame" x="3" y="32" width="101" height="44"/>
+                                        <rect key="frame" x="1" y="32" width="106" height="44"/>
                                         <string key="text">Información
 Útil</string>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
@@ -417,8 +418,10 @@ Lugares</string>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="menuCell1" rowHeight="35" id="b1J-OJ-CPJ" customClass="MenuTableViewCell1" customModule="Gui_a_Turi_stica" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="35"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="b1J-OJ-CPJ" id="mX4-07-GY0">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="34"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tAB-2r-efd">
@@ -619,11 +622,14 @@ Lugares</string>
                                 <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="items" textLabel="yzh-2K-IQ0" style="IBUITableViewCellStyleDefault" id="ewB-ay-q43">
+                                        <rect key="frame" x="0.0" y="50" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ewB-ay-q43" id="Qqf-Wq-03v">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yzh-2K-IQ0">
+                                                    <rect key="frame" x="15" y="0.0" width="290" height="43"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -685,9 +691,10 @@ Lugares</string>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="fotos" rowHeight="80" id="fK3-91-BVh" customClass="ModeloBusquedaLugarFotosTableViewCell" customModule="Gui_a_Turi_stica" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                        <rect key="frame" x="0.0" y="22" width="320" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fK3-91-BVh" id="WNb-WY-BVF">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mMW-Jg-OwD">
@@ -712,8 +719,10 @@ Lugares</string>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="datos" id="8uQ-NC-yUh" customClass="ModeloBusquedaLugarDatosTableViewCell" customModule="Gui_a_Turi_stica" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="102" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="8uQ-NC-yUh" id="tY5-O8-mv2">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FVU-JL-c4K">
@@ -733,15 +742,19 @@ Lugares</string>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="mapa" id="rse-dY-j1T" customClass="ModeloBusquedaLugarMapaTableViewCell" customModule="Gui_a_Turi_stica" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="146" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rse-dY-j1T" id="1UC-KX-Xu7">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.80784313725490198" green="0.88235294117647056" blue="0.96078431372549022" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="informacion" rowHeight="65" id="GpO-Fd-TZ0" customClass="ModeloBusquedaLugarInfoTableViewCell" customModule="Gui_a_Turi_stica" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="190" width="320" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GpO-Fd-TZ0" id="iZk-TL-T02">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iom-BR-LAl">
@@ -802,8 +815,10 @@ Lugares</string>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="observaciones" rowHeight="65" id="crB-pN-7zi" customClass="ModeloBusquedaLugarObservacionesTableViewCell" customModule="Gui_a_Turi_stica" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="255" width="320" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="crB-pN-7zi" id="II8-7X-Zse">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="K9P-jK-tDs">
@@ -1016,11 +1031,14 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                 <color key="sectionIndexBackgroundColor" red="0.86970758438110352" green="0.92044973373413086" blue="0.97994726896286011" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cellAcceso" textLabel="Z3a-QW-ZH1" detailTextLabel="VJd-SH-iLZ" style="IBUITableViewCellStyleSubtitle" id="Axd-QU-WYS">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Axd-QU-WYS" id="HDr-Qx-yFP">
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Z3a-QW-ZH1">
+                                                    <rect key="frame" x="15" y="1" width="34" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -1030,6 +1048,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VJd-SH-iLZ">
+                                                    <rect key="frame" x="15" y="22" width="59" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -1094,11 +1113,14 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="opciones" textLabel="4le-ES-Yo8" detailTextLabel="Gha-vu-w2t" style="IBUITableViewCellStyleValue1" id="6T9-96-9bo">
+                                        <rect key="frame" x="0.0" y="50" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6T9-96-9bo" id="Db6-Va-cPL">
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="4le-ES-Yo8">
+                                                    <rect key="frame" x="15" y="13" width="30" height="18"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -1108,6 +1130,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Gha-vu-w2t">
+                                                    <rect key="frame" x="241" y="11" width="44" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="calibratedRGB"/>
@@ -1120,8 +1143,10 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="filtro" id="ypP-ne-eBh" customClass="ModeloBusquedaCellFiltroTableViewCell" customModule="Gui_a_Turi_stica" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="94" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ypP-ne-eBh" id="Ntf-D4-vsa">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Nombre" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pi6-cF-c0a">
@@ -1191,8 +1216,10 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                 <color key="separatorColor" red="0.45477524399757385" green="0.60293745994567871" blue="0.78737491369247437" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationWidth="0.0" reuseIdentifier="lugar" rowHeight="80" id="R6g-Tr-E4M" customClass="ModeloBusquedaResultadosCellTableViewCell" customModule="Gui_a_Turi_stica" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="R6g-Tr-E4M" id="G0H-rE-Bky">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="79"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dummy-hotel" translatesAutoresizingMaskIntoConstraints="NO" id="Muv-8L-nJL">
@@ -1285,11 +1312,14 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                 <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="transporteSubtitle" textLabel="ERE-RJ-fqT" detailTextLabel="gGs-vx-kSF" style="IBUITableViewCellStyleSubtitle" id="4gb-ZS-zpR">
+                                        <rect key="frame" x="0.0" y="50" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4gb-ZS-zpR" id="Csm-tj-IgC">
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ERE-RJ-fqT">
+                                                    <rect key="frame" x="15" y="1" width="34" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -1299,6 +1329,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" alpha="0.80000000000000004" contentMode="left" text="Detail" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gGs-vx-kSF">
+                                                    <rect key="frame" x="15" y="22" width="44" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -1311,11 +1342,14 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="transporteBasic" textLabel="VPx-Rv-PiQ" style="IBUITableViewCellStyleDefault" id="FZV-4E-nvV">
+                                        <rect key="frame" x="0.0" y="94" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FZV-4E-nvV" id="kic-T5-Q3f">
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VPx-Rv-PiQ">
+                                                    <rect key="frame" x="15" y="0.0" width="270" height="43"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -1375,8 +1409,10 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" restorationIdentifier="paseo" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="paseo" rowHeight="118" id="yNV-7N-aqe" customClass="PaseosYLugaresCellTableViewCell" customModule="Gui_a_Turi_stica" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="118"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yNV-7N-aqe" id="l3j-5N-aD1">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="117"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6d1-hw-Y2d">
@@ -1547,11 +1583,14 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="linea" textLabel="HBN-Tv-unI" style="IBUITableViewCellStyleDefault" id="CrW-f4-XHU">
+                                        <rect key="frame" x="0.0" y="50" width="320" height="37"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="CrW-f4-XHU" id="vIs-rU-hX5">
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="36"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HBN-Tv-unI">
+                                                    <rect key="frame" x="15" y="0.0" width="270" height="36"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -2007,11 +2046,14 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                 <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="transporteSubtitle" textLabel="LYJ-fM-fbP" detailTextLabel="kFS-aX-opK" style="IBUITableViewCellStyleSubtitle" id="oYP-ik-e8D">
+                                        <rect key="frame" x="0.0" y="50" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="oYP-ik-e8D" id="ScR-K7-kkt">
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LYJ-fM-fbP">
+                                                    <rect key="frame" x="15" y="1" width="34" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -2021,6 +2063,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" alpha="0.80000001192092896" contentMode="left" text="Detail" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kFS-aX-opK">
+                                                    <rect key="frame" x="15" y="22" width="44" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -2033,11 +2076,14 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="transporteBasic" textLabel="0hy-q5-2x2" style="IBUITableViewCellStyleDefault" id="Va8-ka-pFM">
+                                        <rect key="frame" x="0.0" y="94" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Va8-ka-pFM" id="woW-wN-pBW">
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0hy-q5-2x2">
+                                                    <rect key="frame" x="15" y="0.0" width="270" height="43"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -2230,11 +2276,14 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="informacionSubtitle" textLabel="Nwh-Za-xeM" detailTextLabel="U6F-0y-8KU" style="IBUITableViewCellStyleSubtitle" id="Ybe-DS-EnK">
+                                        <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ybe-DS-EnK" id="llS-29-36s">
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Nwh-Za-xeM">
+                                                    <rect key="frame" x="15" y="1" width="34" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -2244,6 +2293,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                                     </variation>
                                                 </label>
                                                 <label opaque="NO" multipleTouchEnabled="YES" alpha="0.80000001192092896" contentMode="left" text="Detail" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="U6F-0y-8KU">
+                                                    <rect key="frame" x="15" y="22" width="44" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -2256,11 +2306,14 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="informacionBasic" textLabel="60D-gW-gWx" style="IBUITableViewCellStyleDefault" id="D1D-M1-0HI">
+                                        <rect key="frame" x="0.0" y="66" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="D1D-M1-0HI" id="ZbX-ss-zqm">
+                                            <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="60D-gW-gWx">
+                                                    <rect key="frame" x="15" y="0.0" width="270" height="43"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -2343,7 +2396,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="2" translatesAutoresizingMaskIntoConstraints="NO" id="oKC-nq-M1L">
-                                <rect key="frame" x="8" y="76" width="305" height="29"/>
+                                <rect key="frame" x="9" y="76" width="302" height="29"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <segments>
                                     <segment title="De turno hoy"/>
@@ -2485,7 +2538,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                 </subviews>
                                 <color key="backgroundColor" red="0.99819964169999942" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <accessibility key="accessibilityConfiguration">
-                                    <accessibilityTraits key="traits" none="YES" notEnabled="YES"/>
+                                    <accessibilityTraits key="traits" notEnabled="YES"/>
                                 </accessibility>
                                 <constraints>
                                     <constraint firstItem="PwP-Ic-NCM" firstAttribute="top" secondItem="k0W-jS-qLO" secondAttribute="top" constant="4" id="Bvl-Xz-djJ"/>
@@ -2637,19 +2690,19 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Policía:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qtv-Wt-mr1">
-                                        <rect key="frame" x="8" y="69" width="61" height="22"/>
+                                        <rect key="frame" x="8" y="69" width="63" height="22"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <color key="textColor" red="0.76695811748504639" green="0.85238462686538696" blue="0.95030701160430908" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bomberos:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XsP-vX-qjG">
-                                        <rect key="frame" x="8" y="93" width="92" height="22"/>
+                                        <rect key="frame" x="8" y="93" width="95" height="22"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <color key="textColor" red="0.76695811749999998" green="0.85238462690000005" blue="0.95030701159999997" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Accidentes en vía pública:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a1c-CW-PCH">
-                                        <rect key="frame" x="8" y="117" width="219" height="22"/>
+                                        <rect key="frame" x="8" y="117" width="226" height="22"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                         <color key="textColor" red="0.76695811749999998" green="0.85238462690000005" blue="0.95030701159999997" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -2661,7 +2714,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xyF-w5-y2r">
-                                        <rect key="frame" x="77" y="62" width="33" height="36"/>
+                                        <rect key="frame" x="79" y="62" width="31" height="36"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="911">
                                             <color key="titleColor" red="0.86970758438110352" green="0.92044973373413086" blue="0.97994726896286011" alpha="1" colorSpace="calibratedRGB"/>
@@ -2672,7 +2725,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aRz-pY-G7Z">
-                                        <rect key="frame" x="235" y="110" width="33" height="36"/>
+                                        <rect key="frame" x="242" y="110" width="33" height="36"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="107">
                                             <color key="titleColor" red="0.86970758439999996" green="0.92044973370000005" blue="0.97994726899999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -2700,7 +2753,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rxk-bZ-RUq">
-                                        <rect key="frame" x="108" y="86" width="33" height="36"/>
+                                        <rect key="frame" x="111" y="86" width="35" height="36"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <state key="normal" title="100">
                                             <color key="titleColor" red="0.86970758439999996" green="0.92044973370000005" blue="0.97994726899999995" alpha="1" colorSpace="calibratedRGB"/>

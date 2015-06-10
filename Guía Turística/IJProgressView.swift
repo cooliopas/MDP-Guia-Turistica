@@ -35,6 +35,7 @@ public class IJProgressView {
 		
 		UIApplication.sharedApplication().networkActivityIndicatorVisible = true
 		
+        containerView = UIView()
         containerView.frame = CGRectMake(0, 0+paddingPoints, view.frame.size.width, view.frame.size.height-paddingPoints)
         containerView.backgroundColor = UIColor(hex: 0xcccccc, alpha: 0.5)
 		
@@ -53,7 +54,7 @@ public class IJProgressView {
 
 		if texto != nil {
 
-			textoView.frame = CGRectMake(0, 0, 260, 90)
+            textoView = UIView(frame: CGRectMake(0, 0, 260, 90))
 			textoView.center = CGPointMake(containerView.bounds.width / 2, (containerView.bounds.height / 2) + 92)
 			textoView.backgroundColor = UIColor(hex: 0xcccccc, alpha: 0.7)
 			textoView.clipsToBounds = true

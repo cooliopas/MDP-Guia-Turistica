@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CF264A9D67F960E638D08B30"
+               BlueprintIdentifier = "BC7B5BD6C576420A828D1259"
                BuildableName = "IJReachability.framework"
                BlueprintName = "Pods-IJReachability"
                ReferencedContainer = "container:Pods.xcodeproj">

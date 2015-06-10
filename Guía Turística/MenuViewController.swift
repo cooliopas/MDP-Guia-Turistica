@@ -53,16 +53,30 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
 	func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 
 		self.revealViewController().revealToggleAnimated(true)
-		
+
 		let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
 		let nuevoVC = appDelegate.traeVC(arrayMenu[indexPath.row]["id"]!)
 		
 		if self.revealViewController().frontViewController != nuevoVC {
-			
-			self.revealViewController().setFrontViewController(nuevoVC, animated: true)
-			
+
+            if let viejoVC = self.revealViewController().frontViewController as? ModeloBusquedaViewController {
+                
+                viejoVC.limpiar()
+                
+            } else if let viejoVC = self.revealViewController().frontViewController as? ModeloBusquedaOpcionesViewController {
+                
+                viejoVC.modeloBusquedaVC.limpiar()
+                
+            } else if let viejoVC = self.revealViewController().frontViewController as? ModeloBusquedaLugarViewController {
+                
+                viejoVC.modeloBusquedaVC.limpiar()
+                
+            }
+            
+            self.revealViewController().setFrontViewController(nuevoVC, animated: true)
+            
 		}
-		
+        
 	}
 
 }

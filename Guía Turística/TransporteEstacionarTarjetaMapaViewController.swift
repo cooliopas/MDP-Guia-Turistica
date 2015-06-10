@@ -285,8 +285,6 @@ class TransporteEstacionarTarjetaMapaViewController: UIViewController, MKMapView
 
 		mapaView.delegate = nil
 		
-		IJProgressView.shared.hideProgressView()
-
 		self.removeFromParentViewController()
 		
 	}
