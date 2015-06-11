@@ -32,69 +32,73 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.7)]
 		
 		// carga opcionesItems para las secciones correspondientes (vCs)
-		
-		let fileManager = NSFileManager.defaultManager()
-		
-		let libraryPath = fileManager.URLsForDirectory(.LibraryDirectory, inDomains: .UserDomainMask).first as! NSURL
 
-		let timestampAhora = NSDate().timeIntervalSince1970
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
 
-		// los VC que tienen opcionesItems
-		// algunos, como hotelesYAlojamiento, tienen más de un tipo de opcion
-		let vCs = [ "congresosYEventos": ["categoria"],
-                    "gastronomia": ["tipo"],
-                    "hotelesYAlojamiento": ["categoria","zona"],
-                    "inmobiliarias": ["zona"],
-                    "playas": ["zona"],
-                    "recreacion": ["categoria"]]
-		
-		for (idVC,opciones) in vCs {
+            let fileManager = NSFileManager.defaultManager()
+            
+            let libraryPath = fileManager.URLsForDirectory(.LibraryDirectory, inDomains: .UserDomainMask).first as! NSURL
+            
+            let timestampAhora = NSDate().timeIntervalSince1970
+            
+            // los VC que tienen opcionesItems
+            // algunos, como hotelesYAlojamiento, tienen más de un tipo de opcion
+            let vCs = [ "congresosYEventos": ["categoria"],
+                "gastronomia": ["tipo"],
+                "hotelesYAlojamiento": ["categoria","zona"],
+                "inmobiliarias": ["zona"],
+                "playas": ["zona"],
+                "recreacion": ["categoria"]]
+            
+            for (idVC,opciones) in vCs {
+                
+                self.opcionesItems[idVC] = [:]
+                
+                for opcion in opciones {
+                    
+                    var cacheDesdeInicial = false
+                    let archivoCache = libraryPath.URLByAppendingPathComponent("Caches/\(idVC)-\(opcion)-OpcionesItems.json")
+                    
+                    // me fijo si existe el archivo de cache
+                    if !fileManager.fileExistsAtPath(archivoCache.path!) {
+                        
+                        // si no existe, uso el que esta en Varios.bundle y lo cacheo
+                        if let archivoInicial = NSBundle.mainBundle().pathForResource("Varios.bundle/\(idVC)-\(opcion)-OpcionesItemsInicial", ofType: "json") {
+                            
+                            let jsonInicial = String(contentsOfFile: archivoInicial, encoding: NSUTF8StringEncoding, error: nil)
+                            
+                            jsonInicial!.writeToURL(archivoCache, atomically: true, encoding: NSUTF8StringEncoding, error: nil)
+                            
+                            cacheDesdeInicial = true
+                            
+                        }
+                        
+                    }
+                    
+                    // leo el archivo de cache
+                    let jsonCache = NSData(contentsOfFile: archivoCache.path!)
+                    
+                    let data = NSJSONSerialization.JSONObjectWithData(jsonCache!, options: nil, error: nil)! as! NSArray
+                    
+                    self.opcionesItems[idVC]![opcion] = (data as! [[String : String]])
+                    
+                    let attributes = fileManager.attributesOfItemAtPath(archivoCache.path!, error: nil)! as NSDictionary
+                    
+                    let timestamp = attributes.fileModificationDate()!.timeIntervalSince1970
+                    
+                    // si el cache tiene más de un día, o es el que estaba en Varios.bundle, lo refresco desde la API
+                    if timestampAhora - timestamp >= 86400 || cacheDesdeInicial == true {
+                    
+                        self.leeOpciones(idVC,opcion: opcion)
+                        
+                    }
+                    
+                }
+                
+            }
+            
+        })
 
-			opcionesItems[idVC] = [:]
-			
-			for opcion in opciones {
-				
-				var cacheDesdeInicial = 0
-				let archivoCache = libraryPath.URLByAppendingPathComponent("Caches/\(idVC)-\(opcion)-OpcionesItems.json")
-
-				// me fijo si existe el archivo de cache
-				if !fileManager.fileExistsAtPath(archivoCache.path!) {
-					
-					// si no existe, uso el que esta en Varios.bundle y lo cacheo
-					if let archivoInicial = NSBundle.mainBundle().pathForResource("Varios.bundle/\(idVC)-\(opcion)-OpcionesItemsInicial", ofType: "json") {
-						
-						let jsonInicial = String(contentsOfFile: archivoInicial, encoding: NSUTF8StringEncoding, error: nil)
-						
-						jsonInicial!.writeToURL(archivoCache, atomically: true, encoding: NSUTF8StringEncoding, error: nil)
-						
-						cacheDesdeInicial = 1
-						
-					}
-
-				}
-
-				// leo el archivo de cache
-				let jsonCache = NSData(contentsOfFile: archivoCache.path!)
-				
-				let data = NSJSONSerialization.JSONObjectWithData(jsonCache!, options: nil, error: nil)! as! NSArray
-
-				opcionesItems[idVC]![opcion] = (data as! [[String : String]])
-				
-				let attributes = fileManager.attributesOfItemAtPath(archivoCache.path!, error: nil)! as NSDictionary
-				
-				let timestamp = attributes.fileModificationDate()!.timeIntervalSince1970
-				
-				// si el cache tiene más de un día, o es el que estaba en Varios.bundle, lo refresco desde la API
-				if timestampAhora - timestamp >= 86400 || cacheDesdeInicial == 1 {
-					
-					leeOpciones(idVC,opcion: opcion)
-					
-				}
-
-			}
-			
-		}
-        
         // fin carga opcionesItems para las secciones correspondientes (vCs)
 	
 		return true
