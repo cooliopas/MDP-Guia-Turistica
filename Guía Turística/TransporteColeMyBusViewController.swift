@@ -62,12 +62,10 @@ class TransporteColeMyBusViewController: UIViewController, UIWebViewDelegate, UI
 	
 	func webView(webView: UIWebView, didFailLoadWithError error: NSError) {
 		
-		if self.revealViewController() != nil { IJProgressView.shared.hideProgressView() }
+		UIApplication.sharedApplication().networkActivityIndicatorVisible = false
 		
 		if error.code != -999 {
-		
-			UIApplication.sharedApplication().networkActivityIndicatorVisible = false
-			
+					
 			var alertView = UIAlertController(title: "Ocurrió un error", message: error.localizedDescription, preferredStyle: .Alert)
 			var okAction = UIAlertAction(title: "Ok", style: .Default, handler: nil)
 			alertView.addAction(okAction)
@@ -83,13 +81,13 @@ class TransporteColeMyBusViewController: UIViewController, UIWebViewDelegate, UI
 	
 	func webViewDidStartLoad(webView: UIWebView) {
 		
-		IJProgressView.shared.showProgressView(self.view, padding: true)
+		UIApplication.sharedApplication().networkActivityIndicatorVisible = true
 		
 	}
 	
 	func webViewDidFinishLoad(webView: UIWebView) {
 				
-		if self.revealViewController() != nil { IJProgressView.shared.hideProgressView() }
+		UIApplication.sharedApplication().networkActivityIndicatorVisible = false
 		
 	}
 
