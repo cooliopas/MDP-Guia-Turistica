@@ -40,7 +40,6 @@ public class IJProgressView {
         containerView.backgroundColor = UIColor(hex: 0xcccccc, alpha: 0.5)
 		
         progressView.frame = CGRectMake(0, 0, 80, 80)
-        progressView.center = CGPointMake(containerView.bounds.width / 2, containerView.bounds.height / 2)
         progressView.backgroundColor = UIColor(hex: 0x444444, alpha: 0.7)
         progressView.clipsToBounds = true
         progressView.layer.cornerRadius = 10
@@ -55,7 +54,6 @@ public class IJProgressView {
 		if texto != nil {
 
             textoView = UIView(frame: CGRectMake(0, 0, 260, 90))
-			textoView.center = CGPointMake(containerView.bounds.width / 2, (containerView.bounds.height / 2) + 92)
 			textoView.backgroundColor = UIColor(hex: 0xcccccc, alpha: 0.7)
 			textoView.clipsToBounds = true
 			textoView.layer.cornerRadius = 5
@@ -71,6 +69,8 @@ public class IJProgressView {
 			
 			textoLabel.frame.size.height = height
 			textoView.frame.size.height = height + 10
+
+            textoView.frame.origin = CGPointMake(containerView.bounds.width / 2 - textoView.frame.size.width / 2, containerView.bounds.height / 2 - textoView.frame.size.height / 2 + 8)
 			
 			textoView.addSubview(textoLabel)
 			
@@ -78,6 +78,8 @@ public class IJProgressView {
 	
 		}
 	
+        progressView.center = CGPointMake(containerView.bounds.width / 2, containerView.bounds.height / 2 - progressView.frame.size.height / 2 - textoView.frame.size.height / 2)
+        
         view.addSubview(containerView)
 		
         activityIndicator.startAnimating()
