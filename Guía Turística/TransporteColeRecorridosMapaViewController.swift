@@ -39,79 +39,9 @@ class TransporteColeRecorridosMapaViewController: UIViewController, MKMapViewDel
 		}
 		
 		mapaView.delegate = self
-
-// leo recorrido de ida
-		
-		if let file = NSBundle.mainBundle().pathForResource("Recorridos.bundle/\(linea)-ida", ofType: "json"),
-			let data = NSData(contentsOfFile: file),
-			let coordenadasIda = JSON(data:data).array {
-
-			let inicioIda = CLLocationCoordinate2DMake(coordenadasIda.first![0].doubleValue,coordenadasIda.first![1].doubleValue)
-			let finIda = CLLocationCoordinate2DMake(coordenadasIda.last![0].doubleValue,coordenadasIda.last![1].doubleValue)
-
-			var arrayPuntosIda = [CLLocationCoordinate2D]()
-
-			for coordenada in coordenadasIda {
-				
-				let coordenadaArmada = 	CLLocationCoordinate2DMake(coordenada[0].doubleValue,coordenada[1].doubleValue)
-				
-				arrayPuntosIda.append(coordenadaArmada)
-				
-			}
-
-			polylineIda = MKPolyline(coordinates: &arrayPuntosIda, count: arrayPuntosIda.count)
-			polylineIda.title = "ida"
-
-			annotationInicioIda.coordinate = inicioIda
-			annotationInicioIda.title = "Inicio recorrido de ida"
-			
-			annotationFinIda.coordinate = finIda
-			annotationFinIda.title = "Final recorrido de ida"
-			
-		} else {
-			
-			muestraError("Ocurrío un error al leer los recorridos.",volver: 1)
-			
-		}
-		
-// leo recorrido de vuelta
-		
-		if let file = NSBundle.mainBundle().pathForResource("Recorridos.bundle/\(linea)-vuelta", ofType: "json"),
-			let data = NSData(contentsOfFile: file),
-			let coordenadasVuelta = JSON(data:data).array {
-				
-				let inicioVuelta = CLLocationCoordinate2DMake(coordenadasVuelta.first![0].doubleValue,coordenadasVuelta.first![1].doubleValue)
-				let finVuelta = CLLocationCoordinate2DMake(coordenadasVuelta.last![0].doubleValue,coordenadasVuelta.last![1].doubleValue)
-				
-				var arrayPuntosVuelta = [CLLocationCoordinate2D]()
-				
-				for coordenada in coordenadasVuelta {
-					
-					let coordenadaArmada = 	CLLocationCoordinate2DMake(coordenada[0].doubleValue,coordenada[1].doubleValue)
-					
-					arrayPuntosVuelta.append(coordenadaArmada)
-					
-				}
-				
-				polylineVuelta = MKPolyline(coordinates: &arrayPuntosVuelta, count: arrayPuntosVuelta.count)
-				polylineVuelta.title = "vuelta"
-				
-				annotationInicioVuelta.coordinate = inicioVuelta
-				annotationInicioVuelta.title = "Inicio recorrido de vuelta"
-				
-				annotationFinVuelta.coordinate = finVuelta
-				annotationFinVuelta.title = "Fin recorrido de vuelta"
-				
-		} else {
-			
-			muestraError("Ocurrío un error al leer los recorridos.",volver: 1)
-			
-		}
 		
 		mapaView.setRegion(MKCoordinateRegionMake(CLLocationCoordinate2DMake(-37.992820, -57.583932), MKCoordinateSpanMake(0.05, 0.05)), animated: false)
 
-		segmentarRecorrido()
-		
 	}
 
 	@IBAction func segmentarRecorrido() {
@@ -153,6 +83,81 @@ class TransporteColeRecorridosMapaViewController: UIViewController, MKMapViewDel
 		
 	}
 	
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // leo recorrido de ida
+        
+        if let file = NSBundle.mainBundle().pathForResource("Recorridos.bundle/\(linea)-ida", ofType: "json"),
+            let data = NSData(contentsOfFile: file),
+            let coordenadasIda = JSON(data:data).array {
+                
+                let inicioIda = CLLocationCoordinate2DMake(coordenadasIda.first![0].doubleValue,coordenadasIda.first![1].doubleValue)
+                let finIda = CLLocationCoordinate2DMake(coordenadasIda.last![0].doubleValue,coordenadasIda.last![1].doubleValue)
+                
+                var arrayPuntosIda = [CLLocationCoordinate2D]()
+                
+                for coordenada in coordenadasIda {
+                    
+                    let coordenadaArmada = 	CLLocationCoordinate2DMake(coordenada[0].doubleValue,coordenada[1].doubleValue)
+                    
+                    arrayPuntosIda.append(coordenadaArmada)
+                    
+                }
+                
+                polylineIda = MKPolyline(coordinates: &arrayPuntosIda, count: arrayPuntosIda.count)
+                polylineIda.title = "ida"
+                
+                annotationInicioIda.coordinate = inicioIda
+                annotationInicioIda.title = "Inicio recorrido de ida"
+                
+                annotationFinIda.coordinate = finIda
+                annotationFinIda.title = "Final recorrido de ida"
+                
+        } else {
+            
+            muestraError("Ocurrío un error al leer los recorridos.",volver: 1)
+            
+        }
+        
+        // leo recorrido de vuelta
+        
+        if let file = NSBundle.mainBundle().pathForResource("Recorridos.bundle/\(linea)-vuelta", ofType: "json"),
+            let data = NSData(contentsOfFile: file),
+            let coordenadasVuelta = JSON(data:data).array {
+                
+                let inicioVuelta = CLLocationCoordinate2DMake(coordenadasVuelta.first![0].doubleValue,coordenadasVuelta.first![1].doubleValue)
+                let finVuelta = CLLocationCoordinate2DMake(coordenadasVuelta.last![0].doubleValue,coordenadasVuelta.last![1].doubleValue)
+                
+                var arrayPuntosVuelta = [CLLocationCoordinate2D]()
+                
+                for coordenada in coordenadasVuelta {
+                    
+                    let coordenadaArmada = 	CLLocationCoordinate2DMake(coordenada[0].doubleValue,coordenada[1].doubleValue)
+                    
+                    arrayPuntosVuelta.append(coordenadaArmada)
+                    
+                }
+                
+                polylineVuelta = MKPolyline(coordinates: &arrayPuntosVuelta, count: arrayPuntosVuelta.count)
+                polylineVuelta.title = "vuelta"
+                
+                annotationInicioVuelta.coordinate = inicioVuelta
+                annotationInicioVuelta.title = "Inicio recorrido de vuelta"
+                
+                annotationFinVuelta.coordinate = finVuelta
+                annotationFinVuelta.title = "Fin recorrido de vuelta"
+                
+        } else {
+            
+            muestraError("Ocurrío un error al leer los recorridos.",volver: 1)
+            
+        }
+        
+        segmentarRecorrido()
+        
+    }
+    
 	func mapView(mapView: MKMapView!, rendererForOverlay overlay: MKOverlay!) -> MKOverlayRenderer! {
 		
 		if overlay is MKPolyline {

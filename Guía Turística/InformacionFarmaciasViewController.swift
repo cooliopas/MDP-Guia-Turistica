@@ -132,15 +132,20 @@ class InformacionFarmaciasViewController: UIViewController, MKMapViewDelegate, C
 		
 		armaNavegacion()
 		self.revealViewController().delegate = self
-		
-		if !hayRed() {
-			
-			muestraError("No se detecta conección a Internet.\nNo es posible continuar.", volver: 1)
-			
-		}
-		
+				
 	}
 	
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if !hayRed() {
+            
+            muestraError("No se detecta conección a Internet.\nNo es posible continuar.", volver: 1)
+            
+        }
+        
+    }
+    
 	func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
 		
 		if annotation is MKUserLocation {

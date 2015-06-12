@@ -21,6 +21,8 @@ class InformacionComisariasViewController: UIViewController, MKMapViewDelegate, 
 	let locationManager = CLLocationManager()
 	
 	var ubicacionActual: CLLocation?
+    
+    var mostroComisarias = false
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -31,8 +33,8 @@ class InformacionComisariasViewController: UIViewController, MKMapViewDelegate, 
 			
 			mapaView.delegate = self
 						
-			statusLabel.text = "Cargando datos ..."
-			
+            statusLabel.text = "Cargando datos ..."
+            
 			UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut, animations: {
 				
 				self.statusLabel.alpha = 1
@@ -42,8 +44,22 @@ class InformacionComisariasViewController: UIViewController, MKMapViewDelegate, 
 			let parametros = [[String: String]]()
 			soapea("comisarias", parametros) { (respuesta, error) in
 				
-				self.statusLabel.text = "Detectando ubicación ..."
-				
+                self.mostroComisarias = true
+                
+                if self.ubicacionActual != nil {
+                    
+                    UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut | .BeginFromCurrentState, animations: {
+                        
+                        self.statusLabel.alpha = 0
+                        
+                        }, completion: nil)
+                    
+                } else {
+                    
+                    self.statusLabel.text = "Detectando ubicación ..."
+                    
+                }
+                
 				if error == nil {
 					
 					for comisaria in respuesta {
@@ -73,11 +89,16 @@ class InformacionComisariasViewController: UIViewController, MKMapViewDelegate, 
 						}
 						
 					}
+                    
+                    if self.ubicacionActual != nil {
+                        
+                        self.cargaComisariaCercanaYMovil()
+                        
+                    }
 					
 				} else {
 					
 					self.muestraError("No se encontraron comisarias.",volver: 1)
-//					println(error)
 					
 				}
 				
@@ -95,14 +116,19 @@ class InformacionComisariasViewController: UIViewController, MKMapViewDelegate, 
 		armaNavegacion()
 		self.revealViewController().delegate = self
 		
-		if !hayRed() {
-			
-			muestraError("No se detecta conección a Internet.\nNo es posible continuar.", volver: 1)
-			
-		}
-		
 	}
 	
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if !hayRed() {
+            
+            muestraError("No se detecta conección a Internet.\nNo es posible continuar.", volver: 1)
+            
+        }
+        
+    }
+    
 	@IBAction func emergenciaLlamar() {
 
 		if let numero = emergenciaBoton.titleLabel?.text {
@@ -122,100 +148,128 @@ class InformacionComisariasViewController: UIViewController, MKMapViewDelegate, 
 	
 	func mapView(mapView: MKMapView!, didUpdateUserLocation userLocation: MKUserLocation!) {
 		
-		UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut | .BeginFromCurrentState, animations: {
-			
-			self.statusLabel.alpha = 0
-			
-			}, completion: nil)
+        if mostroComisarias == true {
+        
+            UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut | .BeginFromCurrentState, animations: {
+                
+                self.statusLabel.alpha = 0
+                
+                }, completion: nil)
+            
+        }
 		
 		if ubicacionActual == nil {
-
-			var parametros = [["latitud":"\(userLocation.coordinate.latitude)"],["longitud":"\(userLocation.coordinate.longitude)"]]
-			soapea("comisaria_cercana", parametros) { (respuesta, error) in
-				
-				if error == nil {
-					
-					if respuesta.count > 0 {
-						
-						let comisaria = respuesta[0]
-						let direccion = comisaria["ubicacion"]!
-						
-						for annotation in self.mapaView.annotations {
-							
-							if !(annotation is MKUserLocation) {
-								
-								if annotation.subtitle == direccion {
-									
-									let comisariaCercana = annotation as! MKAnnotation
-									
-									let annotation = MKPointAnnotation()
-									annotation.coordinate = comisariaCercana.coordinate
-									annotation.title = comisariaCercana.title
-									annotation.subtitle = "\(comisariaCercana.subtitle!) - COMISARIA MAS CERCANA"
-									
-									self.mapaView.addAnnotation(annotation)
-									
-									self.mapaView.selectAnnotation(annotation, animated: true)
-									
-									self.mapaView.removeAnnotation(comisariaCercana)
-									
-								}
-								
-							}
-							
-						}
-						
-					}
-					
-				} else {
-					
-//					println("No se encontro la comisaria más cercana")
-//					println(error)
-					
-				}
-				
-			}
-			
-			parametros = [["latitud":"\(userLocation.coordinate.latitude)"],["longitud":"\(userLocation.coordinate.longitude)"]]
-			soapea("movilpolicial_lat_lng", parametros) { (respuesta, error) in
-				
-				if error == nil {
-					
-					if respuesta.count > 0 && respuesta[0]["return"] != "NO" {
-						
-						self.emergenciaLabel.text = "En caso de emergencia, el teléfono celular del móvil policial más cercano es: "
-						self.emergenciaBoton.setTitle(respuesta[0]["return"], forState: UIControlState.Normal)
-						
-						UIView.animateWithDuration(0.6, delay: 0.0, options: .CurveEaseOut, animations: {
-							
-							self.emergenciaView.alpha = 1
-							self.emergenciaView.userInteractionEnabled = true
-							
-							}, completion: nil)
-						
-					} else {
-						
-//						println("No se encontro el movil más cercano")
-						
-					}
-					
-				} else {
-					
-//					println("No se encontro el movil más cercano")
-//					println(error)
-					
-				}
-				
-			}
 			
 			mapaView.setRegion(MKCoordinateRegionMake(userLocation.coordinate, MKCoordinateSpanMake(0.03, 0.03)), animated: true)
-			
+
+            if mostroComisarias == true {
+                
+                cargaComisariaCercanaYMovil()
+                
+            }
+            
 		}
 		
 		ubicacionActual = userLocation.location
 		
 	}
 	
+    func cargaComisariaCercanaYMovil() {
+        
+        if ubicacionActual != nil {
+        
+            var parametros = [["latitud":"\(ubicacionActual!.coordinate.latitude)"],["longitud":"\(ubicacionActual!.coordinate.longitude)"]]
+            soapea("comisaria_cercana", parametros) { (respuesta, error) in
+                
+                if error == nil {
+                    
+                    if respuesta[0].count > 0 {
+                        
+                        let comisaria = respuesta[0]
+                        if let direccion = comisaria["ubicacion"] {
+                        
+                            for annotation in self.mapaView.annotations {
+                                
+                                if !(annotation is MKUserLocation) {
+                                    
+                                    if annotation.subtitle == direccion {
+                                        
+                                        let comisariaCercana = annotation as! MKAnnotation
+                                        
+                                        let annotation = MKPointAnnotation()
+                                        annotation.coordinate = comisariaCercana.coordinate
+                                        annotation.title = comisariaCercana.title
+                                        annotation.subtitle = "\(comisariaCercana.subtitle!) - COMISARIA MAS CERCANA"
+                                        
+                                        self.mapaView.addAnnotation(annotation)
+                                        
+                                        self.mapaView.selectAnnotation(annotation, animated: true)
+                                        
+                                        self.mapaView.removeAnnotation(comisariaCercana)
+                                        
+                                    }
+                                    
+                                }
+                                
+                            }
+
+                        } else {
+                            
+//                            println("No se encontro la comisaria más cercana")
+                            
+                        }
+                            
+                    } else {
+                        
+//                        println("No se encontro la comisaria más cercana")
+                        
+                    }
+                    
+                } else {
+                    
+                    //					println("No se encontro la comisaria más cercana")
+                    //					println(error)
+                    
+                }
+                
+            }
+            
+            parametros = [["latitud":"\(ubicacionActual!.coordinate.latitude)"],["longitud":"\(ubicacionActual!.coordinate.longitude)"]]
+            soapea("movilpolicial_lat_lng", parametros) { (respuesta, error) in
+                
+                if error == nil {
+                    
+                    if respuesta.count > 0 && respuesta[0]["return"] != "NO" {
+                        
+                        self.emergenciaLabel.text = "En caso de emergencia, el teléfono celular del móvil policial más cercano es: "
+                        self.emergenciaBoton.setTitle(respuesta[0]["return"], forState: UIControlState.Normal)
+                        
+                        UIView.animateWithDuration(0.6, delay: 0.0, options: .CurveEaseOut, animations: {
+                            
+                            self.emergenciaView.alpha = 1
+                            self.emergenciaView.userInteractionEnabled = true
+                            
+                            }, completion: nil)
+                        
+                    } else {
+                        
+                        //						println("No se encontro el movil más cercano")
+                        
+                    }
+                    
+                } else {
+                    
+                    //					println("No se encontro el movil más cercano")
+                    //					println(error)
+                    
+                }
+                
+            }
+
+        }
+            
+    }
+    
 	deinit {
 //		println("deinit")
 	}

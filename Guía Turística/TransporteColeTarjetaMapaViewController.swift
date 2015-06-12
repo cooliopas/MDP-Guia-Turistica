@@ -81,15 +81,20 @@ class TransporteColeTarjetaMapaViewController: UIViewController, MKMapViewDelega
 		
 		armaNavegacion()
 		self.revealViewController().delegate = self
-		
-		if !hayRed() {
 			
-			muestraError("No se detecta conección a Internet.\nNo es posible continuar.", volver: 1)
-			
-		}
-	
 	}
 	
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if !hayRed() {
+            
+            muestraError("No se detecta conección a Internet.\nNo es posible continuar.", volver: 1)
+            
+        }
+        
+    }
+    
 	@IBAction func mostrarPuestosActualiza() {
 		
 		if segmentadorTodos.selectedSegmentIndex == 0 && ubicacionActual == nil {

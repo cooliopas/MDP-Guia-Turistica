@@ -77,12 +77,17 @@ class ModeloBusquedaViewController: UIViewController, UITableViewDelegate, UITab
         armaNavegacion()
         self.revealViewController().delegate = self
      
+    }
+
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
         if opciones.count == 0 && lugares.count == 0 {
             
             buscar()
             
         }
-        
+                
     }
     
 	func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {

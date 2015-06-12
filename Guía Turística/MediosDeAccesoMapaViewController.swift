@@ -47,13 +47,18 @@ class MediosDeAccesoMapaViewController: UIViewController, MKMapViewDelegate, CLL
 		armaNavegacion()
 		self.revealViewController().delegate = self
 		
-		if !hayRed() {
-			
-			muestraError("No se detecta conección a Internet.\nNo es posible continuar.", volver: 1)
-			
-		}
-
 	}
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if !hayRed() {
+            
+            muestraError("No se detecta conección a Internet.\nNo es posible continuar.", volver: 1)
+            
+        }
+        
+    }
 	
 	func alertaLocalizacion() {
 		
