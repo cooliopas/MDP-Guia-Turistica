@@ -26,13 +26,13 @@ class TransporteColeRecorridosViewController: UIViewController, UITableViewDeleg
 			
 			for filename in filelistOrdenado {
 				
-				if filename.rangeOfString("vuelta") == nil {
-				
-					let linea = filename.stringByReplacingOccurrencesOfString("-ida.json", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil)
-				
-					lineas.append(linea)
-					
-				}
+                let linea = filename.stringByReplacingOccurrencesOfString("-ida.json", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil).stringByReplacingOccurrencesOfString("-vuelta.json", withString: "", options: NSStringCompareOptions.LiteralSearch, range: nil).stringByReplacingOccurrencesOfString("-", withString: " ", options: NSStringCompareOptions.LiteralSearch, range: nil).capitalizedString
+            
+                if !contains(lineas,linea) {
+                
+                    lineas.append(linea)
+                    
+                }
 				
 			}
 			
