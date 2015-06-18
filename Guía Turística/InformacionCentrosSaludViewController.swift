@@ -101,7 +101,7 @@ class InformacionCentrosSaludViewController: UIViewController, MKMapViewDelegate
 		
 		if !actualizoRegion {
 			
-			mapaView.setRegion(MKCoordinateRegionMake(userLocation.coordinate, MKCoordinateSpanMake(0.03, 0.03)), animated: true)
+			mapaView.setRegion(MKCoordinateRegionMake(userLocation.coordinate, MKCoordinateSpanMake(0.04, 0.04)), animated: true)
 			actualizoRegion = true
 			
 		}

@@ -92,7 +92,6 @@ class TransporteEstacionarZonaViewController: UIViewController, MKMapViewDelegat
 			labelVerificando.backgroundColor = UIColor.clearColor()
 			labelVerificando.layer.backgroundColor = UIColor(red: 0.454775, green: 0.602937, blue: 0.787375, alpha: 1).CGColor
 
-//			mapaView.setRegion(MKCoordinateRegionMake(CLLocationCoordinate2DMake(-38.000125, -57.549382), MKCoordinateSpanMake(0.007, 0.007)), animated: false)
             mapaView.setRegion(regionIncluyendoCoordenadas(coordenadasZonaSegura), animated: true)
 
 		}
@@ -212,7 +211,6 @@ class TransporteEstacionarZonaViewController: UIViewController, MKMapViewDelegat
 	
 	@IBAction func mostrarUbicacion() {
 		
-//		mapaView.setRegion(MKCoordinateRegionMake(ubicacionActual!.coordinate, MKCoordinateSpanMake(0.04, 0.04)), animated: true)
         mapaView.setRegion(regionIncluyendoCoordenadas(coordenadasZonaSegura + [ubicacionActual!.coordinate]), animated: true)
         
 	}

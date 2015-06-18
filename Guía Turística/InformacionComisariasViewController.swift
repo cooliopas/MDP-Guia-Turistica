@@ -45,7 +45,7 @@ class InformacionComisariasViewController: UIViewController, MKMapViewDelegate, 
 			soapea("comisarias", parametros) { (respuesta, error) in
 				
                 self.mostroComisarias = true
-                
+
                 if self.ubicacionActual != nil {
                     
                     UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut | .BeginFromCurrentState, animations: {
@@ -60,8 +60,8 @@ class InformacionComisariasViewController: UIViewController, MKMapViewDelegate, 
                     
                 }
                 
-				if error == nil {
-					
+				if error == nil && respuesta.count > 1 {
+                    
 					for comisaria in respuesta {
 						
 						let annotation = MKPointAnnotation()
@@ -148,23 +148,19 @@ class InformacionComisariasViewController: UIViewController, MKMapViewDelegate, 
 	
 	func mapView(mapView: MKMapView!, didUpdateUserLocation userLocation: MKUserLocation!) {
 		
-        if mostroComisarias == true {
-        
-            UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut | .BeginFromCurrentState, animations: {
-                
-                self.statusLabel.alpha = 0
-                
-                }, completion: nil)
-            
-        }
-		
 		if ubicacionActual == nil {
 			
             ubicacionActual = userLocation.location
             
-			mapaView.setRegion(MKCoordinateRegionMake(userLocation.coordinate, MKCoordinateSpanMake(0.03, 0.03)), animated: true)
+			mapaView.setRegion(MKCoordinateRegionMake(userLocation.coordinate, MKCoordinateSpanMake(0.04, 0.04)), animated: true)
 
             if mostroComisarias == true {
+
+                UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut | .BeginFromCurrentState, animations: {
+                    
+                    self.statusLabel.alpha = 0
+                    
+                    }, completion: nil)
                 
                 cargaComisariaCercanaYMovil()
                 
@@ -218,8 +214,8 @@ class InformacionComisariasViewController: UIViewController, MKMapViewDelegate, 
                     
                 } else {
                     
-                    					println("No se encontro la comisaria más cercana")
-                    					println(error)
+                    println("No se encontro la comisaria más cercana")
+                    println(error)
                     
                 }
                 

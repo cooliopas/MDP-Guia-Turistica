@@ -124,16 +124,52 @@ class TransporteColeTarjetaMapaViewController: UIViewController, MKMapViewDelega
 			
 			mostrarPuestos(segmentadorTipo.selectedSegmentIndex,todos: segmentadorTodos.selectedSegmentIndex)
 			
-			if segmentadorTodos.selectedSegmentIndex == 0 {
+			if segmentadorTodos.selectedSegmentIndex == 0 && ubicacionActual != nil {
 				
-				mapaView.setRegion(MKCoordinateRegionMake(ubicacionActual!.coordinate, MKCoordinateSpanMake(0.02, 0.02)), animated: true)
-				
+                var arrayCoordenadasAnnotations = [ubicacionActual!.coordinate]
+                
+                for annotation in mapaView.annotations {
+                    
+                    if let annotation = annotation as? PuestoCargaAnnotation {
+                        
+                        arrayCoordenadasAnnotations.append(annotation.coordinate)
+                        
+                    }
+                    
+                }
+                
+                mapaView.setRegion(regionIncluyendoCoordenadas(arrayCoordenadasAnnotations), animated: true)
+                
 			}
 			
 		}
 		
 	}
 	
+    func regionIncluyendoCoordenadas(puntos: [CLLocationCoordinate2D]) -> MKCoordinateRegion {
+        
+        var minLat = 90.0
+        var maxLat = -90.0
+        var minLon = 180.0
+        var maxLon = -180.0
+        
+        for punto in puntos {
+            
+            if punto.latitude < minLat { minLat = punto.latitude }
+            if punto.latitude > maxLat { maxLat = punto.latitude }
+            if punto.longitude < minLon { minLon = punto.longitude }
+            if punto.longitude > maxLon { maxLon = punto.longitude }
+            
+        }
+        
+        let center = CLLocationCoordinate2DMake((minLat+maxLat)/2.0, (minLon+maxLon)/2.0)
+        let span = MKCoordinateSpanMake(maxLat-minLat + 0.01, maxLon-minLon + 0.01);
+        let region = MKCoordinateRegionMake (center, span);
+        
+        return region
+        
+    }
+    
 	func alertaLocalizacion() {
 		
 		var alertController = UIAlertController (title: "Acceso a la localización", message: "Para mostrar los puestos de carga más cercanos, es necesario que permitas el acceso a la localización desde esta aplicación.\n\nPodes permitir el acceso desde \"Ajustes\".", preferredStyle: .Alert)
@@ -320,7 +356,7 @@ class TransporteColeTarjetaMapaViewController: UIViewController, MKMapViewDelega
 			
 			if ubicacionActual == nil {
 				
-				mapaView.setRegion(MKCoordinateRegionMake(userLocation.coordinate, MKCoordinateSpanMake(0.02, 0.02)), animated: true)
+				mapaView.setRegion(MKCoordinateRegionMake(userLocation.coordinate, MKCoordinateSpanMake(0.05, 0.05)), animated: true)
 				
 			}
 			

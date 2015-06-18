@@ -12,7 +12,7 @@ import Alamofire
 
 func soapea(servicio: String, parametros: [[String: String]], completionHandler: ([[String: String]], NSError?) -> ()) {
 	
-	let soapRequest = soapGeneraRequest(servicio, parametros)
+    let soapRequest = soapGeneraRequest(servicio, parametros)
 	let msgLength = String(count(soapRequest))
 
 	let apiURL = "http://gisdesa.mardelplata.gob.ar/opendata/ws.php?wsdl"
@@ -147,5 +147,5 @@ func restea(api: String, servicio: String, parametros: [String:AnyObject], compl
 		}
 
 	}
-		
+       
 }

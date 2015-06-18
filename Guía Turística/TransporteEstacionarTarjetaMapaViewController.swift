@@ -70,16 +70,12 @@ class TransporteEstacionarTarjetaMapaViewController: UIViewController, MKMapView
     
 	func mapView(mapView: MKMapView!, didUpdateUserLocation userLocation: MKUserLocation!) {
 
-		UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut, animations: {
-			
-			self.statusLabel.alpha = 0
-			
-			}, completion: nil)
-		
 		if ubicacionActual == nil || ubicacionActual!.distanceFromLocation(userLocation.location) > 100 {
 			
 			ubicacionActual = userLocation.location
 
+            mapaView.setRegion(MKCoordinateRegionMake(userLocation.coordinate, MKCoordinateSpanMake(0.05, 0.05)), animated: true)
+            
 			mostrarPuestos(ubicacionActual!.coordinate)
 
 		}
@@ -89,13 +85,7 @@ class TransporteEstacionarTarjetaMapaViewController: UIViewController, MKMapView
 	func mostrarPuestos(coordenadas: CLLocationCoordinate2D) {
 		
 		statusLabel.text = "Cargando datos ..."
-		
-		UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut, animations: {
-			
-			self.statusLabel.alpha = 1
-			
-			}, completion: nil)
-		
+				
 		let parametros = [["latitud":"\(coordenadas.latitude)"],["longitud":"\(coordenadas.longitude)"]]
 		soapea("latlong_puestomedido", parametros) { (respuesta, error) in
 			
@@ -105,7 +95,7 @@ class TransporteEstacionarTarjetaMapaViewController: UIViewController, MKMapView
 				
 				}, completion: nil)
 			
-			if error == nil {
+			if error == nil && respuesta.count > 1 {
 
 				var arrayNuevosPuestos: [String] = []
 				
@@ -117,7 +107,7 @@ class TransporteEstacionarTarjetaMapaViewController: UIViewController, MKMapView
 					arrayNuevosPuestos.append("\(latitud),\(longitud)")
 					
 				}
-
+                
 				for annotation in self.mapaView.annotations {
 					
 					if let anotacion = annotation as? MKPointAnnotation {
@@ -180,7 +170,6 @@ class TransporteEstacionarTarjetaMapaViewController: UIViewController, MKMapView
 			} else {
 				
 				self.muestraError("No se encontraron puntos de venta de estacionamiento medido.",volver: 1)
-//				println(error)
 				
 			}
 			
@@ -252,8 +241,6 @@ class TransporteEstacionarTarjetaMapaViewController: UIViewController, MKMapView
 		
 	func alertaLocalizacion() {
 		
-		mostrarPuestos(CLLocationCoordinate2DMake(-37.995816,-57.552115))
-
 		UIView.animateWithDuration(0.4, delay: 0, options: .CurveEaseOut, animations: {
 			
 			self.sinUbicacionLabel.alpha = 1

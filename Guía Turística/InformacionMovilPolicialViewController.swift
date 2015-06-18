@@ -79,104 +79,108 @@ class InformacionMovilPolicialViewController: UIViewController, CLLocationManage
 		
 		detectandoLabel.text = "Buscando movil policial más cercano ..."
 		
-		let parametros = [["latitud":"\(ubicacionActual!.coordinate.latitude)"],["longitud":"\(ubicacionActual!.coordinate.longitude)"]]
-		soapea("movilpolicial_lat_lng", parametros) { (respuesta, error) in
-			
-			if error == nil {
-				
-				var nuevoEmergenciaViewHeight: CGFloat = 0
-				
-				if respuesta.count > 0 && respuesta[0]["return"] != "NO" {
-					
-					self.emergenciaLabel.text = "En caso de emergencia, el teléfono celular del móvil policial más cercano es: "
-					self.emergenciaBoton.setTitle(respuesta[0]["return"], forState: UIControlState.Normal)
-					nuevoEmergenciaViewHeight = 120
-					
-				} else {
-					
-					self.emergenciaLabel.text = "Lamentablemente, el servicio de información no esta disponible en este momento."
-					self.emergenciaBoton.hidden = true
-					nuevoEmergenciaViewHeight = 80
+        if ubicacionActual != nil {
+        
+            let parametros = [["latitud":"\(ubicacionActual!.coordinate.latitude)"],["longitud":"\(ubicacionActual!.coordinate.longitude)"]]
+            soapea("movilpolicial_lat_lng", parametros) { (respuesta, error) in
+                
+                if error == nil {
+                    
+                    var nuevoEmergenciaViewHeight: CGFloat = 0
+                    
+                    if respuesta.count > 0 && respuesta[0]["return"] != "NO" {
+                        
+                        self.emergenciaLabel.text = "En caso de emergencia, el teléfono celular del móvil policial más cercano es: "
+                        self.emergenciaBoton.setTitle(respuesta[0]["return"], forState: UIControlState.Normal)
+                        nuevoEmergenciaViewHeight = 120
+                        
+                    } else {
+                        
+                        self.emergenciaLabel.text = "Lamentablemente, el servicio de información no esta disponible en este momento."
+                        self.emergenciaBoton.hidden = true
+                        nuevoEmergenciaViewHeight = 80
 
-				}
-				
-				UIView.animateWithDuration(0.6, delay: 0.5, options: .CurveEaseOut, animations: {
-					
-					self.emergenciaViewHeight.constant = nuevoEmergenciaViewHeight
-					
-					self.detectandoView.alpha = 0
+                    }
+                    
+                    UIView.animateWithDuration(0.6, delay: 0.5, options: .CurveEaseOut, animations: {
+                        
+                        self.emergenciaViewHeight.constant = nuevoEmergenciaViewHeight
+                        
+                        self.detectandoView.alpha = 0
 
-					self.emergenciaView.alpha = 1
-					self.emergenciaView.userInteractionEnabled = true
-					
-					self.telefonosView.alpha = 1
-					
-					self.view.layoutIfNeeded()
-					
-					}, completion: nil)
-				
-			} else {
-				
-//				println("No se encontro el movil más cercano")
-//				println(error)
-				
-			}
-			
-		}
-		
-		soapea("comisaria_cercana", parametros) { (respuesta, error) in
-			
-			if error == nil {
-				
-				if respuesta.count > 0 {
-					
-					let comisaria = respuesta[0]
-					
-					self.comisariaCercana = comisaria
-					
-					let nombre = comisaria["nro"]!
-					let direccion = comisaria["ubicacion"]!
-					let tel = comisaria["telefono"] ?? ""
-					
-					self.comisariaDetalle.text = "Comisaria \(nombre)\n\(direccion)"
-					
-					if tel != "" {
-						
-						self.comisariaDetalle.text! += "\nTeléfono(s): \(tel)"
-						
-					}
-				
-					UIView.animateWithDuration(0.4, delay: 0.5, options: .CurveEaseOut, animations: {
-						
-						self.comisariaTitulo.alpha = 1
-						self.comisariaDetalle.alpha = 1
-						self.comisariaBoton.alpha = 1
-						
-						if tel != "" {
+                        self.emergenciaView.alpha = 1
+                        self.emergenciaView.userInteractionEnabled = true
+                        
+                        self.telefonosView.alpha = 1
+                        
+                        self.view.layoutIfNeeded()
+                        
+                        }, completion: nil)
+                    
+                } else {
+                    
+    //				println("No se encontro el movil más cercano")
+    //				println(error)
+                    
+                }
+                
+            }
+            
+            soapea("comisaria_cercana", parametros) { (respuesta, error) in
+                
+                if error == nil {
+                    
+                    if respuesta.count > 0 {
+                        
+                        let comisaria = respuesta[0]
+                        
+                        self.comisariaCercana = comisaria
+                        
+                        let nombre = comisaria["nro"]!
+                        let direccion = comisaria["ubicacion"]!
+                        let tel = comisaria["telefono"] ?? ""
+                        
+                        self.comisariaDetalle.text = "Comisaria \(nombre)\n\(direccion)"
+                        
+                        if tel != "" {
+                            
+                            self.comisariaDetalle.text! += "\nTeléfono(s): \(tel)"
+                            
+                        }
+                    
+                        UIView.animateWithDuration(0.4, delay: 0.5, options: .CurveEaseOut, animations: {
+                            
+                            self.comisariaTitulo.alpha = 1
+                            self.comisariaDetalle.alpha = 1
+                            self.comisariaBoton.alpha = 1
+                            
+                            if tel != "" {
 
-							self.telefonosViewHeight.constant = 250
-							
-						} else {
-							
-							self.telefonosViewHeight.constant = 240
-							
-						}
-						
-						self.view.layoutIfNeeded()
-						
-						}, completion: nil)
-					
-				}
-				
-			} else {
-				
-//				println("No se encontro la comisaria más cercana")
-//				println(error)
-				
-			}
-			
-		}
-		
+                                self.telefonosViewHeight.constant = 250
+                                
+                            } else {
+                                
+                                self.telefonosViewHeight.constant = 240
+                                
+                            }
+                            
+                            self.view.layoutIfNeeded()
+                            
+                            }, completion: nil)
+                        
+                    }
+                    
+                } else {
+                    
+    //				println("No se encontro la comisaria más cercana")
+    //				println(error)
+                    
+                }
+                
+            }
+
+        }
+            
 	}
 	
 	func alertaLocalizacion() {

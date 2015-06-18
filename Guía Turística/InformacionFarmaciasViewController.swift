@@ -209,7 +209,13 @@ class InformacionFarmaciasViewController: UIViewController, MKMapViewDelegate, C
 			
 			if segmentadorTipo.selectedSegmentIndex == 1 {
 				
-                var arrayCoordenadasAnnotations = [ubicacionActual!.coordinate]
+                var arrayCoordenadasAnnotations = [CLLocationCoordinate2D]()
+                
+                if ubicacionActual != nil {
+                    
+                    arrayCoordenadasAnnotations.append(ubicacionActual!.coordinate)
+                    
+                }
                 
                 for annotation in self.mapaView.annotations {
                     
@@ -235,7 +241,13 @@ class InformacionFarmaciasViewController: UIViewController, MKMapViewDelegate, C
 				
 				}, completion: nil)
             
-            var arrayCoordenadasAnnotations = [ubicacionActual!.coordinate]
+            var arrayCoordenadasAnnotations = [CLLocationCoordinate2D]()
+            
+            if ubicacionActual != nil {
+                
+                arrayCoordenadasAnnotations.append(ubicacionActual!.coordinate)
+                
+            }
             
             for annotation in self.mapaView.annotations {
                 
@@ -338,7 +350,7 @@ class InformacionFarmaciasViewController: UIViewController, MKMapViewDelegate, C
 			
 			if ubicacionActual == nil {
 				
-				mapaView.setRegion(MKCoordinateRegionMake(userLocation.coordinate, MKCoordinateSpanMake(0.02, 0.02)), animated: true)
+				mapaView.setRegion(MKCoordinateRegionMake(userLocation.coordinate, MKCoordinateSpanMake(0.04, 0.04)), animated: true)
 				
 			}
 			

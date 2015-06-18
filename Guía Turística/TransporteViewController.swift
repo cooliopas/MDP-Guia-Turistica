@@ -40,8 +40,8 @@ class TransporteViewController: UIViewController, UITableViewDataSource, UITable
 				"view":"transporteEstacionarZona"
 			],
 			[
-				"nombre":"Puntos de venta",
-				"sub":"Encontra los puntos de venta más cercanos",
+				"nombre":"Puestos de venta",
+				"sub":"Puestos de venta de estacionamiento medido",
 				"view":"transporteEstacionarTarjetaMapa"
 			],
 			[
