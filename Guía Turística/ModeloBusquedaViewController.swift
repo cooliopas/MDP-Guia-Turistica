@@ -121,7 +121,21 @@ class ModeloBusquedaViewController: UIViewController, UITableViewDelegate, UITab
 		
 		if !hayRed() {
 			
-			muestraError("No se detecta conección a Internet.\nNo es posible continuar.", volver: 0)
+            if opciones.count == 0 && lugares.count == 0 {
+
+                self.labelStatus.text = "No se detecta conección a Internet.\nNo es posible continuar."
+                
+                UIView.animateWithDuration(0.2, delay: 0, options: .CurveEaseOut, animations: {
+                    
+                    self.labelStatus.alpha = 1
+                    
+                    }, completion: nil)
+                
+            } else {
+                
+                muestraError("No se detecta conección a Internet.\nNo es posible continuar.", volver: 0)
+                
+            }
 			
 		} else {
 		
