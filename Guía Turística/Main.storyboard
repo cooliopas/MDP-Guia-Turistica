@@ -1957,7 +1957,7 @@ Desde la Ciudad Autónoma de Buenos Aires:
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g5y-Yo-gHT">
                                 <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                                 <items>
-                                    <navigationItem title="Puntos de Venta" id="2uK-Yf-2LD"/>
+                                    <navigationItem title="Puestos de Venta" id="2uK-Yf-2LD"/>
                                 </items>
                             </navigationBar>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="bdC-IB-oBs">

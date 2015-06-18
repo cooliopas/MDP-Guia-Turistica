@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E217C4FB1B33497600493376 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = E217C4FA1B33497600493376 /* Reachability.swift */; };
 		E257586B1B0F8ADB0091326F /* PuestoCargaAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E257586A1B0F8ADB0091326F /* PuestoCargaAnnotation.swift */; };
 		E28735CA1AFB24E9005ED91B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E28735C91AFB24E9005ED91B /* AppDelegate.swift */; };
 		E28735EA1AFB2538005ED91B /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E28735E91AFB2538005ED91B /* CoreLocation.framework */; };
@@ -71,6 +72,7 @@
 		417253B2D668CDEA82FA8491 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		6307FEABF60DE8F816804A6E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		7B9B11BFB8E51AB34ADDD349 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E217C4FA1B33497600493376 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		E257586A1B0F8ADB0091326F /* PuestoCargaAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuestoCargaAnnotation.swift; sourceTree = "<group>"; };
 		E28735C41AFB24E9005ED91B /* Guía Turística.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Guía Turística.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E28735C81AFB24E9005ED91B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 			children = (
 				E28736071AFB2758005ED91B /* funciones.swift */,
 				E287360E1AFB2758005ED91B /* Soaper.swift */,
+				E217C4FA1B33497600493376 /* Reachability.swift */,
 				E28735F71AFB271F005ED91B /* NSDateExtendida.swift */,
 				E28735F81AFB271F005ED91B /* IJProgressView.swift */,
 				E28735FA1AFB271F005ED91B /* MapManager.swift */,
@@ -515,6 +518,7 @@
 				E28736541AFB286D005ED91B /* ModeloBusquedaOpcionesViewController.swift in Sources */,
 				E28736601AFB288A005ED91B /* InformacionComisariasViewController.swift in Sources */,
 				E28736D11AFB28FD005ED91B /* TransporteColeMyBusViewController.swift in Sources */,
+				E217C4FB1B33497600493376 /* Reachability.swift in Sources */,
 				E28736BB1AFB28FD005ED91B /* PaseosYLugaresViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

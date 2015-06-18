@@ -15,6 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	var window: UIWindow?
 	var arrayVC: [String:UIViewController] = [:]
 	var opcionesItems: [String: [String : [[String: String]]]] = [:]
+    var coneccion = true
 	
 	func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
 		// Override point for customization after application launch.
@@ -31,10 +32,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		UINavigationBar.appearance().barTintColor = UIColor(red: 196/255, green: 217/255, blue: 242/255, alpha: 1)
 		UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.7)]
 		
-		// carga opcionesItems para las secciones correspondientes (vCs)
-
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
 
+            // Detecta conección
+            
+            let reachability = Reachability.reachabilityForInternetConnection()
+            
+            reachability.whenReachable = { reachability in
+
+                if reachability.isReachableViaWiFi() {
+                    self.coneccion = true
+                } else {
+                    self.coneccion = true
+                }
+                
+            }
+            reachability.whenUnreachable = { reachability in
+                self.coneccion = false
+            }
+            
+            reachability.startNotifier()
+            
+            // carga opcionesItems para las secciones correspondientes (vCs)
+            
             let fileManager = NSFileManager.defaultManager()
             
             let libraryPath = fileManager.URLsForDirectory(.LibraryDirectory, inDomains: .UserDomainMask).first as! NSURL

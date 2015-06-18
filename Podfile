@@ -5,4 +5,4 @@ pod 'SWXMLHash', '~> 1.0.0'
 pod 'Alamofire', '~> 1.2'
 pod 'WYPopoverController', '~> 0.3.7'
 pod "SwiftyJSON", ">= 2.2"
-pod 'IJReachability', :git => 'https://github.com/Isuru-Nanayakkara/IJReachability.git'
+#pod 'IJReachability', :git => 'https://github.com/Isuru-Nanayakkara/IJReachability.git'

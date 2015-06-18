@@ -8,7 +8,6 @@
 
 import Foundation
 import CoreLocation
-import IJReachability
 
 extension UIViewController {
 	
@@ -225,9 +224,11 @@ extension UIViewController {
 	}
 	
 	func hayRed() -> Bool {
-		
-		return IJReachability.isConnectedToNetwork()
-		
+
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+
+        return appDelegate.coneccion
+        
 	}
 	
 }
