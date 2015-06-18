@@ -28,6 +28,34 @@ class TransporteEstacionarZonaViewController: UIViewController, MKMapViewDelegat
 	var actualizoRegion = false
 	var poligonoZonaSegura: MKPolygon!
 	let polygonAsCGP = CGPathCreateMutable()
+    
+    var coordenadasZona = [
+        CLLocationCoordinate2DMake(-37.993095,-57.554640),
+        CLLocationCoordinate2DMake(-37.997755,-57.545455),
+        CLLocationCoordinate2DMake(-37.998190,-57.544420),
+        CLLocationCoordinate2DMake(-37.998780,-57.542330),
+        CLLocationCoordinate2DMake(-37.998965,-57.541520),
+        CLLocationCoordinate2DMake(-38.000257,-57.541319),
+        CLLocationCoordinate2DMake(-38.000737,-57.541335),
+        CLLocationCoordinate2DMake(-38.000984,-57.541391),
+        CLLocationCoordinate2DMake(-38.002000,-57.541780),
+        CLLocationCoordinate2DMake(-38.006105,-57.545018),
+        CLLocationCoordinate2DMake(-37.998880,-57.559280)
+    ]
+    
+    var coordenadasZonaSegura = [
+        CLLocationCoordinate2DMake(-37.992934,-57.554683),
+        CLLocationCoordinate2DMake(-37.997645,-57.545358),
+        CLLocationCoordinate2DMake(-37.998055,-57.544291),
+        CLLocationCoordinate2DMake(-37.998662,-57.542276),
+        CLLocationCoordinate2DMake(-37.998889,-57.541348),
+        CLLocationCoordinate2DMake(-38.000249,-57.541158),
+        CLLocationCoordinate2DMake(-38.000729,-57.541163),
+        CLLocationCoordinate2DMake(-38.000992,-57.541209),
+        CLLocationCoordinate2DMake(-38.002059,-57.541598),
+        CLLocationCoordinate2DMake(-38.006308,-57.544943),
+        CLLocationCoordinate2DMake(-37.998888,-57.559527)
+    ]
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,34 +70,6 @@ class TransporteEstacionarZonaViewController: UIViewController, MKMapViewDelegat
 			
 			mapaView.delegate = self
 
-			var coordenadasZona = [
-				CLLocationCoordinate2DMake(-37.993095,-57.554640),
-				CLLocationCoordinate2DMake(-37.997755,-57.545455),
-				CLLocationCoordinate2DMake(-37.998190,-57.544420),
-				CLLocationCoordinate2DMake(-37.998780,-57.542330),
-				CLLocationCoordinate2DMake(-37.998965,-57.541520),
-				CLLocationCoordinate2DMake(-38.000257,-57.541319),
-				CLLocationCoordinate2DMake(-38.000737,-57.541335),
-				CLLocationCoordinate2DMake(-38.000984,-57.541391),
-				CLLocationCoordinate2DMake(-38.002000,-57.541780),
-				CLLocationCoordinate2DMake(-38.006105,-57.545018),
-				CLLocationCoordinate2DMake(-37.998880,-57.559280)
-			]
-
-			var coordenadasZonaSegura = [
-				CLLocationCoordinate2DMake(-37.992934,-57.554683),
-				CLLocationCoordinate2DMake(-37.997645,-57.545358),
-				CLLocationCoordinate2DMake(-37.998055,-57.544291),
-				CLLocationCoordinate2DMake(-37.998662,-57.542276),
-				CLLocationCoordinate2DMake(-37.998889,-57.541348),
-				CLLocationCoordinate2DMake(-38.000249,-57.541158),
-				CLLocationCoordinate2DMake(-38.000729,-57.541163),
-				CLLocationCoordinate2DMake(-38.000992,-57.541209),
-				CLLocationCoordinate2DMake(-38.002059,-57.541598),
-				CLLocationCoordinate2DMake(-38.006308,-57.544943),
-				CLLocationCoordinate2DMake(-37.998888,-57.559527)
-			]
-			
 			let poligonoZona = MKPolygon(coordinates: &coordenadasZona, count: coordenadasZona.count)
 			mapaView.addOverlay(poligonoZona)
 
@@ -92,12 +92,37 @@ class TransporteEstacionarZonaViewController: UIViewController, MKMapViewDelegat
 			labelVerificando.backgroundColor = UIColor.clearColor()
 			labelVerificando.layer.backgroundColor = UIColor(red: 0.454775, green: 0.602937, blue: 0.787375, alpha: 1).CGColor
 
-			mapaView.setRegion(MKCoordinateRegionMake(CLLocationCoordinate2DMake(-38.000125, -57.549382), MKCoordinateSpanMake(0.007, 0.007)), animated: false)
+//			mapaView.setRegion(MKCoordinateRegionMake(CLLocationCoordinate2DMake(-38.000125, -57.549382), MKCoordinateSpanMake(0.007, 0.007)), animated: false)
+            mapaView.setRegion(regionIncluyendoCoordenadas(coordenadasZonaSegura), animated: true)
 
 		}
 			
 	}
 	
+    func regionIncluyendoCoordenadas(puntos: [CLLocationCoordinate2D]) -> MKCoordinateRegion {
+        
+        var minLat = 90.0
+        var maxLat = -90.0
+        var minLon = 180.0
+        var maxLon = -180.0
+        
+        for punto in puntos {
+            
+            if punto.latitude < minLat { minLat = punto.latitude }
+            if punto.latitude > maxLat { maxLat = punto.latitude }
+            if punto.longitude < minLon { minLon = punto.longitude }
+            if punto.longitude > maxLon { maxLon = punto.longitude }
+            
+        }
+        
+        let center = CLLocationCoordinate2DMake((minLat+maxLat)/2.0, (minLon+maxLon)/2.0)
+        let span = MKCoordinateSpanMake(maxLat-minLat + 0.01, maxLon-minLon + 0.01);
+        let region = MKCoordinateRegionMake (center, span);
+        
+        return region
+        
+    }
+    
 	override func viewWillAppear(animated: Bool) {
 		super.viewWillAppear(animated)
 		
@@ -187,8 +212,9 @@ class TransporteEstacionarZonaViewController: UIViewController, MKMapViewDelegat
 	
 	@IBAction func mostrarUbicacion() {
 		
-		mapaView.setRegion(MKCoordinateRegionMake(ubicacionActual!.coordinate, MKCoordinateSpanMake(0.04, 0.04)), animated: true)
-		
+//		mapaView.setRegion(MKCoordinateRegionMake(ubicacionActual!.coordinate, MKCoordinateSpanMake(0.04, 0.04)), animated: true)
+        mapaView.setRegion(regionIncluyendoCoordenadas(coordenadasZonaSegura + [ubicacionActual!.coordinate]), animated: true)
+        
 	}
 	
 	deinit {

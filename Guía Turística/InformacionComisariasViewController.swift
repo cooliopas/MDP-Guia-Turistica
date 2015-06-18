@@ -160,6 +160,8 @@ class InformacionComisariasViewController: UIViewController, MKMapViewDelegate, 
 		
 		if ubicacionActual == nil {
 			
+            ubicacionActual = userLocation.location
+            
 			mapaView.setRegion(MKCoordinateRegionMake(userLocation.coordinate, MKCoordinateSpanMake(0.03, 0.03)), animated: true)
 
             if mostroComisarias == true {
@@ -169,8 +171,6 @@ class InformacionComisariasViewController: UIViewController, MKMapViewDelegate, 
             }
             
 		}
-		
-		ubicacionActual = userLocation.location
 		
 	}
 	
@@ -183,52 +183,43 @@ class InformacionComisariasViewController: UIViewController, MKMapViewDelegate, 
                 
                 if error == nil {
                     
-                    if respuesta[0].count > 0 {
-                        
-                        let comisaria = respuesta[0]
-                        if let direccion = comisaria["ubicacion"] {
-                        
-                            for annotation in self.mapaView.annotations {
+                    if respuesta[0].count > 0, let direccion = respuesta[0]["ubicacion"] {
+
+                        for annotation in self.mapaView.annotations {
+                            
+                            if !(annotation is MKUserLocation) {
                                 
-                                if !(annotation is MKUserLocation) {
+                                if annotation.subtitle == direccion {
                                     
-                                    if annotation.subtitle == direccion {
-                                        
-                                        let comisariaCercana = annotation as! MKAnnotation
-                                        
-                                        let annotation = MKPointAnnotation()
-                                        annotation.coordinate = comisariaCercana.coordinate
-                                        annotation.title = comisariaCercana.title
-                                        annotation.subtitle = "\(comisariaCercana.subtitle!) - COMISARIA MAS CERCANA"
-                                        
-                                        self.mapaView.addAnnotation(annotation)
-                                        
-                                        self.mapaView.selectAnnotation(annotation, animated: true)
-                                        
-                                        self.mapaView.removeAnnotation(comisariaCercana)
-                                        
-                                    }
+                                    let comisariaCercana = annotation as! MKAnnotation
+                                    
+                                    let annotation = MKPointAnnotation()
+                                    annotation.coordinate = comisariaCercana.coordinate
+                                    annotation.title = comisariaCercana.title
+                                    annotation.subtitle = "\(comisariaCercana.subtitle!) - COMISARIA MAS CERCANA"
+                                    
+                                    self.mapaView.addAnnotation(annotation)
+                                    
+                                    self.mapaView.selectAnnotation(annotation, animated: true)
+                                    
+                                    self.mapaView.removeAnnotation(comisariaCercana)
                                     
                                 }
                                 
                             }
-
-                        } else {
-                            
-//                            println("No se encontro la comisaria más cercana")
                             
                         }
-                            
+
                     } else {
                         
-//                        println("No se encontro la comisaria más cercana")
+                        println("No se encontro la comisaria más cercana")
                         
                     }
                     
                 } else {
                     
-                    //					println("No se encontro la comisaria más cercana")
-                    //					println(error)
+                    					println("No se encontro la comisaria más cercana")
+                    					println(error)
                     
                 }
                 

@@ -157,6 +157,26 @@ class TransporteEstacionarTarjetaMapaViewController: UIViewController, MKMapView
 					
 				}
 				
+                if !self.actualizoRegion {
+                    
+                    var arrayCoordenadasAnnotations = [coordenadas]
+                    
+                    for annotation in self.mapaView.annotations {
+                        
+                        if let annotation = annotation as? MKPointAnnotation {
+                            
+                            arrayCoordenadasAnnotations.append(annotation.coordinate)
+                            
+                        }
+                        
+                    }
+                    
+                    self.mapaView.setRegion(self.regionIncluyendoCoordenadas(arrayCoordenadasAnnotations), animated: true)
+                    
+                    self.actualizoRegion = true
+                    
+                }
+                
 			} else {
 				
 				self.muestraError("No se encontraron puntos de venta de estacionamiento medido.",volver: 1)
@@ -165,16 +185,33 @@ class TransporteEstacionarTarjetaMapaViewController: UIViewController, MKMapView
 			}
 			
 		}
-		
-		if !actualizoRegion {
-		
-			mapaView.setRegion(MKCoordinateRegionMake(coordenadas, MKCoordinateSpanMake(0.007, 0.007)), animated: true)
-			actualizoRegion = true
-			
-		}
 
 	}
 	
+    func regionIncluyendoCoordenadas(puntos: [CLLocationCoordinate2D]) -> MKCoordinateRegion {
+        
+        var minLat = 90.0
+        var maxLat = -90.0
+        var minLon = 180.0
+        var maxLon = -180.0
+        
+        for punto in puntos {
+            
+            if punto.latitude < minLat { minLat = punto.latitude }
+            if punto.latitude > maxLat { maxLat = punto.latitude }
+            if punto.longitude < minLon { minLon = punto.longitude }
+            if punto.longitude > maxLon { maxLon = punto.longitude }
+            
+        }
+        
+        let center = CLLocationCoordinate2DMake((minLat+maxLat)/2.0, (minLon+maxLon)/2.0)
+        let span = MKCoordinateSpanMake(maxLat-minLat + 0.01, maxLon-minLon + 0.01);
+        let region = MKCoordinateRegionMake (center, span);
+        
+        return region
+        
+    }
+    
 	func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {
 		
 		if annotation is MKUserLocation {

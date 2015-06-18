@@ -25,11 +25,13 @@ class TransporteColeRecorridosMapaViewController: UIViewController, MKMapViewDel
 	let annotationInicioIda = MKPointAnnotation()
 	let annotationFinIda = MKPointAnnotation()
     var hayRecorridosIda = false
+    var arrayPuntosIda = [CLLocationCoordinate2D]()
 
 	var polylineVuelta = MKPolyline()
 	let annotationInicioVuelta = MKPointAnnotation()
 	let annotationFinVuelta = MKPointAnnotation()
     var hayRecorridosVuelta = false
+    var arrayPuntosVuelta = [CLLocationCoordinate2D]()
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,8 +64,6 @@ class TransporteColeRecorridosMapaViewController: UIViewController, MKMapViewDel
                 
                 let inicioIda = CLLocationCoordinate2DMake(coordenadasIda.first![0].doubleValue,coordenadasIda.first![1].doubleValue)
                 let finIda = CLLocationCoordinate2DMake(coordenadasIda.last![0].doubleValue,coordenadasIda.last![1].doubleValue)
-                
-                var arrayPuntosIda = [CLLocationCoordinate2D]()
                 
                 for coordenada in coordenadasIda {
                     
@@ -99,8 +99,6 @@ class TransporteColeRecorridosMapaViewController: UIViewController, MKMapViewDel
                 
                 let inicioVuelta = CLLocationCoordinate2DMake(coordenadasVuelta.first![0].doubleValue,coordenadasVuelta.first![1].doubleValue)
                 let finVuelta = CLLocationCoordinate2DMake(coordenadasVuelta.last![0].doubleValue,coordenadasVuelta.last![1].doubleValue)
-                
-                var arrayPuntosVuelta = [CLLocationCoordinate2D]()
                 
                 for coordenada in coordenadasVuelta {
                     
@@ -144,7 +142,7 @@ class TransporteColeRecorridosMapaViewController: UIViewController, MKMapViewDel
         
 	}
 
-    func regionForAnnotations(puntos: [MKPointAnnotation]) -> MKCoordinateRegion {
+    func regionIncluyendoCoordenadas(puntos: [CLLocationCoordinate2D]) -> MKCoordinateRegion {
 
         var minLat = 90.0
         var maxLat = -90.0
@@ -153,15 +151,15 @@ class TransporteColeRecorridosMapaViewController: UIViewController, MKMapViewDel
     
         for punto in puntos {
             
-            if punto.coordinate.latitude < minLat { minLat = punto.coordinate.latitude }
-            if punto.coordinate.latitude > maxLat { maxLat = punto.coordinate.latitude }
-            if punto.coordinate.longitude < minLon { minLon = punto.coordinate.longitude }
-            if punto.coordinate.longitude > maxLon { maxLon = punto.coordinate.longitude }
+            if punto.latitude < minLat { minLat = punto.latitude }
+            if punto.latitude > maxLat { maxLat = punto.latitude }
+            if punto.longitude < minLon { minLon = punto.longitude }
+            if punto.longitude > maxLon { maxLon = punto.longitude }
             
         }
         
         let center = CLLocationCoordinate2DMake((minLat+maxLat)/2.0, (minLon+maxLon)/2.0)
-        let span = MKCoordinateSpanMake(maxLat-minLat, maxLon-minLon);
+        let span = MKCoordinateSpanMake(maxLat-minLat + 0.01, maxLon-minLon + 0.01);
         let region = MKCoordinateRegionMake (center, span);
         
         return region
@@ -182,12 +180,12 @@ class TransporteColeRecorridosMapaViewController: UIViewController, MKMapViewDel
 			mapaView.addOverlay(polylineIda)
 			mapaView.addAnnotation(annotationInicioIda)
 			mapaView.addAnnotation(annotationFinIda)
-            mapaView.setRegion(regionForAnnotations([annotationInicioIda,annotationFinIda]), animated: true)
+            mapaView.setRegion(regionIncluyendoCoordenadas(arrayPuntosIda), animated: true)
 		case 1:
 			mapaView.addOverlay(polylineVuelta)
 			mapaView.addAnnotation(annotationInicioVuelta)
 			mapaView.addAnnotation(annotationFinVuelta)
-            mapaView.setRegion(regionForAnnotations([annotationInicioVuelta,annotationFinVuelta]), animated: true)
+            mapaView.setRegion(regionIncluyendoCoordenadas(arrayPuntosVuelta), animated: true)
 		case 2:
 			mapaView.addOverlay(polylineIda)
 			mapaView.addAnnotation(annotationInicioIda)
@@ -195,7 +193,7 @@ class TransporteColeRecorridosMapaViewController: UIViewController, MKMapViewDel
 			mapaView.addOverlay(polylineVuelta)
 			mapaView.addAnnotation(annotationInicioVuelta)
 			mapaView.addAnnotation(annotationFinVuelta)
-            mapaView.setRegion(regionForAnnotations([annotationInicioIda,annotationFinIda,annotationInicioVuelta,annotationFinVuelta]), animated: true)
+            mapaView.setRegion(regionIncluyendoCoordenadas(arrayPuntosIda + arrayPuntosVuelta), animated: true)
 		default:
 			break
 		}
