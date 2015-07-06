@@ -144,7 +144,7 @@ extension UIViewController {
 						padre = "playas"
 					case "recreacionOpciones","recreacionLugar":
 						padre = "recreacion"
-					case "informacionFarmacias","informacionComisarias","informacionMovilPolicial","informacionWiFi","informacionCentrosSalud":
+					case "informacionFarmacias","informacionCajeros","informacionComisarias","informacionMovilPolicial","informacionWiFi","informacionCentrosSalud":
 						padre = "informacion"
 					default:
 						break

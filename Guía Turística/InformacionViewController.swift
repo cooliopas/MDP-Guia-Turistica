@@ -11,31 +11,36 @@ import UIKit
 class InformacionViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SWRevealViewControllerDelegate {
 	
 	let informacionSecciones = [
-			[
-				"nombre":"Farmacias",
-				"sub":"Farmacias de turno y farmacias más cercanas",
-				"view":"informacionFarmacias"
-			],
-			[
-				"nombre":"Comisarias",
-				"sub":"Cual es la comisaría más cercana?",
-				"view":"informacionComisarias"
-			],
-			[
-				"nombre":"Movil Policial",
-				"sub":"Teléfono celular de la patrulla más cercana",
-				"view":"informacionMovilPolicial"
-			],
-			[
-				"nombre":"WiFi Público",
-				"sub":"Lugares más cercanos de Wifi Público",
-				"view":"informacionWiFi"
-			],
-			[
-				"nombre":"Centros de Salud",
-				"sub":"Cual es el Centro de Salud más cercano?",
-				"view":"informacionCentrosSalud"
-			]
+		[
+			"nombre":"Farmacias",
+			"sub":"Farmacias de turno y farmacias más cercanas",
+			"view":"informacionFarmacias"
+		],
+		[
+			"nombre":"Cajeros Automáticos",
+			"sub":"Cajeros Banelco y Link más cercanos",
+			"view":"informacionCajeros"
+		],
+		[
+			"nombre":"Comisarias",
+			"sub":"Cual es la comisaría más cercana?",
+			"view":"informacionComisarias"
+		],
+		[
+			"nombre":"Movil Policial",
+			"sub":"Teléfono celular de la patrulla más cercana",
+			"view":"informacionMovilPolicial"
+		],
+		[
+			"nombre":"WiFi Público",
+			"sub":"Lugares más cercanos de Wifi Público",
+			"view":"informacionWiFi"
+		],
+		[
+			"nombre":"Centros de Salud",
+			"sub":"Cual es el Centro de Salud más cercano?",
+			"view":"informacionCentrosSalud"
+		]
 	]
 	
 	override func viewWillAppear(animated: Bool) {

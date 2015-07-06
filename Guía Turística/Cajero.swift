@@ -1,5 +1,5 @@
 //
-//  Farmacia.swift
+//  Cajero.swift
 //  GT1
 //
 //  Created by Pablo Pasqualino on 4/2/15.
@@ -9,25 +9,22 @@
 import Foundation
 import CoreLocation
 
-class Farmacia {
+class Cajero {
 	var coordenadas: CLLocationCoordinate2D
-	var nombre: String
+	var banco: String
 	var direccion: String
-	var direccionDeTurno: String
 	var tipo: Int
 	var distancia: Double?
 	
 	init(
 		coordenadas: CLLocationCoordinate2D,
-		nombre: String,
+		banco: String,
 		direccion: String,
-		direccionDeTurno: String,
-		tipo: Int // 0 = SUBE, 1 = UTE
+		tipo: Int // 0 = BANELCO, 1 = LINK
 		) {
 			self.coordenadas = coordenadas
-			self.nombre = nombre
+			self.banco = banco
 			self.direccion = direccion
-			self.direccionDeTurno = direccionDeTurno
 			self.tipo = tipo
 	}
 		

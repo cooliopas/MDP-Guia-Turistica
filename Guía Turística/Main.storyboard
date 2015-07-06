@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TcJ-IA-Ugj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="TcJ-IA-Ugj">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -2974,6 +2974,81 @@ Desde la Ciudad Autónoma de Buenos Aires:
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pl9-jc-7ew" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1468" y="1124"/>
+        </scene>
+        <!--Información Útil Cajeros-->
+        <scene sceneID="9Hr-1L-0Qj">
+            <objects>
+                <viewController storyboardIdentifier="informacionCajeros" title="Información Útil Cajeros" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6Hh-El-n3c" userLabel="Información Útil Cajeros" customClass="InformacionCajerosViewController" customModule="Gui_a_Turi_stica" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Smb-Z0-6RF"/>
+                        <viewControllerLayoutGuide type="bottom" id="Irg-LI-Pzx"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="XYI-lQ-gx3">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r4n-Zt-YbQ">
+                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                                <items>
+                                    <navigationItem title="Cajeros Automáticos" id="ZpC-r7-r7V"/>
+                                </items>
+                            </navigationBar>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="xWJ-tj-cno">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                            </mapView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="1" translatesAutoresizingMaskIntoConstraints="NO" id="CtJ-R3-OAI">
+                                <rect key="frame" x="59" y="76" width="203" height="29"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <segments>
+                                    <segment title="Más Cercanos"/>
+                                    <segment title="Todos"/>
+                                </segments>
+                                <connections>
+                                    <action selector="mostrarCajerosActualiza" destination="6Hh-El-n3c" eventType="valueChanged" id="c7N-qg-U0G"/>
+                                </connections>
+                            </segmentedControl>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detectando ubicación ..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dp2-HA-Lvh">
+                                <rect key="frame" x="16" y="532" width="288" height="28"/>
+                                <color key="backgroundColor" red="0.45477524400000002" green="0.60293745990000003" blue="0.78737491370000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="HaI-Z6-aVF"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="7"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.86970758439999996" green="0.92044973370000005" blue="0.97994726899999995" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="r4n-Zt-YbQ" secondAttribute="centerX" id="32Q-Th-xMN"/>
+                            <constraint firstItem="Irg-LI-Pzx" firstAttribute="top" secondItem="xWJ-tj-cno" secondAttribute="bottom" id="3MJ-bK-whc"/>
+                            <constraint firstItem="Irg-LI-Pzx" firstAttribute="top" secondItem="dp2-HA-Lvh" secondAttribute="bottom" constant="8" id="PPu-EZ-izk"/>
+                            <constraint firstItem="xWJ-tj-cno" firstAttribute="top" secondItem="r4n-Zt-YbQ" secondAttribute="bottom" id="Q0W-8W-PZw"/>
+                            <constraint firstItem="dp2-HA-Lvh" firstAttribute="leading" secondItem="XYI-lQ-gx3" secondAttribute="leadingMargin" id="QXa-1F-7hq"/>
+                            <constraint firstItem="dp2-HA-Lvh" firstAttribute="trailing" secondItem="XYI-lQ-gx3" secondAttribute="trailingMargin" id="gYU-b4-ZKW"/>
+                            <constraint firstItem="CtJ-R3-OAI" firstAttribute="centerX" secondItem="xWJ-tj-cno" secondAttribute="centerX" id="hnT-Jn-Iuo"/>
+                            <constraint firstItem="r4n-Zt-YbQ" firstAttribute="top" secondItem="Smb-Z0-6RF" secondAttribute="bottom" id="iCy-dz-7A0"/>
+                            <constraint firstAttribute="width" secondItem="xWJ-tj-cno" secondAttribute="width" id="lDc-Hw-E3W"/>
+                            <constraint firstItem="xWJ-tj-cno" firstAttribute="top" secondItem="CtJ-R3-OAI" secondAttribute="bottom" constant="-40" id="osp-eX-Ajd"/>
+                            <constraint firstAttribute="width" secondItem="r4n-Zt-YbQ" secondAttribute="width" id="tga-5W-Une"/>
+                            <constraint firstItem="xWJ-tj-cno" firstAttribute="leading" secondItem="XYI-lQ-gx3" secondAttribute="leading" id="wd8-vP-5en"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="mapaView" destination="xWJ-tj-cno" id="nvU-MO-jF1"/>
+                        <outlet property="segmentadorTipo" destination="CtJ-R3-OAI" id="9gk-Z2-jnt"/>
+                        <outlet property="statusLabel" destination="dp2-HA-Lvh" id="Csr-zT-y7w"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pjo-wV-e9s" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1487" y="1139"/>
         </scene>
     </scenes>
     <resources>
