@@ -40,7 +40,14 @@ class coverViewController: UIViewController {
 		superHeight = self.view.frame.height - navigationHeight - UIApplication.sharedApplication().statusBarFrame.height
 		itemWidth = superWidth / 3 - itemMargin * 2
 
-		scrollView.contentSize = CGSizeMake(superWidth, (itemWidth + itemMargin * 4 + 2) * ceil( CGFloat(Double(arraySecciones.count) / 3) ))
+		let scrollHeight = (itemWidth + itemMargin * 4 + 2) * ceil( CGFloat(Double(arraySecciones.count) / 3) )
+
+		if scrollHeight > superHeight {
+
+			scrollView.contentSize = CGSizeMake(superWidth, (itemWidth + itemMargin * 4 + 2) * ceil( CGFloat(Double(arraySecciones.count) / 3) ))
+			scrollView.scrollEnabled = true
+
+		}
 
 		var ubicacionX:CGFloat = itemMargin
 		var ubicacionY:CGFloat = itemMargin
