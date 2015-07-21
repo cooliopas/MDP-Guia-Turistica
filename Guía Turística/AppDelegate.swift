@@ -32,6 +32,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		UINavigationBar.appearance().barTintColor = UIColor(red: 196/255, green: 217/255, blue: 242/255, alpha: 1)
 		UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.7)]
 
+		// Detecta conección
+
+		let reachability = Reachability.reachabilityForInternetConnection()
+
+		reachability.whenReachable = { reachability in
+			self.coneccion = true
+		}
+		reachability.whenUnreachable = { reachability in
+			self.coneccion = false
+		}
+
+		reachability.startNotifier()
+
+		if reachability.currentReachabilityStatus == Reachability.NetworkStatus.NotReachable {
+			coneccion = false
+		}
+
 		// Configure tracker from GoogleService-Info.plist.
 		var configureError:NSError?
 		GGLContext.sharedInstance().configureWithError(&configureError)
@@ -42,29 +59,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		gai.trackUncaughtExceptions = true
 		gai.logger.logLevel = GAILogLevel.None
 
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
 
-            // Detecta conección
-            
-            let reachability = Reachability.reachabilityForInternetConnection()
-            
-            reachability.whenReachable = { reachability in
-
-                if reachability.isReachableViaWiFi() {
-                    self.coneccion = true
-                } else {
-                    self.coneccion = true
-                }
-                
-            }
-            reachability.whenUnreachable = { reachability in
-                self.coneccion = false
-            }
-            
-            reachability.startNotifier()
-            
             // carga opcionesItems para las secciones correspondientes (vCs)
-            
+
             let fileManager = NSFileManager.defaultManager()
             
             let libraryPath = fileManager.URLsForDirectory(.LibraryDirectory, inDomains: .UserDomainMask).first as! NSURL
