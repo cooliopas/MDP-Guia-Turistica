@@ -9,163 +9,128 @@
 import UIKit
 
 class coverViewController: UIViewController {
-	
-	var navigationHeight:CGFloat = 0
-	var superWidth:CGFloat!
-	var superHeight:CGFloat!
-	var itemWidth:CGFloat!
-	var itemHeight:CGFloat!
-	
-	var arrayConstraints: [[String:NSLayoutConstraint]] = [[:]]
-	let cantidadItems:CGFloat = 12
-	
+
+	@IBOutlet weak var scrollView: UIScrollView!
+
+	let arraySecciones: [[String:String]] = [
+		["id":"mediosDeAcceso","tituloMenu":"Medios de Acceso"],
+		["id":"hotelesYAlojamiento","tituloMenu":"Hoteles y Alojamiento"],
+		["id":"inmobiliarias","tituloMenu":"Inmobiliarias"],
+		["id":"gastronomia","tituloMenu":"Gastronomía"],
+		["id":"playas","tituloMenu":"Playas y Balnearios"],
+		["id":"transporte","tituloMenu":"Transporte"],
+		["id":"congresosYEventos","tituloMenu":"Eventos"],
+		["id":"recreacion","tituloMenu":"Recreación y Excursiones"],
+		["id":"paseosYLugares","tituloMenu":"Paseos y Lugares"],
+		["id":"museos","tituloMenu":"Museos"],
+		["id":"informacion","tituloMenu":"Información Útil"]
+	]
+
+	var navigationHeight: CGFloat = 0
+	var superWidth: CGFloat!
+	var superHeight: CGFloat!
+	var itemWidth: CGFloat!
+	var itemMargin: CGFloat = 10
+
     override func viewDidLoad() {
         super.viewDidLoad()
 		
         if navBar != nil { navigationHeight = navBar!.frame.size.height }
 		superWidth = self.view.frame.width
 		superHeight = self.view.frame.height - navigationHeight - UIApplication.sharedApplication().statusBarFrame.height
-		itemWidth = superWidth / 3
-		itemHeight = ceil(superHeight / ceil(cantidadItems / 3))
-		
-		for id in 1...12 {
-			
-			if let viewId = self.view.viewWithTag(id) {
+		itemWidth = superWidth / 3 - itemMargin * 2
 
-				let tapGestureRecognizer:UITapGestureRecognizer	= UITapGestureRecognizer(target: self, action: "tap:")
-				tapGestureRecognizer.numberOfTapsRequired = 1
-				viewId.addGestureRecognizer(tapGestureRecognizer)
+		scrollView.contentSize = CGSizeMake(superWidth, (itemWidth + itemMargin * 4 + 2) * ceil( CGFloat(Double(arraySecciones.count) / 3) ))
 
-				viewId.userInteractionEnabled = false
-				
-				arrayConstraints.append([:])
-				
-				arrayConstraints[id]["width"] = NSLayoutConstraint(item: viewId, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: itemWidth)
-				self.view.addConstraint(arrayConstraints[id]["width"]!);
+		var ubicacionX:CGFloat = itemMargin
+		var ubicacionY:CGFloat = itemMargin
+		var itemIndex = 1
 
-				arrayConstraints[id]["height"] = NSLayoutConstraint(item: viewId, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: itemHeight)
-				self.view.addConstraint(arrayConstraints[id]["height"]!);
-				
-				arrayConstraints[id]["left"] = NSLayoutConstraint(item: viewId, attribute: NSLayoutAttribute.Leading, relatedBy: NSLayoutRelation.Equal, toItem: viewId.superview!, attribute: NSLayoutAttribute.Leading, multiplier: 1, constant: superWidth / 2 - superWidth / 6)
-				self.view.addConstraint(arrayConstraints[id]["left"]!);
-				
-				arrayConstraints[id]["top"] = NSLayoutConstraint(item: viewId, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: self.topLayoutGuide, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: superHeight)
-				self.view.addConstraint(arrayConstraints[id]["top"]!);
+		for seccion in arraySecciones {
 
-				self.view.sendSubviewToBack(viewId)
-				
-				viewId.alpha = 0.0
+			let seccionView = UIImageView(frame: CGRectMake(ubicacionX, ubicacionY, itemWidth, itemWidth))
 
-			}
-				
+			let tapGestureRecognizer:UITapGestureRecognizer	= UITapGestureRecognizer(target: self, action: "tap:")
+			tapGestureRecognizer.numberOfTapsRequired = 1
+			seccionView.addGestureRecognizer(tapGestureRecognizer)
+
+			seccionView.tag = itemIndex - 1
+			seccionView.layer.cornerRadius = itemWidth/2
+			seccionView.clipsToBounds = true
+			seccionView.alpha = 0.0
+			seccionView.layer.borderColor = UIColor.grayColor().CGColor
+			seccionView.layer.borderWidth = 1
+			seccionView.contentMode = UIViewContentMode.ScaleAspectFit
+			seccionView.userInteractionEnabled = true
+
+			seccionView.image = UIImage(named: "cover-\(itemIndex)")
+
+			scrollView.addSubview(seccionView)
+
+			let seccionLabel = UILabel(frame: CGRectMake(ubicacionX, ubicacionY + itemWidth + 4, itemWidth, itemMargin * 3))
+
+			seccionLabel.tag = itemIndex - 1
+			seccionLabel.textAlignment = NSTextAlignment.Center
+			seccionLabel.numberOfLines = 0
+			seccionLabel.text = seccion["tituloMenu"]!
+			seccionLabel.font = UIFont.systemFontOfSize(12)
+			seccionLabel.sizeToFit()
+			seccionLabel.frame.size.width = itemWidth
+			seccionLabel.alpha = 0.0
+			seccionLabel.userInteractionEnabled = true
+
+			let tapGestureRecognizerLabel:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "tap:")
+			tapGestureRecognizerLabel.numberOfTapsRequired = 1
+			seccionLabel.addGestureRecognizer(tapGestureRecognizerLabel)
+
+			scrollView.addSubview(seccionLabel)
+
+			ubicacionY = CGFloat(Int(itemWidth + itemMargin * 4) * Int(itemIndex/3)) + itemMargin
+			ubicacionX += itemWidth + itemMargin * 2
+			if (ubicacionX >= superWidth) { ubicacionX = itemMargin }
+
+			itemIndex++
+
 		}
-		
+
     }
 	
 	override func viewDidAppear(animated: Bool) {
 		super.viewDidAppear(animated)
 		
-		var ubicacionX:CGFloat = 0
-		var ubicacionY:CGFloat = navigationHeight
 		var delay = 0.0
 		
-		for id in 1...12 {
-			
-			let viewId = self.view.viewWithTag(id as Int)! as UIView
-		
-			UIView.animateWithDuration(0.5, delay: delay, options: .CurveEaseOut, animations: {
+		for viewId in scrollView.subviews {
 
-				self.arrayConstraints[id]["top"]!.constant = ubicacionY
-				ubicacionY = CGFloat(Int(self.itemHeight) * Int(id/3)) + self.navigationHeight
-				
-				self.arrayConstraints[id]["left"]!.constant = ubicacionX
-				ubicacionX += self.superWidth / 3
-				if (ubicacionX+16 >= self.superWidth) { ubicacionX = 0 }
-				
-				viewId.alpha = 1.0
-				
-				self.view.layoutIfNeeded()
-				
-				}, completion: { finished in
-					
-					viewId.userInteractionEnabled = true
-			
-				}
-			)
+			UIView.animateWithDuration(0.5, delay: delay, options: nil, animations: { () -> Void in
+				(viewId as! UIView).alpha = 1.0
+			}, completion: nil)
 
-			delay += 0.1
-			
+			delay += 0.01
+
 		}
-		
+
+		var tracker = GAI.sharedInstance().defaultTracker
+		tracker.set(kGAIScreenName, value: self.restorationIdentifier!)
+
+		var builder = GAIDictionaryBuilder.createScreenView()
+		tracker.send(builder.build() as [NSObject : AnyObject])
+
 	}
 	
 	func tap(recognizer:UITapGestureRecognizer){
-		
+
 		let viewActual = recognizer.view!
 		let tagActual = viewActual.tag
-		var label: UILabel!
-		var nuevoVC = ""
-		
-		switch viewActual.tag {
-		case 1:
-			nuevoVC = "mediosDeAcceso"
-		case 2:
-			nuevoVC = "hotelesYAlojamiento"
-		case 3:
-			nuevoVC = "inmobiliarias"
-		case 4:
-			nuevoVC = "gastronomia"
-		case 5:
-			nuevoVC = "playas"
-		case 6:
-			nuevoVC = "transporte"
-		case 7:
-			nuevoVC = "congresosYEventos"
-		case 8:
-			nuevoVC = "recreacion"
-		case 9:
-			nuevoVC = "paseosYLugares"
-		case 10:
-			nuevoVC = "museos"
-		case 11:
-			nuevoVC = "informacion"
-		default:
-			break
-		}
-		
+		var nuevoVC = arraySecciones[tagActual]["id"] ?? ""
+
 		if nuevoVC != "" && self.revealViewController().frontViewController.restorationIdentifier != nuevoVC {
 		
-			for view in viewActual.subviews {
-				
-				if view is UILabel {
-					
-					label = view as? UILabel
-					
-				}
-				
-			}
-			
 			self.view.bringSubviewToFront(viewActual)
 			
 			let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
 			
-			UIView.animateWithDuration(0.4, delay: 0.0, options: .CurveEaseOut, animations: {
-
-				self.arrayConstraints[tagActual]["width"]!.constant = self.superWidth
-				self.arrayConstraints[tagActual]["height"]!.constant = self.superHeight
-
-				self.arrayConstraints[tagActual]["top"]!.constant = self.navigationHeight
-				self.arrayConstraints[tagActual]["left"]!.constant = 0
-				
-				label.alpha = 0
-				
-				self.view.layoutIfNeeded()
-				
-				}, completion: { finished in
-					
-					self.revealViewController().setFrontViewController(appDelegate.traeVC(nuevoVC), animated: true)
-					
-			})
+			self.revealViewController().setFrontViewController(appDelegate.traeVC(nuevoVC), animated: true)
 
 		}
 	}
