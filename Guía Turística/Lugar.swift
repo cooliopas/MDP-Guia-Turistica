@@ -947,7 +947,6 @@ class Lugar {
             case "hotelesYAlojamiento":
                 
                 var idCategoria = 0
-                var idZona = 0
                 var filtroNombre = ""
 
                 if let opcionesCategoria = opcionesItems["categoria"] {
@@ -958,23 +957,14 @@ class Lugar {
                     }
                 }
 
-                if let opcionesZona = opcionesItems["zona"] {
-                    if let opcionesZonaValor = opcionesValores["zona"] as? Int {
-                        if let opcionesZonaId = opcionesZona[opcionesZonaValor]["id"] {
-                            idZona = opcionesZonaId.toInt()!
-                        }
-                    }
-                }
-                
                 filtroNombre = opcionesValores["nombre"]! as! String
 
                 resteaParametros["IdCategoria"] = idCategoria
-                resteaParametros["IdZona"] = idZona
                 resteaParametros["Nombre"] = filtroNombre
                 resteaApi = "Hotel"
                 resteaServicio = "Buscar"
                 resteaNombreArrayResultados = "Hoteles"
-                resteaErrorSinFiltros = "Es necesario elegir una categoría, zona o filtrar por nombre."
+                resteaErrorSinFiltros = "Es necesario elegir una categoría o filtrar por nombre."
                 resteaErrorSinResultados = "No se encontraron hoteles para su búsqueda."
             case "inmobiliarias":
                 
