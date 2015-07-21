@@ -31,7 +31,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		UINavigationBar.appearance().barTintColor = UIColor(red: 196/255, green: 217/255, blue: 242/255, alpha: 1)
 		UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.7)]
-		
+
+		// Configure tracker from GoogleService-Info.plist.
+		var configureError:NSError?
+		GGLContext.sharedInstance().configureWithError(&configureError)
+		assert(configureError == nil, "Error configuring Google services: \(configureError)")
+
+		// Optional: configure GAI options.
+		var gai = GAI.sharedInstance()
+		gai.trackUncaughtExceptions = true
+		gai.logger.logLevel = GAILogLevel.None
+
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
 
             // Detecta conección
@@ -65,7 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // algunos, como hotelesYAlojamiento, tienen más de un tipo de opcion
             let vCs = [ "congresosYEventos": ["categoria"],
                 "gastronomia": ["tipo"],
-                "hotelesYAlojamiento": ["categoria","zona"],
+                "hotelesYAlojamiento": ["categoria"],
                 "inmobiliarias": ["zona"],
                 "playas": ["zona"],
                 "recreacion": ["categoria"]]
@@ -173,17 +183,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 				opcionCero = "Todos los tipos"
 			case "hotelesYAlojamiento":
 				api = "Hotel"
-				if opcion == "categoria" {
-					opcionNombre = "Categorias"
-					opcionItemDescripcion = "DescripcionCategoria"
-					opcionItemId = "IdCategoria"
-					opcionCero = "Todas las categorías"
-				} else {
-					opcionNombre = "Zonas"
-					opcionItemDescripcion = "DescripcionZona"
-					opcionItemId = "IdZona"
-					opcionCero = "Todas las zonas"
-				}
+				opcionNombre = "Categorias"
+				opcionItemDescripcion = "DescripcionCategoria"
+				opcionItemId = "IdCategoria"
+				opcionCero = "Todas las categorías"
 			case "inmobiliarias":
 				api = "Inmobiliaria"
 				opcionNombre = "ZonasOperacion"
@@ -301,12 +304,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 switch nombreVC {
                     case "hotelesYAlojamiento":
                         let vcd = vc as! ModeloBusquedaViewController // vcd = View Controller Downcasted
-                        vcd.opciones = ["categoria","zona","nombre"]
+                        vcd.opciones = ["categoria","nombre"]
                         vcd.opcionesTitulos = [	"categoria":"Categoria",
-                                                "zona":"Zona",
                                                 "nombre":"Nombre"]
                         vcd.opcionesValores = [	"categoria":0,
-                                                "zona":0,
                                                 "nombre":""]
                         vcd.idSeccion = nombreVC
                         vcd.titulo = "Hoteles y Alojamiento"

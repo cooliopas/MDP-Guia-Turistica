@@ -26,7 +26,13 @@ class PaseosYLugaresViewController: UIViewController, UITableViewDataSource, UIT
 		
 		armaNavegacion()
 		self.revealViewController().delegate = self
-		
+
+		var tracker = GAI.sharedInstance().defaultTracker
+		tracker.set(kGAIScreenName, value: self.restorationIdentifier!)
+
+		var builder = GAIDictionaryBuilder.createScreenView()
+		tracker.send(builder.build() as [NSObject : AnyObject])
+
 	}
 	
 	//MARK: UITableViewDataSource

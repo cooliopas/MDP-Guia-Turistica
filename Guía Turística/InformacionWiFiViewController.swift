@@ -50,6 +50,12 @@ class InformacionWiFiViewController: UIViewController, MKMapViewDelegate, CLLoca
 		armaNavegacion()
 		self.revealViewController().delegate = self
 		
+		var tracker = GAI.sharedInstance().defaultTracker
+		tracker.set(kGAIScreenName, value: self.restorationIdentifier!)
+
+		var builder = GAIDictionaryBuilder.createScreenView()
+		tracker.send(builder.build() as [NSObject : AnyObject])
+
 	}
 	
     override func viewDidAppear(animated: Bool) {
@@ -65,7 +71,7 @@ class InformacionWiFiViewController: UIViewController, MKMapViewDelegate, CLLoca
     
 	func mapView(mapView: MKMapView!, didUpdateUserLocation userLocation: MKUserLocation!) {
 		
-		if ubicacionActual == nil || ubicacionActual!.distanceFromLocation(userLocation.location) > 1000 {
+		if userLocation.location.horizontalAccuracy < 20 && (ubicacionActual == nil || ubicacionActual!.distanceFromLocation(userLocation.location) > 1000) {
 			
 			statusLabel.text = "Cargando datos ..."
 			
@@ -97,23 +103,22 @@ class InformacionWiFiViewController: UIViewController, MKMapViewDelegate, CLLoca
 				} else {
 					
 					self.muestraError("No se encontraron los puntos de WiFi Público.",volver: 1)
-//					println(error)
-					
+
 				}
 				
 			}
 
+			if !actualizoRegion {
+
+				mapaView.setRegion(MKCoordinateRegionMake(userLocation.coordinate, MKCoordinateSpanMake(0.04, 0.04)), animated: true)
+				actualizoRegion = true
+
+			}
+
+			ubicacionActual = userLocation.location
+
 		}
-		
-		if !actualizoRegion {
-			
-			mapaView.setRegion(MKCoordinateRegionMake(userLocation.coordinate, MKCoordinateSpanMake(0.04, 0.04)), animated: true)
-			actualizoRegion = true
-			
-		}
-		
-		ubicacionActual = userLocation.location
-		
+
 	}
 	
 	func mapView(mapView: MKMapView!, viewForAnnotation annotation: MKAnnotation!) -> MKAnnotationView! {

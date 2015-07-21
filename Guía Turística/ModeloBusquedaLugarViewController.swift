@@ -196,7 +196,21 @@ class ModeloBusquedaLugarViewController: UIViewController, UITableViewDelegate, 
         
         armaNavegacion()
         self.revealViewController().delegate = self
-        
+
+		var tituloGA = "\(titulo) - Lugar"
+
+		if lugar != nil {
+
+			tituloGA += " - \(lugar!.nombre)"
+
+		}
+
+		var tracker = GAI.sharedInstance().defaultTracker
+		tracker.set(kGAIScreenName, value: tituloGA)
+
+		var builder = GAIDictionaryBuilder.createScreenView()
+		tracker.send(builder.build() as [NSObject : AnyObject])
+
     }
 	
 	func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {

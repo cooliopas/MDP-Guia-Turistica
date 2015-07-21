@@ -76,7 +76,13 @@ class ModeloBusquedaViewController: UIViewController, UITableViewDelegate, UITab
         
         armaNavegacion()
         self.revealViewController().delegate = self
-     
+
+		var tracker = GAI.sharedInstance().defaultTracker
+		tracker.set(kGAIScreenName, value: titulo)
+
+		var builder = GAIDictionaryBuilder.createScreenView()
+		tracker.send(builder.build() as [NSObject : AnyObject])
+
     }
 
     override func viewDidAppear(animated: Bool) {

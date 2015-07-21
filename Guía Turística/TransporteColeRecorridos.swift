@@ -45,7 +45,13 @@ class TransporteColeRecorridosViewController: UIViewController, UITableViewDeleg
 		
 		armaNavegacion()
 		self.revealViewController().delegate = self
-		
+
+		var tracker = GAI.sharedInstance().defaultTracker
+		tracker.set(kGAIScreenName, value: self.restorationIdentifier!)
+
+		var builder = GAIDictionaryBuilder.createScreenView()
+		tracker.send(builder.build() as [NSObject : AnyObject])
+
 	}
 	
 	override func viewDidLayoutSubviews() {

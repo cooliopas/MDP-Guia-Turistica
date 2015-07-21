@@ -127,7 +127,13 @@ class TransporteEstacionarZonaViewController: UIViewController, MKMapViewDelegat
 		
 		armaNavegacion()
 		self.revealViewController().delegate = self
-		
+
+		var tracker = GAI.sharedInstance().defaultTracker
+		tracker.set(kGAIScreenName, value: self.restorationIdentifier!)
+
+		var builder = GAIDictionaryBuilder.createScreenView()
+		tracker.send(builder.build() as [NSObject : AnyObject])
+
 	}
 	
     override func viewDidAppear(animated: Bool) {
@@ -162,49 +168,53 @@ class TransporteEstacionarZonaViewController: UIViewController, MKMapViewDelegat
 	
 	func mapView(mapView: MKMapView!, didUpdateUserLocation userLocation: MKUserLocation!) {
 		
-		ubicacionActual = userLocation.location
-		
-		if !actualizoRegion {
+		if userLocation.location.horizontalAccuracy < 20 {
 
-			labelVerificando.layer.removeAllAnimations()
+			ubicacionActual = userLocation.location
+			
+			if !actualizoRegion {
 
-			UIView.animateWithDuration(0.6, delay: 0.0, options: .CurveEaseOut, animations: {
-				
-				self.labelVerificando.alpha = 1
-				self.botonUbicacion.alpha = 1
-				self.botonUbicacion.userInteractionEnabled = true
-				
-				}, completion: nil)
-			
-			actualizoRegion = true
-			
-		}
+				labelVerificando.layer.removeAllAnimations()
 
-		let mapPointActual = MKMapPointForCoordinate(userLocation.coordinate)
-		let mapPointAsCGP = CGPointMake(CGFloat(mapPointActual.x), CGFloat(mapPointActual.y))
-		
-		let pointIsInPolygon = CGPathContainsPoint(polygonAsCGP, nil, mapPointAsCGP, false);
-		
-		if !pointIsInPolygon {
-			
-			labelVerificando.text = " No es zona de estacionamiento medido   "
-			
-			UIView.animateWithDuration(0.6, delay: 0.0, options: .CurveEaseOut, animations: {
+				UIView.animateWithDuration(0.6, delay: 0.0, options: .CurveEaseOut, animations: {
+					
+					self.labelVerificando.alpha = 1
+					self.botonUbicacion.alpha = 1
+					self.botonUbicacion.userInteractionEnabled = true
+					
+					}, completion: nil)
 				
-				self.labelVerificando.layer.backgroundColor = UIColor.blueColor().CGColor
+				actualizoRegion = true
 				
-				}, completion: nil)
+			}
+
+			let mapPointActual = MKMapPointForCoordinate(userLocation.coordinate)
+			let mapPointAsCGP = CGPointMake(CGFloat(mapPointActual.x), CGFloat(mapPointActual.y))
 			
-		} else {
+			let pointIsInPolygon = CGPathContainsPoint(polygonAsCGP, nil, mapPointAsCGP, false);
 			
-			labelVerificando.text = " Estas en zona de estacionamiento medido "
-			
-			UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut, animations: {
+			if !pointIsInPolygon {
 				
-				self.labelVerificando.layer.backgroundColor = UIColor.redColor().CGColor
+				labelVerificando.text = " No es zona de estacionamiento medido   "
 				
-				}, completion: nil)
-			
+				UIView.animateWithDuration(0.6, delay: 0.0, options: .CurveEaseOut, animations: {
+					
+					self.labelVerificando.layer.backgroundColor = UIColor.blueColor().CGColor
+					
+					}, completion: nil)
+				
+			} else {
+				
+				labelVerificando.text = " Estas en zona de estacionamiento medido "
+				
+				UIView.animateWithDuration(0.3, delay: 0.0, options: .CurveEaseOut, animations: {
+					
+					self.labelVerificando.layer.backgroundColor = UIColor.redColor().CGColor
+					
+					}, completion: nil)
+				
+			}
+
 		}
 		
 	}

@@ -1,19 +1,38 @@
 PODS:
   - Alamofire (1.2.3)
+  - Google/Analytics (1.0.7):
+    - Google/Core
+    - GoogleAnalytics (~> 3.12)
+  - Google/Core (1.0.7):
+    - GoogleNetworkingUtilities (~> 1.0)
+    - GoogleSymbolUtilities (~> 1.0)
+    - GoogleUtilities (~> 1.0)
+  - GoogleAnalytics (3.12.0)
+  - GoogleNetworkingUtilities (1.0.0):
+    - GoogleSymbolUtilities (~> 1.0)
+  - GoogleSymbolUtilities (1.0.0)
+  - GoogleUtilities (1.0.1):
+    - GoogleSymbolUtilities (~> 1.0)
   - SwiftyJSON (2.2.0)
   - SWXMLHash (1.0.0)
   - WYPopoverController (0.3.8)
 
 DEPENDENCIES:
   - Alamofire (~> 1.2)
+  - Google/Analytics (~> 1.0.0)
   - SwiftyJSON (>= 2.2)
   - SWXMLHash (~> 1.0.0)
   - WYPopoverController (~> 0.3.7)
 
 SPEC CHECKSUMS:
   Alamofire: 5550bf0b575ed1a4bf9be572f9463e1015cc169e
+  Google: 875f5a8ade86dd02e36586e4a54814843938c7f6
+  GoogleAnalytics: ef2e0b800ef3c1e62688cdfc959e0d3132bc246c
+  GoogleNetworkingUtilities: 292992ab31b7b4ba32809a0e8b40e324cdfb2c0c
+  GoogleSymbolUtilities: a7b0feed1fe667c8d5e647177938d0ecd62d6948
+  GoogleUtilities: e3475cd4d45134221d2f3f3626095a1c49b62041
   SwiftyJSON: 0b3e6c07af17ff745e77e8e9984097b55c956e5c
   SWXMLHash: ab46ebedec2baaeefe16948ad270c2c211735d60
   WYPopoverController: dda54780e1bef186464ae5a10ab9b4998c279e89
 
-COCOAPODS: 0.37.2
+COCOAPODS: 0.38.0

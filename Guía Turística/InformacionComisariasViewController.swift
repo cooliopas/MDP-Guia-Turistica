@@ -116,6 +116,12 @@ class InformacionComisariasViewController: UIViewController, MKMapViewDelegate, 
 		armaNavegacion()
 		self.revealViewController().delegate = self
 		
+		var tracker = GAI.sharedInstance().defaultTracker
+		tracker.set(kGAIScreenName, value: self.restorationIdentifier!)
+
+		var builder = GAIDictionaryBuilder.createScreenView()
+		tracker.send(builder.build() as [NSObject : AnyObject])
+
 	}
 	
     override func viewDidAppear(animated: Bool) {
@@ -148,7 +154,7 @@ class InformacionComisariasViewController: UIViewController, MKMapViewDelegate, 
 	
 	func mapView(mapView: MKMapView!, didUpdateUserLocation userLocation: MKUserLocation!) {
 		
-		if ubicacionActual == nil {
+		if ubicacionActual == nil && userLocation.location.horizontalAccuracy < 20 {
 			
             ubicacionActual = userLocation.location
             

@@ -68,6 +68,12 @@ class InformacionCajerosViewController: UIViewController, MKMapViewDelegate, CLL
 		armaNavegacion()
 		self.revealViewController().delegate = self
 				
+		var tracker = GAI.sharedInstance().defaultTracker
+		tracker.set(kGAIScreenName, value: self.restorationIdentifier!)
+
+		var builder = GAIDictionaryBuilder.createScreenView()
+		tracker.send(builder.build() as [NSObject : AnyObject])
+
 	}
 	
     override func viewDidAppear(animated: Bool) {
@@ -249,7 +255,7 @@ class InformacionCajerosViewController: UIViewController, MKMapViewDelegate, CLL
 	
 	func mapView(mapView: MKMapView!, didUpdateUserLocation userLocation: MKUserLocation!) {
 		
-		if ubicacionActual == nil || ubicacionActual!.distanceFromLocation(userLocation.location) > 100 {
+		if userLocation.location.horizontalAccuracy < 20 && (ubicacionActual == nil || ubicacionActual!.distanceFromLocation(userLocation.location) > 100) {
 			
 			if ubicacionActual == nil {
 				
@@ -271,18 +277,18 @@ class InformacionCajerosViewController: UIViewController, MKMapViewDelegate, CLL
 				
 			}
 			
+			if statusLabel.alpha == 1 {
+
+				UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut, animations: {
+
+					self.statusLabel.alpha = 0
+
+					}, completion: nil)
+
+			}
+
 		}
-		
-		if statusLabel.alpha == 1 {
-			
-			UIView.animateWithDuration(0.3, delay: 0, options: .CurveEaseOut, animations: {
-				
-				self.statusLabel.alpha = 0
-				
-				}, completion: nil)
-			
-		}
-		
+
 	}
 	
 	deinit {

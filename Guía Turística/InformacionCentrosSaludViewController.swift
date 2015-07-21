@@ -84,6 +84,12 @@ class InformacionCentrosSaludViewController: UIViewController, MKMapViewDelegate
 		armaNavegacion()
 		self.revealViewController().delegate = self
 				
+		var tracker = GAI.sharedInstance().defaultTracker
+		tracker.set(kGAIScreenName, value: self.restorationIdentifier!)
+
+		var builder = GAIDictionaryBuilder.createScreenView()
+		tracker.send(builder.build() as [NSObject : AnyObject])
+		
 	}
 	
     override func viewDidAppear(animated: Bool) {
@@ -99,7 +105,7 @@ class InformacionCentrosSaludViewController: UIViewController, MKMapViewDelegate
     
 	func mapView(mapView: MKMapView!, didUpdateUserLocation userLocation: MKUserLocation!) {
 		
-		if !actualizoRegion {
+		if !actualizoRegion && userLocation.location.horizontalAccuracy < 20 {
 			
 			mapaView.setRegion(MKCoordinateRegionMake(userLocation.coordinate, MKCoordinateSpanMake(0.04, 0.04)), animated: true)
 			actualizoRegion = true
