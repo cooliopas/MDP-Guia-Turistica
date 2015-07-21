@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E217C4FB1B33497600493376 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = E217C4FA1B33497600493376 /* Reachability.swift */; };
+		E23FC8E61B5DFB0700C592EF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E23FC8E51B5DFB0700C592EF /* GoogleService-Info.plist */; };
 		E257586B1B0F8ADB0091326F /* PuestoCargaAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E257586A1B0F8ADB0091326F /* PuestoCargaAnnotation.swift */; };
 		E25DC63E1B4AD974002AFA13 /* InformacionCajerosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25DC63D1B4AD974002AFA13 /* InformacionCajerosViewController.swift */; };
 		E25DC6401B4AE06D002AFA13 /* Cajero.swift in Sources */ = {isa = PBXBuildFile; fileRef = E25DC63F1B4AE06D002AFA13 /* Cajero.swift */; };
@@ -75,6 +76,7 @@
 		6307FEABF60DE8F816804A6E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		7B9B11BFB8E51AB34ADDD349 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E217C4FA1B33497600493376 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		E23FC8E51B5DFB0700C592EF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E257586A1B0F8ADB0091326F /* PuestoCargaAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PuestoCargaAnnotation.swift; sourceTree = "<group>"; };
 		E25DC63D1B4AD974002AFA13 /* InformacionCajerosViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformacionCajerosViewController.swift; sourceTree = "<group>"; };
 		E25DC63F1B4AE06D002AFA13 /* Cajero.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cajero.swift; sourceTree = "<group>"; };
@@ -230,6 +232,7 @@
 				E28736071AFB2758005ED91B /* funciones.swift */,
 				E287360E1AFB2758005ED91B /* Soaper.swift */,
 				E217C4FA1B33497600493376 /* Reachability.swift */,
+				E23FC8E51B5DFB0700C592EF /* GoogleService-Info.plist */,
 				E28735F71AFB271F005ED91B /* NSDateExtendida.swift */,
 				E28735F81AFB271F005ED91B /* IJProgressView.swift */,
 				E28735FA1AFB271F005ED91B /* MapManager.swift */,
@@ -418,6 +421,7 @@
 				E2C813701B05141300BECFA8 /* Main.storyboard in Resources */,
 				E287361B1AFB2784005ED91B /* LaunchScreen.xib in Resources */,
 				E28735F61AFB269C005ED91B /* Varios.bundle in Resources */,
+				E23FC8E61B5DFB0700C592EF /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -631,6 +635,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Guía Turística/Guía Turística-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Pods/**";
 			};
 			name = Debug;
 		};
@@ -646,6 +651,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "cooliopas.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Guía Turística/Guía Turística-Bridging-Header.h";
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Pods/**";
 			};
 			name = Release;
 		};
